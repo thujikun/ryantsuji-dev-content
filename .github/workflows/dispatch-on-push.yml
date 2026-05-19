@@ -1,0 +1,37 @@
+# content repo の main に **人手で** push があった時、parent monorepo に
+# `content-updated` の repository_dispatch を投げて submodule pointer 更新 PR を
+# 開かせる workflow。
+#
+# schedule-publish.yml も末尾で同じ dispatch を呼ぶが、こちらは bot push
+# (GITHUB_TOKEN 経由) には反応しない仕様 — 「Actions performed by GITHUB_TOKEN
+# will not create new workflow runs」というルールでスケジュール由来の cascade が
+# 抑止されるので、二重 dispatch にはならない。
+#
+# secrets:
+# - `MONOREPO_DISPATCH_PAT`: thujikun/self-management の `actions: write` 権限を
+#   持つ fine-grained PAT
+name: Dispatch parent on content push
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "posts/**"
+      - "images/**"
+
+permissions:
+  contents: read
+
+jobs:
+  dispatch:
+    name: Notify parent monorepo
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dispatch bump-submodule
+        env:
+          GH_TOKEN: ${{ secrets.MONOREPO_DISPATCH_PAT }}
+        run: |
+          gh api repos/thujikun/self-management/dispatches \
+            -f event_type=content-updated \
+            -f client_payload[reason]="manual-content-push" \
+            -f client_payload[sha]="${{ github.sha }}"
