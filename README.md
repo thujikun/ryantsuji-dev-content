@@ -6,6 +6,7 @@
 
 ```
 posts/      ryantsuji.dev native frontmatter 付き .md (SoT)
+images/     post 本文から参照する画像。CI が R2 bucket に sync
 articles/   Zenn-CLI 互換 frontmatter で syndicator が生成する Zenn 配信版
 ```
 

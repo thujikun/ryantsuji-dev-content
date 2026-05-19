@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1150" viewBox="0 0 1600 1150">
+  <rect width="1600" height="1150" fill="#0f172a"/>
+
+  <defs>
+    <marker id="a-94a3b8" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#94a3b8"/></marker>
+    <marker id="a-4ade80" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#4ade80"/></marker>
+    <marker id="a-38bdf8" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#38bdf8"/></marker>
+    <marker id="a-f59e0b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#f59e0b"/></marker>
+    <marker id="a-a78bfa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#a78bfa"/></marker>
+    <marker id="a-fb923c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#fb923c"/></marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="800" y="56" font-size="32" fill="#e2e8f0" text-anchor="middle" font-weight="bold" font-family="sans-serif">Product Graph -- code, DB, infra, and docs on the same node set</text>
+  <text x="800" y="92" font-size="20" fill="#94a3b8" text-anchor="middle" font-family="sans-serif">A slice of cpg itself. Function / BigQueryTable / Column / Pulumi resource / docs / external services -- all connected by edges</text>
+
+  <!-- Legend -->
+  <g font-family="sans-serif" font-size="18">
+    <circle cx="100" cy="142" r="11" fill="#1a2818" stroke="#4ade80" stroke-width="2"/>
+    <text x="120" y="148" fill="#cbd5e1">Function</text>
+
+    <circle cx="280" cy="142" r="11" fill="#0d2030" stroke="#38bdf8" stroke-width="2"/>
+    <text x="300" y="148" fill="#cbd5e1">BigQueryTable / Column</text>
+
+    <circle cx="600" cy="142" r="11" fill="#1a1525" stroke="#a78bfa" stroke-width="2"/>
+    <text x="620" y="148" fill="#cbd5e1">Pulumi / CronSchedule / CloudRunJob</text>
+
+    <circle cx="1010" cy="142" r="11" fill="#25190d" stroke="#f59e0b" stroke-width="2"/>
+    <text x="1030" y="148" fill="#cbd5e1">Document</text>
+
+    <circle cx="1170" cy="142" r="11" fill="#251a0d" stroke="#fb923c" stroke-width="2"/>
+    <text x="1190" y="148" fill="#cbd5e1">External</text>
+  </g>
+
+  <!-- =================================================================== -->
+  <!-- Edges (drawn first so they sit behind the nodes)                      -->
+  <!-- =================================================================== -->
+
+  <g font-family="sans-serif" font-size="18">
+    <!-- parseJSDocExports -> applyGraphTag (calls) -->
+    <line x1="280" y1="330" x2="280" y2="500" stroke="#4ade80" stroke-width="2" opacity="0.9" marker-end="url(#a-4ade80)"/>
+    <text x="296" y="425" fill="#4ade80" font-weight="bold">calls</text>
+
+    <!-- applyGraphTag -> generateEmbeddings (calls) -->
+    <line x1="345" y1="558" x2="690" y2="600" stroke="#4ade80" stroke-width="2" opacity="0.9" marker-end="url(#a-4ade80)"/>
+    <text x="450" y="565" fill="#4ade80" font-weight="bold">calls</text>
+
+    <!-- generateEmbeddings -> cortex.product_graph_nodes (queries [via:id]) -->
+    <line x1="800" y1="675" x2="830" y2="850" stroke="#38bdf8" stroke-width="2.2" marker-end="url(#a-38bdf8)"/>
+    <text x="828" y="770" fill="#38bdf8" font-weight="bold">queries [via:id]</text>
+
+    <!-- generateEmbeddings -> vertex-ai-embedding (calls) -->
+    <line x1="855" y1="588" x2="1320" y2="310" stroke="#fb923c" stroke-width="2" marker-end="url(#a-fb923c)"/>
+    <text x="1080" y="438" fill="#fb923c" font-weight="bold">calls</text>
+
+    <!-- generateEmbeddings -> docs/product-graph/README.md (documented_by) -->
+    <line x1="870" y1="615" x2="1310" y2="600" stroke="#f59e0b" stroke-width="2" marker-end="url(#a-f59e0b)"/>
+    <text x="1010" y="592" fill="#f59e0b" font-weight="bold">documented_by</text>
+
+    <!-- productGraphNodesTable (Pulumi) -> cortex.product_graph_nodes (defines) -->
+    <line x1="375" y1="864" x2="755" y2="884" stroke="#a78bfa" stroke-width="2" marker-end="url(#a-a78bfa)"/>
+    <text x="478" y="858" fill="#a78bfa" font-weight="bold">defines</text>
+
+    <!-- cortex.product_graph_nodes -> id Column (HAS_COLUMN) -->
+    <line x1="780" y1="935" x2="560" y2="1010" stroke="#38bdf8" stroke-width="1.8" opacity="0.85" marker-end="url(#a-38bdf8)"/>
+    <text x="600" y="985" fill="#38bdf8" opacity="0.95" font-weight="bold">HAS_COLUMN</text>
+
+    <!-- cortex.product_graph_nodes -> nodeType Column (HAS_COLUMN) -->
+    <line x1="830" y1="942" x2="830" y2="1010" stroke="#38bdf8" stroke-width="1.8" opacity="0.85" marker-end="url(#a-38bdf8)"/>
+
+    <!-- cortex.product_graph_nodes -> qualifiedName Column (HAS_COLUMN) -->
+    <line x1="880" y1="935" x2="1100" y2="1010" stroke="#38bdf8" stroke-width="1.8" opacity="0.85" marker-end="url(#a-38bdf8)"/>
+    <text x="990" y="985" fill="#38bdf8" opacity="0.95" font-weight="bold">HAS_COLUMN</text>
+
+    <!-- graph-boundary-daily -> graph-index-job (triggers) -->
+    <line x1="1255" y1="888" x2="1255" y2="718" stroke="#a78bfa" stroke-width="2" marker-end="url(#a-a78bfa)"/>
+    <text x="1270" y="810" fill="#a78bfa" font-weight="bold">triggers</text>
+  </g>
+
+  <!-- =================================================================== -->
+  <!-- Nodes (circles + labels)                                              -->
+  <!-- =================================================================== -->
+
+  <g font-family="sans-serif">
+
+    <!-- parseJSDocExports (Function) -->
+    <circle cx="280" cy="280" r="56" fill="#1a2818" stroke="#4ade80" stroke-width="2.5"/>
+    <text x="280" y="278" font-size="16" fill="#4ade80" text-anchor="middle" font-weight="bold">parseJSDoc</text>
+    <text x="280" y="296" font-size="16" fill="#4ade80" text-anchor="middle" font-weight="bold">Exports</text>
+    <text x="280" y="356" font-size="16" fill="#cbd5e1" text-anchor="middle">Function</text>
+
+    <!-- applyGraphTag (Function) -->
+    <circle cx="280" cy="558" r="56" fill="#1a2818" stroke="#4ade80" stroke-width="2.5"/>
+    <text x="280" y="554" font-size="16" fill="#4ade80" text-anchor="middle" font-weight="bold">applyGraph</text>
+    <text x="280" y="572" font-size="16" fill="#4ade80" text-anchor="middle" font-weight="bold">Tag</text>
+    <text x="280" y="632" font-size="16" fill="#cbd5e1" text-anchor="middle">Function</text>
+
+    <!-- generateEmbeddings (center, highlighted) -->
+    <circle cx="800" cy="600" r="84" fill="#1a2818" stroke="#4ade80" stroke-width="4"/>
+    <text x="800" y="594" font-size="20" fill="#4ade80" text-anchor="middle" font-weight="bold">generate</text>
+    <text x="800" y="618" font-size="20" fill="#4ade80" text-anchor="middle" font-weight="bold">Embeddings</text>
+    <text x="800" y="710" font-size="18" fill="#cbd5e1" text-anchor="middle" font-weight="bold">Function (center node)</text>
+    <text x="800" y="734" font-size="14" fill="#94a3b8" text-anchor="middle">apps/graph/product/src/generators/embedding-generator.ts</text>
+
+    <!-- vertex-ai-embedding (External) -->
+    <circle cx="1340" cy="270" r="68" fill="#251a0d" stroke="#fb923c" stroke-width="2.5"/>
+    <text x="1340" y="264" font-size="16" fill="#fb923c" text-anchor="middle" font-weight="bold">vertex-ai-</text>
+    <text x="1340" y="284" font-size="16" fill="#fb923c" text-anchor="middle" font-weight="bold">embedding</text>
+    <text x="1340" y="358" font-size="16" fill="#cbd5e1" text-anchor="middle">External</text>
+    <text x="1340" y="378" font-size="14" fill="#94a3b8" text-anchor="middle">Google Cloud Vertex AI</text>
+
+    <!-- docs/product-graph/README.md (Document) -->
+    <circle cx="1350" cy="600" r="68" fill="#25190d" stroke="#f59e0b" stroke-width="2.5"/>
+    <text x="1350" y="594" font-size="15" fill="#f59e0b" text-anchor="middle" font-weight="bold">product-</text>
+    <text x="1350" y="614" font-size="15" fill="#f59e0b" text-anchor="middle" font-weight="bold">graph/README</text>
+    <text x="1350" y="690" font-size="16" fill="#cbd5e1" text-anchor="middle">Document</text>
+    <text x="1350" y="710" font-size="14" fill="#94a3b8" text-anchor="middle">stack: product-graph</text>
+
+    <!-- productGraphNodesTable (Pulumi) -->
+    <circle cx="318" cy="870" r="68" fill="#1a1525" stroke="#a78bfa" stroke-width="2.5"/>
+    <text x="318" y="864" font-size="15" fill="#a78bfa" text-anchor="middle" font-weight="bold">productGraph</text>
+    <text x="318" y="884" font-size="15" fill="#a78bfa" text-anchor="middle" font-weight="bold">NodesTable</text>
+    <text x="318" y="960" font-size="16" fill="#cbd5e1" text-anchor="middle">Pulumi BQ resource</text>
+    <text x="318" y="980" font-size="14" fill="#94a3b8" text-anchor="middle">infra/graph/product/bigquery.ts</text>
+
+    <!-- cortex.product_graph_nodes (BigQueryTable) -->
+    <circle cx="830" cy="908" r="74" fill="#0d2030" stroke="#38bdf8" stroke-width="3"/>
+    <text x="830" y="900" font-size="16" fill="#38bdf8" text-anchor="middle" font-weight="bold">cortex.</text>
+    <text x="830" y="922" font-size="16" fill="#38bdf8" text-anchor="middle" font-weight="bold">product_graph_nodes</text>
+    <text x="830" y="1004" font-size="16" fill="#cbd5e1" text-anchor="middle">BigQueryTable</text>
+
+    <!-- Columns -->
+    <circle cx="540" cy="1042" r="38" fill="#0d2030" stroke="#38bdf8" stroke-width="2"/>
+    <text x="540" y="1048" font-size="16" fill="#38bdf8" text-anchor="middle" font-weight="bold">id</text>
+    <text x="540" y="1110" font-size="14" fill="#cbd5e1" text-anchor="middle">Column</text>
+
+    <circle cx="830" cy="1054" r="38" fill="#0d2030" stroke="#38bdf8" stroke-width="2"/>
+    <text x="830" y="1060" font-size="16" fill="#38bdf8" text-anchor="middle" font-weight="bold">nodeType</text>
+    <text x="830" y="1122" font-size="14" fill="#cbd5e1" text-anchor="middle">Column</text>
+
+    <circle cx="1120" cy="1042" r="38" fill="#0d2030" stroke="#38bdf8" stroke-width="2"/>
+    <text x="1120" y="1042" font-size="14" fill="#38bdf8" text-anchor="middle" font-weight="bold">qualified</text>
+    <text x="1120" y="1058" font-size="14" fill="#38bdf8" text-anchor="middle" font-weight="bold">Name</text>
+    <text x="1120" y="1110" font-size="14" fill="#cbd5e1" text-anchor="middle">Column</text>
+
+    <!-- graph-boundary-daily (CronSchedule) -->
+    <circle cx="1255" cy="928" r="56" fill="#1a1525" stroke="#a78bfa" stroke-width="2.5"/>
+    <text x="1255" y="922" font-size="15" fill="#a78bfa" text-anchor="middle" font-weight="bold">graph-</text>
+    <text x="1255" y="940" font-size="15" fill="#a78bfa" text-anchor="middle" font-weight="bold">boundary-daily</text>
+    <text x="1255" y="1004" font-size="16" fill="#cbd5e1" text-anchor="middle">CronSchedule</text>
+    <text x="1255" y="1024" font-size="13" fill="#94a3b8" text-anchor="middle">daily 7:00 AM JST</text>
+
+    <!-- graph-index-job (CloudRunJob) -->
+    <circle cx="1255" cy="668" r="50" fill="#1a1525" stroke="#a78bfa" stroke-width="2.5"/>
+    <text x="1255" y="664" font-size="15" fill="#a78bfa" text-anchor="middle" font-weight="bold">graph-</text>
+    <text x="1255" y="682" font-size="15" fill="#a78bfa" text-anchor="middle" font-weight="bold">index-job</text>
+    <text x="1255" y="738" font-size="16" fill="#cbd5e1" text-anchor="middle">CloudRunJob</text>
+  </g>
+</svg>

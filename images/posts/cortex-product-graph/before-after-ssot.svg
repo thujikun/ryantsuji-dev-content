@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1080" viewBox="0 0 1600 1080">
+  <rect width="1600" height="1080" fill="#0f172a"/>
+
+  <defs>
+    <marker id="a-94a3b8" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#94a3b8"/></marker>
+    <marker id="a-ef4444" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#ef4444"/></marker>
+    <marker id="a-4ade80" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#4ade80"/></marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="800" y="56" font-size="30" fill="#e2e8f0" text-anchor="middle" font-weight="bold" font-family="Noto Sans JP, sans-serif">Before / After — 静的解析だけのグラフ vs JSDoc を SSoT にしたナレッジグラフ</text>
+  <text x="800" y="92" font-size="18" fill="#94a3b8" text-anchor="middle" font-family="Noto Sans JP, sans-serif">同じソースコードから、機械的に取れる構造と「意味」を載せた構造を比べる</text>
+
+  <!-- ============================================================ -->
+  <!-- LEFT: Static-analysis-only graph                              -->
+  <!-- ============================================================ -->
+  <g font-family="Noto Sans JP, sans-serif">
+    <rect x="40" y="130" width="760" height="900" rx="16" fill="#180d0d" stroke="#7f1d1d" stroke-width="2" opacity="0.55"/>
+    <text x="420" y="180" font-size="26" fill="#ef4444" text-anchor="middle" font-weight="bold">Before — 静的解析だけ</text>
+    <text x="420" y="210" font-size="16" fill="#cbd5e1" text-anchor="middle">関数・型・呼び出し関係を AST から抜く。機械的に正確だが、意味の重みづけがない</text>
+
+    <!-- Source -->
+    <rect x="80" y="240" width="240" height="100" rx="10" fill="#1a1a2e" stroke="#94a3b8" stroke-width="1.5"/>
+    <text x="200" y="274" font-size="17" fill="#e2e8f0" text-anchor="middle" font-weight="bold">TypeScript source</text>
+    <text x="200" y="298" font-size="14" fill="#94a3b8" text-anchor="middle">export function</text>
+    <text x="200" y="318" font-size="14" fill="#94a3b8" text-anchor="middle">calculateBugCount(...) { ... }</text>
+
+    <!-- AST analyzer -->
+    <rect x="520" y="240" width="220" height="100" rx="10" fill="#1a1a2e" stroke="#94a3b8" stroke-width="1.5"/>
+    <text x="630" y="274" font-size="17" fill="#e2e8f0" text-anchor="middle" font-weight="bold">AST 解析</text>
+    <text x="630" y="298" font-size="14" fill="#94a3b8" text-anchor="middle">関数 / 型 / 呼び出し</text>
+    <text x="630" y="318" font-size="14" fill="#94a3b8" text-anchor="middle">/ import / API パス</text>
+
+    <line x1="320" y1="290" x2="520" y2="290" stroke="#94a3b8" stroke-width="2" marker-end="url(#a-94a3b8)"/>
+
+    <!-- Graph (names known, but no semantic context) -->
+    <g>
+      <circle cx="200" cy="500" r="48" fill="#1a1a2e" stroke="#475569" stroke-width="2"/>
+      <text x="200" y="498" font-size="12" fill="#cbd5e1" text-anchor="middle" font-weight="bold">calculate</text>
+      <text x="200" y="514" font-size="12" fill="#cbd5e1" text-anchor="middle" font-weight="bold">BugCount</text>
+
+      <circle cx="380" cy="450" r="48" fill="#1a1a2e" stroke="#475569" stroke-width="2"/>
+      <text x="380" y="448" font-size="12" fill="#cbd5e1" text-anchor="middle" font-weight="bold">kpiTeam</text>
+      <text x="380" y="464" font-size="12" fill="#cbd5e1" text-anchor="middle" font-weight="bold">Filter</text>
+
+      <circle cx="560" cy="500" r="48" fill="#1a1a2e" stroke="#475569" stroke-width="2"/>
+      <text x="560" y="498" font-size="12" fill="#cbd5e1" text-anchor="middle" font-weight="bold">formatRow</text>
+      <text x="560" y="514" font-size="12" fill="#cbd5e1" text-anchor="middle" font-weight="bold">ForDisplay</text>
+
+      <circle cx="280" cy="660" r="48" fill="#1a1a2e" stroke="#475569" stroke-width="2"/>
+      <text x="280" y="658" font-size="12" fill="#cbd5e1" text-anchor="middle" font-weight="bold">kpi_daily</text>
+      <text x="280" y="674" font-size="12" fill="#cbd5e1" text-anchor="middle" font-weight="bold">_table</text>
+
+      <circle cx="470" cy="660" r="48" fill="#1a1a2e" stroke="#475569" stroke-width="2"/>
+      <text x="470" y="668" font-size="12" fill="#cbd5e1" text-anchor="middle" font-weight="bold">/kpi/bugs</text>
+
+      <circle cx="660" cy="660" r="48" fill="#1a1a2e" stroke="#475569" stroke-width="2"/>
+      <text x="660" y="658" font-size="12" fill="#cbd5e1" text-anchor="middle" font-weight="bold">renderKpi</text>
+      <text x="660" y="674" font-size="12" fill="#cbd5e1" text-anchor="middle" font-weight="bold">Dashboard</text>
+
+      <!-- Plain edges, no labels -->
+      <line x1="246" y1="488" x2="334" y2="462" stroke="#475569" stroke-width="1.5"/>
+      <line x1="426" y1="462" x2="514" y2="488" stroke="#475569" stroke-width="1.5"/>
+      <line x1="210" y1="546" x2="270" y2="614" stroke="#475569" stroke-width="1.5"/>
+      <line x1="390" y1="496" x2="460" y2="614" stroke="#475569" stroke-width="1.5"/>
+      <line x1="550" y1="546" x2="490" y2="614" stroke="#475569" stroke-width="1.5"/>
+      <line x1="568" y1="548" x2="652" y2="614" stroke="#475569" stroke-width="1.5"/>
+
+      <!-- Noise nodes: anonymous fns / builtins / 3rd party libs that static analysis also picks up -->
+      <circle cx="100" cy="400" r="28" fill="#1a0d0d" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="3 2" opacity="0.85"/>
+      <text x="100" y="396" font-size="10" fill="#fca5a5" text-anchor="middle" font-weight="bold">(anonymous</text>
+      <text x="100" y="410" font-size="10" fill="#fca5a5" text-anchor="middle" font-weight="bold">arrow fn)</text>
+
+      <circle cx="265" cy="370" r="26" fill="#1a0d0d" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="3 2" opacity="0.85"/>
+      <text x="265" y="368" font-size="10" fill="#fca5a5" text-anchor="middle" font-weight="bold">Array.</text>
+      <text x="265" y="382" font-size="10" fill="#fca5a5" text-anchor="middle" font-weight="bold">prototype.map</text>
+
+      <circle cx="490" cy="380" r="26" fill="#1a0d0d" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="3 2" opacity="0.85"/>
+      <text x="490" y="378" font-size="10" fill="#fca5a5" text-anchor="middle" font-weight="bold">Object.</text>
+      <text x="490" y="392" font-size="10" fill="#fca5a5" text-anchor="middle" font-weight="bold">keys</text>
+
+      <circle cx="720" cy="500" r="26" fill="#1a0d0d" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="3 2" opacity="0.85"/>
+      <text x="720" y="498" font-size="10" fill="#fca5a5" text-anchor="middle" font-weight="bold">lodash.</text>
+      <text x="720" y="512" font-size="10" fill="#fca5a5" text-anchor="middle" font-weight="bold">groupBy</text>
+
+      <!-- Dashed edges to noise -->
+      <line x1="158" y1="472" x2="125" y2="424" stroke="#ef4444" stroke-width="1.2" stroke-dasharray="3 2" opacity="0.7"/>
+      <line x1="342" y1="426" x2="288" y2="390" stroke="#ef4444" stroke-width="1.2" stroke-dasharray="3 2" opacity="0.7"/>
+      <line x1="520" y1="468" x2="500" y2="404" stroke="#ef4444" stroke-width="1.2" stroke-dasharray="3 2" opacity="0.7"/>
+      <line x1="608" y1="496" x2="696" y2="500" stroke="#ef4444" stroke-width="1.2" stroke-dasharray="3 2" opacity="0.7"/>
+
+      <!-- Annotation label for noise cluster -->
+      <text x="180" y="345" font-size="13" fill="#fca5a5" font-weight="bold">無名関数・builtin・3rd party もノード化 → グラフを汚す</text>
+    </g>
+
+    <!-- Problem callout -->
+    <rect x="60" y="770" width="720" height="240" rx="12" fill="#1a0d0d" stroke="#ef4444" stroke-width="2"/>
+    <text x="420" y="810" font-size="19" fill="#ef4444" text-anchor="middle" font-weight="bold">問題: 意味のラベルがない + ノイズも入る</text>
+    <text x="80" y="844" font-size="15" fill="#cbd5e1">• 関数名や型・呼び出し関係はわかるが、「<tspan fill="#fca5a5" font-weight="bold">なぜこの関数があるか</tspan>」がどこにも無い</text>
+    <text x="80" y="868" font-size="15" fill="#cbd5e1">• 無名関数 / builtin / 3rd party もノード化 → グラフが汚れて重要度が見えなくなる</text>
+    <text x="80" y="892" font-size="15" fill="#cbd5e1">• 「KPI のバグ発生率を計算するコード」のような自然言語クエリでは引けない</text>
+    <text x="80" y="916" font-size="15" fill="#cbd5e1">• Embedding に乗せるテキストがない → セマンティック検索が機能しない</text>
+    <text x="80" y="976" font-size="17" fill="#ef4444" font-weight="bold">→ 機械的に正確だが、AI の「やりたいことから探す」には届かない</text>
+  </g>
+
+  <!-- ============================================================ -->
+  <!-- RIGHT: SSoT (JSDoc) graph                                     -->
+  <!-- ============================================================ -->
+  <g font-family="Noto Sans JP, sans-serif">
+    <rect x="820" y="130" width="760" height="900" rx="16" fill="#0d1f12" stroke="#166534" stroke-width="2" opacity="0.55"/>
+    <text x="1200" y="180" font-size="26" fill="#4ade80" text-anchor="middle" font-weight="bold">After — JSDoc を SSoT に</text>
+    <text x="1200" y="210" font-size="16" fill="#cbd5e1" text-anchor="middle">宣言ごとに @graph-* を書く。意味のテキストが直接ノードに付き、Embedding に乗る</text>
+
+    <!-- Source with JSDoc -->
+    <rect x="860" y="240" width="280" height="160" rx="10" fill="#1a2818" stroke="#4ade80" stroke-width="1.5"/>
+    <text x="1000" y="270" font-size="16" fill="#4ade80" text-anchor="middle" font-weight="bold">JSDoc付き source</text>
+    <text x="870" y="298" font-size="13" fill="#cbd5e1" font-family="ui-monospace, monospace">/**</text>
+    <text x="870" y="318" font-size="13" fill="#cbd5e1" font-family="ui-monospace, monospace"> * @graph-business KPIのバグ率…</text>
+    <text x="870" y="338" font-size="13" fill="#cbd5e1" font-family="ui-monospace, monospace"> * @graph-connects kpi_daily…</text>
+    <text x="870" y="358" font-size="13" fill="#cbd5e1" font-family="ui-monospace, monospace"> */</text>
+    <text x="870" y="380" font-size="13" fill="#cbd5e1" font-family="ui-monospace, monospace">export function calculateBugCount…</text>
+
+    <!-- ts-morph parse -->
+    <rect x="1280" y="240" width="260" height="160" rx="10" fill="#0d1f2d" stroke="#38bdf8" stroke-width="1.5"/>
+    <text x="1410" y="278" font-size="17" fill="#38bdf8" text-anchor="middle" font-weight="bold">ts-morph で抽出</text>
+    <text x="1410" y="312" font-size="15" fill="#cbd5e1" text-anchor="middle">タグ + business テキスト</text>
+    <text x="1410" y="334" font-size="15" fill="#cbd5e1" text-anchor="middle">+ Vertex AI で embedding</text>
+    <text x="1410" y="376" font-size="14" fill="#94a3b8" text-anchor="middle">差分 push: $0.001 以下</text>
+
+    <line x1="1140" y1="320" x2="1280" y2="320" stroke="#94a3b8" stroke-width="2" marker-end="url(#a-94a3b8)"/>
+
+    <!-- Graph with labels -->
+    <g>
+      <circle cx="970" cy="540" r="54" fill="#1a2818" stroke="#4ade80" stroke-width="2.5"/>
+      <text x="970" y="536" font-size="14" fill="#4ade80" text-anchor="middle" font-weight="bold">calculate</text>
+      <text x="970" y="554" font-size="14" fill="#4ade80" text-anchor="middle" font-weight="bold">BugCount</text>
+      <text x="970" y="608" font-size="14" fill="#cbd5e1" text-anchor="middle">Function</text>
+
+      <circle cx="1190" cy="470" r="54" fill="#1a2818" stroke="#4ade80" stroke-width="2.5"/>
+      <text x="1190" y="466" font-size="14" fill="#4ade80" text-anchor="middle" font-weight="bold">kpiTeam</text>
+      <text x="1190" y="484" font-size="14" fill="#4ade80" text-anchor="middle" font-weight="bold">Filter</text>
+      <text x="1190" y="538" font-size="14" fill="#cbd5e1" text-anchor="middle">Function</text>
+
+      <circle cx="1410" cy="540" r="54" fill="#0d2030" stroke="#38bdf8" stroke-width="2.5"/>
+      <text x="1410" y="536" font-size="14" fill="#38bdf8" text-anchor="middle" font-weight="bold">kpi_daily</text>
+      <text x="1410" y="554" font-size="14" fill="#38bdf8" text-anchor="middle" font-weight="bold">_table</text>
+      <text x="1410" y="608" font-size="14" fill="#cbd5e1" text-anchor="middle">BigQueryTable</text>
+
+      <circle cx="1020" cy="720" r="54" fill="#251a0d" stroke="#fb923c" stroke-width="2.5"/>
+      <text x="1020" y="724" font-size="14" fill="#fb923c" text-anchor="middle" font-weight="bold">/kpi/bugs</text>
+      <text x="1020" y="788" font-size="14" fill="#cbd5e1" text-anchor="middle">ApiEndpoint</text>
+
+      <circle cx="1280" cy="720" r="54" fill="#25190d" stroke="#f59e0b" stroke-width="2.5"/>
+      <text x="1280" y="714" font-size="14" fill="#f59e0b" text-anchor="middle" font-weight="bold">docs/api/</text>
+      <text x="1280" y="732" font-size="14" fill="#f59e0b" text-anchor="middle" font-weight="bold">kpi.md</text>
+      <text x="1280" y="788" font-size="14" fill="#cbd5e1" text-anchor="middle">Document</text>
+
+      <!-- Edges with labels -->
+      <line x1="1024" y1="540" x2="1136" y2="480" stroke="#4ade80" stroke-width="2" marker-end="url(#a-4ade80)"/>
+      <text x="1052" y="500" font-size="14" fill="#4ade80" font-weight="bold">calls</text>
+
+      <line x1="1244" y1="480" x2="1356" y2="540" stroke="#38bdf8" stroke-width="2" marker-end="url(#a-94a3b8)"/>
+      <text x="1280" y="500" font-size="14" fill="#38bdf8" font-weight="bold">queries</text>
+
+      <line x1="970" y1="594" x2="1010" y2="668" stroke="#fb923c" stroke-width="2" marker-end="url(#a-94a3b8)"/>
+      <text x="942" y="640" font-size="14" fill="#fb923c" font-weight="bold">routes</text>
+
+      <line x1="970" y1="594" x2="1230" y2="668" stroke="#f59e0b" stroke-width="2" marker-end="url(#a-94a3b8)"/>
+      <text x="1090" y="625" font-size="14" fill="#f59e0b" font-weight="bold">documented_by</text>
+    </g>
+
+    <!-- Win callout -->
+    <rect x="840" y="840" width="720" height="170" rx="12" fill="#0d1f12" stroke="#4ade80" stroke-width="2"/>
+    <text x="1200" y="880" font-size="19" fill="#4ade80" text-anchor="middle" font-weight="bold">結果: 意味のテキストが各ノードに付く</text>
+    <text x="860" y="914" font-size="16" fill="#cbd5e1">• @graph-business が <tspan fill="#86efac" font-weight="bold">そのまま Embedding 入力</tspan>に。「KPI のバグ発生率…」で引ける</text>
+    <text x="860" y="942" font-size="16" fill="#cbd5e1">• ノード種別が混在: Function / BigQueryTable / ApiEndpoint / Document が同じ id 空間</text>
+    <text x="860" y="970" font-size="16" fill="#cbd5e1">• エッジに種別と via:&lt;field&gt; が付く → AI がデータフロー単位で辿れる</text>
+    <text x="860" y="1000" font-size="17" fill="#4ade80" font-weight="bold">→ AI の「やりたいこと」から、意味で繋がるサブグラフが返ってくる</text>
+  </g>
+</svg>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="980" viewBox="0 0 1600 980">
+  <rect width="1600" height="980" fill="#0f172a"/>
+
+  <defs>
+    <marker id="a-94a3b8" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#94a3b8"/></marker>
+    <marker id="a-38bdf8" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#38bdf8"/></marker>
+    <marker id="a-4ade80" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#4ade80"/></marker>
+    <marker id="a-f59e0b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#f59e0b"/></marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="800" y="56" font-size="30" fill="#e2e8f0" text-anchor="middle" font-weight="bold" font-family="Noto Sans JP, sans-serif">Runbook パターン — ツール返却値に「次に叩くべきツール呼び出し」が同梱される</text>
+  <text x="800" y="92" font-size="18" fill="#94a3b8" text-anchor="middle" font-family="Noto Sans JP, sans-serif">AI は呼ぶたびに次の選択肢が手に入る。usecase で戦略テキストと next-tool が切り替わる</text>
+
+  <!-- AI Agent (left) -->
+  <g font-family="Noto Sans JP, sans-serif">
+    <rect x="60" y="200" width="280" height="160" rx="16" fill="#1a2818" stroke="#4ade80" stroke-width="2.5"/>
+    <text x="200" y="246" font-size="22" fill="#4ade80" text-anchor="middle" font-weight="bold">AI Agent</text>
+    <text x="200" y="278" font-size="15" fill="#cbd5e1" text-anchor="middle">Claude Code / Codex / etc.</text>
+    <text x="200" y="312" font-size="14" fill="#94a3b8" text-anchor="middle">「KPI のバグ発生率を計算</text>
+    <text x="200" y="334" font-size="14" fill="#94a3b8" text-anchor="middle">しているコードを調べたい」</text>
+  </g>
+
+  <!-- MCP Server (right) -->
+  <g font-family="Noto Sans JP, sans-serif">
+    <rect x="1240" y="200" width="320" height="160" rx="16" fill="#0d2030" stroke="#38bdf8" stroke-width="2.5"/>
+    <text x="1400" y="246" font-size="22" fill="#38bdf8" text-anchor="middle" font-weight="bold">cortex-product-graph MCP</text>
+    <text x="1400" y="280" font-size="15" fill="#cbd5e1" text-anchor="middle">3層 + 実データ補助ツール</text>
+    <text x="1400" y="310" font-size="14" fill="#94a3b8" text-anchor="middle">search / detail / traverse</text>
+    <text x="1400" y="332" font-size="14" fill="#94a3b8" text-anchor="middle">read_file / query_bq / Firestore</text>
+  </g>
+
+  <!-- Step 1: AI sends query (arrow + box) -->
+  <g font-family="Noto Sans JP, sans-serif">
+    <line x1="345" y1="260" x2="1230" y2="260" stroke="#94a3b8" stroke-width="2" marker-end="url(#a-94a3b8)" stroke-dasharray="8 5"/>
+    <rect x="450" y="218" width="680" height="44" rx="8" fill="#0f172a" stroke="#475569" stroke-width="1.5"/>
+    <text x="790" y="246" font-size="15" fill="#e2e8f0" text-anchor="middle" font-family="ui-monospace, monospace">search_product_graph_nodes(query: "KPI...", usecase: "design")</text>
+  </g>
+
+  <!-- Step 2: MCP returns response with hints -->
+  <g font-family="Noto Sans JP, sans-serif">
+    <rect x="430" y="430" width="680" height="380" rx="14" fill="#0f172a" stroke="#475569" stroke-width="2"/>
+    <text x="450" y="470" font-size="19" fill="#e2e8f0" font-weight="bold">MCP からの返却:</text>
+
+    <!-- Body lines -->
+    <text x="450" y="504" font-size="15" fill="#cbd5e1" font-family="ui-monospace, monospace">3 件のノードが見つかりました:</text>
+    <text x="450" y="528" font-size="15" fill="#e2e8f0" font-family="ui-monospace, monospace">  - calculateBugCount (Function)</text>
+    <text x="450" y="550" font-size="15" fill="#e2e8f0" font-family="ui-monospace, monospace">  - kpi_daily_table (BigQueryTable)</text>
+    <text x="450" y="572" font-size="15" fill="#e2e8f0" font-family="ui-monospace, monospace">  - /kpi/bugs (ApiEndpoint)</text>
+
+    <line x1="450" y1="594" x2="1090" y2="594" stroke="#334155" stroke-width="1.5"/>
+
+    <text x="450" y="624" font-size="17" fill="#fb923c" font-weight="bold">## 関連ノード（次のアクション候補）</text>
+
+    <text x="450" y="656" font-size="15" fill="#4ade80" font-family="ui-monospace, monospace" font-weight="bold">🛠 コード</text>
+    <text x="450" y="678" font-size="13" fill="#e2e8f0" font-family="ui-monospace, monospace">  → get_product_graph_node_detail("...calculateBugCount")</text>
+
+    <text x="450" y="708" font-size="15" fill="#38bdf8" font-family="ui-monospace, monospace" font-weight="bold">🗄 DBテーブル</text>
+    <text x="450" y="730" font-size="13" fill="#e2e8f0" font-family="ui-monospace, monospace">  → trace_product_graph_connections(start="...kpi_daily_table", direction="backward")</text>
+
+    <text x="450" y="760" font-size="15" fill="#fb923c" font-family="ui-monospace, monospace" font-weight="bold">🌐 API</text>
+    <text x="450" y="782" font-size="13" fill="#e2e8f0" font-family="ui-monospace, monospace">  → get_product_graph_node_detail("/kpi/bugs")</text>
+  </g>
+
+  <!-- Arrow from MCP to response box -->
+  <line x1="1400" y1="360" x2="980" y2="430" stroke="#38bdf8" stroke-width="2" marker-end="url(#a-38bdf8)"/>
+  <text x="1160" y="386" font-size="15" fill="#38bdf8" font-family="Noto Sans JP, sans-serif" font-weight="bold">レスポンス</text>
+
+  <!-- Arrow back from response to AI -->
+  <line x1="430" y1="568" x2="290" y2="358" stroke="#94a3b8" stroke-width="2" marker-end="url(#a-94a3b8)" stroke-dasharray="6 4"/>
+  <text x="290" y="476" font-size="15" fill="#cbd5e1" font-family="Noto Sans JP, sans-serif" font-weight="bold" transform="rotate(-58 290 476)">AI が読む</text>
+
+  <!-- AI picks one and calls next tool -->
+  <g font-family="Noto Sans JP, sans-serif">
+    <rect x="60" y="860" width="1500" height="100" rx="14" fill="#1a2818" stroke="#4ade80" stroke-width="2"/>
+    <text x="80" y="892" font-size="17" fill="#4ade80" font-weight="bold">AI の次の一手（コピペで呼べる形になっている）:</text>
+    <text x="80" y="922" font-size="15" fill="#e2e8f0" font-family="ui-monospace, monospace">trace_product_graph_connections(start_node: "kpi_daily_table", direction: "backward", usecase: "design")</text>
+    <text x="80" y="946" font-size="14" fill="#94a3b8">→ usecase が前回と揃うので、次の返却も同じ戦略テキスト + 同じ目的に最適化された next-tool が並ぶ</text>
+  </g>
+
+  <!-- Loop arrow from "next call" back to MCP server -->
+  <path d="M 1450 860 Q 1580 700 1500 380" stroke="#4ade80" stroke-width="2" fill="none" marker-end="url(#a-4ade80)" stroke-dasharray="6 4"/>
+  <text x="1530" y="600" font-size="15" fill="#4ade80" font-family="Noto Sans JP, sans-serif" font-weight="bold" transform="rotate(-72 1530 600)">次のツール呼び出し</text>
+
+  <!-- usecase callout -->
+  <g font-family="Noto Sans JP, sans-serif">
+    <rect x="60" y="430" width="340" height="380" rx="12" fill="#1a1525" stroke="#a78bfa" stroke-width="2"/>
+    <text x="230" y="470" font-size="19" fill="#a78bfa" text-anchor="middle" font-weight="bold">usecase で戦略が切り替わる</text>
+
+    <text x="80" y="506" font-size="15" fill="#cbd5e1" font-weight="bold">design:</text>
+    <text x="80" y="528" font-size="14" fill="#94a3b8">  → detail で business / 接続を読む</text>
+
+    <text x="80" y="558" font-size="15" fill="#cbd5e1" font-weight="bold">impact / code-review / bug:</text>
+    <text x="80" y="580" font-size="14" fill="#94a3b8">  → trace direction=both / depth=5</text>
+
+    <text x="80" y="610" font-size="15" fill="#cbd5e1" font-weight="bold">test-create:</text>
+    <text x="80" y="632" font-size="14" fill="#94a3b8">  → detail で param と接続 DB</text>
+
+    <text x="80" y="668" font-size="16" fill="#a78bfa" font-weight="bold">→ 同じグラフから違う角度の応答</text>
+
+    <line x1="80" y1="688" x2="380" y2="688" stroke="#334155" stroke-width="1.5"/>
+
+    <text x="80" y="718" font-size="14" fill="#cbd5e1">Auto Review が code-review、</text>
+    <text x="80" y="738" font-size="14" fill="#cbd5e1">Alert-Fix が bug を踏んでいる。</text>
+    <text x="80" y="768" font-size="13" fill="#94a3b8">AI 側は「いま自分は何をしているか」</text>
+    <text x="80" y="786" font-size="13" fill="#94a3b8">を宣言するだけで、戦略はサーバ側に</text>
+  </g>
+</svg>
