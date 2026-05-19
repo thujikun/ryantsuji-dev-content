@@ -176,7 +176,7 @@ The result: **"write a declaration → business context is always written with i
 
 One honest note: **forcing "5 JSDoc tags on every declaration" on humans would blow up in code review within three days**. Writing a `@graph-business` sentence per function, enumerating `@graph-connects` exhaustively, checking the naming allowlists — that's genuinely tedious at scale.
 
-This works because **AI writes the code**. Writing five JSDoc tags is rounding error on top of writing the code itself. With ESLint and automated review in the feedback loop, the AI doesn't miss tags — and human reviewers only need to check "is this tag factually correct?" not "is it there?"
+This works because **AI writes the code**. Writing four required JSDoc tags (plus optional `@graph-node` when the default `Function` type isn't enough) is rounding error on top of writing the code itself. With ESLint and automated review in the feedback loop, the AI doesn't miss tags — and human reviewers only need to check "is this tag factually correct?" not "is it there?"
 
 :::message
 This design is one that **can't realistically be maintained when humans write code**, but **becomes viable the moment AI does**. It's an AI-first design. The premise of AI-first development is what lets business context be fixed in code as the SSoT.
@@ -188,8 +188,7 @@ Viewed from another angle, what's going on here is that **the location of halluc
 
 As I [wrote elsewhere](/posts/agentic-graph-rag-mcp), when you combine AI with a graph system, "**hallucination doesn't disappear — it just changes location.**" For cpg, here's where it lands:
 
-- **Graph build phase**: **Zero** hallucination. Context lives in the code itself, and both the ts-morph AST pass and the BigQuery MERGE are fully deterministic. No LLM is involved.
-- **Graph query phase**: **Zero** hallucination. The MCP tools return facts straight from BQ.
+- **Graph build / query phase**: **No fresh LLM generation.** Once reviewed metadata lands in the graph, the ts-morph AST pass, the BigQuery MERGE, and the MCP query responses are all deterministic.
 - **JSDoc writing phase**: This is the entry point for hallucination. Whether `@graph-business` is factually accurate, or whether `@graph-connects` is exhaustively listed — these can go wrong since the AI is writing them.
 
 But **the entry point is locked down by automated PR review**. Missing tags get `[Graph] Critical`; factual drift gets `[Doc] Critical`. When something's wrong, either the AI that wrote the code or another reviewer AI catches it and fixes it.
@@ -201,7 +200,7 @@ The result: **once data lands in the graph, it can be treated as deterministical
 Once JSDoc is established as the SSoT, the rest is mechanics: extract it and assemble the graph. The implementation:
 
 1. **AST-analyze JS/TS with ts-morph** — walk every declaration (function / class / method / type / enum / variable / expression statement / `export default` / etc.)
-2. **Extract `@graph-*` tags from JSDoc** — collect all five tags and normalize into a `ParsedGraphTags` structure
+2. **Extract `@graph-*` tags from JSDoc** — collect the four required tags plus optional `@graph-node` and normalize into a `ParsedGraphTags` structure
 3. **Generate nodes** — use `qualifiedName = "<filePath>:<name>"` as the node ID
 4. **Generate edges** — one edge per `@graph-connects` entry, with `via:` / `cardinality` and other metadata preserved
 5. **Generate embeddings** — send `@graph-business` text to Vertex AI Embedding (`gemini-embedding-2`) and vectorize it
