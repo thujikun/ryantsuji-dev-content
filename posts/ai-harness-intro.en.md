@@ -318,3 +318,5 @@ Building cortex, what's struck me is that **in an AI-era dev environment, "absor
 And it expands two things — **how much one engineer can ship**, and **how much non-engineers can participate** — well beyond what was possible before. That's the texture of the "harness" we've built on top of cortex.
 
 In subsequent parts, I'll walk through the individual mechanisms that make this work.
+
+→ Part 2: [Product Graph — code, docs, DB, infrastructure as one unified graph](/posts/cortex-product-graph)
