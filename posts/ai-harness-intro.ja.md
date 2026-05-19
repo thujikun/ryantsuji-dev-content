@@ -28,6 +28,17 @@ cover: /posts/ai-harness-intro.ja.cover.png
 
 これらは全部、**cortex**と名付けた社内向けのAI開発プラットフォームの上で動いています。今回は、そのcortexそのものについて書きます。**今回から数回に分けて、その仕組みを公開していく予定**で、本記事はその初回・総論編です。
 
+## 連載一覧
+
+| # | テーマ | キーシーン | 記事 |
+|---|---|---|---|
+| 1 | 総論：cortexのハーネス | PRが無人マージ / 障害が気づく前に治っている | [本記事](/posts/ai-harness-intro) ←現在地 |
+| 2 | Product Graph (cpg) | コード・docs・DB・インフラを1グラフに統合 | [cortex-product-graph](/posts/cortex-product-graph) |
+| 3 | AI PRレビュー | webhook → AIレビュー → 自動修正 → squash merge | 準備中 |
+| 4 | Alert-Fix | アラート → AI調査 → 修正PR → 自動再デプロイ | 準備中 |
+| 5 | Observability + 品質ゲート | OTel/Faro 一式 + 品質「下げない」設計 | 準備中 |
+| 6 | 非エンジニア開発環境 | 事業メンバーがPR、AIレビューで品質担保 | 準備中 |
+
 ## いきなり2つのシーンから
 
 ### シーン1: PRは無人でマージされる
@@ -284,7 +295,7 @@ cortexがデプロイまで全自動にできているのは、もちろんCompo
 **Part 1: 総論**（本記事）
    cortexがどんな環境で、なぜ「ハーネス」という形で機能するかの全体像。シリーズ全体の地図役。
 
-**Part 2: Product Graph ── コード・docs・DB・インフラを1つのグラフに統合する** ★最初に読み進めるおすすめ
+**[Part 2: Product Graph ── コード・docs・DB・インフラを1つのグラフに統合する](/posts/cortex-product-graph)** ★最初に読み進めるおすすめ
    この統合グラフがどう構築・維持されているかの実装編。直前の[Agentic Graph RAG MCPの記事](/posts/agentic-graph-rag-mcp)で書いた設計原則をcortex全体に適用するとどうなるか。
 
 **Part 3: AIがPRをレビューし、修正し、マージし、デプロイする**

@@ -25,6 +25,17 @@ In my previous posts I've introduced [the full picture of our 17 internal MCP se
 
 All of those run on top of an internal AI development platform we call **cortex**. This post is the first in a series about cortex itself — the platform, the design choices, and the operational experience.
 
+## Series Index
+
+| # | Theme | Key scene | Article |
+|---|---|---|---|
+| 1 | Series intro: cortex's harness | PRs auto-merge / incidents self-heal before you notice | [this post](/posts/ai-harness-intro) ← you are here |
+| 2 | Product Graph (cpg) | Code, docs, DB, infra unified into one graph | [cortex-product-graph](/posts/cortex-product-graph) |
+| 3 | AI PR review | webhook → AI review → auto-fix → squash merge | coming |
+| 4 | Alert-Fix | Alert → AI investigation → fix PR → auto redeploy | coming |
+| 5 | Observability + quality gates | OTel/Faro stack + "non-loweriable" quality design | coming |
+| 6 | Non-engineer dev environment | Business members opening PRs, quality via AI review | coming |
+
 ## Two Scenes, Up Front
 
 ### Scene 1: PRs merge themselves
@@ -281,7 +292,7 @@ The series is planned as 6 parts.
 **Part 1: Series Intro** (this post)
    The big picture of what cortex is and why it works in "harness" form. The map to the rest of the series.
 
-**Part 2: Product Graph — code, docs, DB, infrastructure as one unified graph** ★ recommended next
+**[Part 2: Product Graph — code, docs, DB, infrastructure as one unified graph](/posts/cortex-product-graph)** ★ recommended next
    The implementation side: how the unified graph is built and maintained. What happens when you take the design principles from [the Agentic Graph RAG MCP post](/posts/agentic-graph-rag-mcp) and apply them to the entire cortex codebase.
 
 **Part 3: AI reviews, fixes, merges, and deploys PRs**

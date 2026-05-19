@@ -29,6 +29,17 @@ In [Part 1 (Series Intro)](/posts/ai-harness-intro), I wrote about how **AI hand
 
 In Part 1, I described cpg at a high level: "all of cortex is indexed in one graph." This post goes deeper — **how it's built, why we landed on this design, and what actually changed** once it was in place.
 
+## Series Index
+
+| # | Theme | Key scene | Article |
+|---|---|---|---|
+| 1 | Series intro: cortex's harness | PRs auto-merge / incidents self-heal before you notice | [ai-harness-intro](/posts/ai-harness-intro) |
+| 2 | Product Graph (cpg) | Code, docs, DB, infra unified into one graph | [this post](/posts/cortex-product-graph) ← you are here |
+| 3 | AI PR review | webhook → AI review → auto-fix → squash merge | coming |
+| 4 | Alert-Fix | Alert → AI investigation → fix PR → auto redeploy | coming |
+| 5 | Observability + quality gates | OTel/Faro stack + "non-loweriable" quality design | coming |
+| 6 | Non-engineer dev environment | Business members opening PRs, quality via AI review | coming |
+
 ## Start with One Scene
 
 "I want to change the calculation logic behind the 'bug rate' KPI on the dashboard. **Where is it, and what might break?**" — imagine that question comes up before you touch any code.
