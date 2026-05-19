@@ -32,7 +32,7 @@ cover: /posts/ai-harness-intro.ja.cover.png
 
 | # | テーマ | キーシーン | 記事 |
 |---|---|---|---|
-| 1 | 総論：cortexのハーネス | PRが無人マージ / 障害が気づく前に治っている | [本記事](/posts/ai-harness-intro) ←現在地 |
+| 1 | 総論：cortexのハーネス | PRが無人マージ / 障害が気づく前に治っている | 本記事 ←現在地 |
 | 2 | Product Graph (cpg) | コード・ドキュメント・DB・インフラを1グラフに統合 | [cortex-product-graph](/posts/cortex-product-graph) |
 | 3 | AI PRレビュー | webhook → AIレビュー → 自動修正 → squash merge | 準備中 |
 | 4 | Alert-Fix | アラート → AI調査 → 修正PR → 自動再デプロイ | 準備中 |

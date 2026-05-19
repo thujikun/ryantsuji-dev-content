@@ -29,7 +29,7 @@ All of those run on top of an internal AI development platform we call **cortex*
 
 | # | Theme | Key scene | Article |
 |---|---|---|---|
-| 1 | Series intro: cortex's harness | PRs auto-merge / incidents self-heal before you notice | [this post](/posts/ai-harness-intro) ← you are here |
+| 1 | Series intro: cortex's harness | PRs auto-merge / incidents self-heal before you notice | this post ← you are here |
 | 2 | Product Graph (cpg) | Code, docs, DB, infra unified into one graph | [cortex-product-graph](/posts/cortex-product-graph) |
 | 3 | AI PR review | webhook → AI review → auto-fix → squash merge | coming |
 | 4 | Alert-Fix | Alert → AI investigation → fix PR → auto redeploy | coming |
