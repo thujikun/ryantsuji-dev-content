@@ -91,7 +91,7 @@ The implementation is **a script running on each developer's own machine**. GitH
 
 When the reviewer's PC receives an event, the script spawns `claude -p` and walks through 9 dimensions (Graph / Architecture / Security / Test / Doc / Impact / Observability / AI-Antipattern / Recurrence) sequentially, then reads the verdict marker the AI emitted at the end and posts `APPROVE` or `REQUEST_CHANGES` via `gh pr review`.
 
-![Auto review pipeline — distributed webhook architecture running on every developer's PC](/images/posts/cortex-auto-review/auto-review-flow.png)
+![Auto review pipeline — distributed webhook architecture running on every developer's PC](/images/posts/cortex-auto-review/auto-review-flow-en.png)
 
 A few notes:
 
@@ -215,13 +215,13 @@ After this, the PR author (= usually another AI running on the author's PC) push
 
 Plotted on a timeline:
 
-![Real example of the review-fix loop — embedding model migration PR, 6 iterations in 1.5 hours](/images/posts/cortex-auto-review/review-fix-timeline.png)
+![Real example of the review-fix loop — embedding model migration PR, 6 iterations in 1.5 hours](/images/posts/cortex-auto-review/review-fix-timeline-en.png)
 
 With a human reviewer, this is "Critical x3 -> wait until tomorrow for the fix -> re-review the day after" -- 2 to 3 days per PR. cortex closes it in **90 minutes**.
 
 The difference between human review and auto review is not just speed. A single AI session walks all 9 dimensions in order and cites the guideline each time, which makes it **much harder to miss the "deep" findings humans drop because their attention drifted** -- doc consistency, recurrence-prevention judgments, weak matchers. Side-by-side comparison:
 
-![Before / After — human review era vs. cortex's auto-review era](/images/posts/cortex-auto-review/before-after-review.png)
+![Before / After — human review era vs. cortex's auto-review era](/images/posts/cortex-auto-review/before-after-review-en.png)
 
 This is why "the review bottleneck" structurally doesn't form here.
 

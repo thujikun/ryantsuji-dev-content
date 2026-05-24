@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="960" viewBox="0 0 1600 960">
+  <rect width="1600" height="960" fill="#0f172a"/>
+
+  <defs>
+    <marker id="a-94a3b8" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#94a3b8"/></marker>
+    <marker id="a-4ade80" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#4ade80"/></marker>
+    <marker id="a-38bdf8" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#38bdf8"/></marker>
+    <marker id="a-fb923c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#fb923c"/></marker>
+    <marker id="a-f87171" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#f87171"/></marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="800" y="56" font-size="30" fill="#e2e8f0" text-anchor="middle" font-weight="bold" font-family="sans-serif">Auto review pipeline — distributed webhook architecture on every developer's PC</text>
+  <text x="800" y="92" font-size="18" fill="#94a3b8" text-anchor="middle" font-family="sans-serif">769 PRs in 30 days / avg 10.8 review-fix iterations / ~0% human review per PR / median 31 min to merge</text>
+
+  <!-- Phase labels -->
+  <g font-family="sans-serif" font-size="17">
+    <text x="150" y="150" fill="#cbd5e1" text-anchor="middle" font-weight="bold">1. Trigger</text>
+    <text x="490" y="150" fill="#cbd5e1" text-anchor="middle" font-weight="bold">2. reviewer mode (reviewer's PC)</text>
+    <text x="820" y="150" fill="#cbd5e1" text-anchor="middle" font-weight="bold">3. Verdict</text>
+    <text x="1140" y="150" fill="#cbd5e1" text-anchor="middle" font-weight="bold">4. author mode (PR author's PC)</text>
+    <text x="1450" y="150" fill="#cbd5e1" text-anchor="middle" font-weight="bold">5. Merge &amp; Deploy</text>
+  </g>
+
+  <!-- ============= 1. Trigger ============= -->
+  <g font-family="sans-serif">
+    <rect x="30" y="200" width="240" height="270" rx="14" fill="#1a2818" stroke="#4ade80" stroke-width="2.5"/>
+    <text x="150" y="240" font-size="20" fill="#4ade80" text-anchor="middle" font-weight="bold">GitHub PR</text>
+    <text x="150" y="268" font-size="14" fill="#cbd5e1" text-anchor="middle">opened / synchronize</text>
+    <text x="150" y="292" font-size="13" fill="#94a3b8" text-anchor="middle">authored by AI or human</text>
+
+    <line x1="50" y1="312" x2="250" y2="312" stroke="#334155" stroke-width="1"/>
+
+    <text x="150" y="340" font-size="16" fill="#fb923c" text-anchor="middle" font-weight="bold">Event Relay (in-house)</text>
+    <text x="150" y="362" font-size="12" fill="#cbd5e1" text-anchor="middle">Persisted to Firestore</text>
+    <text x="150" y="382" font-size="12" fill="#94a3b8" text-anchor="middle">Delivered via SSE to each PC</text>
+
+    <text x="150" y="420" font-size="13" fill="#94a3b8" text-anchor="middle">One-time webhook registration</text>
+    <text x="150" y="440" font-size="13" fill="#94a3b8" text-anchor="middle">Last-Event-ID replays missed events</text>
+    <text x="150" y="458" font-size="13" fill="#94a3b8" text-anchor="middle">Zero event loss</text>
+  </g>
+
+  <!-- ============= 2. reviewer mode ============= -->
+  <g font-family="sans-serif">
+    <rect x="330" y="200" width="320" height="580" rx="14" fill="#0d1f2d" stroke="#38bdf8" stroke-width="2.5"/>
+    <text x="490" y="234" font-size="18" fill="#38bdf8" text-anchor="middle" font-weight="bold">webhook-server.mjs --mode reviewer</text>
+    <text x="490" y="254" font-size="13" fill="#94a3b8" text-anchor="middle">On reviewer's PC (localhost:3456)</text>
+
+    <!-- dedup / lang check -->
+    <rect x="350" y="272" width="280" height="44" rx="6" fill="#0a1820" stroke="#38bdf8" stroke-width="1.3"/>
+    <text x="490" y="294" font-size="13" fill="#cbd5e1" text-anchor="middle" font-weight="bold">Dedup + language check</text>
+    <text x="490" y="310" font-size="11" fill="#94a3b8" text-anchor="middle">Dedup by SHA + latest activity TS</text>
+
+    <!-- cpg context -->
+    <rect x="350" y="324" width="280" height="44" rx="6" fill="#1a1525" stroke="#a78bfa" stroke-width="1.3"/>
+    <text x="490" y="346" font-size="13" fill="#a78bfa" text-anchor="middle" font-weight="bold">Product Graph pre-load</text>
+    <text x="490" y="362" font-size="11" fill="#94a3b8" text-anchor="middle">Pre-load changed nodes + dependencies</text>
+
+    <!-- AI single session -->
+    <rect x="350" y="380" width="280" height="372" rx="8" fill="#251a0d" stroke="#fb923c" stroke-width="1.8"/>
+    <text x="490" y="406" font-size="14" fill="#fb923c" text-anchor="middle" font-weight="bold">Spawn claude -p (single session)</text>
+    <text x="490" y="424" font-size="11" fill="#94a3b8" text-anchor="middle">9 dimensions checked sequentially</text>
+
+    <line x1="370" y1="436" x2="610" y2="436" stroke="#334155" stroke-width="1"/>
+
+    <rect x="370" y="446" width="240" height="22" rx="4" fill="#0a1820" stroke="#fb923c" stroke-width="1"/>
+    <text x="490" y="461" font-size="11" fill="#cbd5e1" text-anchor="middle">1. [Graph] graph-integrity.md</text>
+
+    <rect x="370" y="472" width="240" height="22" rx="4" fill="#0a1820" stroke="#fb923c" stroke-width="1"/>
+    <text x="490" y="487" font-size="11" fill="#cbd5e1" text-anchor="middle">2. [Architecture] architecture.md</text>
+
+    <rect x="370" y="498" width="240" height="22" rx="4" fill="#0a1820" stroke="#fb923c" stroke-width="1"/>
+    <text x="490" y="513" font-size="11" fill="#cbd5e1" text-anchor="middle">3. [Security] security.md</text>
+
+    <rect x="370" y="524" width="240" height="22" rx="4" fill="#0a1820" stroke="#fb923c" stroke-width="1"/>
+    <text x="490" y="539" font-size="11" fill="#cbd5e1" text-anchor="middle">4. [Test] testing.md</text>
+
+    <rect x="370" y="550" width="240" height="22" rx="4" fill="#0a1820" stroke="#fb923c" stroke-width="1"/>
+    <text x="490" y="565" font-size="11" fill="#cbd5e1" text-anchor="middle">5. [Doc] document-writing.md</text>
+
+    <rect x="370" y="576" width="240" height="22" rx="4" fill="#0a1820" stroke="#fb923c" stroke-width="1"/>
+    <text x="490" y="591" font-size="11" fill="#cbd5e1" text-anchor="middle">6. [Impact] impact-analysis.md</text>
+
+    <rect x="370" y="602" width="240" height="22" rx="4" fill="#0a1820" stroke="#fb923c" stroke-width="1"/>
+    <text x="490" y="617" font-size="11" fill="#cbd5e1" text-anchor="middle">7. [Observability] observability.md</text>
+
+    <rect x="370" y="628" width="240" height="22" rx="4" fill="#0a1820" stroke="#fb923c" stroke-width="1"/>
+    <text x="490" y="643" font-size="11" fill="#cbd5e1" text-anchor="middle">8. [AI-Antipattern] ai-antipattern.md</text>
+
+    <rect x="370" y="654" width="240" height="22" rx="4" fill="#0a1820" stroke="#fb923c" stroke-width="1"/>
+    <text x="490" y="669" font-size="11" fill="#cbd5e1" text-anchor="middle">9. [Recurrence] recurrence-prevention.md</text>
+
+    <text x="490" y="700" font-size="11" fill="#94a3b8" text-anchor="middle">Not parallel sub-agents.</text>
+    <text x="490" y="718" font-size="11" fill="#94a3b8" text-anchor="middle">Single session shares context while</text>
+    <text x="490" y="736" font-size="11" fill="#94a3b8" text-anchor="middle">switching dimensions.</text>
+  </g>
+
+  <!-- ============= 3. Verdict ============= -->
+  <g font-family="sans-serif">
+    <rect x="700" y="200" width="240" height="270" rx="14" fill="#0d1f2d" stroke="#38bdf8" stroke-width="2.5"/>
+    <text x="820" y="234" font-size="19" fill="#38bdf8" text-anchor="middle" font-weight="bold">PR comment</text>
+    <text x="820" y="254" font-size="12" fill="#94a3b8" text-anchor="middle">with verdict marker</text>
+
+    <rect x="720" y="272" width="200" height="80" rx="8" fill="#2d1414" stroke="#f87171" stroke-width="1.8"/>
+    <text x="820" y="298" font-size="14" fill="#f87171" text-anchor="middle" font-weight="bold">REQUEST_CHANGES</text>
+    <text x="820" y="318" font-size="11" fill="#cbd5e1" text-anchor="middle">Critical or Major</text>
+    <text x="820" y="336" font-size="11" fill="#94a3b8" text-anchor="middle">-&gt; 4. author mode</text>
+
+    <rect x="720" y="364" width="200" height="80" rx="8" fill="#0d2820" stroke="#4ade80" stroke-width="1.8"/>
+    <text x="820" y="390" font-size="14" fill="#4ade80" text-anchor="middle" font-weight="bold">APPROVE</text>
+    <text x="820" y="410" font-size="11" fill="#cbd5e1" text-anchor="middle">all clear (after CI pass)</text>
+    <text x="820" y="428" font-size="11" fill="#94a3b8" text-anchor="middle">-&gt; 5. Merge</text>
+  </g>
+
+  <!-- VERDICT criteria note -->
+  <g font-family="sans-serif">
+    <text x="820" y="500" font-size="13" fill="#cbd5e1" text-anchor="middle" font-weight="bold">Severity ladder</text>
+    <text x="820" y="522" font-size="12" fill="#94a3b8" text-anchor="middle">Critical / Major -&gt; BLOCK</text>
+    <text x="820" y="540" font-size="12" fill="#94a3b8" text-anchor="middle">Minor -&gt; must resolve</text>
+    <text x="820" y="558" font-size="12" fill="#94a3b8" text-anchor="middle">Nit -&gt; APPROVE</text>
+    <text x="820" y="590" font-size="11" fill="#94a3b8" text-anchor="middle">No-downgrade rule applies</text>
+    <text x="820" y="608" font-size="11" fill="#94a3b8" text-anchor="middle">("following existing patterns" etc.</text>
+    <text x="820" y="626" font-size="11" fill="#94a3b8" text-anchor="middle">  is not a valid downgrade reason)</text>
+  </g>
+
+  <!-- ============= 4. author mode ============= -->
+  <g font-family="sans-serif">
+    <rect x="980" y="200" width="320" height="320" rx="14" fill="#251a0d" stroke="#fb923c" stroke-width="2.5"/>
+    <text x="1140" y="234" font-size="18" fill="#fb923c" text-anchor="middle" font-weight="bold">webhook-server.mjs --mode author</text>
+    <text x="1140" y="254" font-size="13" fill="#94a3b8" text-anchor="middle">On PR author's PC (different machine + session)</text>
+
+    <rect x="1000" y="272" width="280" height="36" rx="6" fill="#1a1305" stroke="#fb923c" stroke-width="1.3"/>
+    <text x="1140" y="294" font-size="12" fill="#cbd5e1" text-anchor="middle">Merge origin/main into worktree</text>
+
+    <rect x="1000" y="316" width="280" height="36" rx="6" fill="#1a1305" stroke="#fb923c" stroke-width="1.3"/>
+    <text x="1140" y="338" font-size="12" fill="#cbd5e1" text-anchor="middle">Load all review comments as context</text>
+
+    <rect x="1000" y="360" width="280" height="36" rx="6" fill="#1a1305" stroke="#fb923c" stroke-width="1.3"/>
+    <text x="1140" y="382" font-size="12" fill="#cbd5e1" text-anchor="middle">Spawn claude -p inside worktree</text>
+
+    <rect x="1000" y="404" width="280" height="36" rx="6" fill="#1a1305" stroke="#fb923c" stroke-width="1.3"/>
+    <text x="1140" y="426" font-size="12" fill="#cbd5e1" text-anchor="middle">commit + push the fix</text>
+
+    <text x="1140" y="464" font-size="12" fill="#94a3b8" text-anchor="middle" font-weight="bold">Repeated failures -&gt; needs-human label</text>
+    <text x="1140" y="482" font-size="11" fill="#94a3b8" text-anchor="middle">reviewer and author run on different PCs,</text>
+    <text x="1140" y="500" font-size="11" fill="#94a3b8" text-anchor="middle">so judgments cross independently</text>
+  </g>
+
+  <!-- Re-review loop arrow -->
+  <path d="M 1140 520 Q 1140 620 870 620 Q 600 620 490 740 Q 380 880 380 740" stroke="#fb923c" stroke-width="2.5" fill="none" stroke-dasharray="6 4" marker-end="url(#a-fb923c)"/>
+  <text x="710" y="640" font-size="13" fill="#fb923c" font-family="sans-serif" font-weight="bold">push -&gt; webhook refires -&gt; reviewer PC re-reviews</text>
+
+  <!-- ============= 5. Merge & Deploy ============= -->
+  <g font-family="sans-serif">
+    <rect x="1330" y="200" width="240" height="240" rx="14" fill="#1a2818" stroke="#4ade80" stroke-width="2.5"/>
+    <text x="1450" y="234" font-size="19" fill="#4ade80" text-anchor="middle" font-weight="bold">auto-merge</text>
+    <text x="1450" y="254" font-size="12" fill="#94a3b8" text-anchor="middle">squash merge to main</text>
+
+    <rect x="1350" y="276" width="200" height="36" rx="6" fill="#0a1612" stroke="#4ade80" stroke-width="1.3"/>
+    <text x="1450" y="298" font-size="12" fill="#cbd5e1" text-anchor="middle">Turborepo build (affected)</text>
+
+    <rect x="1350" y="322" width="200" height="36" rx="6" fill="#0a1612" stroke="#4ade80" stroke-width="1.3"/>
+    <text x="1450" y="344" font-size="12" fill="#cbd5e1" text-anchor="middle">Pulumi up (parallel deploy)</text>
+
+    <rect x="1350" y="368" width="200" height="36" rx="6" fill="#0a1612" stroke="#4ade80" stroke-width="1.3"/>
+    <text x="1450" y="390" font-size="12" fill="#cbd5e1" text-anchor="middle">cpg index rebuild (diff only)</text>
+
+    <text x="1450" y="424" font-size="13" fill="#cbd5e1" text-anchor="middle">merge to production: ~10-15 min</text>
+  </g>
+
+  <!-- Arrows between phases -->
+  <line x1="270" y1="350" x2="330" y2="350" stroke="#94a3b8" stroke-width="2" marker-end="url(#a-94a3b8)"/>
+  <line x1="650" y1="350" x2="700" y2="350" stroke="#94a3b8" stroke-width="2" marker-end="url(#a-94a3b8)"/>
+  <line x1="940" y1="312" x2="980" y2="312" stroke="#f87171" stroke-width="2" marker-end="url(#a-f87171)"/>
+  <text x="960" y="302" font-size="11" fill="#f87171" text-anchor="middle" font-family="sans-serif" font-weight="bold">REQUEST</text>
+  <text x="960" y="318" font-size="11" fill="#f87171" text-anchor="middle" font-family="sans-serif" font-weight="bold">_CHANGES</text>
+
+  <line x1="940" y1="404" x2="1330" y2="290" stroke="#4ade80" stroke-width="2" marker-end="url(#a-4ade80)"/>
+  <text x="1180" y="370" font-size="12" fill="#4ade80" text-anchor="middle" font-family="sans-serif" font-weight="bold">APPROVE</text>
+
+  <!-- Bottom note: real example -->
+  <g font-family="sans-serif">
+    <rect x="80" y="780" width="1440" height="140" rx="14" fill="#1a1305" stroke="#fb923c" stroke-width="1.5"/>
+    <text x="800" y="812" font-size="16" fill="#fb923c" text-anchor="middle" font-weight="bold">Example: PR migrating embedding model from gemini-embedding-001 to gemini-embedding-2</text>
+    <text x="800" y="838" font-size="13" fill="#cbd5e1" text-anchor="middle">07:25 opened -&gt; 07:35 first review (Critical x3 + Minor x2) -&gt; 07:54 -&gt; 08:16 -&gt; 08:33 -&gt; 08:42 -&gt; 08:50 APPROVE -&gt; auto-merge</text>
+    <text x="800" y="862" font-size="13" fill="#cbd5e1" text-anchor="middle">A multi-day human review cycle, closed in 6 iterations / 1.5 hours</text>
+    <text x="800" y="892" font-size="12" fill="#94a3b8" text-anchor="middle">AI escalates to deeper findings each iteration: [Graph] -&gt; [Test] -&gt; [Observability] -&gt; multi-SHA verification -&gt; APPROVE</text>
+  </g>
+</svg>

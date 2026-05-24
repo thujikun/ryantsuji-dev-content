@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="780" viewBox="0 0 1600 780">
+  <rect width="1600" height="780" fill="#0f172a"/>
+
+  <defs>
+    <marker id="a-94a3b8" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#94a3b8"/></marker>
+    <marker id="a-fb923c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#fb923c"/></marker>
+    <marker id="a-4ade80" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#4ade80"/></marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="800" y="56" font-size="30" fill="#e2e8f0" text-anchor="middle" font-weight="bold" font-family="sans-serif">review-fix loop example — PR migrating embedding model from gemini-embedding-001 to gemini-embedding-2</text>
+  <text x="800" y="92" font-size="18" fill="#94a3b8" text-anchor="middle" font-family="sans-serif">2026-05-19 07:25 opened -&gt; 08:57 merge / 6 iterations in 1.5 hours</text>
+
+  <!-- Timeline base line -->
+  <line x1="80" y1="500" x2="1520" y2="500" stroke="#475569" stroke-width="3"/>
+
+  <!-- Time labels on baseline -->
+  <g font-family="sans-serif" font-size="13">
+    <text x="80" y="540" fill="#94a3b8" text-anchor="middle">07:25</text>
+    <text x="240" y="540" fill="#94a3b8" text-anchor="middle">07:35</text>
+    <text x="460" y="540" fill="#94a3b8" text-anchor="middle">07:54</text>
+    <text x="720" y="540" fill="#94a3b8" text-anchor="middle">08:16</text>
+    <text x="940" y="540" fill="#94a3b8" text-anchor="middle">08:33</text>
+    <text x="1160" y="540" fill="#94a3b8" text-anchor="middle">08:42</text>
+    <text x="1380" y="540" fill="#94a3b8" text-anchor="middle">08:50</text>
+    <text x="1520" y="540" fill="#94a3b8" text-anchor="middle">08:57</text>
+  </g>
+
+  <!-- Event dots on timeline -->
+  <circle cx="80" cy="500" r="9" fill="#94a3b8"/>
+  <circle cx="240" cy="500" r="11" fill="#f87171" stroke="#f87171" stroke-width="2"/>
+  <circle cx="460" cy="500" r="11" fill="#f87171" stroke="#f87171" stroke-width="2"/>
+  <circle cx="720" cy="500" r="11" fill="#f87171" stroke="#f87171" stroke-width="2"/>
+  <circle cx="940" cy="500" r="11" fill="#f87171" stroke="#f87171" stroke-width="2"/>
+  <circle cx="1160" cy="500" r="11" fill="#f87171" stroke="#f87171" stroke-width="2"/>
+  <circle cx="1380" cy="500" r="11" fill="#4ade80" stroke="#4ade80" stroke-width="2"/>
+  <circle cx="1520" cy="500" r="9" fill="#4ade80"/>
+
+  <!-- Event 1: PR opened -->
+  <g font-family="sans-serif">
+    <text x="80" y="572" font-size="14" fill="#cbd5e1" text-anchor="middle" font-weight="bold">PR opened</text>
+    <text x="80" y="592" font-size="12" fill="#94a3b8" text-anchor="middle">opened</text>
+  </g>
+
+  <!-- Event 2: First review -->
+  <g font-family="sans-serif">
+    <rect x="120" y="190" width="240" height="290" rx="10" fill="#2d1414" stroke="#f87171" stroke-width="2"/>
+    <text x="240" y="218" font-size="14" fill="#f87171" text-anchor="middle" font-weight="bold">1st review</text>
+    <text x="240" y="240" font-size="12" fill="#cbd5e1" text-anchor="middle">REQUEST_CHANGES</text>
+
+    <line x1="130" y1="256" x2="350" y2="256" stroke="#475569" stroke-width="1"/>
+
+    <text x="135" y="280" font-size="12" fill="#f87171" font-weight="bold">Critical x3:</text>
+    <text x="140" y="300" font-size="11" fill="#cbd5e1">- [Graph] missing @graph-business x3</text>
+    <text x="140" y="316" font-size="11" fill="#cbd5e1">- [Graph] @graph-connects v2 not added</text>
+    <text x="140" y="332" font-size="11" fill="#cbd5e1">- [Doc] BQ schema not updated</text>
+
+    <text x="135" y="362" font-size="12" fill="#fbbf24" font-weight="bold">Minor x2:</text>
+    <text x="140" y="382" font-size="11" fill="#cbd5e1">- [Test] v2 value not asserted</text>
+    <text x="140" y="398" font-size="11" fill="#cbd5e1">- [Test] v2 null scenario not tested</text>
+
+    <text x="135" y="430" font-size="11" fill="#94a3b8">Cited: graph-integrity.md /</text>
+    <text x="135" y="446" font-size="11" fill="#94a3b8">severity.md / testing.md</text>
+    <text x="135" y="466" font-size="11" fill="#94a3b8">"Existing violation is not a downgrade reason"</text>
+  </g>
+
+  <line x1="240" y1="486" x2="240" y2="500" stroke="#f87171" stroke-width="2"/>
+
+  <!-- Event 3: 2nd review -->
+  <g font-family="sans-serif">
+    <rect x="340" y="230" width="240" height="250" rx="10" fill="#2d1414" stroke="#f87171" stroke-width="2"/>
+    <text x="460" y="258" font-size="14" fill="#f87171" text-anchor="middle" font-weight="bold">2nd review</text>
+    <text x="460" y="280" font-size="12" fill="#cbd5e1" text-anchor="middle">REQUEST_CHANGES</text>
+
+    <line x1="350" y1="296" x2="570" y2="296" stroke="#475569" stroke-width="1"/>
+
+    <text x="460" y="318" font-size="12" fill="#4ade80" text-anchor="middle">Prior Criticals confirmed fixed</text>
+
+    <text x="355" y="346" font-size="12" fill="#fb923c" font-weight="bold">New Major:</text>
+    <text x="360" y="364" font-size="11" fill="#cbd5e1">- [Test] forbidden matcher used</text>
+    <text x="360" y="380" font-size="11" fill="#cbd5e1">  (objectContaining hiding values)</text>
+
+    <text x="360" y="420" font-size="11" fill="#94a3b8">Partial fixes are rejected --</text>
+    <text x="360" y="436" font-size="11" fill="#94a3b8">root cause must be addressed</text>
+  </g>
+
+  <line x1="460" y1="486" x2="460" y2="500" stroke="#f87171" stroke-width="2"/>
+
+  <!-- Event 4: 3rd review -->
+  <g font-family="sans-serif">
+    <rect x="600" y="230" width="240" height="250" rx="10" fill="#2d1414" stroke="#f87171" stroke-width="2"/>
+    <text x="720" y="258" font-size="14" fill="#f87171" text-anchor="middle" font-weight="bold">3rd review</text>
+    <text x="720" y="280" font-size="12" fill="#cbd5e1" text-anchor="middle">REQUEST_CHANGES</text>
+
+    <line x1="610" y1="296" x2="830" y2="296" stroke="#475569" stroke-width="1"/>
+
+    <text x="720" y="318" font-size="12" fill="#4ade80" text-anchor="middle">[Test] Major confirmed fixed</text>
+
+    <text x="615" y="346" font-size="12" fill="#fb923c" font-weight="bold">New Major:</text>
+    <text x="620" y="364" font-size="11" fill="#cbd5e1">- [Observability] insufficient</text>
+    <text x="620" y="380" font-size="11" fill="#cbd5e1">  logging in migration script</text>
+
+    <text x="620" y="420" font-size="11" fill="#94a3b8">Findings escalate to deeper</text>
+    <text x="620" y="436" font-size="11" fill="#94a3b8">dimensions as same classes resolve</text>
+  </g>
+
+  <line x1="720" y1="486" x2="720" y2="500" stroke="#f87171" stroke-width="2"/>
+
+  <!-- Event 5: 4th review -->
+  <g font-family="sans-serif">
+    <rect x="820" y="230" width="240" height="250" rx="10" fill="#2d1414" stroke="#f87171" stroke-width="2"/>
+    <text x="940" y="258" font-size="14" fill="#f87171" text-anchor="middle" font-weight="bold">4th review</text>
+    <text x="940" y="280" font-size="12" fill="#cbd5e1" text-anchor="middle">REQUEST_CHANGES</text>
+
+    <line x1="830" y1="296" x2="1050" y2="296" stroke="#475569" stroke-width="1"/>
+
+    <text x="940" y="318" font-size="12" fill="#4ade80" text-anchor="middle">[Observability] confirmed fixed</text>
+
+    <text x="835" y="346" font-size="12" fill="#fb923c" font-weight="bold">Finer findings:</text>
+    <text x="840" y="364" font-size="11" fill="#cbd5e1">- [Test] mock.calls + toStrictEqual</text>
+    <text x="840" y="380" font-size="11" fill="#cbd5e1">  replacement OK</text>
+    <text x="840" y="396" font-size="11" fill="#cbd5e1">- @graph-domain trailing comma</text>
+  </g>
+
+  <line x1="940" y1="486" x2="940" y2="500" stroke="#f87171" stroke-width="2"/>
+
+  <!-- Event 6: 5th review -->
+  <g font-family="sans-serif">
+    <rect x="1040" y="230" width="240" height="250" rx="10" fill="#2d1414" stroke="#f87171" stroke-width="2"/>
+    <text x="1160" y="258" font-size="14" fill="#f87171" text-anchor="middle" font-weight="bold">5th review</text>
+    <text x="1160" y="280" font-size="12" fill="#cbd5e1" text-anchor="middle">REQUEST_CHANGES</text>
+
+    <line x1="1050" y1="296" x2="1270" y2="296" stroke="#475569" stroke-width="1"/>
+
+    <text x="1160" y="318" font-size="12" fill="#cbd5e1" text-anchor="middle">Further fine-tuning</text>
+
+    <text x="1055" y="346" font-size="12" fill="#fb923c" font-weight="bold">Remaining:</text>
+    <text x="1060" y="364" font-size="11" fill="#cbd5e1">- some weak matchers remain</text>
+    <text x="1060" y="380" font-size="11" fill="#cbd5e1">- add migration script logging</text>
+
+    <text x="1060" y="420" font-size="11" fill="#94a3b8">Raises the bar to "pass"</text>
+  </g>
+
+  <line x1="1160" y1="486" x2="1160" y2="500" stroke="#f87171" stroke-width="2"/>
+
+  <!-- Event 7: 6th review APPROVE -->
+  <g font-family="sans-serif">
+    <rect x="1260" y="230" width="240" height="250" rx="10" fill="#0d2820" stroke="#4ade80" stroke-width="2"/>
+    <text x="1380" y="258" font-size="14" fill="#4ade80" text-anchor="middle" font-weight="bold">6th review</text>
+    <text x="1380" y="280" font-size="12" fill="#cbd5e1" text-anchor="middle">APPROVE</text>
+
+    <line x1="1270" y1="296" x2="1490" y2="296" stroke="#475569" stroke-width="1"/>
+
+    <text x="1380" y="318" font-size="12" fill="#4ade80" text-anchor="middle">All Critical / Major resolved</text>
+
+    <text x="1380" y="356" font-size="12" fill="#cbd5e1" text-anchor="middle">Multi-pass verification on same SHA</text>
+    <text x="1380" y="376" font-size="11" fill="#94a3b8" text-anchor="middle">(re-reviewed from different angles,</text>
+    <text x="1380" y="392" font-size="11" fill="#94a3b8" text-anchor="middle">confirmed no findings)</text>
+
+    <text x="1380" y="430" font-size="11" fill="#4ade80" text-anchor="middle" font-weight="bold">auto-merge script triggered</text>
+    <text x="1380" y="448" font-size="11" fill="#94a3b8" text-anchor="middle">-&gt; squash merge</text>
+  </g>
+
+  <line x1="1380" y1="486" x2="1380" y2="500" stroke="#4ade80" stroke-width="2"/>
+
+  <!-- Event 8: Merge -->
+  <g font-family="sans-serif">
+    <text x="1520" y="572" font-size="14" fill="#4ade80" text-anchor="middle" font-weight="bold">merge</text>
+    <text x="1520" y="592" font-size="12" fill="#94a3b8" text-anchor="middle">-&gt; deploy</text>
+  </g>
+
+  <!-- Auto-Fix arrows (between reviews) -->
+  <g>
+    <path d="M 240 500 Q 350 660 460 500" stroke="#fb923c" stroke-width="2" fill="none" stroke-dasharray="6 4" marker-end="url(#a-fb923c)"/>
+    <path d="M 460 500 Q 590 660 720 500" stroke="#fb923c" stroke-width="2" fill="none" stroke-dasharray="6 4" marker-end="url(#a-fb923c)"/>
+    <path d="M 720 500 Q 830 660 940 500" stroke="#fb923c" stroke-width="2" fill="none" stroke-dasharray="6 4" marker-end="url(#a-fb923c)"/>
+    <path d="M 940 500 Q 1050 660 1160 500" stroke="#fb923c" stroke-width="2" fill="none" stroke-dasharray="6 4" marker-end="url(#a-fb923c)"/>
+    <path d="M 1160 500 Q 1270 660 1380 500" stroke="#fb923c" stroke-width="2" fill="none" stroke-dasharray="6 4" marker-end="url(#a-fb923c)"/>
+
+    <text x="800" y="690" font-size="14" fill="#fb923c" text-anchor="middle" font-family="sans-serif" font-weight="bold">Auto-fix (author mode on PR author's PC) keeps committing and pushing</text>
+  </g>
+
+  <!-- Bottom takeaway -->
+  <text x="800" y="730" font-size="14" fill="#cbd5e1" text-anchor="middle" font-family="sans-serif">Finding depth escalates each iteration: [Graph]/[Doc] -&gt; [Test] -&gt; [Observability] -&gt; finer details -&gt; multi-SHA verification -&gt; APPROVE</text>
+  <text x="800" y="754" font-size="13" fill="#94a3b8" text-anchor="middle" font-family="sans-serif">A multi-day human review cycle, closed in 6 iterations / 1.5 hours</text>
+</svg>
