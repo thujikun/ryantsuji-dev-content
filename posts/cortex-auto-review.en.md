@@ -2,6 +2,7 @@
 title: "Code Written by AI Is Reviewed by AI ── A Structural Answer to Review Bottleneck and Quality Drop (Series Part 3)"
 publishedAt: "2026-05-26T08:30:00+09:00"
 updatedAt: "2026-05-26T08:30:00+09:00"
+draft: true
 slug: "cortex-auto-review"
 summary: "Series Part 3: a structural answer to the common AI-development critiques — review bottleneck and quality drop. Full Auto Review pipeline in cortex: webhook ingestion → cpg context → AI review tagged [Graph] / [Doc] / [Impact] / [Security] → auto-fix by a separate AI → re-review → auto-merge → parallel deploy."
 tags:
@@ -14,7 +15,6 @@ series: "building-ai-harness"
 seriesOrder: 3
 syndication:
   devto:
-    id: TBD
     publishAt: "2026-05-26T07:00:00-07:00"
 cover: /posts/cortex-auto-review.en.cover.png
 ---

@@ -2,6 +2,7 @@
 title: "AIが書いたコードはAIが見る ── レビュー詰まりと品質低下への構造的反論（連載Part 3）"
 publishedAt: "2026-05-26T08:30:00+09:00"
 updatedAt: "2026-05-26T08:30:00+09:00"
+draft: true
 slug: "cortex-auto-review"
 summary: "社内AI基盤cortexの連載Part 3。「AIで開発スピードが上がるとレビューがボトルネック化する／品質が下がる」という業界の通説への構造的反論として、Auto Review の全フローを解説。webhook受信 → cpg context 取得 → AIレビュー → [Graph] Critical等の指摘 → 別AIが自動修正 → 再レビュー → 自動merge → 並列deploy までを実装目線で。"
 tags:
@@ -15,7 +16,6 @@ series: "building-ai-harness"
 seriesOrder: 3
 syndication:
   zenn:
-    id: "TBD"
     publishAt: "2026-05-26T08:30:00+09:00"
 ---
 
