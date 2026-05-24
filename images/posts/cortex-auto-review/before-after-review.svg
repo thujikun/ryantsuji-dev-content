@@ -10,7 +10,7 @@
   </defs>
 
   <!-- Title -->
-  <text x="800" y="56" font-size="30" fill="#e2e8f0" text-anchor="middle" font-weight="bold" font-family="Noto Sans JP, sans-serif">Before / After — 人レビュー時代 vs cortex の Auto Review 時代</text>
+  <text x="800" y="56" font-size="30" fill="#e2e8f0" text-anchor="middle" font-weight="bold" font-family="Noto Sans JP, sans-serif">Before / After — 人レビュー時代 vs cortexの自動レビュー時代</text>
   <text x="800" y="92" font-size="18" fill="#94a3b8" text-anchor="middle" font-family="Noto Sans JP, sans-serif">同じ「Critical x3 + Minor x2 が初回で出る PR」が、どれだけの時間と人手で merge まで進むか</text>
 
   <!-- Divider line -->
@@ -87,10 +87,10 @@
     <text x="410" y="894" font-size="14" fill="#cbd5e1" text-anchor="middle">PR数が増えるとレビュー詰まりで開発全体が止まる</text>
   </g>
 
-  <!-- ============ RIGHT: After (Auto Review) ============ -->
+  <!-- ============ RIGHT: After (自動レビュー) ============ -->
   <g font-family="Noto Sans JP, sans-serif">
     <rect x="830" y="140" width="720" height="60" rx="14" fill="#0d2820" stroke="#4ade80" stroke-width="2.5"/>
-    <text x="1190" y="178" font-size="22" fill="#4ade80" text-anchor="middle" font-weight="bold">cortex の Auto Review 時代</text>
+    <text x="1190" y="178" font-size="22" fill="#4ade80" text-anchor="middle" font-weight="bold">cortexの自動レビュー時代</text>
   </g>
 
   <!-- R-Step 1: PR open -->
@@ -114,9 +114,9 @@
   </g>
 
   <line x1="1190" y1="430" x2="1190" y2="450" stroke="#94a3b8" stroke-width="2" marker-end="url(#a-94a3b8)"/>
-  <text x="1210" y="446" font-size="12" fill="#94a3b8" font-family="Noto Sans JP, sans-serif">Auto Fix 起動 → 数分で修正完了</text>
+  <text x="1210" y="446" font-size="12" fill="#94a3b8" font-family="Noto Sans JP, sans-serif">自動修正起動 → 数分で修正完了</text>
 
-  <!-- R-Step 3: Auto Fix -->
+  <!-- R-Step 3: 自動修正 -->
   <g font-family="Noto Sans JP, sans-serif">
     <rect x="830" y="460" width="720" height="80" rx="12" fill="#251a0d" stroke="#fb923c" stroke-width="2"/>
     <text x="880" y="488" font-size="13" fill="#94a3b8">07:40-07:50</text>

@@ -11,7 +11,7 @@
   </defs>
 
   <!-- Title -->
-  <text x="800" y="56" font-size="30" fill="#e2e8f0" text-anchor="middle" font-weight="bold" font-family="Noto Sans JP, sans-serif">Auto Review 全フロー — 各開発者のPC上で動く分散webhook構成</text>
+  <text x="800" y="56" font-size="30" fill="#e2e8f0" text-anchor="middle" font-weight="bold" font-family="Noto Sans JP, sans-serif">自動レビュー全フロー — 各開発者のPC上で動く分散webhook構成</text>
   <text x="800" y="92" font-size="18" fill="#94a3b8" text-anchor="middle" font-family="Noto Sans JP, sans-serif">直近30日で 769 PR / 平均10.8回 review-fix loop / 個別PRに人レビューほぼ0% / 中央値31分で merge</text>
 
   <!-- Phase labels -->
@@ -32,13 +32,13 @@
 
     <line x1="50" y1="312" x2="250" y2="312" stroke="#334155" stroke-width="1"/>
 
-    <text x="150" y="340" font-size="16" fill="#fb923c" text-anchor="middle" font-weight="bold">Cloudflare Tunnel</text>
-    <text x="150" y="362" font-size="12" fill="#cbd5e1" text-anchor="middle">trycloudflare.com</text>
-    <text x="150" y="382" font-size="12" fill="#94a3b8" text-anchor="middle">webhook を各PCへ転送</text>
+    <text x="150" y="340" font-size="16" fill="#fb923c" text-anchor="middle" font-weight="bold">Event Relay (自前)</text>
+    <text x="150" y="362" font-size="12" fill="#cbd5e1" text-anchor="middle">Firestoreに永続化</text>
+    <text x="150" y="382" font-size="12" fill="#94a3b8" text-anchor="middle">SSEで各PCに配信</text>
 
-    <text x="150" y="420" font-size="13" fill="#94a3b8" text-anchor="middle">中央サーバなし</text>
-    <text x="150" y="440" font-size="13" fill="#94a3b8" text-anchor="middle">webhookは登録された</text>
-    <text x="150" y="458" font-size="13" fill="#94a3b8" text-anchor="middle">各人のローカルへ届く</text>
+    <text x="150" y="420" font-size="13" fill="#94a3b8" text-anchor="middle">webhook登録は1回だけ</text>
+    <text x="150" y="440" font-size="13" fill="#94a3b8" text-anchor="middle">Last-Event-IDで未送信再送</text>
+    <text x="150" y="458" font-size="13" fill="#94a3b8" text-anchor="middle">取りこぼしゼロ</text>
   </g>
 
   <!-- ============= 2. reviewerモード ============= -->
@@ -173,7 +173,7 @@
   <!-- Bottom note: real example -->
   <g font-family="Noto Sans JP, sans-serif">
     <rect x="80" y="780" width="1440" height="140" rx="14" fill="#1a1305" stroke="#fb923c" stroke-width="1.5"/>
-    <text x="800" y="812" font-size="16" fill="#fb923c" text-anchor="middle" font-weight="bold">実例: PR #1241 (feat(meet): dual-write embeddings v2)</text>
+    <text x="800" y="812" font-size="16" fill="#fb923c" text-anchor="middle" font-weight="bold">実例: feat(meet): dual-write embeddings v2 (meet pipelineのembedding v2移行PR)</text>
     <text x="800" y="838" font-size="13" fill="#cbd5e1" text-anchor="middle">07:25 起票 → 07:35 初回 review (Critical x3 + Minor x2) → 07:54 → 08:16 → 08:33 → 08:42 → 08:50 APPROVE → auto-merge</text>
     <text x="800" y="862" font-size="13" fill="#cbd5e1" text-anchor="middle">人レビュアーなら数日かかる修正サイクルを、6 iteration / 1.5時間 で完結</text>
     <text x="800" y="892" font-size="12" fill="#94a3b8" text-anchor="middle">各 iteration で AI が深い指摘に進化: [Graph] → [Test] → [Observability] → 同 SHA 多重確認 → APPROVE</text>

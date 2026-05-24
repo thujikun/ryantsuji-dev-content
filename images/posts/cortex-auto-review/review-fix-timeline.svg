@@ -9,7 +9,7 @@
   </defs>
 
   <!-- Title -->
-  <text x="800" y="56" font-size="30" fill="#e2e8f0" text-anchor="middle" font-weight="bold" font-family="Noto Sans JP, sans-serif">review-fix loop の実例 — PR #1241 / 1.5時間 で 6 iteration</text>
+  <text x="800" y="56" font-size="30" fill="#e2e8f0" text-anchor="middle" font-weight="bold" font-family="Noto Sans JP, sans-serif">review-fix loop の実例 — meet pipeline の embedding v2 移行PR / 1.5時間 で 6 iteration</text>
   <text x="800" y="92" font-size="18" fill="#94a3b8" text-anchor="middle" font-family="Noto Sans JP, sans-serif">feat(meet): dual-write embeddings to new 'embedding' column (v2) — 2026-05-19 07:25 起票 → 08:57 merge</text>
 
   <!-- Timeline base line -->
@@ -178,7 +178,7 @@
     <path d="M 940 500 Q 1050 660 1160 500" stroke="#fb923c" stroke-width="2" fill="none" stroke-dasharray="6 4" marker-end="url(#a-fb923c)"/>
     <path d="M 1160 500 Q 1270 660 1380 500" stroke="#fb923c" stroke-width="2" fill="none" stroke-dasharray="6 4" marker-end="url(#a-fb923c)"/>
 
-    <text x="800" y="690" font-size="14" fill="#fb923c" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-weight="bold">Auto Fix (PR作者のPCで動くauthorモード) が修正 commit + push を繰り返す</text>
+    <text x="800" y="690" font-size="14" fill="#fb923c" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-weight="bold">自動修正(PR作者のPCで動くauthorモード) が修正 commit + push を繰り返す</text>
   </g>
 
   <!-- Bottom takeaway -->
