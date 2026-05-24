@@ -77,9 +77,23 @@ Part 1 and Part 2 kept asking the same recurring question: "**how far do you pus
 
 Three conditions had to hold for this to work:
 
-1. **The AI reviewer has enough context** -- a generic AI reviewer **only sees the PR diff**. The diff alone hides business meaning, upstream/downstream dependencies, and prior incident history. cortex feeds the **Product Graph (cpg)** from [Part 2](/posts/cortex-product-graph) into the AI reviewer, so it can **trace impact into code that the PR didn't even touch**. This structurally catches (a) missed upstream/downstream fixes, (b) missed doc updates, (c) tests that should have been updated but weren't. Diff-only AI review can never reach this territory.
-2. **Reviews are not improvisational** -- if reviews shift day to day, the team gets confused, and the AI can't be told what "correct" looks like. We enforce this by passing **an explicit review-guideline document** as the mandatory citation source for every review (we open-sourced a snapshot, see below).
-3. **False positives don't blanket-block merges** -- treating every false positive as Critical breaks the workflow. We control this with **a severity hierarchy (Critical / Major / Minor / Nit) plus strict no-downgrade rules**.
+1. **The AI reviewer has enough context**
+
+    A generic AI reviewer **only sees the PR diff**. The diff alone hides business meaning, upstream/downstream dependencies, and prior incident history. cortex feeds the **Product Graph (cpg)** from [Part 2](/posts/cortex-product-graph) into the AI reviewer, so it can **trace impact into code that the PR didn't even touch**. This structurally catches:
+
+    - Missed upstream/downstream fixes
+    - Missed doc updates
+    - Tests that should have been updated but weren't
+
+    Diff-only AI review can never reach this territory.
+
+2. **Reviews are not improvisational**
+
+    If reviews shift day to day, the team gets confused, and the AI can't be told what "correct" looks like. We enforce this by passing **an explicit review-guideline document** as the mandatory citation source for every review (we open-sourced a snapshot, see below).
+
+3. **False positives don't blanket-block merges**
+
+    Treating every false positive as Critical breaks the workflow. We control this with **a severity hierarchy (Critical / Major / Minor / Nit) plus strict no-downgrade rules**.
 
 So: the cpg from [Part 2](/posts/cortex-product-graph) solves "**what context the AI sees**," the review guidelines solve "**what the AI should do**" as **Guides (pre-execution control)**, and the severity ladder + no-downgrade rules solve "**what the AI must not do**" as **Sensors (post-execution control)**. This maps cleanly onto Martin Fowler's Guides / Sensors taxonomy (introduced back in [Part 1](/posts/ai-harness-intro)).
 
