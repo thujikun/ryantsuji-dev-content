@@ -85,7 +85,7 @@ Three conditions had to hold for this to work:
 
 1. **The AI reviewer has enough context**
 
-    A generic AI reviewer **only sees the PR diff**. The diff alone hides business meaning, upstream/downstream dependencies, and prior incident history. cortex feeds the **Product Graph (cpg)** from [Part 2](/posts/cortex-product-graph) into the AI reviewer, so it can **trace impact into code that the PR didn't even touch**. This structurally catches:
+    A generic AI reviewer **only sees the PR diff**. The diff alone hides business meaning, upstream/downstream dependencies, and prior incident history. cortex feeds the **Product Graph (cpg)** from [Part 2](/posts/cortex-product-graph) -- **a knowledge graph that fuses code, docs, DB schemas, and infra into one structure, with each node carrying business role and upstream/downstream dependencies** -- into the AI reviewer, so it can **trace impact into code that the PR didn't even touch**. This structurally catches:
 
     - Missed upstream/downstream fixes
     - Missed doc updates
