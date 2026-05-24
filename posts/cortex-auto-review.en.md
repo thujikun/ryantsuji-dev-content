@@ -4,7 +4,7 @@ publishedAt: "2026-05-26T08:30:00+09:00"
 updatedAt: "2026-05-26T08:30:00+09:00"
 draft: true
 slug: "cortex-auto-review"
-summary: "Series Part 3. The common critiques of AI-assisted development -- 'review becomes the new bottleneck' and 'AI code drops the quality bar' -- fundamentally don't apply when AI also does the reviewing. Full walkthrough of our pipeline: webhook -> cpg context -> AI review with [Graph]/[Doc]/[Impact] tags -> auto-fix by a separate AI -> re-review -> auto-merge -> parallel deploy. 769 PRs merged in 30 days, human review involvement per PR is near-zero."
+summary: "Series Part 3. The common critiques of AI-assisted development -- 'review becomes the new bottleneck' and 'AI code drops the quality bar' -- largely don't apply when AI also does the reviewing. Full walkthrough of our pipeline: webhook -> cpg context -> AI review with [Graph]/[Doc]/[Impact] tags -> auto-fix by a separate AI -> re-review -> auto-merge -> parallel deploy. 769 PRs merged in 30 days, human review involvement per PR is near-zero."
 tags:
   - "ai"
   - "devops"
@@ -283,7 +283,7 @@ That wasn't enough on its own. Over time other excuse patterns surfaced -- "**wi
 
 The final verdict at the end of every review was originally `APPROVE` / `REQUEST_CHANGES` / `COMMENT` (approve / request changes / comment-only). When the AI picked `COMMENT` -- for example when only Minor issues existed -- the script took no action, the PR sat in review-pending forever, and ultimately someone had to manually pick it up. Classic anti-pattern, and it kept happening.
 
-We **collapsed the verdict to 2 options**. Anything Minor or above is `REQUEST_CHANGES`, a missing verdict marker defaults to `REQUEST_CHANGES` (safe side), and only Nit-only or no findings (with CI passing) yields `APPROVE`. The principle: "**if the judgment is ambiguous, fail-safe by defaulting to the blocking side (`REQUEST_CHANGES`)**." Going all-in on that design clarified things.
+We **collapsed the verdict to 2 options**. Anything Minor or above is `REQUEST_CHANGES`, a missing verdict marker defaults to `REQUEST_CHANGES` (safe side), and only Nit-only or no findings (with CI passing) yields `APPROVE`. The principle: "**if the judgment is ambiguous, fail-safe by defaulting to the blocking side (`REQUEST_CHANGES`)**." Going all-in on that design eliminated the stuck-PR class entirely.
 
 ### 3. Checklist items had no severity, so the AI's judgment kept drifting
 
@@ -354,7 +354,7 @@ Once `REQUEST_CHANGES` lands, **the same script running on the PR author's machi
 
 Two design choices matter here.
 
-- **Reviewer and author run on different machines in different sessions** -- reviewer mode and author mode are the same script, but they run on different machines in different processes. "Is the original critique correct?" is judged independently. Unlike a single AI fixing its own complaints, the judgment crosses between two separate sessions.
+- **Reviewer and author run on different machines in different sessions** -- reviewer mode and author mode are the same script, but they run on different machines in different processes. "Is the original critique correct?" is judged independently. Unlike a single AI fixing its own complaints, the judgment passes between two separate sessions.
 - **All iteration stays inside the same PR** -- we don't spawn a new PR. The "**fix the root cause, no deferrals**" rule from Part 2 and the review guidelines kicks in here: if the AI tries to escape via `TODO/FIXME` or by splitting work out into a separate PR, the next review rejects it.
 
 ## Auto-merge + parallel deploy
@@ -406,7 +406,7 @@ The most common findings out of the first review:
 - **[Observability] Unstructured error logs** -- `event` field or required keys deviating from the structured-log spec.
 - **[Recurrence] No recurrence-prevention action** -- a bug-fix PR description not declaring which of {lint / horizontal rollout / add guideline / nothing} applies.
 
-These are categories **human reviewers tend to miss even when they try** (especially doc consistency and recurrence-prevention judgments). Pushing them to AI cuts the miss rate.
+These are categories **human reviewers tend to miss even when they try** (especially doc consistency and recurrence-prevention judgments). Handing them off to AI cuts the miss rate.
 
 ### Actual false-positive rate
 
