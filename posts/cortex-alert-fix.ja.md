@@ -1,5 +1,5 @@
 ---
-title: "障害が自動で直り、ガードレールが自動で増える ── Alert-Fix + Observability + 自動lint追加（連載Part 4）"
+title: "障害が自動で直り、ガードレールが自動で増える ── Alert-Fix（連載Part 4）"
 publishedAt: "2026-06-02T08:30:00+09:00"
 updatedAt: "2026-06-02T08:30:00+09:00"
 draft: true
