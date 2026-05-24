@@ -52,7 +52,7 @@ This post is about **the automated PR review pipeline** -- AI reviews the PR, a 
 
 That's a typical 30 days on cortex (Apr 21 -- May 21).
 
-Every one of those 769 PRs had an AI reviewer as the first reviewer, with **an average of 10.8 review-fix loop iterations per PR (max 56)**. 1 in 5 merged within 10 minutes, roughly half within 30 minutes. What humans do now is look at review outcomes and **tune the review prompt and the guidelines themselves** -- this is **human-on-the-loop, not human-in-the-loop**. Not "a human in the middle of each decision," but "a human watching the system from above and steering."
+Every one of those 769 PRs had an AI reviewer as the first reviewer, with **an average of 10.8 review-fix loop iterations per PR (max 56)**. 1 in 5 merged within 10 minutes, roughly half within 30 minutes. What humans do now is look at review outcomes and **tune the review prompt and the guidelines themselves** -- this is **human-on-the-loop, not human-in-the-loop**. **Humans operate on the policy layer, not the execution layer.**
 
 | Past 30 days |  |
 |---|---|
@@ -334,7 +334,7 @@ The common thread: "**when the AI gets it wrong, don't override the individual P
 
 As long as this loop turns, the guideline is **a living document that absorbs the failure patterns AI produces in production**. **Don't try to write the perfect guideline up front. Catch the moment AI gets it wrong, and write the rule for that moment.** That's the actual mechanism behind "quality doesn't drop even when humans aren't inside the loop."
 
-And one more thread. Right now, the trigger for "AI got it wrong, time to rewrite the guideline" is still mostly a human judgment, but **that maintenance is also gradually shifting to AI**. **Alert-Fix** (Part 4 next time) -- where AI investigates production incidents, opens a fix PR, runs it through auto-review, and auto-redeploys -- requires every fix PR to write one of {add lint, add guideline, horizontal rollout} under the `[Recurrence]` lens. The result is **AI growing its own judgment criteria on its own**. Even guideline maintenance is leaving human hands -- I'll come back to this in Part 4.
+And one more thread. Right now, the trigger for "AI got it wrong, time to rewrite the guideline" is still mostly a human judgment, but **parts of that maintenance are gradually becoming automatable too**. **Alert-Fix** (Part 4 next time) -- where AI investigates production incidents, opens a fix PR, runs it through auto-review, and auto-redeploys -- requires every fix PR to write one of {add lint, add guideline, horizontal rollout} under the `[Recurrence]` lens. So the **AI is increasingly participating in the maintenance of its own review criteria**, with humans still in the loop on adoption. I'll come back to this in Part 4.
 
 ## Auto-fix: a separate AI applies the changes and pushes
 
@@ -406,7 +406,7 @@ The most common findings out of the first review:
 - **[Observability] Unstructured error logs** -- `event` field or required keys deviating from the structured-log spec.
 - **[Recurrence] No recurrence-prevention action** -- a bug-fix PR description not declaring which of {lint / horizontal rollout / add guideline / nothing} applies.
 
-These are categories **human reviewers tend to miss even when they try** (especially doc consistency and recurrence-prevention judgments). Handing them off to AI cuts the miss rate.
+These are categories **human reviewers frequently miss in practice**, especially doc consistency and recurrence-prevention checks. The AI reviewer applies them mechanically on every PR.
 
 ### Actual false-positive rate
 
