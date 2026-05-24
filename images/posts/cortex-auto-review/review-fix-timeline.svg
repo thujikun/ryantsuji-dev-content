@@ -178,7 +178,7 @@
     <path d="M 940 500 Q 1050 660 1160 500" stroke="#fb923c" stroke-width="2" fill="none" stroke-dasharray="6 4" marker-end="url(#a-fb923c)"/>
     <path d="M 1160 500 Q 1270 660 1380 500" stroke="#fb923c" stroke-width="2" fill="none" stroke-dasharray="6 4" marker-end="url(#a-fb923c)"/>
 
-    <text x="800" y="690" font-size="14" fill="#fb923c" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-weight="bold">Auto Fix (annotation-author) が修正 commit + push を繰り返す</text>
+    <text x="800" y="690" font-size="14" fill="#fb923c" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-weight="bold">Auto Fix (PR作者のPCで動くauthorモード) が修正 commit + push を繰り返す</text>
   </g>
 
   <!-- Bottom takeaway -->

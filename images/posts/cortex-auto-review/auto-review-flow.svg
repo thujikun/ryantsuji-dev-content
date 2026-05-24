@@ -11,131 +11,136 @@
   </defs>
 
   <!-- Title -->
-  <text x="800" y="56" font-size="30" fill="#e2e8f0" text-anchor="middle" font-weight="bold" font-family="Noto Sans JP, sans-serif">Auto Review 全フロー — PR 起票から自動 deploy まで人なしで完結</text>
-  <text x="800" y="92" font-size="18" fill="#94a3b8" text-anchor="middle" font-family="Noto Sans JP, sans-serif">直近30日で 769 PR / 平均10.8回 review-fix loop / 74% は人レビュー touch ゼロ / 中央値31分で merge</text>
+  <text x="800" y="56" font-size="30" fill="#e2e8f0" text-anchor="middle" font-weight="bold" font-family="Noto Sans JP, sans-serif">Auto Review 全フロー — 各開発者のPC上で動く分散webhook構成</text>
+  <text x="800" y="92" font-size="18" fill="#94a3b8" text-anchor="middle" font-family="Noto Sans JP, sans-serif">直近30日で 769 PR / 平均10.8回 review-fix loop / 個別PRに人レビューほぼ0% / 中央値31分で merge</text>
 
   <!-- Phase labels -->
   <g font-family="Noto Sans JP, sans-serif" font-size="17">
     <text x="150" y="150" fill="#cbd5e1" text-anchor="middle" font-weight="bold">1. Trigger</text>
-    <text x="490" y="150" fill="#cbd5e1" text-anchor="middle" font-weight="bold">2. Auto Review</text>
+    <text x="490" y="150" fill="#cbd5e1" text-anchor="middle" font-weight="bold">2. reviewerモード（レビュアーのPC）</text>
     <text x="820" y="150" fill="#cbd5e1" text-anchor="middle" font-weight="bold">3. Verdict</text>
-    <text x="1140" y="150" fill="#cbd5e1" text-anchor="middle" font-weight="bold">4. Auto Fix (REQUEST_CHANGES時)</text>
+    <text x="1140" y="150" fill="#cbd5e1" text-anchor="middle" font-weight="bold">4. authorモード（PR作者のPC）</text>
     <text x="1450" y="150" fill="#cbd5e1" text-anchor="middle" font-weight="bold">5. Merge &amp; Deploy</text>
   </g>
 
   <!-- ============= 1. Trigger ============= -->
   <g font-family="Noto Sans JP, sans-serif">
-    <rect x="30" y="200" width="240" height="160" rx="14" fill="#1a2818" stroke="#4ade80" stroke-width="2.5"/>
+    <rect x="30" y="200" width="240" height="270" rx="14" fill="#1a2818" stroke="#4ade80" stroke-width="2.5"/>
     <text x="150" y="240" font-size="20" fill="#4ade80" text-anchor="middle" font-weight="bold">GitHub PR</text>
     <text x="150" y="268" font-size="14" fill="#cbd5e1" text-anchor="middle">opened / synchronize</text>
-    <text x="150" y="298" font-size="13" fill="#94a3b8" text-anchor="middle">webhook</text>
-    <text x="150" y="322" font-size="13" fill="#94a3b8" text-anchor="middle">payload: PR diff + meta</text>
-    <text x="150" y="346" font-size="13" fill="#94a3b8" text-anchor="middle">authored by AI or human</text>
+    <text x="150" y="292" font-size="13" fill="#94a3b8" text-anchor="middle">authored by AI or human</text>
+
+    <line x1="50" y1="312" x2="250" y2="312" stroke="#334155" stroke-width="1"/>
+
+    <text x="150" y="340" font-size="16" fill="#fb923c" text-anchor="middle" font-weight="bold">Cloudflare Tunnel</text>
+    <text x="150" y="362" font-size="12" fill="#cbd5e1" text-anchor="middle">trycloudflare.com</text>
+    <text x="150" y="382" font-size="12" fill="#94a3b8" text-anchor="middle">webhook を各PCへ転送</text>
+
+    <text x="150" y="420" font-size="13" fill="#94a3b8" text-anchor="middle">中央サーバなし</text>
+    <text x="150" y="440" font-size="13" fill="#94a3b8" text-anchor="middle">webhookは登録された</text>
+    <text x="150" y="458" font-size="13" fill="#94a3b8" text-anchor="middle">各人のローカルへ届く</text>
   </g>
 
-  <!-- ============= 2. Auto Review (reviewer Cloud Run) ============= -->
+  <!-- ============= 2. reviewerモード ============= -->
   <g font-family="Noto Sans JP, sans-serif">
     <rect x="330" y="200" width="320" height="540" rx="14" fill="#0d1f2d" stroke="#38bdf8" stroke-width="2.5"/>
-    <text x="490" y="234" font-size="19" fill="#38bdf8" text-anchor="middle" font-weight="bold">reviewer (Cloud Run)</text>
+    <text x="490" y="234" font-size="18" fill="#38bdf8" text-anchor="middle" font-weight="bold">webhook-server.mjs --mode reviewer</text>
+    <text x="490" y="254" font-size="13" fill="#94a3b8" text-anchor="middle">レビュアーのPC上 (localhost:3456)</text>
 
-    <!-- worktree + cpg load -->
-    <rect x="350" y="254" width="280" height="68" rx="8" fill="#1a1525" stroke="#a78bfa" stroke-width="1.8"/>
-    <text x="490" y="278" font-size="14" fill="#a78bfa" text-anchor="middle" font-weight="bold">worktree 切り出し</text>
-    <text x="490" y="298" font-size="12" fill="#cbd5e1" text-anchor="middle">PRごとに isolation</text>
-    <text x="490" y="314" font-size="12" fill="#cbd5e1" text-anchor="middle">+ cpg を full context load</text>
+    <!-- dedup / lang check -->
+    <rect x="350" y="272" width="280" height="44" rx="6" fill="#0a1820" stroke="#38bdf8" stroke-width="1.3"/>
+    <text x="490" y="294" font-size="13" fill="#cbd5e1" text-anchor="middle" font-weight="bold">重複チェック・言語判定</text>
+    <text x="490" y="310" font-size="11" fill="#94a3b8" text-anchor="middle">SHA + 最新activity TS で dedup</text>
 
-    <!-- orchestrator -->
-    <rect x="350" y="338" width="280" height="48" rx="8" fill="#251a0d" stroke="#fb923c" stroke-width="1.8"/>
-    <text x="490" y="362" font-size="14" fill="#fb923c" text-anchor="middle" font-weight="bold">orchestrator (diff から関連 sub-agent を選択)</text>
-    <text x="490" y="378" font-size="11" fill="#94a3b8" text-anchor="middle"></text>
+    <!-- cpg context -->
+    <rect x="350" y="324" width="280" height="44" rx="6" fill="#1a1525" stroke="#a78bfa" stroke-width="1.3"/>
+    <text x="490" y="346" font-size="13" fill="#a78bfa" text-anchor="middle" font-weight="bold">Product Graph で事前調査</text>
+    <text x="490" y="362" font-size="11" fill="#94a3b8" text-anchor="middle">変更ノード + 依存関係を pre-load</text>
 
-    <!-- sub-agents (parallel) -->
-    <text x="490" y="408" font-size="13" fill="#cbd5e1" text-anchor="middle" font-weight="bold">並列 sub-agents (各々 1 guideline + cpg)</text>
+    <!-- AI single session -->
+    <rect x="350" y="380" width="280" height="276" rx="8" fill="#251a0d" stroke="#fb923c" stroke-width="1.8"/>
+    <text x="490" y="406" font-size="14" fill="#fb923c" text-anchor="middle" font-weight="bold">claude -p をspawn（1セッション）</text>
+    <text x="490" y="424" font-size="11" fill="#94a3b8" text-anchor="middle">6観点を順にチェック</text>
 
-    <rect x="350" y="420" width="135" height="36" rx="6" fill="#0d2030" stroke="#38bdf8" stroke-width="1.5"/>
-    <text x="417" y="442" font-size="12" fill="#cbd5e1" text-anchor="middle">arch-reviewer</text>
+    <line x1="370" y1="436" x2="610" y2="436" stroke="#334155" stroke-width="1"/>
 
-    <rect x="495" y="420" width="135" height="36" rx="6" fill="#0d2030" stroke="#38bdf8" stroke-width="1.5"/>
-    <text x="562" y="442" font-size="12" fill="#cbd5e1" text-anchor="middle">graph-reviewer</text>
+    <rect x="370" y="448" width="240" height="28" rx="4" fill="#0a1820" stroke="#fb923c" stroke-width="1"/>
+    <text x="490" y="467" font-size="12" fill="#cbd5e1" text-anchor="middle">① [Graph] graph-integrity.md</text>
 
-    <rect x="350" y="462" width="135" height="36" rx="6" fill="#0d2030" stroke="#38bdf8" stroke-width="1.5"/>
-    <text x="417" y="484" font-size="12" fill="#cbd5e1" text-anchor="middle">security-reviewer</text>
+    <rect x="370" y="480" width="240" height="28" rx="4" fill="#0a1820" stroke="#fb923c" stroke-width="1"/>
+    <text x="490" y="499" font-size="12" fill="#cbd5e1" text-anchor="middle">② [Arch] architecture.md</text>
 
-    <rect x="495" y="462" width="135" height="36" rx="6" fill="#0d2030" stroke="#38bdf8" stroke-width="1.5"/>
-    <text x="562" y="484" font-size="12" fill="#cbd5e1" text-anchor="middle">test-reviewer</text>
+    <rect x="370" y="512" width="240" height="28" rx="4" fill="#0a1820" stroke="#fb923c" stroke-width="1"/>
+    <text x="490" y="531" font-size="12" fill="#cbd5e1" text-anchor="middle">③ [Security] security.md</text>
 
-    <rect x="350" y="504" width="135" height="36" rx="6" fill="#0d2030" stroke="#38bdf8" stroke-width="1.5"/>
-    <text x="417" y="526" font-size="11" fill="#cbd5e1" text-anchor="middle">ai-antipattern-reviewer</text>
+    <rect x="370" y="544" width="240" height="28" rx="4" fill="#0a1820" stroke="#fb923c" stroke-width="1"/>
+    <text x="490" y="563" font-size="12" fill="#cbd5e1" text-anchor="middle">④ [Test] testing.md</text>
 
-    <rect x="495" y="504" width="135" height="36" rx="6" fill="#0d2030" stroke="#38bdf8" stroke-width="1.5"/>
-    <text x="562" y="526" font-size="12" fill="#cbd5e1" text-anchor="middle">doc-reviewer</text>
+    <rect x="370" y="576" width="240" height="28" rx="4" fill="#0a1820" stroke="#fb923c" stroke-width="1"/>
+    <text x="490" y="595" font-size="12" fill="#cbd5e1" text-anchor="middle">⑤ [Doc] document-writing.md</text>
 
-    <rect x="350" y="546" width="135" height="36" rx="6" fill="#0d2030" stroke="#38bdf8" stroke-width="1.5"/>
-    <text x="417" y="568" font-size="12" fill="#cbd5e1" text-anchor="middle">impact-reviewer</text>
+    <rect x="370" y="608" width="240" height="28" rx="4" fill="#0a1820" stroke="#fb923c" stroke-width="1"/>
+    <text x="490" y="627" font-size="12" fill="#cbd5e1" text-anchor="middle">⑥ [Impact] impact-analysis.md</text>
 
-    <rect x="495" y="546" width="135" height="36" rx="6" fill="#0d2030" stroke="#38bdf8" stroke-width="1.5"/>
-    <text x="562" y="568" font-size="12" fill="#cbd5e1" text-anchor="middle">observability-rev.</text>
-
-    <!-- aggregate -->
-    <rect x="350" y="600" width="280" height="50" rx="8" fill="#251a0d" stroke="#fb923c" stroke-width="1.8"/>
-    <text x="490" y="624" font-size="14" fill="#fb923c" text-anchor="middle" font-weight="bold">aggregate findings</text>
-    <text x="490" y="640" font-size="11" fill="#94a3b8" text-anchor="middle">severity + tag + 引用元 guideline 付き</text>
-
-    <text x="490" y="678" font-size="12" fill="#94a3b8" text-anchor="middle">各 sub-agent は 1 ガイドライン file を context として保持</text>
-    <text x="490" y="696" font-size="12" fill="#94a3b8" text-anchor="middle">cortex-review-guidelines repo (public) で参照可能</text>
-    <text x="490" y="718" font-size="12" fill="#94a3b8" text-anchor="middle">100% 全 PR で発火（直近30日実績）</text>
+    <text x="490" y="676" font-size="11" fill="#94a3b8" text-anchor="middle">並列sub-agentではなく</text>
+    <text x="490" y="694" font-size="11" fill="#94a3b8" text-anchor="middle">1セッション内でコンテキストを共有しつつ</text>
+    <text x="490" y="712" font-size="11" fill="#94a3b8" text-anchor="middle">観点を切り替える設計</text>
   </g>
 
   <!-- ============= 3. Verdict ============= -->
   <g font-family="Noto Sans JP, sans-serif">
-    <rect x="700" y="200" width="240" height="240" rx="14" fill="#0d1f2d" stroke="#38bdf8" stroke-width="2.5"/>
+    <rect x="700" y="200" width="240" height="270" rx="14" fill="#0d1f2d" stroke="#38bdf8" stroke-width="2.5"/>
     <text x="820" y="234" font-size="19" fill="#38bdf8" text-anchor="middle" font-weight="bold">PR comment</text>
+    <text x="820" y="254" font-size="12" fill="#94a3b8" text-anchor="middle">verdict marker 付き</text>
 
-    <rect x="720" y="252" width="200" height="80" rx="8" fill="#2d1414" stroke="#f87171" stroke-width="1.8"/>
-    <text x="820" y="278" font-size="14" fill="#f87171" text-anchor="middle" font-weight="bold">REQUEST_CHANGES</text>
-    <text x="820" y="298" font-size="11" fill="#cbd5e1" text-anchor="middle">Critical or Major</text>
-    <text x="820" y="316" font-size="11" fill="#94a3b8" text-anchor="middle">→ 4. Auto Fix へ</text>
+    <rect x="720" y="272" width="200" height="80" rx="8" fill="#2d1414" stroke="#f87171" stroke-width="1.8"/>
+    <text x="820" y="298" font-size="14" fill="#f87171" text-anchor="middle" font-weight="bold">REQUEST_CHANGES</text>
+    <text x="820" y="318" font-size="11" fill="#cbd5e1" text-anchor="middle">Critical or Major</text>
+    <text x="820" y="336" font-size="11" fill="#94a3b8" text-anchor="middle">→ 4. authorモード へ</text>
 
-    <rect x="720" y="346" width="200" height="80" rx="8" fill="#0d2820" stroke="#4ade80" stroke-width="1.8"/>
-    <text x="820" y="372" font-size="14" fill="#4ade80" text-anchor="middle" font-weight="bold">APPROVE</text>
-    <text x="820" y="392" font-size="11" fill="#cbd5e1" text-anchor="middle">all clear</text>
-    <text x="820" y="410" font-size="11" fill="#94a3b8" text-anchor="middle">→ 5. Merge へ</text>
+    <rect x="720" y="364" width="200" height="80" rx="8" fill="#0d2820" stroke="#4ade80" stroke-width="1.8"/>
+    <text x="820" y="390" font-size="14" fill="#4ade80" text-anchor="middle" font-weight="bold">APPROVE</text>
+    <text x="820" y="410" font-size="11" fill="#cbd5e1" text-anchor="middle">all clear (CI pass 後)</text>
+    <text x="820" y="428" font-size="11" fill="#94a3b8" text-anchor="middle">→ 5. Merge へ</text>
   </g>
 
-  <!-- VERDICT decision criteria note -->
+  <!-- VERDICT criteria note -->
   <g font-family="Noto Sans JP, sans-serif">
-    <text x="820" y="490" font-size="13" fill="#cbd5e1" text-anchor="middle" font-weight="bold">severity 階層</text>
-    <text x="820" y="514" font-size="12" fill="#94a3b8" text-anchor="middle">Critical / Major → BLOCK</text>
-    <text x="820" y="532" font-size="12" fill="#94a3b8" text-anchor="middle">Minor → resolve 必須</text>
-    <text x="820" y="550" font-size="12" fill="#94a3b8" text-anchor="middle">Nit → APPROVE</text>
-    <text x="820" y="582" font-size="11" fill="#94a3b8" text-anchor="middle">降格禁止ルールあり</text>
-    <text x="820" y="600" font-size="11" fill="#94a3b8" text-anchor="middle">（"既存パターンに従った" 等は</text>
-    <text x="820" y="618" font-size="11" fill="#94a3b8" text-anchor="middle"> 降格理由として認めない）</text>
+    <text x="820" y="500" font-size="13" fill="#cbd5e1" text-anchor="middle" font-weight="bold">severity 階層</text>
+    <text x="820" y="522" font-size="12" fill="#94a3b8" text-anchor="middle">Critical / Major → BLOCK</text>
+    <text x="820" y="540" font-size="12" fill="#94a3b8" text-anchor="middle">Minor → resolve 必須</text>
+    <text x="820" y="558" font-size="12" fill="#94a3b8" text-anchor="middle">Nit → APPROVE</text>
+    <text x="820" y="590" font-size="11" fill="#94a3b8" text-anchor="middle">降格禁止ルールあり</text>
+    <text x="820" y="608" font-size="11" fill="#94a3b8" text-anchor="middle">（"既存パターンに従った" 等は</text>
+    <text x="820" y="626" font-size="11" fill="#94a3b8" text-anchor="middle"> 降格理由として認めない）</text>
   </g>
 
-  <!-- ============= 4. Auto Fix (annotation-author) ============= -->
+  <!-- ============= 4. authorモード ============= -->
   <g font-family="Noto Sans JP, sans-serif">
-    <rect x="980" y="200" width="320" height="280" rx="14" fill="#251a0d" stroke="#fb923c" stroke-width="2.5"/>
-    <text x="1140" y="234" font-size="19" fill="#fb923c" text-anchor="middle" font-weight="bold">annotation-author</text>
-    <text x="1140" y="254" font-size="13" fill="#94a3b8" text-anchor="middle">(Cloud Run, 修正専用 AI)</text>
+    <rect x="980" y="200" width="320" height="320" rx="14" fill="#251a0d" stroke="#fb923c" stroke-width="2.5"/>
+    <text x="1140" y="234" font-size="18" fill="#fb923c" text-anchor="middle" font-weight="bold">webhook-server.mjs --mode author</text>
+    <text x="1140" y="254" font-size="13" fill="#94a3b8" text-anchor="middle">PR作者のPC上（別マシン・別セッション）</text>
 
-    <rect x="1000" y="276" width="280" height="36" rx="6" fill="#1a1305" stroke="#fb923c" stroke-width="1.3"/>
-    <text x="1140" y="298" font-size="12" fill="#cbd5e1" text-anchor="middle">レビューコメント全部を context として load</text>
+    <rect x="1000" y="272" width="280" height="36" rx="6" fill="#1a1305" stroke="#fb923c" stroke-width="1.3"/>
+    <text x="1140" y="294" font-size="12" fill="#cbd5e1" text-anchor="middle">origin/main を worktree にマージ</text>
 
-    <rect x="1000" y="320" width="280" height="36" rx="6" fill="#1a1305" stroke="#fb923c" stroke-width="1.3"/>
-    <text x="1140" y="342" font-size="12" fill="#cbd5e1" text-anchor="middle">worktree 内で Claude Code が修正</text>
+    <rect x="1000" y="316" width="280" height="36" rx="6" fill="#1a1305" stroke="#fb923c" stroke-width="1.3"/>
+    <text x="1140" y="338" font-size="12" fill="#cbd5e1" text-anchor="middle">レビューコメント全部を context に</text>
 
-    <rect x="1000" y="364" width="280" height="36" rx="6" fill="#1a1305" stroke="#fb923c" stroke-width="1.3"/>
-    <text x="1140" y="386" font-size="12" fill="#cbd5e1" text-anchor="middle">commit + push し直す</text>
+    <rect x="1000" y="360" width="280" height="36" rx="6" fill="#1a1305" stroke="#fb923c" stroke-width="1.3"/>
+    <text x="1140" y="382" font-size="12" fill="#cbd5e1" text-anchor="middle">claude -p を worktree 内で spawn</text>
 
-    <text x="1140" y="424" font-size="12" fill="#94a3b8" text-anchor="middle" font-weight="bold">3回連続失敗 → human escalate</text>
-    <text x="1140" y="442" font-size="11" fill="#94a3b8" text-anchor="middle">review 側と fix 側を別 agent に分離</text>
-    <text x="1140" y="460" font-size="11" fill="#94a3b8" text-anchor="middle">→ 互いの判断を交差させる</text>
+    <rect x="1000" y="404" width="280" height="36" rx="6" fill="#1a1305" stroke="#fb923c" stroke-width="1.3"/>
+    <text x="1140" y="426" font-size="12" fill="#cbd5e1" text-anchor="middle">修正を commit + push</text>
+
+    <text x="1140" y="464" font-size="12" fill="#94a3b8" text-anchor="middle" font-weight="bold">連続失敗 → needs-human label</text>
+    <text x="1140" y="482" font-size="11" fill="#94a3b8" text-anchor="middle">reviewer と author は別 PC で動くので、</text>
+    <text x="1140" y="500" font-size="11" fill="#94a3b8" text-anchor="middle">「指摘の妥当性」の判定が独立に交差する</text>
   </g>
 
   <!-- Re-review loop arrow -->
-  <path d="M 1140 480 Q 1140 580 870 580 Q 600 580 490 740 Q 380 880 380 740" stroke="#fb923c" stroke-width="2.5" fill="none" stroke-dasharray="6 4" marker-end="url(#a-fb923c)"/>
-  <text x="710" y="600" font-size="13" fill="#fb923c" font-family="Noto Sans JP, sans-serif" font-weight="bold">push → webhook 再発火 → 再 review loop</text>
+  <path d="M 1140 520 Q 1140 620 870 620 Q 600 620 490 740 Q 380 880 380 740" stroke="#fb923c" stroke-width="2.5" fill="none" stroke-dasharray="6 4" marker-end="url(#a-fb923c)"/>
+  <text x="710" y="640" font-size="13" fill="#fb923c" font-family="Noto Sans JP, sans-serif" font-weight="bold">push → webhook 再発火 → レビュアーの PC が再 review</text>
 
   <!-- ============= 5. Merge & Deploy ============= -->
   <g font-family="Noto Sans JP, sans-serif">
@@ -156,14 +161,14 @@
   </g>
 
   <!-- Arrows between phases -->
-  <line x1="270" y1="280" x2="330" y2="280" stroke="#94a3b8" stroke-width="2" marker-end="url(#a-94a3b8)"/>
-  <line x1="650" y1="320" x2="700" y2="320" stroke="#94a3b8" stroke-width="2" marker-end="url(#a-94a3b8)"/>
-  <line x1="940" y1="290" x2="980" y2="290" stroke="#f87171" stroke-width="2" marker-end="url(#a-f87171)"/>
-  <text x="960" y="280" font-size="11" fill="#f87171" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-weight="bold">REQUEST</text>
-  <text x="960" y="296" font-size="11" fill="#f87171" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-weight="bold">_CHANGES</text>
+  <line x1="270" y1="350" x2="330" y2="350" stroke="#94a3b8" stroke-width="2" marker-end="url(#a-94a3b8)"/>
+  <line x1="650" y1="350" x2="700" y2="350" stroke="#94a3b8" stroke-width="2" marker-end="url(#a-94a3b8)"/>
+  <line x1="940" y1="312" x2="980" y2="312" stroke="#f87171" stroke-width="2" marker-end="url(#a-f87171)"/>
+  <text x="960" y="302" font-size="11" fill="#f87171" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-weight="bold">REQUEST</text>
+  <text x="960" y="318" font-size="11" fill="#f87171" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-weight="bold">_CHANGES</text>
 
-  <line x1="940" y1="386" x2="1330" y2="290" stroke="#4ade80" stroke-width="2" marker-end="url(#a-4ade80)"/>
-  <text x="1180" y="350" font-size="12" fill="#4ade80" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-weight="bold">APPROVE</text>
+  <line x1="940" y1="404" x2="1330" y2="290" stroke="#4ade80" stroke-width="2" marker-end="url(#a-4ade80)"/>
+  <text x="1180" y="370" font-size="12" fill="#4ade80" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-weight="bold">APPROVE</text>
 
   <!-- Bottom note: real example -->
   <g font-family="Noto Sans JP, sans-serif">
