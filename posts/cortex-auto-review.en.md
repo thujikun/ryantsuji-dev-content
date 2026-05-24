@@ -136,6 +136,14 @@ Alongside this, we **swap out `CLAUDE.md` to a review-specific version** for the
 
 Cutting wasted context injection improves judgment precision and token cost at the same time -- that's the design baseline for this layer.
 
+### Operational knobs
+
+A few filters and toggles we apply in actual use:
+
+- **Draft (WIP) PRs are excluded from review.** A PR in GitHub Draft state is received by the webhook but skipped. Running a review on every push during work-in-progress is just noise -- review starts firing once the author flips it to Ready for Review.
+- **Specific PRs can be targeted manually.** The webhook is the normal trigger, but you can also kick off a review against a specific PR number from the CLI. Useful for re-checking a PR after a CI failure, or for "I want to look at just this PR again."
+- **Auto-merge is opt-in.** The default is "auto-review APPROVE + CI green -> auto-merge," but you can switch to "humans hit the merge button" at the repository or per-PR level. We do that for changes that go directly to prod, and for repos whose operations haven't fully stabilized yet.
+
 ## Output structure: tags and severity
 
 Every auto-review comment is structured as **tag + severity + concrete example**.
