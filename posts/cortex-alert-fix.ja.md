@@ -17,6 +17,7 @@ seriesOrder: 4
 syndication:
   zenn:
     id: "39e2fd6747b28e"
+    publishAt: "2026-06-02T08:30:00+09:00"
 ---
 
 
