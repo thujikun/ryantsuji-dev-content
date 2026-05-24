@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="940" viewBox="0 0 1600 940">
+  <rect width="1600" height="940" fill="#0f172a"/>
+
+  <defs>
+    <marker id="a-94a3b8" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#94a3b8"/></marker>
+    <marker id="a-f87171" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#f87171"/></marker>
+    <marker id="a-4ade80" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#4ade80"/></marker>
+    <marker id="a-fb923c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#fb923c"/></marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="800" y="56" font-size="30" fill="#e2e8f0" text-anchor="middle" font-weight="bold" font-family="Noto Sans JP, sans-serif">Before / After — 人レビュー時代 vs cortex の Auto Review 時代</text>
+  <text x="800" y="92" font-size="18" fill="#94a3b8" text-anchor="middle" font-family="Noto Sans JP, sans-serif">同じ「Critical x3 + Minor x2 が初回で出る PR」が、どれだけの時間と人手で merge まで進むか</text>
+
+  <!-- Divider line -->
+  <line x1="800" y1="130" x2="800" y2="900" stroke="#334155" stroke-width="2" stroke-dasharray="10 6"/>
+
+  <!-- ============ LEFT: Before (Human-only review) ============ -->
+  <g font-family="Noto Sans JP, sans-serif">
+    <rect x="50" y="140" width="720" height="60" rx="14" fill="#2d1414" stroke="#f87171" stroke-width="2.5"/>
+    <text x="410" y="178" font-size="22" fill="#f87171" text-anchor="middle" font-weight="bold">人レビュー時代</text>
+  </g>
+
+  <!-- Step 1: PR open -->
+  <g font-family="Noto Sans JP, sans-serif">
+    <rect x="50" y="220" width="720" height="80" rx="12" fill="#1a2818" stroke="#4ade80" stroke-width="2"/>
+    <text x="100" y="248" font-size="13" fill="#94a3b8">Day 1 — 14:00</text>
+    <text x="100" y="276" font-size="16" fill="#4ade80" font-weight="bold">PR opened (人 or AI)</text>
+    <text x="100" y="292" font-size="13" fill="#cbd5e1">レビュアーを assign、Slack で通知</text>
+  </g>
+
+  <!-- Arrow -->
+  <line x1="410" y1="300" x2="410" y2="320" stroke="#94a3b8" stroke-width="2" marker-end="url(#a-94a3b8)"/>
+  <text x="430" y="316" font-size="12" fill="#94a3b8" font-family="Noto Sans JP, sans-serif">レビュアーの予定待ち（数時間〜半日）</text>
+
+  <!-- Step 2: 1st human review -->
+  <g font-family="Noto Sans JP, sans-serif">
+    <rect x="50" y="330" width="720" height="100" rx="12" fill="#2d1414" stroke="#f87171" stroke-width="2"/>
+    <text x="100" y="358" font-size="13" fill="#94a3b8">Day 2 — 10:30</text>
+    <text x="100" y="384" font-size="16" fill="#f87171" font-weight="bold">1st 人レビュー → REQUEST_CHANGES</text>
+    <text x="100" y="402" font-size="13" fill="#cbd5e1">Critical 1-2件、見落としあり (Doc 不整合 / Test カバレッジ等)</text>
+    <text x="100" y="418" font-size="13" fill="#94a3b8">レビュアーの集中力・経験に依存。深い指摘ほど後の iteration でこぼれる</text>
+  </g>
+
+  <!-- Arrow -->
+  <line x1="410" y1="430" x2="410" y2="450" stroke="#94a3b8" stroke-width="2" marker-end="url(#a-94a3b8)"/>
+  <text x="430" y="446" font-size="12" fill="#94a3b8" font-family="Noto Sans JP, sans-serif">修正対応待ち</text>
+
+  <!-- Step 3: author fix -->
+  <g font-family="Noto Sans JP, sans-serif">
+    <rect x="50" y="460" width="720" height="80" rx="12" fill="#251a0d" stroke="#fb923c" stroke-width="2"/>
+    <text x="100" y="488" font-size="13" fill="#94a3b8">Day 2 — 17:00</text>
+    <text x="100" y="514" font-size="16" fill="#fb923c" font-weight="bold">author が修正 push</text>
+    <text x="100" y="530" font-size="13" fill="#cbd5e1">再レビュー依頼。レビュアーまた予定の調整</text>
+  </g>
+
+  <!-- Arrow -->
+  <line x1="410" y1="540" x2="410" y2="560" stroke="#94a3b8" stroke-width="2" marker-end="url(#a-94a3b8)"/>
+  <text x="430" y="556" font-size="12" fill="#94a3b8" font-family="Noto Sans JP, sans-serif">再びレビュアーの予定待ち</text>
+
+  <!-- Step 4: 2nd review -->
+  <g font-family="Noto Sans JP, sans-serif">
+    <rect x="50" y="570" width="720" height="80" rx="12" fill="#2d1414" stroke="#f87171" stroke-width="2"/>
+    <text x="100" y="598" font-size="13" fill="#94a3b8">Day 3 — 11:00</text>
+    <text x="100" y="624" font-size="16" fill="#f87171" font-weight="bold">2nd 人レビュー → さらに指摘 or APPROVE</text>
+    <text x="100" y="640" font-size="13" fill="#94a3b8">前回見落とした Test / Observability 等が新規発覚することも</text>
+  </g>
+
+  <!-- Arrow -->
+  <line x1="410" y1="650" x2="410" y2="670" stroke="#94a3b8" stroke-width="2" marker-end="url(#a-94a3b8)"/>
+
+  <!-- Step 5: Merge -->
+  <g font-family="Noto Sans JP, sans-serif">
+    <rect x="50" y="680" width="720" height="80" rx="12" fill="#0d2820" stroke="#4ade80" stroke-width="2"/>
+    <text x="100" y="708" font-size="13" fill="#94a3b8">Day 3 — 16:00 (最短)</text>
+    <text x="100" y="734" font-size="16" fill="#4ade80" font-weight="bold">merge → 手動 deploy</text>
+    <text x="100" y="750" font-size="13" fill="#cbd5e1">deploy 担当者が別途必要</text>
+  </g>
+
+  <!-- Bottom box: total -->
+  <g font-family="Noto Sans JP, sans-serif">
+    <rect x="50" y="790" width="720" height="120" rx="14" fill="#1a1305" stroke="#f87171" stroke-width="2"/>
+    <text x="410" y="822" font-size="18" fill="#f87171" text-anchor="middle" font-weight="bold">合計: PR 1本 で 2-3 日</text>
+    <text x="410" y="850" font-size="14" fill="#cbd5e1" text-anchor="middle">人レビュアーの集中力・予定が常にボトルネック</text>
+    <text x="410" y="872" font-size="14" fill="#cbd5e1" text-anchor="middle">深い指摘 (Doc / Test / Observability) はこぼれやすい</text>
+    <text x="410" y="894" font-size="14" fill="#cbd5e1" text-anchor="middle">PR数が増えるとレビュー詰まりで開発全体が止まる</text>
+  </g>
+
+  <!-- ============ RIGHT: After (Auto Review) ============ -->
+  <g font-family="Noto Sans JP, sans-serif">
+    <rect x="830" y="140" width="720" height="60" rx="14" fill="#0d2820" stroke="#4ade80" stroke-width="2.5"/>
+    <text x="1190" y="178" font-size="22" fill="#4ade80" text-anchor="middle" font-weight="bold">cortex の Auto Review 時代</text>
+  </g>
+
+  <!-- R-Step 1: PR open -->
+  <g font-family="Noto Sans JP, sans-serif">
+    <rect x="830" y="220" width="720" height="80" rx="12" fill="#1a2818" stroke="#4ade80" stroke-width="2"/>
+    <text x="880" y="248" font-size="13" fill="#94a3b8">07:25</text>
+    <text x="880" y="276" font-size="16" fill="#4ade80" font-weight="bold">PR opened (人 or AI)</text>
+    <text x="880" y="292" font-size="13" fill="#cbd5e1">webhook → reviewer Cloud Run 即起動</text>
+  </g>
+
+  <line x1="1190" y1="300" x2="1190" y2="320" stroke="#94a3b8" stroke-width="2" marker-end="url(#a-94a3b8)"/>
+  <text x="1210" y="316" font-size="12" fill="#94a3b8" font-family="Noto Sans JP, sans-serif">10分</text>
+
+  <!-- R-Step 2: 1st AI review -->
+  <g font-family="Noto Sans JP, sans-serif">
+    <rect x="830" y="330" width="720" height="100" rx="12" fill="#2d1414" stroke="#f87171" stroke-width="2"/>
+    <text x="880" y="358" font-size="13" fill="#94a3b8">07:35</text>
+    <text x="880" y="384" font-size="16" fill="#f87171" font-weight="bold">1st AI レビュー → REQUEST_CHANGES</text>
+    <text x="880" y="402" font-size="13" fill="#cbd5e1">Critical x3 + Minor x2 を一度に検知</text>
+    <text x="880" y="418" font-size="13" fill="#94a3b8">8 sub-agents が並列で各観点を見る、深い指摘もこぼさない</text>
+  </g>
+
+  <line x1="1190" y1="430" x2="1190" y2="450" stroke="#94a3b8" stroke-width="2" marker-end="url(#a-94a3b8)"/>
+  <text x="1210" y="446" font-size="12" fill="#94a3b8" font-family="Noto Sans JP, sans-serif">Auto Fix 起動 → 数分で修正完了</text>
+
+  <!-- R-Step 3: Auto Fix -->
+  <g font-family="Noto Sans JP, sans-serif">
+    <rect x="830" y="460" width="720" height="80" rx="12" fill="#251a0d" stroke="#fb923c" stroke-width="2"/>
+    <text x="880" y="488" font-size="13" fill="#94a3b8">07:40-07:50</text>
+    <text x="880" y="514" font-size="16" fill="#fb923c" font-weight="bold">annotation-author が修正 push</text>
+    <text x="880" y="530" font-size="13" fill="#cbd5e1">レビューコメントを context に load、worktree で修正、即 push</text>
+  </g>
+
+  <line x1="1190" y1="540" x2="1190" y2="560" stroke="#94a3b8" stroke-width="2" marker-end="url(#a-94a3b8)"/>
+  <text x="1210" y="556" font-size="12" fill="#94a3b8" font-family="Noto Sans JP, sans-serif">webhook 再発火</text>
+
+  <!-- R-Step 4: re-review loop -->
+  <g font-family="Noto Sans JP, sans-serif">
+    <rect x="830" y="570" width="720" height="80" rx="12" fill="#2d1414" stroke="#f87171" stroke-width="2"/>
+    <text x="880" y="598" font-size="13" fill="#94a3b8">07:54 - 08:42</text>
+    <text x="880" y="624" font-size="16" fill="#f87171" font-weight="bold">2nd-5th 再レビュー (iterate x5)</text>
+    <text x="880" y="640" font-size="13" fill="#94a3b8">前回指摘の本質解消を確認、新たな観点を深堀り (Test → Observability →…)</text>
+  </g>
+
+  <line x1="1190" y1="650" x2="1190" y2="670" stroke="#94a3b8" stroke-width="2" marker-end="url(#a-94a3b8)"/>
+
+  <!-- R-Step 5: APPROVE -->
+  <g font-family="Noto Sans JP, sans-serif">
+    <rect x="830" y="680" width="720" height="80" rx="12" fill="#0d2820" stroke="#4ade80" stroke-width="2"/>
+    <text x="880" y="708" font-size="13" fill="#94a3b8">08:50 → 08:57</text>
+    <text x="880" y="734" font-size="16" fill="#4ade80" font-weight="bold">APPROVE → auto-merge → 自動 deploy</text>
+    <text x="880" y="750" font-size="13" fill="#cbd5e1">Turborepo + Pulumi で並列 deploy、cpg index 連動再構築</text>
+  </g>
+
+  <!-- R-Bottom -->
+  <g font-family="Noto Sans JP, sans-serif">
+    <rect x="830" y="790" width="720" height="120" rx="14" fill="#0a1612" stroke="#4ade80" stroke-width="2"/>
+    <text x="1190" y="822" font-size="18" fill="#4ade80" text-anchor="middle" font-weight="bold">合計: PR 1本 で 1.5 時間</text>
+    <text x="1190" y="850" font-size="14" fill="#cbd5e1" text-anchor="middle">レビュー詰まりなし、人の予定に依存しない</text>
+    <text x="1190" y="872" font-size="14" fill="#cbd5e1" text-anchor="middle">深い指摘も並列 sub-agent でこぼさない</text>
+    <text x="1190" y="894" font-size="14" fill="#cbd5e1" text-anchor="middle">PR 数が増えても線形に scale する (直近30日 769 PR)</text>
+  </g>
+</svg>

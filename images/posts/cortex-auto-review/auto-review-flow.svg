@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="960" viewBox="0 0 1600 960">
+  <rect width="1600" height="960" fill="#0f172a"/>
+
+  <defs>
+    <marker id="a-94a3b8" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#94a3b8"/></marker>
+    <marker id="a-4ade80" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#4ade80"/></marker>
+    <marker id="a-38bdf8" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#38bdf8"/></marker>
+    <marker id="a-fb923c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#fb923c"/></marker>
+    <marker id="a-f87171" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#f87171"/></marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="800" y="56" font-size="30" fill="#e2e8f0" text-anchor="middle" font-weight="bold" font-family="Noto Sans JP, sans-serif">Auto Review 全フロー — PR 起票から自動 deploy まで人なしで完結</text>
+  <text x="800" y="92" font-size="18" fill="#94a3b8" text-anchor="middle" font-family="Noto Sans JP, sans-serif">直近30日で 769 PR / 平均10.8回 review-fix loop / 74% は人レビュー touch ゼロ / 中央値31分で merge</text>
+
+  <!-- Phase labels -->
+  <g font-family="Noto Sans JP, sans-serif" font-size="17">
+    <text x="150" y="150" fill="#cbd5e1" text-anchor="middle" font-weight="bold">1. Trigger</text>
+    <text x="490" y="150" fill="#cbd5e1" text-anchor="middle" font-weight="bold">2. Auto Review</text>
+    <text x="820" y="150" fill="#cbd5e1" text-anchor="middle" font-weight="bold">3. Verdict</text>
+    <text x="1140" y="150" fill="#cbd5e1" text-anchor="middle" font-weight="bold">4. Auto Fix (REQUEST_CHANGES時)</text>
+    <text x="1450" y="150" fill="#cbd5e1" text-anchor="middle" font-weight="bold">5. Merge &amp; Deploy</text>
+  </g>
+
+  <!-- ============= 1. Trigger ============= -->
+  <g font-family="Noto Sans JP, sans-serif">
+    <rect x="30" y="200" width="240" height="160" rx="14" fill="#1a2818" stroke="#4ade80" stroke-width="2.5"/>
+    <text x="150" y="240" font-size="20" fill="#4ade80" text-anchor="middle" font-weight="bold">GitHub PR</text>
+    <text x="150" y="268" font-size="14" fill="#cbd5e1" text-anchor="middle">opened / synchronize</text>
+    <text x="150" y="298" font-size="13" fill="#94a3b8" text-anchor="middle">webhook</text>
+    <text x="150" y="322" font-size="13" fill="#94a3b8" text-anchor="middle">payload: PR diff + meta</text>
+    <text x="150" y="346" font-size="13" fill="#94a3b8" text-anchor="middle">authored by AI or human</text>
+  </g>
+
+  <!-- ============= 2. Auto Review (reviewer Cloud Run) ============= -->
+  <g font-family="Noto Sans JP, sans-serif">
+    <rect x="330" y="200" width="320" height="540" rx="14" fill="#0d1f2d" stroke="#38bdf8" stroke-width="2.5"/>
+    <text x="490" y="234" font-size="19" fill="#38bdf8" text-anchor="middle" font-weight="bold">reviewer (Cloud Run)</text>
+
+    <!-- worktree + cpg load -->
+    <rect x="350" y="254" width="280" height="68" rx="8" fill="#1a1525" stroke="#a78bfa" stroke-width="1.8"/>
+    <text x="490" y="278" font-size="14" fill="#a78bfa" text-anchor="middle" font-weight="bold">worktree 切り出し</text>
+    <text x="490" y="298" font-size="12" fill="#cbd5e1" text-anchor="middle">PRごとに isolation</text>
+    <text x="490" y="314" font-size="12" fill="#cbd5e1" text-anchor="middle">+ cpg を full context load</text>
+
+    <!-- orchestrator -->
+    <rect x="350" y="338" width="280" height="48" rx="8" fill="#251a0d" stroke="#fb923c" stroke-width="1.8"/>
+    <text x="490" y="362" font-size="14" fill="#fb923c" text-anchor="middle" font-weight="bold">orchestrator (diff から関連 sub-agent を選択)</text>
+    <text x="490" y="378" font-size="11" fill="#94a3b8" text-anchor="middle"></text>
+
+    <!-- sub-agents (parallel) -->
+    <text x="490" y="408" font-size="13" fill="#cbd5e1" text-anchor="middle" font-weight="bold">並列 sub-agents (各々 1 guideline + cpg)</text>
+
+    <rect x="350" y="420" width="135" height="36" rx="6" fill="#0d2030" stroke="#38bdf8" stroke-width="1.5"/>
+    <text x="417" y="442" font-size="12" fill="#cbd5e1" text-anchor="middle">arch-reviewer</text>
+
+    <rect x="495" y="420" width="135" height="36" rx="6" fill="#0d2030" stroke="#38bdf8" stroke-width="1.5"/>
+    <text x="562" y="442" font-size="12" fill="#cbd5e1" text-anchor="middle">graph-reviewer</text>
+
+    <rect x="350" y="462" width="135" height="36" rx="6" fill="#0d2030" stroke="#38bdf8" stroke-width="1.5"/>
+    <text x="417" y="484" font-size="12" fill="#cbd5e1" text-anchor="middle">security-reviewer</text>
+
+    <rect x="495" y="462" width="135" height="36" rx="6" fill="#0d2030" stroke="#38bdf8" stroke-width="1.5"/>
+    <text x="562" y="484" font-size="12" fill="#cbd5e1" text-anchor="middle">test-reviewer</text>
+
+    <rect x="350" y="504" width="135" height="36" rx="6" fill="#0d2030" stroke="#38bdf8" stroke-width="1.5"/>
+    <text x="417" y="526" font-size="11" fill="#cbd5e1" text-anchor="middle">ai-antipattern-reviewer</text>
+
+    <rect x="495" y="504" width="135" height="36" rx="6" fill="#0d2030" stroke="#38bdf8" stroke-width="1.5"/>
+    <text x="562" y="526" font-size="12" fill="#cbd5e1" text-anchor="middle">doc-reviewer</text>
+
+    <rect x="350" y="546" width="135" height="36" rx="6" fill="#0d2030" stroke="#38bdf8" stroke-width="1.5"/>
+    <text x="417" y="568" font-size="12" fill="#cbd5e1" text-anchor="middle">impact-reviewer</text>
+
+    <rect x="495" y="546" width="135" height="36" rx="6" fill="#0d2030" stroke="#38bdf8" stroke-width="1.5"/>
+    <text x="562" y="568" font-size="12" fill="#cbd5e1" text-anchor="middle">observability-rev.</text>
+
+    <!-- aggregate -->
+    <rect x="350" y="600" width="280" height="50" rx="8" fill="#251a0d" stroke="#fb923c" stroke-width="1.8"/>
+    <text x="490" y="624" font-size="14" fill="#fb923c" text-anchor="middle" font-weight="bold">aggregate findings</text>
+    <text x="490" y="640" font-size="11" fill="#94a3b8" text-anchor="middle">severity + tag + 引用元 guideline 付き</text>
+
+    <text x="490" y="678" font-size="12" fill="#94a3b8" text-anchor="middle">各 sub-agent は 1 ガイドライン file を context として保持</text>
+    <text x="490" y="696" font-size="12" fill="#94a3b8" text-anchor="middle">cortex-review-guidelines repo (public) で参照可能</text>
+    <text x="490" y="718" font-size="12" fill="#94a3b8" text-anchor="middle">100% 全 PR で発火（直近30日実績）</text>
+  </g>
+
+  <!-- ============= 3. Verdict ============= -->
+  <g font-family="Noto Sans JP, sans-serif">
+    <rect x="700" y="200" width="240" height="240" rx="14" fill="#0d1f2d" stroke="#38bdf8" stroke-width="2.5"/>
+    <text x="820" y="234" font-size="19" fill="#38bdf8" text-anchor="middle" font-weight="bold">PR comment</text>
+
+    <rect x="720" y="252" width="200" height="80" rx="8" fill="#2d1414" stroke="#f87171" stroke-width="1.8"/>
+    <text x="820" y="278" font-size="14" fill="#f87171" text-anchor="middle" font-weight="bold">REQUEST_CHANGES</text>
+    <text x="820" y="298" font-size="11" fill="#cbd5e1" text-anchor="middle">Critical or Major</text>
+    <text x="820" y="316" font-size="11" fill="#94a3b8" text-anchor="middle">→ 4. Auto Fix へ</text>
+
+    <rect x="720" y="346" width="200" height="80" rx="8" fill="#0d2820" stroke="#4ade80" stroke-width="1.8"/>
+    <text x="820" y="372" font-size="14" fill="#4ade80" text-anchor="middle" font-weight="bold">APPROVE</text>
+    <text x="820" y="392" font-size="11" fill="#cbd5e1" text-anchor="middle">all clear</text>
+    <text x="820" y="410" font-size="11" fill="#94a3b8" text-anchor="middle">→ 5. Merge へ</text>
+  </g>
+
+  <!-- VERDICT decision criteria note -->
+  <g font-family="Noto Sans JP, sans-serif">
+    <text x="820" y="490" font-size="13" fill="#cbd5e1" text-anchor="middle" font-weight="bold">severity 階層</text>
+    <text x="820" y="514" font-size="12" fill="#94a3b8" text-anchor="middle">Critical / Major → BLOCK</text>
+    <text x="820" y="532" font-size="12" fill="#94a3b8" text-anchor="middle">Minor → resolve 必須</text>
+    <text x="820" y="550" font-size="12" fill="#94a3b8" text-anchor="middle">Nit → APPROVE</text>
+    <text x="820" y="582" font-size="11" fill="#94a3b8" text-anchor="middle">降格禁止ルールあり</text>
+    <text x="820" y="600" font-size="11" fill="#94a3b8" text-anchor="middle">（"既存パターンに従った" 等は</text>
+    <text x="820" y="618" font-size="11" fill="#94a3b8" text-anchor="middle"> 降格理由として認めない）</text>
+  </g>
+
+  <!-- ============= 4. Auto Fix (annotation-author) ============= -->
+  <g font-family="Noto Sans JP, sans-serif">
+    <rect x="980" y="200" width="320" height="280" rx="14" fill="#251a0d" stroke="#fb923c" stroke-width="2.5"/>
+    <text x="1140" y="234" font-size="19" fill="#fb923c" text-anchor="middle" font-weight="bold">annotation-author</text>
+    <text x="1140" y="254" font-size="13" fill="#94a3b8" text-anchor="middle">(Cloud Run, 修正専用 AI)</text>
+
+    <rect x="1000" y="276" width="280" height="36" rx="6" fill="#1a1305" stroke="#fb923c" stroke-width="1.3"/>
+    <text x="1140" y="298" font-size="12" fill="#cbd5e1" text-anchor="middle">レビューコメント全部を context として load</text>
+
+    <rect x="1000" y="320" width="280" height="36" rx="6" fill="#1a1305" stroke="#fb923c" stroke-width="1.3"/>
+    <text x="1140" y="342" font-size="12" fill="#cbd5e1" text-anchor="middle">worktree 内で Claude Code が修正</text>
+
+    <rect x="1000" y="364" width="280" height="36" rx="6" fill="#1a1305" stroke="#fb923c" stroke-width="1.3"/>
+    <text x="1140" y="386" font-size="12" fill="#cbd5e1" text-anchor="middle">commit + push し直す</text>
+
+    <text x="1140" y="424" font-size="12" fill="#94a3b8" text-anchor="middle" font-weight="bold">3回連続失敗 → human escalate</text>
+    <text x="1140" y="442" font-size="11" fill="#94a3b8" text-anchor="middle">review 側と fix 側を別 agent に分離</text>
+    <text x="1140" y="460" font-size="11" fill="#94a3b8" text-anchor="middle">→ 互いの判断を交差させる</text>
+  </g>
+
+  <!-- Re-review loop arrow -->
+  <path d="M 1140 480 Q 1140 580 870 580 Q 600 580 490 740 Q 380 880 380 740" stroke="#fb923c" stroke-width="2.5" fill="none" stroke-dasharray="6 4" marker-end="url(#a-fb923c)"/>
+  <text x="710" y="600" font-size="13" fill="#fb923c" font-family="Noto Sans JP, sans-serif" font-weight="bold">push → webhook 再発火 → 再 review loop</text>
+
+  <!-- ============= 5. Merge & Deploy ============= -->
+  <g font-family="Noto Sans JP, sans-serif">
+    <rect x="1330" y="200" width="240" height="240" rx="14" fill="#1a2818" stroke="#4ade80" stroke-width="2.5"/>
+    <text x="1450" y="234" font-size="19" fill="#4ade80" text-anchor="middle" font-weight="bold">auto-merge</text>
+    <text x="1450" y="254" font-size="12" fill="#94a3b8" text-anchor="middle">squash merge to main</text>
+
+    <rect x="1350" y="276" width="200" height="36" rx="6" fill="#0a1612" stroke="#4ade80" stroke-width="1.3"/>
+    <text x="1450" y="298" font-size="12" fill="#cbd5e1" text-anchor="middle">Turborepo build (affected)</text>
+
+    <rect x="1350" y="322" width="200" height="36" rx="6" fill="#0a1612" stroke="#4ade80" stroke-width="1.3"/>
+    <text x="1450" y="344" font-size="12" fill="#cbd5e1" text-anchor="middle">Pulumi up (並列 deploy)</text>
+
+    <rect x="1350" y="368" width="200" height="36" rx="6" fill="#0a1612" stroke="#4ade80" stroke-width="1.3"/>
+    <text x="1450" y="390" font-size="12" fill="#cbd5e1" text-anchor="middle">cpg index 再構築 (差分のみ)</text>
+
+    <text x="1450" y="424" font-size="13" fill="#cbd5e1" text-anchor="middle">merge から本番反映 ~10-15分</text>
+  </g>
+
+  <!-- Arrows between phases -->
+  <line x1="270" y1="280" x2="330" y2="280" stroke="#94a3b8" stroke-width="2" marker-end="url(#a-94a3b8)"/>
+  <line x1="650" y1="320" x2="700" y2="320" stroke="#94a3b8" stroke-width="2" marker-end="url(#a-94a3b8)"/>
+  <line x1="940" y1="290" x2="980" y2="290" stroke="#f87171" stroke-width="2" marker-end="url(#a-f87171)"/>
+  <text x="960" y="280" font-size="11" fill="#f87171" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-weight="bold">REQUEST</text>
+  <text x="960" y="296" font-size="11" fill="#f87171" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-weight="bold">_CHANGES</text>
+
+  <line x1="940" y1="386" x2="1330" y2="290" stroke="#4ade80" stroke-width="2" marker-end="url(#a-4ade80)"/>
+  <text x="1180" y="350" font-size="12" fill="#4ade80" text-anchor="middle" font-family="Noto Sans JP, sans-serif" font-weight="bold">APPROVE</text>
+
+  <!-- Bottom note: real example -->
+  <g font-family="Noto Sans JP, sans-serif">
+    <rect x="80" y="780" width="1440" height="140" rx="14" fill="#1a1305" stroke="#fb923c" stroke-width="1.5"/>
+    <text x="800" y="812" font-size="16" fill="#fb923c" text-anchor="middle" font-weight="bold">実例: PR #1241 (feat(meet): dual-write embeddings v2)</text>
+    <text x="800" y="838" font-size="13" fill="#cbd5e1" text-anchor="middle">07:25 起票 → 07:35 初回 review (Critical x3 + Minor x2) → 07:54 → 08:16 → 08:33 → 08:42 → 08:50 APPROVE → auto-merge</text>
+    <text x="800" y="862" font-size="13" fill="#cbd5e1" text-anchor="middle">人レビュアーなら数日かかる修正サイクルを、6 iteration / 1.5時間 で完結</text>
+    <text x="800" y="892" font-size="12" fill="#94a3b8" text-anchor="middle">各 iteration で AI が深い指摘に進化: [Graph] → [Test] → [Observability] → 同 SHA 多重確認 → APPROVE</text>
+  </g>
+</svg>
