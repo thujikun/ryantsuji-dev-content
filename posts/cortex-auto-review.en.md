@@ -1,5 +1,5 @@
 ---
-title: "Human-on-the-Loop: Letting AI Review AI's PRs (769 PRs/month, quality up not down)"
+title: "Human-on-the-Loop: AI Reviewing AI PRs at cortex (769 PRs/month, quality up not down)"
 publishedAt: "2026-05-26T08:30:00+09:00"
 updatedAt: "2026-05-26T08:30:00+09:00"
 draft: true
@@ -29,7 +29,7 @@ Hi, I'm [Ryan](https://x.com/ryantsuji), CTO at airCloset.
 
 In [Part 1 (intro)](/posts/ai-harness-intro) I covered the high level -- **AI driving both PR reviews and incident response on top of cortex**. In [Part 2 (Product Graph)](/posts/cortex-product-graph) I went deep on **cpg**, the unified knowledge graph that fuses code, docs, DB schemas and infra into a single business-aware index.
 
-This post is about **the automated PR review pipeline** -- AI looks at the PR, AI fixes the issues, AI merges. The usual critiques of AI-assisted development ("**reviewers become the bottleneck**" and "**AI code drops the quality bar**") don't structurally apply here. The rest of this post unpacks why.
+This post is about **the automated PR review pipeline** -- AI looks at the PR, AI fixes the issues, AI merges. The usual critiques of AI-assisted development ("**the reviewer becomes the bottleneck**" and "**AI code drops the quality bar**") don't structurally apply here. The rest of this post unpacks why.
 
 ## Series
 
@@ -71,13 +71,13 @@ The common refrain -- "**AI speeds up writing but reviews still bottleneck**" an
 
 ## Defending against "AI writing -> review bottleneck" structurally
 
-### The conventional wisdom: reviewers are the new bottleneck
+### The conventional wisdom: the reviewer becomes the bottleneck
 
 As AI writes faster, the load on whoever reviews the output grows proportionally. Anthropic's internal blog ([How Anthropic teams use Claude Code](https://www.anthropic.com/news/how-anthropic-teams-use-claude-code)) reports the same pattern -- **the bottleneck has shifted from writing to reviewing**, and senior engineers' work has moved from writing code toward integrating and reviewing AI output.
 
 cortex hit exactly this. The moment we ran Claude Code at full throttle, **writing speed jumped by an order of magnitude or more**. Meanwhile the human time available to read and approve PRs only grew linearly. If the reviewer (=me) took a day off, the whole org stalled -- a classic single point of failure.
 
-### cortex's answer: push the reviewer to AI too
+### cortex's answer: move the reviewer role to AI as well
 
 Part 1 and Part 2 kept asking the same recurring question: "**how far do you push the harness?**" cortex went all-in: **the AI writes the code, the AI reviews the code**. What humans keep their hands on is "**tuning the prompts and guidelines themselves**" -- not making decisions inside each individual PR, but watching the system from above and adjusting.
 
@@ -107,17 +107,17 @@ One more upstream layer: before any of those three kicks in, **a 500-lines-per-f
 
 ## How the auto-review system is wired
 
-The implementation is **a script running on each developer's own machine**. GitHub webhooks are received by an in-house **Event Relay server**, persisted to Firestore, and the local scripts on each developer's PC **act as SSE clients that consume the events**. On reconnect, Last-Event-ID replays anything missed, so there's zero event loss, and we register the GitHub webhook exactly once. **The Event Relay aggregates delivery; review and fix logic run on each individual PC** -- that's the basic shape.
+The implementation is **a script running on each developer's own machine**. GitHub webhooks are received by an in-house **Event Relay server**, persisted to Firestore, and the local scripts on each developer's machine **act as SSE clients that consume the events**. On reconnect, Last-Event-ID replays anything missed, so there's zero event loss, and we register the GitHub webhook exactly once. **The Event Relay aggregates delivery; review and fix logic run on each individual machine** -- that's the basic shape.
 
-To clarify the placement: **reviewer-mode machines are kept always-on** (so a review can be picked up the moment one arrives), while **author-mode runs in the background on the PR author's own PC** (which is already running during their normal dev work, with author mode living alongside that). If a PC is offline for an extended period, Event Relay keeps the events in Firestore and replays them when the connection comes back.
+To clarify the placement: **reviewer-mode machines are kept always-on** (so a review can be picked up the moment one arrives), while **author-mode runs in the background on the PR author's own machine** (which is already running during their normal dev work, with author mode living alongside that). If a machine is offline for an extended period, Event Relay keeps the events in Firestore and replays them when the connection comes back.
 
-When the reviewer's PC receives an event, the script spawns `claude -p` and walks through 9 dimensions (Graph / Architecture / Security / Test / Doc / Impact / Observability / AI-Antipattern / Recurrence) sequentially, then reads the verdict marker the AI emitted at the end and posts `APPROVE` or `REQUEST_CHANGES` via `gh pr review`.
+When the reviewer's machine receives an event, the script spawns `claude -p` and walks through 9 dimensions (Graph / Architecture / Security / Test / Doc / Impact / Observability / AI-Antipattern / Recurrence) sequentially, then reads the verdict marker the AI emitted at the end and posts `APPROVE` or `REQUEST_CHANGES` via `gh pr review`.
 
-![Auto review pipeline — distributed webhook architecture running on every developer's PC](/images/posts/cortex-auto-review/auto-review-flow-en.png)
+![Auto review pipeline — distributed webhook architecture running on every developer's machine](/images/posts/cortex-auto-review/auto-review-flow-en.png)
 
 A few notes:
 
-- **Modes split the role** -- the same script started with `--mode reviewer` becomes the reviewer process; with `--mode author` it becomes the PR-author response process. The PC of whoever is assigned as reviewer runs reviewer mode; the PC of whoever opened the PR runs author mode. Event Relay multicasts the events, and **each PC reacts in a distributed way**.
+- **Modes split the role** -- the same script started with `--mode reviewer` becomes the reviewer process; with `--mode author` it becomes the PR-author response process. The machine of whoever is assigned as reviewer runs reviewer mode; the machine of whoever opened the PR runs author mode. Event Relay multicasts the events, and **each machine reacts in a distributed way**.
 - **Per-PR worktree isolation** -- author mode merges `origin/main` into a fresh worktree before spawning the AI. Multiple PRs can be handled in parallel without file state contaminating across them.
 - **9 dimensions checked sequentially in one session** -- not parallel sub-agents. A single `claude -p` session walks the 9 dimensions while keeping context shared, which also catches cross-dimension contradictions.
 - **Review guidelines: public snapshot** -- [air-closet/cortex-review-guidelines](https://github.com/air-closet/cortex-review-guidelines) (JP/EN). The live guidelines are inside cortex (private repo) and evolve daily; the public repo is a snapshot extracted for reference.
@@ -255,7 +255,7 @@ The takeaway is the precision of the details.
 - **The typical excuse** ("existing code has the same problem") is **pre-emptively closed**.
 - The trailing `<!-- VERDICT:REQUEST_CHANGES -->` is a **machine-readable verdict marker** -- the trigger that moves the PR into `REQUEST_CHANGES` state.
 
-After this, the PR author (= usually another AI running on the author's PC) pushes a fix, the reviewer re-reviews. The next review confirms all 3 Criticals are actually resolved, raises the next Major / Critical, and so on. **6 iterations in 1.5 hours**, finally APPROVE, auto-merge.
+After this, the PR author (= usually another AI running on the author's machine) pushes a fix, the reviewer re-reviews. The next review confirms all 3 Criticals are actually resolved, raises the next Major / Critical, and so on. **6 iterations in 1.5 hours**, finally APPROVE, auto-merge.
 
 Plotted on a timeline:
 
@@ -344,23 +344,23 @@ And one more thread. Right now, the trigger for "AI got it wrong, time to rewrit
 
 ## Auto-fix: a separate AI applies the changes and pushes
 
-Once `REQUEST_CHANGES` lands, **the same script running on the PR author's PC, but in author mode**, picks up the event and starts working.
+Once `REQUEST_CHANGES` lands, **the same script running on the PR author's machine, but in author mode**, picks up the event and starts working.
 
 ```
 [REQUEST_CHANGES detected]
    | SSE push via Event Relay
-[Author mode boots on PR author's PC]
+[Author mode boots on PR author's machine]
    | Merge origin/main into a worktree
    |  (lockfile resolved up front, remaining conflicts handled by AI)
    | Read the auto-review comment as context
    | Spawn claude -p inside the worktree
    | Commit + push the changes
-   | New SHA is delivered back to the reviewer's PC via Event Relay -> re-review
+   | New SHA is delivered back to the reviewer's machine via Event Relay -> re-review
 ```
 
 Two design choices matter here.
 
-- **Reviewer and author run on different PCs in different sessions** -- reviewer mode and author mode are the same script, but they run on different machines in different processes. "Is the original critique correct?" is judged independently. Unlike a single AI fixing its own complaints, the judgment crosses between two separate sessions.
+- **Reviewer and author run on different machines in different sessions** -- reviewer mode and author mode are the same script, but they run on different machines in different processes. "Is the original critique correct?" is judged independently. Unlike a single AI fixing its own complaints, the judgment crosses between two separate sessions.
 - **All iteration stays inside the same PR** -- we don't spawn a new PR. The "**fix the root cause, no deferrals**" rule from Part 2 and the review guidelines kicks in here: if the AI tries to escape via `TODO/FIXME` or by splitting work out into a separate PR, the next review rejects it.
 
 ## Auto-merge + parallel deploy
@@ -424,15 +424,15 @@ Over the past six months, the engineer's role on cortex shifted from "**writer**
 
 - AI writes the code (Claude Code)
 - AI reviews the code (auto review)
-- A different AI applies the fixes (author mode running on the PR author's PC)
+- A different AI applies the fixes (author mode running on the PR author's machine)
 - AI decides when to merge (auto-merge script)
 - Deploys go in parallel (Turborepo + Pulumi)
 
 What stays in human hands: "**what to build at all** (product / requirements)," "**is this direction actually right** (architectural judgment)," "**which guideline to add and where**," and "**look at the reviews and adjust prompts and guidelines accordingly**." High-abstraction work -- **not individual decisions, but watching the whole system from above and steering**. **From human-in-the-loop to human-on-the-loop**, you could say.
 
-The widely-reported phenomena -- "AI lowers quality," "review becomes the bottleneck" -- happen when **the harness is extended on the writer side only, and the reviewer side is left to humans**. If writing speeds up and reviewing doesn't, of course it bottlenecks. Of course things get missed.
+The widely-reported phenomena -- "AI lowers quality," "the reviewer becomes the bottleneck" -- happen when **the harness is extended on the writer side only, and the reviewer side is left to humans**. If writing speeds up and reviewing doesn't, of course it bottlenecks. Of course things get missed.
 
-cortex is the opposite. **We extended the harness on the reviewer side first, before fully extending it on the writer side**. Anthropic's observation that the bottleneck shifts from writing to reviewing is exactly right -- which is precisely why "**push the reviewer to AI too**" is the answer cortex chose.
+cortex is the opposite. **We extended the harness on the reviewer side first, before fully extending it on the writer side**. Anthropic's observation that the bottleneck shifts from writing to reviewing is exactly right -- which is precisely why "**move the reviewer role to AI as well**" is the answer cortex chose.
 
 "The AI writes the code, the AI reviews the code." That's the core of cortex's auto-review pipeline. **Quality drop and review bottleneck are functions of how far you extend the harness** -- they are not inherent to AI-assisted development.
 
