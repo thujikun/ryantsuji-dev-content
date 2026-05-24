@@ -142,7 +142,7 @@ A few filters and toggles we apply in actual use:
 
 - **Draft (WIP) PRs are excluded from review.** A PR in GitHub Draft state is received by the webhook but skipped. Running a review on every push during work-in-progress is just noise -- review starts firing once the author flips it to Ready for Review.
 - **Specific PRs can be targeted manually.** The webhook is the normal trigger, but you can also kick off a review against a specific PR number from the CLI. Useful for re-checking a PR after a CI failure, or for "I want to look at just this PR again."
-- **Auto-merge is opt-in.** The default is "auto-review APPROVE + CI green -> auto-merge," but you can switch to "humans hit the merge button" at the repository or per-PR level. We do that for changes that go directly to prod, and for repos whose operations haven't fully stabilized yet.
+- **Auto-merge is the PR author's call.** Whether to run all the way through to auto-merge after auto-review APPROVE + CI green is decided **by the PR author**. The default is on, but for changes that go directly to prod or PRs the author wants to ship carefully, they flip it off and hit the merge button themselves at the end.
 
 ## Output structure: tags and severity
 
@@ -289,7 +289,7 @@ That wasn't enough on its own. Over time other excuse patterns surfaced -- "**wi
 
 The final verdict at the end of every review was originally `APPROVE` / `REQUEST_CHANGES` / `COMMENT` (approve / request changes / comment-only). When the AI picked `COMMENT` -- for example when only Minor issues existed -- the script took no action, the PR sat in review-pending forever, and ultimately someone had to manually pick it up. Classic anti-pattern, and it kept happening.
 
-We **collapsed the verdict to 2 options**. Anything Minor or above is `REQUEST_CHANGES`, a missing verdict marker defaults to `REQUEST_CHANGES` (safe side), and only Nit-only or no findings (with CI passing) yields `APPROVE`. The principle: "**if the judgment is ambiguous, default to the stopping side**." Going all-in on that design clarified things.
+We **collapsed the verdict to 2 options**. Anything Minor or above is `REQUEST_CHANGES`, a missing verdict marker defaults to `REQUEST_CHANGES` (safe side), and only Nit-only or no findings (with CI passing) yields `APPROVE`. The principle: "**if the judgment is ambiguous, fail-safe by defaulting to the blocking side (`REQUEST_CHANGES`)**." Going all-in on that design clarified things.
 
 ### 3. Checklist items had no severity, so the AI's judgment kept drifting
 
@@ -308,7 +308,7 @@ The `scope` column is **a machine-decidable filter** for which paths a check app
 
 ### 4. The existing guidelines didn't catch AI-specific traps
 
-After running this for a while we noticed AI-generated code has its own cluster of antipatterns -- **calling APIs that don't exist (hallucinated APIs), swallowing errors and returning fallback values, leaving unused functions, expanding the modification scope beyond what was asked, adding unnecessary backward-compatibility code** -- and `security.md` / `testing.md` couldn't catch these. There's a **distinct class of "mistakes only AIs make."**
+After running this for a while we noticed AI-generated code has its own cluster of antipatterns -- **calling APIs that don't exist** (hallucinated APIs -- something like `user.findOrCreate()` that looks plausible but isn't actually defined), **swallowing errors and returning fallback values** (e.g., silently returning an empty array when an upstream API fails), **leaving unused functions** (a refactor adds the new function but doesn't delete the old one, leaving dead code), **expanding the modification scope beyond what was asked** (you ask it to change one function and it reformats the whole file), **adding unnecessary backward-compatibility code** (creating a deprecated alias for an internal-only function) -- and `security.md` / `testing.md` couldn't catch these. There's a **distinct class of "mistakes only AIs make."**
 
 We added a dedicated **`ai-antipattern.md`** for this. Reviews now pick these up explicitly under the `[AI-Antipattern]` tag. **Reviewing AI output requires designing around AI-specific traps** -- you don't get there just by porting human review heuristics onto an AI.
 
