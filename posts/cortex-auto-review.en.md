@@ -73,7 +73,7 @@ The common refrain -- "**AI speeds up writing but reviews still bottleneck**" an
 
 ### The conventional wisdom: reviewers are the new bottleneck
 
-As AI writes faster, the load on whoever reviews the output grows proportionally. Anthropic has stated explicitly from their own internal use of Claude Code that "**the bottleneck shifts from writing to reviewing**" and "senior engineers' work has moved from writing code to integrating and reviewing AI output."
+As AI writes faster, the load on whoever reviews the output grows proportionally. Anthropic's internal blog ([How Anthropic teams use Claude Code](https://www.anthropic.com/news/how-anthropic-teams-use-claude-code)) reports the same pattern -- **the bottleneck has shifted from writing to reviewing**, and senior engineers' work has moved from writing code toward integrating and reviewing AI output.
 
 cortex hit exactly this. The moment we ran Claude Code at full throttle, **writing speed jumped by an order of magnitude or more**. Meanwhile the human time available to read and approve PRs only grew linearly. If the reviewer (=me) took a day off, the whole org stalled -- a classic single point of failure.
 
@@ -380,7 +380,7 @@ Pulumi up (multiple stacks in parallel)
 cpg index rebuilt (only changed nodes regenerate embeddings -- see Part 2)
 ```
 
-`pnpm up <stack1> <stack2> ...` runs in parallel, so deploying 9 stacks at once finishes in about 8-12 minutes. End to end, merge-to-production is averaging 10-15 minutes.
+`pulumi up <stack1> <stack2> ...` runs in parallel, so deploying 9 stacks at once finishes in about 8-12 minutes. End to end, merge-to-production is averaging 10-15 minutes.
 
 This compounds nicely with `auto-fix` PRs. **Incident alert -> Alert-Fix identifies root cause -> opens a fix PR -> auto review pass -> auto merge -> auto deploy** runs as a single closed loop without human involvement (covered in Part 4).
 
@@ -424,7 +424,7 @@ What stays in human hands: "**what to build at all** (product / requirements)," 
 
 The widely-reported phenomena -- "AI lowers quality," "review becomes the bottleneck" -- happen when **the harness is extended on the writer side only, and the reviewer side is left to humans**. If writing speeds up and reviewing doesn't, of course it bottlenecks. Of course things get missed.
 
-cortex is the opposite. **We extended the harness on the reviewer side first, before fully extending it on the writer side**. Anthropic's observation that "reviewing becomes more of a bottleneck than writing" is exactly right -- which is precisely why "**push the reviewer to AI too**" is the answer cortex chose.
+cortex is the opposite. **We extended the harness on the reviewer side first, before fully extending it on the writer side**. Anthropic's observation that the bottleneck shifts from writing to reviewing is exactly right -- which is precisely why "**push the reviewer to AI too**" is the answer cortex chose.
 
 "The AI writes the code, the AI reviews the code." That's the core of cortex's auto-review pipeline. **Quality drop and review bottleneck are functions of how far you extend the harness** -- they are not inherent to AI-assisted development.
 
