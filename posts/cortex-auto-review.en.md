@@ -9,7 +9,7 @@ tags:
   - "ai"
   - "devops"
   - "codereview"
-  - "webdev"
+  - "productivity"
 lang: "en"
 series: "building-ai-harness"
 seriesOrder: 3
@@ -347,7 +347,7 @@ Once `REQUEST_CHANGES` lands, **the same script running on the PR author's machi
    | Merge origin/main into a worktree
    |  (lockfile resolved up front, remaining conflicts handled by AI)
    | Read the auto-review comment as context
-   | Spawn claude -p inside the worktree
+   | Run claude -p inside the worktree
    | Commit + push the changes
    | New SHA is delivered back to the reviewer's machine via Event Relay -> re-review
 ```
@@ -414,7 +414,7 @@ It's not zero. A few times a month we get "this is Nit, not Major" type misjudgm
 
 ## What changed / Bridge to Part 4
 
-Over the past six months, the engineer's role on cortex shifted from "**writer**" and "**reviewer**" to "**judge**."
+Over the past six months, the engineer's role on cortex shifted from "**writer**" and "**reviewer**" to "**operator**" -- the human running the system, not acting inside each individual decision.
 
 - AI writes the code (Claude Code)
 - AI reviews the code (auto review)
