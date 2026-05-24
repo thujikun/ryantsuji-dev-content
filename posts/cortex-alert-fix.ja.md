@@ -14,6 +14,9 @@ tags:
 lang: "ja"
 series: "building-ai-harness"
 seriesOrder: 4
+syndication:
+  zenn:
+    id: "39e2fd6747b28e"
 ---
 
 
