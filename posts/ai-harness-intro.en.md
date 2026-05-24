@@ -34,7 +34,7 @@ All of those run on top of an internal AI development platform we call **cortex*
 | 2 | Product Graph (cpg) | Code, docs, DB, infra unified into one graph | [cortex-product-graph](/posts/cortex-product-graph) |
 | 3 | AI PR review | webhook → AI review → auto-fix → squash merge | coming |
 | 4 | Alert-Fix + observability + auto-added guardrails | Alert → AI investigates → fix PR + new lint/type gate → auto redeploy + recurrence blocked | coming |
-| 5 | Non-engineer dev environment | Business members opening PRs, quality via AI review | coming |
+| 5 | Scaling the harness from cortex to toC services | Non-engineer contributions in practice + scaling cortex's harness to the whole product org | coming |
 
 ## Two Scenes, Up Front
 
@@ -301,8 +301,8 @@ The series is planned as 6 parts.
 **Part 4: Incidents self-heal, guardrails self-strengthen**
    Grafana alert → AI investigation (Loki + Product Graph + git blame) → fix PR + new lint/type gate → auto merge → automatic redeploy: the auto alert-fix system. Also covers the full OTel + Faro + Prometheus stack, Gemini cost tracking, and how the quality gates are designed to be "non-loweriable, non-bypassable, and self-growing."
 
-**Part 5: A dev environment non-engineers can ship in**
-   How business-side members can open PRs directly to cortex, how AI review and auto-fix uphold the quality bar, and how this differs from the [Sandbox MCP](/posts/sandbox-mcp) lane.
+**Part 5: Scaling the harness from cortex to toC services**
+   The first half covers how business members can already open PRs directly to cortex -- and where that breaks (additions to existing pipelines work; new pipelines and architectural changes still need humans in the loop). The second half is the roadmap and the thinking behind scaling cortex's harness across the whole product org (multiple services, multiple infra stacks, multiple teams).
 
 Each post stands on its own, but **Part 2 (Product Graph) is the foundation for the others**, so the recommended reading order is Part 1 → Part 2 → any.
 

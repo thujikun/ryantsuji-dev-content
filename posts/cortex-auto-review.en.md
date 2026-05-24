@@ -39,7 +39,7 @@ This post is about **the automated PR review pipeline** -- AI reviews the PR, a 
 | 2 | Product Graph (cpg) | Code / docs / DB / infra unified into one graph | [cortex-product-graph](/posts/cortex-product-graph) |
 | 3 | Auto PR review | webhook -> AI review -> auto-fix -> squash merge | This article ← you are here |
 | 4 | Alert-Fix + observability + auto-added guardrails | Alert -> AI investigates -> fix PR + new lint/type gate -> auto redeploy + recurrence blocked | Coming soon |
-| 5 | Non-engineer dev experience | Non-engineers ship PRs, AI review enforces quality | Coming soon |
+| 5 | Scaling the harness from cortex to toC services | Non-engineer contributions in practice + scaling cortex's harness to the whole product org | Coming soon |
 
 ## Start with last month's numbers
 

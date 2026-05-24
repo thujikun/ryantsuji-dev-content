@@ -38,7 +38,7 @@ In Part 1, I described cpg at a high level: "all of cortex is indexed in one gra
 | 2 | Product Graph (cpg) | Code, docs, DB, infra unified into one graph | this post ← you are here |
 | 3 | AI PR review | webhook → AI review → auto-fix → squash merge | coming |
 | 4 | Alert-Fix + observability + auto-added guardrails | Alert → AI investigates → fix PR + new lint/type gate → auto redeploy + recurrence blocked | coming |
-| 5 | Non-engineer dev environment | Business members opening PRs, quality via AI review | coming |
+| 5 | Scaling the harness from cortex to toC services | Non-engineer contributions in practice + scaling cortex's harness to the whole product org | coming |
 
 ## Start with One Scene
 
