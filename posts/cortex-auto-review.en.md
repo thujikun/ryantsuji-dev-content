@@ -114,6 +114,20 @@ A few notes:
 - **9 dimensions checked sequentially in one session** -- not parallel sub-agents. A single `claude -p` session walks the 9 dimensions while keeping context shared, which also catches cross-dimension contradictions.
 - **Review guidelines: public snapshot** -- [air-closet/cortex-review-guidelines](https://github.com/air-closet/cortex-review-guidelines) (JP/EN). The live guidelines are inside cortex (private repo) and evolve daily; the public repo is a snapshot extracted for reference.
 
+### Why sequential single-session review, not parallel sub-agents
+
+We initially tried splitting the 9 dimensions across parallel sub-agents, but in production a few problems surfaced:
+
+- **The same context gets injected once per sub-agent.** cpg, guidelines, and the PR diff get sent 9 times. Token cost balloons proportionally.
+- **Cross-dimension findings can't reference each other.** For example a `[Test]` finding that is actually rooted in a `[Graph]` violation (`@graph-connects` mismatch) gets dropped if each sub-agent only sees its own slice -- "looks fine in isolation as a Test issue."
+- **Aggregation logic gets complicated.** You need separate machinery to merge, deduplicate, and emit the final verdict from 9 sub-agent outputs.
+
+Once we switched to a single sequential session, cpg / guideline loading happens exactly once, and **cross-dimension consistency is checked naturally** because earlier findings remain in context as the AI moves to the next dimension. The output is a single stream, so emitting one verdict marker at the end is enough for aggregation.
+
+Alongside this, we **swap out `CLAUDE.md` to a review-specific version** for the reviewer process. cortex's default `CLAUDE.md` is packed with development-time context (Product Graph operating instructions, prod-data safety rules, MCP usage ordering, etc.) -- nearly all of it is noise for an AI reviewer. Starting the reviewer with a review-specific `CLAUDE.md` (centered on the severity ladder, no-downgrade rules, and verdict marker spec) **keeps the AI's attention focused on the review task** and reduces drift.
+
+Cutting wasted context injection improves judgment precision and token cost at the same time -- that's the design baseline for this layer.
+
 ## Output structure: tags and severity
 
 Every auto-review comment is structured as **tag + severity + concrete example**.
