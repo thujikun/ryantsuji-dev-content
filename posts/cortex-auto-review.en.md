@@ -44,9 +44,15 @@ This post is about **the automated PR review pipeline** -- AI looks at the PR, A
 
 ## Start with last month's numbers
 
-Past 30 days (Apr 21 -- May 21), cortex shipped **769 PRs merged**. **Every single one had an AI reviewer as the first reviewer, with an average of 11 (max 56) review-fix loop iterations per PR**.
+**769 PRs merged.**
 
-Time-to-merge: **median 31 minutes**, **1 in 5 merged within 10 minutes**, **roughly half within 30 minutes**. And **since we rolled out the AI reviewer, humans almost never write review comments on individual PRs anymore**. What humans do instead is look at review outcomes and **tune the review prompt and the guidelines themselves** -- this is **human-on-the-loop, not human-in-the-loop**. Not "a human in the middle of each decision," but "a human watching the system from above and steering."
+**Median time to merge: 31 minutes.**
+
+**Human review on individual PRs: effectively zero.**
+
+That's a typical 30 days on cortex (Apr 21 -- May 21).
+
+Every one of those 769 PRs had an AI reviewer as the first reviewer, with **an average of 10.8 review-fix loop iterations per PR (max 56)**. 1 in 5 merged within 10 minutes, roughly half within 30 minutes. What humans do now is look at review outcomes and **tune the review prompt and the guidelines themselves** -- this is **human-on-the-loop, not human-in-the-loop**. Not "a human in the middle of each decision," but "a human watching the system from above and steering."
 
 | Past 30 days |  |
 |---|---|
