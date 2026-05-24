@@ -1,10 +1,10 @@
 ---
-title: "Human-on-the-Loop: AI Reviewing AI PRs at cortex (769 PRs/month, quality up not down)"
+title: "Human-on-the-Loop: AI Reviewing AI PRs at cortex (769 PRs/month, while raising the quality bar)"
 publishedAt: "2026-05-26T08:30:00+09:00"
 updatedAt: "2026-05-26T08:30:00+09:00"
 draft: true
 slug: "cortex-auto-review"
-summary: "Series Part 3. The common critiques of AI-assisted development -- 'review becomes the new bottleneck' and 'AI code drops the quality bar' -- don't structurally apply when AI also does the reviewing. Full walkthrough of our pipeline: webhook -> cpg context -> AI review with [Graph]/[Doc]/[Impact] tags -> auto-fix by a separate AI -> re-review -> auto-merge -> parallel deploy. 769 PRs merged in 30 days, near-zero human review involvement per PR."
+summary: "Series Part 3. The common critiques of AI-assisted development -- 'review becomes the new bottleneck' and 'AI code drops the quality bar' -- fundamentally don't apply when AI also does the reviewing. Full walkthrough of our pipeline: webhook -> cpg context -> AI review with [Graph]/[Doc]/[Impact] tags -> auto-fix by a separate AI -> re-review -> auto-merge -> parallel deploy. 769 PRs merged in 30 days, human review involvement per PR is near-zero."
 tags:
   - "ai"
   - "devops"
@@ -29,7 +29,7 @@ Hi, I'm [Ryan](https://x.com/ryantsuji), CTO at airCloset.
 
 In [Part 1 (intro)](/posts/ai-harness-intro) I covered the high level -- **AI driving both PR reviews and incident response on top of cortex**. In [Part 2 (Product Graph)](/posts/cortex-product-graph) I went deep on **cpg**, the unified knowledge graph that fuses code, docs, DB schemas and infra into a single business-aware index.
 
-This post is about **the automated PR review pipeline** -- AI looks at the PR, AI fixes the issues, AI merges. The usual critiques of AI-assisted development ("**the reviewer becomes the bottleneck**" and "**AI code drops the quality bar**") don't structurally apply here. The rest of this post unpacks why.
+This post is about **the automated PR review pipeline** -- AI reviews the PR, a separate AI applies the fixes, and the system merges automatically once policy gates pass. The usual critiques of AI-assisted development ("**the reviewer becomes the bottleneck**" and "**AI code drops the quality bar**") don't really apply here. The rest of this post unpacks why.
 
 ## Series
 
@@ -48,7 +48,7 @@ This post is about **the automated PR review pipeline** -- AI looks at the PR, A
 
 **Median time to merge: 31 minutes.**
 
-**Human review on individual PRs: effectively zero.**
+**Human review involvement per PR: near-zero.**
 
 That's a typical 30 days on cortex (Apr 21 -- May 21).
 
@@ -67,9 +67,9 @@ Every one of those 769 PRs had an AI reviewer as the first reviewer, with **an a
 
 This is a typical month on cortex now.
 
-The common refrain -- "**AI speeds up writing but reviews still bottleneck**" and "**AI-written code lowers quality**" -- is something cortex absorbs through **a pipeline where neither failure mode can structurally take hold**. Let me break it down.
+The common refrain -- "**AI speeds up writing but reviews still bottleneck**" and "**AI-written code lowers quality**" -- is something cortex absorbs through **a pipeline where neither failure mode can take hold**. Let me break it down.
 
-## Defending against "AI writing -> review bottleneck" structurally
+## How the review bottleneck stops forming
 
 ### The conventional wisdom: the reviewer becomes the bottleneck
 
@@ -85,7 +85,7 @@ Three conditions had to hold for this to work:
 
 1. **The AI reviewer has enough context**
 
-    A generic AI reviewer **only sees the PR diff**. The diff alone hides business meaning, upstream/downstream dependencies, and prior incident history. cortex feeds the **Product Graph (cpg)** from [Part 2](/posts/cortex-product-graph) -- **a knowledge graph that fuses code, docs, DB schemas, and infra into one structure, with each node carrying business role and upstream/downstream dependencies** -- into the AI reviewer, so it can **trace impact into code that the PR didn't even touch**. This structurally catches:
+    A generic AI reviewer **only sees the PR diff**. The diff alone hides business meaning, upstream/downstream dependencies, and prior incident history. cortex feeds the **Product Graph (cpg)** from [Part 2](/posts/cortex-product-graph) -- **a knowledge graph that fuses code, docs, DB schemas, and infra into one structure, with each node carrying business role and upstream/downstream dependencies** -- into the AI reviewer, so it can **trace impact into code that the PR didn't even touch**. It catches:
 
     - Missed upstream/downstream fixes
     - Missed doc updates
@@ -107,9 +107,7 @@ One more upstream layer: before any of those three kicks in, **a 500-lines-per-f
 
 ## How the auto-review system is wired
 
-The implementation is **a script running on each developer's own machine**. GitHub webhooks are received by an in-house **Event Relay server**, persisted to Firestore, and the local scripts on each developer's machine **act as SSE clients that consume the events**. On reconnect, Last-Event-ID replays anything missed, so there's zero event loss, and we register the GitHub webhook exactly once. **The Event Relay aggregates delivery; review and fix logic run on each individual machine** -- that's the basic shape.
-
-To clarify the placement: **reviewer-mode machines are kept always-on** (so a review can be picked up the moment one arrives), while **author-mode runs in the background on the PR author's own machine** (which is already running during their normal dev work, with author mode living alongside that). If a machine is offline for an extended period, Event Relay keeps the events in Firestore and replays them when the connection comes back.
+The implementation is **a script running on each developer's machine**. GitHub webhooks land on an in-house **Event Relay server**, get persisted to Firestore, and each developer's machine subscribes as an SSE client. On reconnect, Last-Event-ID replays anything missed -- zero event loss, single webhook registration. **Reviewer-mode machines stay always-on**, so any incoming review fires immediately. **Author mode runs in the background on the PR author's own machine**, alongside their normal dev work.
 
 When the reviewer's machine receives an event, the script spawns `claude -p` and walks through 9 dimensions (Graph / Architecture / Security / Test / Doc / Impact / Observability / AI-Antipattern / Recurrence) sequentially, then reads the verdict marker the AI emitted at the end and posts `APPROVE` or `REQUEST_CHANGES` via `gh pr review`.
 
@@ -124,25 +122,21 @@ A few notes:
 
 ### Why sequential single-session review, not parallel sub-agents
 
-We initially tried splitting the 9 dimensions across parallel sub-agents, but in production a few problems surfaced:
+We initially tried splitting the 9 dimensions across parallel sub-agents. Three problems emerged: cpg / guidelines / PR diff got injected 9 times (token cost balloons), cross-dimension findings couldn't reference each other (a `[Test]` issue rooted in a `[Graph]` violation gets dropped in isolation), and aggregating 9 outputs into a single verdict required its own machinery.
 
-- **The same context gets injected once per sub-agent.** cpg, guidelines, and the PR diff get sent 9 times. Token cost balloons proportionally.
-- **Cross-dimension findings can't reference each other.** For example a `[Test]` finding that is actually rooted in a `[Graph]` violation (`@graph-connects` mismatch) gets dropped if each sub-agent only sees its own slice -- "looks fine in isolation as a Test issue."
-- **Aggregation logic gets complicated.** You need separate machinery to merge, deduplicate, and emit the final verdict from 9 sub-agent outputs.
+A single sequential session fixes all three: one cpg/guideline load, earlier findings stay in context for later dimensions (cross-dimension consistency comes for free), and one verdict marker at the end is the entire aggregation step.
 
-Once we switched to a single sequential session, cpg / guideline loading happens exactly once, and **cross-dimension consistency is checked naturally** because earlier findings remain in context as the AI moves to the next dimension. The output is a single stream, so emitting one verdict marker at the end is enough for aggregation.
+We also **swap `CLAUDE.md` to a review-specific version** at startup. The default `CLAUDE.md` is dense with development-time context (Product Graph ops, prod-data safety, MCP ordering) -- noise for a reviewer. The review-specific version centers on severity, no-downgrade, and the verdict marker spec, keeping AI attention on the review task.
 
-Alongside this, we **swap out `CLAUDE.md` to a review-specific version** for the reviewer process. cortex's default `CLAUDE.md` is packed with development-time context (Product Graph operating instructions, prod-data safety rules, MCP usage ordering, etc.) -- nearly all of it is noise for an AI reviewer. Starting the reviewer with a review-specific `CLAUDE.md` (centered on the severity ladder, no-downgrade rules, and verdict marker spec) **keeps the AI's attention focused on the review task** and reduces drift.
-
-Cutting wasted context injection improves judgment precision and token cost at the same time -- that's the design baseline for this layer.
+Cutting wasted context lifts judgment precision and token cost at the same time.
 
 ### Operational knobs
 
 A few filters and toggles we apply in actual use:
 
-- **Draft (WIP) PRs are excluded from review.** A PR in GitHub Draft state is received by the webhook but skipped. Running a review on every push during work-in-progress is just noise -- review starts firing once the author flips it to Ready for Review.
-- **Specific PRs can be targeted manually.** The webhook is the normal trigger, but you can also kick off a review against a specific PR number from the CLI. Useful for re-checking a PR after a CI failure, or for "I want to look at just this PR again."
-- **Auto-merge is the PR author's call.** Whether to run all the way through to auto-merge after auto-review APPROVE + CI green is decided **by the PR author**. The default is on, but for changes that go directly to prod or PRs the author wants to ship carefully, they flip it off and hit the merge button themselves at the end.
+- **Draft (WIP) PRs are excluded.** GitHub Draft state is received but skipped; review starts firing once the author flips it to Ready for Review.
+- **Specific PRs can be targeted manually.** The webhook is the normal trigger, but you can also kick off a review against a specific PR number from the CLI -- useful after a CI failure or for re-checking a single PR.
+- **Auto-merge is the PR author's call.** Whether the pipeline runs through to auto-merge after APPROVE + CI green is set by the PR author. Default is on; for changes that go directly to prod, the author can flip it off and hit merge themselves.
 
 ## Output structure: tags and severity
 
@@ -267,13 +261,13 @@ The difference between human review and auto review is not just speed. A single 
 
 ![Before / After — human review era vs. cortex's auto-review era](/images/posts/cortex-auto-review/before-after-review-en.png)
 
-This is why "the review bottleneck" structurally doesn't form here.
+This is why the review bottleneck never forms here.
 
 ## Evolving the guidelines: catching the moments AI gets it wrong, then fixing the rules
 
-The review guidelines I've been referring to are **not a static document**. Running this in production surfaces recurring patterns where **the AI mis-judges a specific class of issue**. Each time that happens, we don't add a comment to the individual PR; we **rewrite the guideline so the AI behaves correctly next time** -- this is what human-on-the-loop actually looks like in practice.
+The review guidelines I've been referring to are **not a static document**. Running this in production surfaces recurring patterns where **the AI mis-judges a specific class of issue**. Each time that happens, we don't add a comment to the individual PR; we **rewrite the guideline so the AI behaves correctly next time** -- this is the meta-layer humans actually operate on.
 
-A few concrete failures we hit on cortex, and how we closed each one structurally.
+A few concrete failures we hit on cortex, and how we closed each one by changing the rule, not the PR.
 
 ### 1. AI was downgrading because "existing code has the same issue"
 
@@ -328,7 +322,7 @@ We closed this by adding **"quality-bar relaxation" as a Critical** in `severity
 
 This is the one explicit boundary where **we deliberately do not give the AI autonomous Approve authority**. Whether the standard itself moves is a human decision. It's the **meta-level safety valve** for the "AI reviewing AI" architecture.
 
-### Evolving the guidelines is itself human-on-the-loop
+### Evolving the guidelines is the meta-layer humans actually operate on
 
 The common thread: "**when the AI gets it wrong, don't override the individual PR -- rewrite the guideline so the fix propagates forward.**"
 
@@ -412,7 +406,7 @@ The most common findings out of the first review:
 - **[Observability] Unstructured error logs** -- `event` field or required keys deviating from the structured-log spec.
 - **[Recurrence] No recurrence-prevention action** -- a bug-fix PR description not declaring which of {lint / horizontal rollout / add guideline / nothing} applies.
 
-These are categories **human reviewers tend to miss even when they try** (especially doc consistency and recurrence-prevention judgments). Pushing them to AI structurally reduces the miss rate.
+These are categories **human reviewers tend to miss even when they try** (especially doc consistency and recurrence-prevention judgments). Pushing them to AI cuts the miss rate.
 
 ### Actual false-positive rate
 
@@ -440,4 +434,4 @@ cortex is the opposite. **We extended the harness on the reviewer side first, be
 
 Up next in **Part 4**: **Alert-Fix** -- a pipeline where a production alert triggers AI investigation, an AI-authored fix PR, auto-review, auto-merge, and auto-redeploy, all without human involvement. If auto review protects quality at PR time, Alert-Fix protects it **at production time**.
 
-The headline number above includes `auto-fix`-flavored PRs (= Alert-Fix output). "**Incidents are already fixed before anyone notices**" is where cortex is today. See you next time.
+The headline number above includes `auto-fix`-flavored PRs (= Alert-Fix output). For certain classes of incidents, the fix is already merged before anyone has time to react -- that's where cortex sits today. See you next time.
