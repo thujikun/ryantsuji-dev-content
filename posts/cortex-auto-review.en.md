@@ -1,5 +1,5 @@
 ---
-title: "Human-on-the-Loop: Letting AI Review AI's PRs (769 PRs/month, ~0 human review)"
+title: "Human-on-the-Loop: Letting AI Review AI's PRs (769 PRs/month, quality up not down)"
 publishedAt: "2026-05-26T08:30:00+09:00"
 updatedAt: "2026-05-26T08:30:00+09:00"
 draft: true
