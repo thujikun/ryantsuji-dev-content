@@ -36,7 +36,7 @@ syndication:
 | # | テーマ | キーシーン | 記事 |
 |---|---|---|---|
 | 1 | 総論：cortexのハーネス | PRが無人マージ / 障害が気づく前に治っている | [ai-harness-intro](/posts/ai-harness-intro) |
-| 2 | Product Graph (cpg) | コード・ドキュメント・DB・インフラを1グラフに統合 | [cortex-product-graph](/posts/cortex-product-graph) |
+| 2 | Product Graph（cpg） | コード・ドキュメント・DB・インフラを1グラフに統合 | [cortex-product-graph](/posts/cortex-product-graph) |
 | 3 | AI PRレビュー | webhook → AIレビュー → 自動修正 → squash merge | 本記事 ←現在地 |
 | 4 | Alert-Fix | アラート → AI調査 → 修正PR → 自動再デプロイ | 準備中 |
 | 5 | Observability + 品質ゲート | OTel/Faro一式 + 品質「下げない」設計 | 準備中 |
@@ -77,19 +77,19 @@ Part 1 / Part 2で繰り返し書いた**「ハーネスをどこまで広げる
 
 これが成立するためには、3つの条件が必要でした。
 
-1. **AIに渡すコンテキストが十分であること**── 通常のAIレビューは**「PRのdiff」しか見ません**。コード本体だけ見ても、ビジネス的な意味・上流下流の依存・過去の障害履歴は見えない。cortexは[Part 2](/posts/cortex-product-graph)で書いた**Product Graph (cpg)**をAIレビュアーに渡しているので、**PRで触っていない関連箇所まで含めて影響範囲を辿れる**。結果として、(a) 上流下流の修正漏れ、(b) ドキュメント更新漏れ、(c) 関連テストの未追従 などが構造的に検出されます。これはAIを使ったレビューでも、PR diffだけを見るやり方では絶対に届かない範囲です。
+1. **AIに渡すコンテキストが十分であること**── 通常のAIレビューは**PRのdiffしか見ません**。コード本体だけ見ても、ビジネス的な意味・上流下流の依存・過去の障害履歴は見えない。cortexは[Part 2](/posts/cortex-product-graph)で書いた**Product Graph**（cpg）をAIレビュアーに渡しているので、**PRで触っていない関連箇所まで含めて影響範囲を辿れる**。結果として、（a）上流下流の修正漏れ、（b）ドキュメント更新漏れ、（c）関連テストの未追従などが構造的に検出されます。これはAIを使ったレビューでも、PR diffだけを見るやり方では絶対に届かない範囲です。
 2. **指摘の品質が「思いつきベース」にならないこと**── レビューが日替わりだとチームは混乱するし、AIに対しても「正解」が定義できない。これは**明文化されたレビューガイドライン**をAIに必ず引用させる判定基準として渡すことで担保します（後述、これは別リポジトリで公開しました）。
 3. **誤指摘でマージブロックが連発しないこと**── false positiveを全部Criticalにすると現場が壊れる。これは**重要度の階層化（Critical / Major / Minor / Nit）と降格禁止ルール**で抑えています。
 
-要は、Part 2で書いたcpgが「**AIに渡すコンテキスト**」の問題を解決し、レビューガイドラインが「**AIに何をさせるか**」の問題を解決し、severity階層が「**AIに何をさせないか**」の問題を解決している、という三層構造です。
+要は、[Part 2](/posts/cortex-product-graph)で書いたcpgが「AIに渡すコンテキスト」、レビューガイドラインが**Guides**（事前制御）として「AIに何をさせるか」、severity階層と降格禁止ルールが**Sensors**（事後制御）として「AIに何をさせないか」を、それぞれ担当しています。Martin Fowlerが提唱したGuides / Sensorsの分類（[Part 1](/posts/ai-harness-intro)で触れた）にそのまま乗る構造です。
 
-もう一つ補足すると、これら3層の手前に**機械的なチェックをlintに寄せている層**があります。oxlintをベースに約500ルール（自作のgraph整合性ルールを含む）が走っていて、フォーマット・未使用変数・import順・危険APIの直接呼び出しといった**機械判定できる指摘は、AIが見る前にすべて弾かれている**状態。AIレビューが扱うのは「lintで判定できない意味的な観点」だけになるので、**AIに「考えるべき問題」だけを集中させられる**。これも「AIにレビューさせやすい」ことを成立させている前提です。
+もう一つ補足すると、これら3層の手前に**ファイルあたり500行までというlint**を効かせていて、PRに含まれるファイルが必ずAIの1セッションで読み切れるサイズに保たれている。これだけでもAIレビューが破綻しにくく、人レビューと違って見落としも起きにくい。これ以外にも多数のlintを敷いていますが、全体像は**Part 5（Observability + 品質ゲート）**で扱います。
 
 ## 自動レビューのシステム配置
 
 実装は**各開発者のPC上で動くスクリプト**です。GitHub webhookは社内で運用している**Event Relayサーバ**で受けてFirestoreに永続化し、各PCのスクリプトは**SSEクライアントとしてEvent Relayにつないでイベントを受け取る**構成。再接続時はLast-Event-IDで未送信分が再送されるので取りこぼしゼロ、GitHub admin権限も1回のwebhook登録だけで済みます。**配信はEvent Relayが集約、レビュー判定や修正処理は各PCで実行**、というのが基本ルートです。
 
-レビュアーのPCで動くスクリプトがイベントを受け取ったら、`claude -p` をspawnして6観点 (Graph / Arch / Security / Test / Doc / Impact) を順にチェックし、verdictマーカーを読み取って `gh pr review` でAPPROVE / REQUEST_CHANGESを投稿します。
+レビュアーのPCで動くスクリプトがイベントを受け取ったら、`claude -p`をspawnして6観点（Graph / Arch / Security / Test / Doc / Impact）を順にチェックし、verdictマーカーを読み取って`gh pr review`でAPPROVE / REQUEST_CHANGESを投稿します。
 
 ![自動レビュー全フロー — PR起票から自動デプロイまで人なしで完結](/images/posts/cortex-auto-review/auto-review-flow.png)
 
@@ -137,9 +137,9 @@ Part 1 / Part 2で繰り返し書いた**「ハーネスをどこまで広げる
 
 ### 実例：meet pipelineをembedding v2にdual-writeするPR
 
-実際の自動レビューコメントを見たほうが早いので、典型例を1つ貼ります。これは2026-05-19にマージされたfeature PR (`feat(meet): dual-write embeddings to new 'embedding' column (v2)`) で、起票からマージまで**1.5時間で6回イテレート**した記録です。
+実際の自動レビューコメントを見たほうが早いので、典型例を1つ貼ります。これは2026-05-19にマージされたfeature PR（`feat(meet): dual-write embeddings to new 'embedding' column (v2)`）で、起票からマージまで**1.5時間で6回イテレート**した記録です。
 
-**初回レビュー (07:35:25)**:
+**初回レビュー（07:35:25）**:
 
 > dual-write の実装方針・冪等な migration script・Promise.all 並列化いずれも妥当です。以下3点の Critical と2点の Minor を修正してから merge をお願いします。
 >
@@ -147,7 +147,7 @@ Part 1 / Part 2で繰り返し書いた**「ハーネスをどこまで広げる
 >
 > ## Critical
 >
-> ### [Graph] `@graph-business` タグが欠落 (×3)
+> ### [Graph] `@graph-business`タグが欠落（×3）
 >
 > `graph-integrity.md` はアプリ層のトップレベル宣言に `@graph-business` を必須としています（severity: Critical）。
 > 今回追加した以下3宣言すべてに欠落しています（別スレッドで詳細コメントあり）。
