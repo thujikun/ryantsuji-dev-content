@@ -137,6 +137,34 @@ Alert-Fix が起票する PR は **特別な PR ではなく、ただの fix PR*
 
 つまり、**Alert-Fix が雑に書いた PR は自動レビューで弾かれる**。alert-fix モードの AI と、reviewer モードの AI が別プロセス・別セッションで動くので、判定は独立です。
 
+### 具体例: meet subscriptionの 409 ALREADY_EXISTS
+
+2026-05-21 にAlert-Fixが起票した自動修正PR (`fix(meet-subscription-renewal): auto-fix for Service Error Log Detected`) を例にとります。
+
+Loki から拾った発火元のエラー:
+
+```text
+Workspace Events API request failed: 409 Conflict
+"Subscription associated with the resource already exists."
+```
+
+AI の調査の流れ:
+
+1. **Loki クエリでエラーログを特定** ── Grafana MCP 経由で `{service_name="meet-subscription-renewal"} | json | level=~"ERROR|error|Error"` を実行、`Failed to renew Meet subscription` のスタックトレース取得
+2. **Product Graph で呼び出し経路を辿る** ── `renewSubscriptions` → `createMeetSubscription` のcall pathを特定
+3. **過去のPRと突合せ** ── 「逆方向の不整合」(Firestoreに名前があるがGoogle側から消えた = 404) は既に別PRで `patchMeetSubscriptionTtl` → null fallback で self-heal 済み。**今回の方向 (Google側に残っているがFirestoreに無い = 409) はまだ対応されていない** ことを発見
+4. **判定**: 「パターンが他にも存在しうる」状況 → `[Recurrence]` 判定マトリクスの **「横展開必須」** のケース
+
+その場凌ぎの修正ではなく、**逆方向に存在していた fallback と対称になるように同方向の self-healing を実装** しました:
+
+- `createMeetSubscription` を idempotent に変更
+- POST が 409 を返したら、レスポンスから既存 Subscription 名を抽出して `patchMeetSubscriptionTtl` を呼ぶ
+- 戻り値を呼び出し元が Firestore に書き戻すので、次回以降の renewal は通常の PATCH パスに収束（**self-healing**）
+- 既存lintルール `graph/no-silent-catch` に従って、JSON.parse 失敗時も `logger.warn` + `serializeError` で構造化ログ
+- テスト3件追加
+
+これが「Alert-Fix が root cause まで踏み込んで横展開してくる」の具体パターンです。**「症状を消す」ではなく「再発のクラスを閉じる」**（`recurrence-prevention.md` の思想）を、AI が自律的に実行している例。
+
 ## 強化層 ── ガードレールが自動で増えていく
 
 ここが Alert-Fix を **単なる「自動修復」で終わらせない** ためのキーになります。
