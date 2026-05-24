@@ -37,9 +37,8 @@ In Part 1, I described cpg at a high level: "all of cortex is indexed in one gra
 | 1 | Series intro: cortex's harness | PRs auto-merge / incidents self-heal before you notice | [ai-harness-intro](/posts/ai-harness-intro) |
 | 2 | Product Graph (cpg) | Code, docs, DB, infra unified into one graph | this post ← you are here |
 | 3 | AI PR review | webhook → AI review → auto-fix → squash merge | coming |
-| 4 | Alert-Fix | Alert → AI investigation → fix PR → auto redeploy | coming |
-| 5 | Observability + quality gates | OTel/Faro stack + "non-loweriable" quality design | coming |
-| 6 | Non-engineer dev environment | Business members opening PRs, quality via AI review | coming |
+| 4 | Alert-Fix + observability + auto-added guardrails | Alert → AI investigates → fix PR + new lint/type gate → auto redeploy + recurrence blocked | coming |
+| 5 | Non-engineer dev environment | Business members opening PRs, quality via AI review | coming |
 
 ## Start with One Scene
 

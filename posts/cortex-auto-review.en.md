@@ -38,9 +38,8 @@ This post is about **the automated PR review pipeline** -- AI reviews the PR, a 
 | 1 | Series intro: cortex harness | PRs merging unattended / incidents fixed before anyone notices | [ai-harness-intro](/posts/ai-harness-intro) |
 | 2 | Product Graph (cpg) | Code / docs / DB / infra unified into one graph | [cortex-product-graph](/posts/cortex-product-graph) |
 | 3 | Auto PR review | webhook -> AI review -> auto-fix -> squash merge | This article ← you are here |
-| 4 | Alert-Fix | Alert -> AI investigation -> fix PR -> auto redeploy | Coming soon |
-| 5 | Observability + quality gates | OTel/Faro stack + "never lower the bar" design | Coming soon |
-| 6 | Non-engineer dev experience | Non-engineers ship PRs, AI review enforces quality | Coming soon |
+| 4 | Alert-Fix + observability + auto-added guardrails | Alert -> AI investigates -> fix PR + new lint/type gate -> auto redeploy + recurrence blocked | Coming soon |
+| 5 | Non-engineer dev experience | Non-engineers ship PRs, AI review enforces quality | Coming soon |
 
 ## Start with last month's numbers
 
@@ -103,7 +102,7 @@ Three conditions had to hold for this to work:
 
 So: the cpg from [Part 2](/posts/cortex-product-graph) solves "**what context the AI sees**," the review guidelines solve "**what the AI should do**" as **Guides (pre-execution control)**, and the severity ladder + no-downgrade rules solve "**what the AI must not do**" as **Sensors (post-execution control)**. This maps cleanly onto Martin Fowler's Guides / Sensors taxonomy (introduced back in [Part 1](/posts/ai-harness-intro)).
 
-One more upstream layer: before any of those three kicks in, **a 500-lines-per-file lint** keeps every file in any PR small enough to fit in a single AI session. That alone keeps AI review from breaking down, and unlike a human reviewer, the AI doesn't lose focus. There are plenty of other lints in front of the AI reviewer too, but the full picture belongs to **Part 5 (Observability + quality gates)**.
+One more upstream layer: before any of those three kicks in, **a 500-lines-per-file lint** keeps every file in any PR small enough to fit in a single AI session. That alone keeps AI review from breaking down, and unlike a human reviewer, the AI doesn't lose focus. There are plenty of other lints in front of the AI reviewer too, but the full picture belongs to **Part 4 (Alert-Fix + observability + auto-added guardrails)**.
 
 ## How the auto-review system is wired
 
@@ -432,6 +431,6 @@ cortex is the opposite. **We extended the harness on the reviewer side first, be
 
 ---
 
-Up next in **Part 4**: **Alert-Fix** -- a pipeline where a production alert triggers AI investigation, an AI-authored fix PR, auto-review, auto-merge, and auto-redeploy, all without human involvement. If auto review protects quality at PR time, Alert-Fix protects it **at production time**.
+Up next in **Part 4**: **Alert-Fix + observability + auto-added guardrails** -- a pipeline where a production alert (observed via OTel/Faro/Prometheus) triggers AI investigation, an AI-authored fix PR plus a new lint/type gate, auto-review, auto-merge, and auto-redeploy. The fix and a recurrence-prevention guardrail land together, so the same class of incident structurally can't fire again. If auto review protects quality at PR time, Part 4 protects it **at production time, while growing the quality gates themselves**.
 
 The headline number above includes `auto-fix`-flavored PRs (= Alert-Fix output). For certain classes of incidents, the fix is already merged before anyone has time to react -- that's where cortex sits today. See you next time.

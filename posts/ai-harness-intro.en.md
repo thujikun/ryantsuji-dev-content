@@ -33,9 +33,8 @@ All of those run on top of an internal AI development platform we call **cortex*
 | 1 | Series intro: cortex's harness | PRs auto-merge / incidents self-heal before you notice | this post ← you are here |
 | 2 | Product Graph (cpg) | Code, docs, DB, infra unified into one graph | [cortex-product-graph](/posts/cortex-product-graph) |
 | 3 | AI PR review | webhook → AI review → auto-fix → squash merge | coming |
-| 4 | Alert-Fix | Alert → AI investigation → fix PR → auto redeploy | coming |
-| 5 | Observability + quality gates | OTel/Faro stack + "non-loweriable" quality design | coming |
-| 6 | Non-engineer dev environment | Business members opening PRs, quality via AI review | coming |
+| 4 | Alert-Fix + observability + auto-added guardrails | Alert → AI investigates → fix PR + new lint/type gate → auto redeploy + recurrence blocked | coming |
+| 5 | Non-engineer dev environment | Business members opening PRs, quality via AI review | coming |
 
 ## Two Scenes, Up Front
 
@@ -189,7 +188,7 @@ These 4 elements **mutually reinforce one another**:
 
 ### Supporting Foundations
 
-Three foundations make the 4 elements possible (covered in detail in Part 5):
+Three foundations make the 4 elements possible (covered in detail in Part 4):
 
 - **Tests and coverage**: ~630K lines of implementation, ~560K lines of tests (**impl : test ≒ 1.13 : 1**)
 - **Documentation**: ~110K lines / 389 files, written **for both humans and AI**, also ingested as Document nodes in the Product Graph
@@ -299,13 +298,10 @@ The series is planned as 6 parts.
 **Part 3: AI reviews, fixes, merges, and deploys PRs**
    GitHub webhook → AI review → on REQUEST_CHANGES, AI fixes via worktree → auto squash merge → changed-stack detection → parallel deploy: the full pipeline.
 
-**Part 4: Incidents fix themselves before you notice**
-   Grafana alert → AI investigation (Loki + Product Graph + git blame) → fix PR → auto merge → automatic redeploy: the auto alert-fix system.
+**Part 4: Incidents self-heal, guardrails self-strengthen**
+   Grafana alert → AI investigation (Loki + Product Graph + git blame) → fix PR + new lint/type gate → auto merge → automatic redeploy: the auto alert-fix system. Also covers the full OTel + Faro + Prometheus stack, Gemini cost tracking, and how the quality gates are designed to be "non-loweriable, non-bypassable, and self-growing."
 
-**Part 5: Observability and quality gates**
-   Full OTel + Faro + Prometheus, Gemini cost tracking, and how the quality gates are designed to be "non-loweriable, non-bypassable."
-
-**Part 6: A dev environment non-engineers can ship in**
+**Part 5: A dev environment non-engineers can ship in**
    How business-side members can open PRs directly to cortex, how AI review and auto-fix uphold the quality bar, and how this differs from the [Sandbox MCP](/posts/sandbox-mcp) lane.
 
 Each post stands on its own, but **Part 2 (Product Graph) is the foundation for the others**, so the recommended reading order is Part 1 → Part 2 → any.
