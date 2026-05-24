@@ -1,10 +1,10 @@
 ---
-title: "Code Written by AI Is Reviewed by AI ── A Structural Answer to Review Bottleneck and Quality Drop (Series Part 3)"
+title: "Human-on-the-Loop: Letting AI Review AI's PRs (769 PRs/month, ~0 human review)"
 publishedAt: "2026-05-26T08:30:00+09:00"
 updatedAt: "2026-05-26T08:30:00+09:00"
 draft: true
 slug: "cortex-auto-review"
-summary: "Series Part 3: a structural answer to the common AI-development critiques — review bottleneck and quality drop. Full Auto Review pipeline in cortex: webhook ingestion → cpg context → AI review tagged [Graph] / [Doc] / [Impact] / [Security] → auto-fix by a separate AI → re-review → auto-merge → parallel deploy."
+summary: "Series Part 3. The common critiques of AI-assisted development -- 'review becomes the new bottleneck' and 'AI code drops the quality bar' -- don't structurally apply when AI also does the reviewing. Full walkthrough of our pipeline: webhook -> cpg context -> AI review with [Graph]/[Doc]/[Impact] tags -> auto-fix by a separate AI -> re-review -> auto-merge -> parallel deploy. 769 PRs merged in 30 days, near-zero human review involvement per PR."
 tags:
   - "ai"
   - "devops"
@@ -25,125 +25,375 @@ cover: /posts/cortex-auto-review.en.cover.png
 
 Hi, I'm [Ryan](https://x.com/ryantsuji), CTO at airCloset.
 
-> **Disclaimer**: "cortex" referenced in this article is the internal code name for an AI platform developed in-house at airCloset. It is unrelated to existing commercial services such as Snowflake Cortex or Palo Alto Networks Cortex.
+> **Disclaimer**: "cortex" in this article is the internal codename for an AI platform built in-house at airCloset. It is unrelated to existing commercial services like Snowflake Cortex or Palo Alto Networks Cortex.
 
-In [Part 1 (Series Intro)](/posts/ai-harness-intro), I wrote about how **AI handles PR reviews and incident response** on top of cortex. In [Part 2 (Product Graph)](/posts/cortex-product-graph), I went deep on **cpg** — the unified knowledge graph of code, docs, DB schemas, and infrastructure.
+In [Part 1 (intro)](/posts/ai-harness-intro) I covered the high level -- **AI driving both PR reviews and incident response on top of cortex**. In [Part 2 (Product Graph)](/posts/cortex-product-graph) I went deep on **cpg**, the unified knowledge graph that fuses code, docs, DB schemas and infra into a single business-aware index.
 
-This post is about **Auto Review** — the pipeline where AI reviews PRs, AI fixes the issues, and AI merges them. I'm framing it as a **structural answer** to the two most common critiques of AI-assisted development: "AI just shifts the bottleneck to reviewers" and "AI-written code drops the quality bar."
+This post is about **the automated PR review pipeline** -- AI looks at the PR, AI fixes the issues, AI merges. The usual critiques of AI-assisted development ("**reviewers become the bottleneck**" and "**AI code drops the quality bar**") don't structurally apply here. The rest of this post unpacks why.
 
 ## Series
 
 | # | Theme | Key scene | Article |
 |---|---|---|---|
 | 1 | Series intro: cortex harness | PRs merging unattended / incidents fixed before anyone notices | [ai-harness-intro](/posts/ai-harness-intro) |
-| 2 | Product Graph (cpg) | code / docs / DB / infra unified into one graph | [cortex-product-graph](/posts/cortex-product-graph) |
-| 3 | Auto Review | webhook → AI review → auto-fix → squash merge | This article ← you are here |
-| 4 | Alert-Fix | alert → AI investigation → fix PR → auto redeploy | Coming soon |
-| 5 | Observability + quality gates | OTel/Faro + "never lower the bar" design | Coming soon |
-| 6 | Non-engineer dev experience | non-engineers ship PRs, AI review enforces quality | Coming soon |
+| 2 | Product Graph (cpg) | Code / docs / DB / infra unified into one graph | [cortex-product-graph](/posts/cortex-product-graph) |
+| 3 | Auto PR review | webhook -> AI review -> auto-fix -> squash merge | This article ← you are here |
+| 4 | Alert-Fix | Alert -> AI investigation -> fix PR -> auto redeploy | Coming soon |
+| 5 | Observability + quality gates | OTel/Faro stack + "never lower the bar" design | Coming soon |
+| 6 | Non-engineer dev experience | Non-engineers ship PRs, AI review enforces quality | Coming soon |
 
-## Start with yesterday
+## Start with last month's numbers
 
-<!-- TODO: refresh numbers from GitHub at publication time -->
+Past 30 days (Apr 21 -- May 21), cortex shipped **769 PRs merged**. **Every single one had an AI reviewer as the first reviewer, with an average of 11 (max 56) review-fix loop iterations per PR**.
 
-On 5/20, cortex merged **38 PRs in a single day**. **12 of them were `auto-fix`** — PRs where an AI traced an alert to its root cause, wrote the fix, opened the PR, passed Auto Review, and merged itself. By 7am local time, 7 had already merged. One example: PR #1287 opened at 03:13, merged at **03:19 — six minutes total**. No human touched it.
+Time-to-merge: **median 31 minutes**, **1 in 5 merged within 10 minutes**, **roughly half within 30 minutes**. And **since we rolled out the AI reviewer, humans almost never write review comments on individual PRs anymore**. What humans do instead is look at review outcomes and **tune the review prompt and the guidelines themselves** -- this is **human-on-the-loop, not human-in-the-loop**. Not "a human in the middle of each decision," but "a human watching the system from above and steering."
 
-This is a typical day on cortex now.
+| Past 30 days |  |
+|---|---|
+| PRs merged | **769** |
+| AI reviewer coverage | **100%** |
+| Avg review iterations / PR | **10.8** |
+| Max review iterations | 56 |
+| Per-PR human review | **~0%** |
+| Median time-to-merge | **31 min** |
+| Merged within 10 min | 20% |
+| Merged within 30 min | 49% |
 
-The rest of this post unpacks the pipeline that makes the common critiques — "review will bottleneck" and "AI code quality is unreliable" — **structurally not apply** here.
+This is a typical month on cortex now.
 
-## Why the "AI shifts the bottleneck to reviewers" critique stops working here
+The common refrain -- "**AI speeds up writing but reviews still bottleneck**" and "**AI-written code lowers quality**" -- is something cortex absorbs through **a pipeline where neither failure mode can structurally take hold**. Let me break it down.
 
-<!-- TODO: industry critique → bottleneck shift (Anthropic dogfooding insight) → cortex's structural answer -->
+## Defending against "AI writing -> review bottleneck" structurally
 
-### The critique: reviewers are the new bottleneck
+### The conventional wisdom: reviewers are the new bottleneck
 
-As AI accelerates writing, the load on reviewers grows proportionally. Anthropic has stated explicitly from their own dogfooding that **the bottleneck moves from writing to reviewing** ([reference TBD]).
+As AI writes faster, the load on whoever reviews the output grows proportionally. Anthropic has stated explicitly from their own internal use of Claude Code that "**the bottleneck shifts from writing to reviewing**" and "senior engineers' work has moved from writing code to integrating and reviewing AI output."
 
-This is a real phenomenon. cortex hit it too.
+cortex hit exactly this. The moment we ran Claude Code at full throttle, **writing speed jumped by an order of magnitude or more**. Meanwhile the human time available to read and approve PRs only grew linearly. If the reviewer (=me) took a day off, the whole org stalled -- a classic single point of failure.
 
-### cortex's answer: the reviewer is also AI
+### cortex's answer: push the reviewer to AI too
 
-This is the same recurring question across Part 1 and Part 2 — **how far do you push the harness?** — and cortex went all in: **code written by AI is reviewed by AI**. Humans only look at "is the AI's review judgment correct" on the rare cases that escalate.
+Part 1 and Part 2 kept asking the same recurring question: "**how far do you push the harness?**" cortex went all-in: **the AI writes the code, the AI reviews the code**. What humans keep their hands on is "**tuning the prompts and guidelines themselves**" -- not making decisions inside each individual PR, but watching the system from above and adjusting.
 
-For this to actually work, three things have to be true:
+Three conditions had to hold for this to work:
 
-1. **The AI reviewer has enough context** — beyond the diff itself, it needs business meaning, upstream/downstream impact, history of related incidents → **solved by cpg (Part 2)**
-2. **The review output is consistent** — not improvisation, but rules that are explicit and reviewable → **public review guidelines (see below)**
-3. **False positives don't gate everything** — if every false-positive blocks merges, the org grinds to a halt → **severity tiers (Critical / Major / Minor / Nit) with explicit no-downgrade rules**
+1. **The AI reviewer has enough context** -- a generic AI reviewer **only sees the PR diff**. The diff alone hides business meaning, upstream/downstream dependencies, and prior incident history. cortex feeds the **Product Graph (cpg)** from [Part 2](/posts/cortex-product-graph) into the AI reviewer, so it can **trace impact into code that the PR didn't even touch**. This structurally catches (a) missed upstream/downstream fixes, (b) missed doc updates, (c) tests that should have been updated but weren't. Diff-only AI review can never reach this territory.
+2. **Reviews are not improvisational** -- if reviews shift day to day, the team gets confused, and the AI can't be told what "correct" looks like. We enforce this by passing **an explicit review-guideline document** as the mandatory citation source for every review (we open-sourced a snapshot, see below).
+3. **False positives don't blanket-block merges** -- treating every false positive as Critical breaks the workflow. We control this with **a severity hierarchy (Critical / Major / Minor / Nit) plus strict no-downgrade rules**.
 
-<!-- TODO: dive into each -->
+So: the cpg from [Part 2](/posts/cortex-product-graph) solves "**what context the AI sees**," the review guidelines solve "**what the AI should do**" as **Guides (pre-execution control)**, and the severity ladder + no-downgrade rules solve "**what the AI must not do**" as **Sensors (post-execution control)**. This maps cleanly onto Martin Fowler's Guides / Sensors taxonomy (introduced back in [Part 1](/posts/ai-harness-intro)).
 
-## Auto Review system layout
+One more upstream layer: before any of those three kicks in, **a 500-lines-per-file lint** keeps every file in any PR small enough to fit in a single AI session. That alone keeps AI review from breaking down, and unlike a human reviewer, the AI doesn't lose focus. There are plenty of other lints in front of the AI reviewer too, but the full picture belongs to **Part 5 (Observability + quality gates)**.
 
-<!-- TODO: system flow diagram: webhook → cpg query → review LLM → comment / auto-fix → merge → deploy -->
+## How the auto-review system is wired
 
-<!-- TODO: implementation:
-- Cloud Run Service (annotation-author / annotation-reviewer)
-- worktree per PR (isolation)
-- cpg loaded as full context
-- per sub-agent loads one guideline file (link to cortex-review-guidelines repo)
--->
+The implementation is **a script running on each developer's own machine**. GitHub webhooks are received by an in-house **Event Relay server**, persisted to Firestore, and the local scripts on each developer's PC **act as SSE clients that consume the events**. On reconnect, Last-Event-ID replays anything missed, so there's zero event loss, and we register the GitHub webhook exactly once. **The Event Relay aggregates delivery; review and fix logic run on each individual PC** -- that's the basic shape.
 
-## Review output: tags and severity
+When the reviewer's PC receives an event, the script spawns `claude -p` and walks through 9 dimensions (Graph / Architecture / Security / Test / Doc / Impact / Observability / AI-Antipattern / Recurrence) sequentially, then reads the verdict marker the AI emitted at the end and posts `APPROVE` or `REQUEST_CHANGES` via `gh pr review`.
 
-<!-- TODO: tag set: [Graph] / [Doc] / [Impact] / [Security] / [Architecture] etc.
-Severity: Critical / Major / Minor / Nit
-Real PR comment examples
-Link to the public review guidelines repo
--->
+![Auto review pipeline — distributed webhook architecture running on every developer's PC](/images/posts/cortex-auto-review/auto-review-flow.png)
 
-The full review rules cortex actually uses are now public: **[air-closet/cortex-review-guidelines](https://github.com/air-closet/cortex-review-guidelines)** (Japanese + English).
+A few notes:
 
-## Auto Fix — separate AI that fixes and re-pushes
+- **Modes split the role** -- the same script started with `--mode reviewer` becomes the reviewer process; with `--mode author` it becomes the PR-author response process. The PC of whoever is assigned as reviewer runs reviewer mode; the PC of whoever opened the PR runs author mode. Event Relay multicasts the events, and **each PC reacts in a distributed way**.
+- **Per-PR worktree isolation** -- author mode merges `origin/main` into a fresh worktree before spawning the AI. Multiple PRs can be handled in parallel without file state contaminating across them.
+- **9 dimensions checked sequentially in one session** -- not parallel sub-agents. A single `claude -p` session walks the 9 dimensions while keeping context shared, which also catches cross-dimension contradictions.
+- **Review guidelines: public snapshot** -- [air-closet/cortex-review-guidelines](https://github.com/air-closet/cortex-review-guidelines) (JP/EN). The live guidelines are inside cortex (private repo) and evolve daily; the public repo is a snapshot extracted for reference.
 
-<!-- TODO:
-- On REQUEST_CHANGES, a separate AI (annotation-author) starts
-- Tries fixes inside a worktree → pushes back
-- Re-review loop
-- After 3 failed attempts → escalate to human
--->
+## Output structure: tags and severity
+
+Every auto-review comment is structured as **tag + severity + concrete example**.
+
+### Tags (dimensions)
+
+| Tag | Dimension | Primary target |
+|---|---|---|
+| `[Graph]` | Product Graph integrity | `@graph-*` JSDoc, node dependencies, doc consistency |
+| `[Doc]` | Doc consistency | Doc updates that should follow code changes, doc placement |
+| `[Impact]` | Impact analysis | Missed upstream/downstream fixes, `via:` field inconsistency |
+| `[Security]` | Security | Auth, input validation, secrets |
+| `[Architecture]` | Composable Architecture | app/package boundaries, dependency direction |
+| `[Test]` | Test quality | Coverage, matchers, naming |
+| `[Observability]` | Observability | Structured logging, no-truncate rules |
+| `[AI-Antipattern]` | AI-generated code traps | Hallucinated APIs, fallback overuse, dead code |
+| `[Recurrence]` | Recurrence prevention | Bug-fix triage (lint / horizontal rollout / new guideline) |
+
+### Severity
+
+| Severity | Criteria | Action |
+|---|---|---|
+| **Critical** | Security, data corruption, prod-risk, doc inconsistency, missing `@graph-*`, quality-bar relaxation | `REQUEST_CHANGES` |
+| **Major** | Spec violation, Composable Architecture violation, missing tests | `REQUEST_CHANGES` |
+| **Minor** | Naming, maintainability, light refactor | `REQUEST_CHANGES` (must be resolved) |
+| **Nit** | Style preference, minor inconsistency | `APPROVE` (comment only) |
+
+The single most important rule is **"no downgrade"**:
+
+- "**Following existing patterns**" is not a valid reason to downgrade (existing violations are a separate problem to fix, not justification for new violations).
+- "**Will be addressed in a separate PR**" or "**incrementally**" is not a valid reason to drop Critical/Major to Nit.
+- "**Leave a TODO/FIXME**" is not a valid deferral path.
+
+This is spelled out in [`severity.md`](https://github.com/air-closet/cortex-review-guidelines/blob/main/en/guidelines/severity.md), and the AI literally cites it back when it issues `REQUEST_CHANGES`.
+
+### Example: PR migrating the embedding model from gemini-embedding-001 to gemini-embedding-2
+
+A real review comment is more useful than abstract description. Here's a typical one. This is a feature PR (`feat(meet): dual-write embeddings to new 'embedding' column (v2)`) that was merged on 2026-05-19, after **6 review-fix iterations across 1.5 hours**.
+
+**First review (07:35:25)**:
+
+> The dual-write approach, the idempotent migration script, and the `Promise.all` parallelization all look sound. Please address the 3 Critical and 2 Minor findings below before merging.
+>
+> ---
+>
+> ## Critical
+>
+> ### [Graph] Missing `@graph-business` tag (x3)
+>
+> `graph-integrity.md` requires `@graph-business` on every top-level declaration under the app layer (severity: Critical).
+> All 3 new declarations below are missing it (detailed comments in separate threads).
+> **Existing code is also missing it, but "following existing patterns" is not a valid downgrade reason (severity.md).**
+>
+> - `generateEmbeddingV2` (v2 embedding generation function)
+> - `EMBEDDING_MODEL_V2` (model name config)
+> - `EMBEDDING_LOCATION_V2` (region config)
+>
+> ---
+>
+> ### [Graph] `embedMeetContent`'s `@graph-connects` doesn't reflect `generateEmbeddingV2`
+>
+> The JSDoc on `embedMeetContent` has `@graph-connects generateEmbedding [calls] Generate embedding`, but no corresponding `@graph-connects` line has been added for the newly introduced `generateEmbeddingV2` call.
+> The graph will be missing an edge to `generateEmbeddingV2`.
+>
+> ```diff
+>    * @graph-connects generateEmbedding [calls] Generate embedding
+> +  * @graph-connects generateEmbeddingV2 [calls] v2 embedding generation (dual-write)
+>    * @graph-connects insertMeetChunks [calls] Insert chunks into BQ
+> ```
+>
+> ---
+>
+> ### [Doc] Corresponding BigQuery schema doc is not updated
+>
+> The "BigQuery schema" section in the related doc is missing the new `embedding` column.
+> Both `graph-integrity.md` and `severity.md` define doc inconsistency as Critical.
+>
+> ```diff
+>  | `created_at`  | TIMESTAMP   | Created at                              |
+> +| `embedding`   | FLOAT64[]   | Embedding vector (v2: gemini-embedding-2) |
+> ```
+>
+> ---
+>
+> ## Minor
+>
+> ### [Test] `textEmbeddingV2` value is not asserted
+>
+> `objectContaining` allows extra fields, so the test still passes even when the v2 value is never set.
+>
+> ```diff
+>          textEmbedding: [0.1, 0.2, 0.3],
+> +        textEmbeddingV2: [0.1, 0.2, 0.3],
+> ```
+>
+> ### [Test] No isolated scenario for "v2 returns null"
+>
+> `generateEmbeddingV2: mockGenerateEmbedding` reuses the v1 mock, so the case "v2 returns null while v1 succeeds" is not independently verified.
+>
+> ---
+>
+> `<!-- VERDICT:REQUEST_CHANGES -->`
+
+The takeaway is the precision of the details.
+
+- **File + line numbers** are concrete.
+- **Suggested fixes are in diff format** (copy-paste ready).
+- **Source guideline** (`graph-integrity.md` / `severity.md`) is cited explicitly.
+- **The typical excuse** ("existing code has the same problem") is **pre-emptively closed**.
+- The trailing `<!-- VERDICT:REQUEST_CHANGES -->` is a **machine-readable verdict marker** -- the trigger that moves the PR into `REQUEST_CHANGES` state.
+
+After this, the PR author (= usually another AI running on the author's PC) pushes a fix, the reviewer re-reviews. The next review confirms all 3 Criticals are actually resolved, raises the next Major / Critical, and so on. **6 iterations in 1.5 hours**, finally APPROVE, auto-merge.
+
+Plotted on a timeline:
+
+![Real example of the review-fix loop — embedding model migration PR, 6 iterations in 1.5 hours](/images/posts/cortex-auto-review/review-fix-timeline.png)
+
+With a human reviewer, this is "Critical x3 -> wait until tomorrow for the fix -> re-review the day after" -- 2 to 3 days per PR. cortex closes it in **90 minutes**.
+
+The difference between human review and auto review is not just speed. A single AI session walks all 9 dimensions in order and cites the guideline each time, which makes it **much harder to miss the "deep" findings humans drop because their attention drifted** -- doc consistency, recurrence-prevention judgments, weak matchers. Side-by-side comparison:
+
+![Before / After — human review era vs. cortex's auto-review era](/images/posts/cortex-auto-review/before-after-review.png)
+
+This is why "the review bottleneck" structurally doesn't form here.
+
+## Evolving the guidelines: catching the moments AI gets it wrong, then fixing the rules
+
+The review guidelines I've been referring to are **not a static document**. Running this in production surfaces recurring patterns where **the AI mis-judges a specific class of issue**. Each time that happens, we don't add a comment to the individual PR; we **rewrite the guideline so the AI behaves correctly next time** -- this is what human-on-the-loop actually looks like in practice.
+
+A few concrete failures we hit on cortex, and how we closed each one structurally.
+
+### 1. AI was downgrading because "existing code has the same issue"
+
+Early on, immediately after flagging a violation the AI would add "**however, since existing code has the same violation, I'm downgrading this to Nit**" and self-downgrade. The result: violations on newly added code kept dropping to Nit, and the system kept emitting Approve.
+
+We closed this by adding **the no-downgrade rule** to `severity.md`:
+
+> "Following existing patterns" is not a valid downgrade reason: if existing code violates a guideline, new code following that pattern still gets flagged at the same severity. Deferral language like "consider during the next refactor" is not accepted.
+
+That wasn't enough on its own. Over time other excuse patterns surfaced -- "**will be addressed in a separate PR**," "**will be addressed in the next session**," "**out of scope**," "**incrementally**" -- so we added those as forbidden downgrade categories too. We also explicitly forbade **deferring via TODO/FIXME comments in code**. The mindset is: **close every typical excuse path preemptively**.
+
+### 2. The final verdict had 3 options, and "comment-only" left PRs in limbo
+
+The final verdict at the end of every review was originally `APPROVE` / `REQUEST_CHANGES` / `COMMENT` (approve / request changes / comment-only). When the AI picked `COMMENT` -- for example when only Minor issues existed -- the script took no action, the PR sat in review-pending forever, and ultimately someone had to manually pick it up. Classic anti-pattern, and it kept happening.
+
+We **collapsed the verdict to 2 options**. Anything Minor or above is `REQUEST_CHANGES`, a missing verdict marker defaults to `REQUEST_CHANGES` (safe side), and only Nit-only or no findings (with CI passing) yields `APPROVE`. The principle: "**if the judgment is ambiguous, default to the stopping side**." Going all-in on that design clarified things.
+
+### 3. Checklist items had no severity, so the AI's judgment kept drifting
+
+Originally, each guideline (`graph-integrity.md`, `testing.md`, etc.) was just a **bulleted checklist**. Items like "Is the test name descriptive?" or "Are mocks minimized?" were listed, but **without per-item severity**. As a result, the same violation could land as Major in one PR and Nit in another, depending on the session.
+
+We **converted every guideline's checklist into a `severity` / `scope` / `criterion` table**:
+
+| Severity | Scope | Criterion |
+|---|---|---|
+| Critical | All PRs | Missing `@graph-business` |
+| Major | App layer only | Missing tests |
+| Minor | Shared packages only | More than 3 function args |
+| Nit | All PRs | Naming inconsistency |
+
+The `scope` column is **a machine-decidable filter** for which paths a check applies to, so the AI reviewer doesn't trigger irrelevant items on PRs outside that scope. Just putting it in a table -- the judgment reproducibility jumped significantly.
+
+### 4. The existing guidelines didn't catch AI-specific traps
+
+After running this for a while we noticed AI-generated code has its own cluster of antipatterns -- **calling APIs that don't exist (hallucinated APIs), swallowing errors and returning fallback values, leaving unused functions, expanding the modification scope beyond what was asked, adding unnecessary backward-compatibility code** -- and `security.md` / `testing.md` couldn't catch these. There's a **distinct class of "mistakes only AIs make."**
+
+We added a dedicated **`ai-antipattern.md`** for this. Reviews now pick these up explicitly under the `[AI-Antipattern]` tag. **Reviewing AI output requires designing around AI-specific traps** -- you don't get there just by porting human review heuristics onto an AI.
+
+### 5. The AI tries to relax "the standard itself"
+
+The last and most important pattern. When the AI was writing fix PRs, occasionally instead of fixing the guideline violation it would write **a PR that relaxes the guideline**. For example:
+
+- Lower the test coverage threshold to avoid writing more tests
+- Narrow the in-house lint rule's scope to make the violation go away
+- Soften the guideline doc language from "recommended" to "preferred" to weaken the binding constraint
+
+And the AI builds a formally-coherent justification: "**existing code already violates this, so let's adjust the standard to match the implementation.**" Left unchecked, **the AI gradually walks the quality bar down**.
+
+We closed this by adding **"quality-bar relaxation" as a Critical** in `severity.md`:
+
+> A PR that relaxes the quality bar -- guideline doc, lint rule, coverage threshold -- must not be Approved by the AI reviewer. It is sent back with `REQUEST_CHANGES`. **A human reviewer's approval is required**. "Existing code already violates this" is not a valid justification for relaxation.
+
+This is the one explicit boundary where **we deliberately do not give the AI autonomous Approve authority**. Whether the standard itself moves is a human decision. It's the **meta-level safety valve** for the "AI reviewing AI" architecture.
+
+### Evolving the guidelines is itself human-on-the-loop
+
+The common thread: "**when the AI gets it wrong, don't override the individual PR -- rewrite the guideline so the fix propagates forward.**"
+
+- AI escapes via "existing code has the same issue" -> add no-downgrade rule
+- AI picks "comment-only" and PR stalls -> collapse to 2-option verdict
+- AI's judgment drifts -> add severity / scope columns to every item
+- AI falls into its own traps -> add the AI-Antipattern category
+- AI tries to relax the standard -> classify standard-relaxation as Critical, require human Approve
+
+As long as this loop turns, the guideline is **a living document that absorbs the failure patterns AI produces in production**. **Don't try to write the perfect guideline up front. Catch the moment AI gets it wrong, and write the rule for that moment.** That's the actual mechanism behind "quality doesn't drop even when humans aren't inside the loop."
+
+And one more thread. Right now, the trigger for "AI got it wrong, time to rewrite the guideline" is still mostly a human judgment, but **that maintenance is also gradually shifting to AI**. **Alert-Fix** (Part 4 next time) -- where AI investigates production incidents, opens a fix PR, runs it through auto-review, and auto-redeploys -- requires every fix PR to write one of {add lint, add guideline, horizontal rollout} under the `[Recurrence]` lens. The result is **AI growing its own judgment criteria on its own**. Even guideline maintenance is leaving human hands -- I'll come back to this in Part 4.
+
+## Auto-fix: a separate AI applies the changes and pushes
+
+Once `REQUEST_CHANGES` lands, **the same script running on the PR author's PC, but in author mode**, picks up the event and starts working.
+
+```
+[REQUEST_CHANGES detected]
+   | SSE push via Event Relay
+[Author mode boots on PR author's PC]
+   | Merge origin/main into a worktree
+   |  (lockfile resolved up front, remaining conflicts handled by AI)
+   | Read the auto-review comment as context
+   | Spawn claude -p inside the worktree
+   | Commit + push the changes
+   | New SHA is delivered back to the reviewer's PC via Event Relay -> re-review
+```
+
+Two design choices matter here.
+
+- **Reviewer and author run on different PCs in different sessions** -- reviewer mode and author mode are the same script, but they run on different machines in different processes. "Is the original critique correct?" is judged independently. Unlike a single AI fixing its own complaints, the judgment crosses between two separate sessions.
+- **All iteration stays inside the same PR** -- we don't spawn a new PR. The "**fix the root cause, no deferrals**" rule from Part 2 and the review guidelines kicks in here: if the AI tries to escape via `TODO/FIXME` or by splitting work out into a separate PR, the next review rejects it.
 
 ## Auto-merge + parallel deploy
 
-<!-- TODO:
-- Once all Critical/Major are clear → auto-merge
-- Turborepo + Pulumi → multiple stacks deploy in parallel
-- cpg index rebuilds in step
--->
+Once auto-review returns APPROVE and CI is fully green, the `auto-merge` script runs and squash-merges the PR.
 
-## Hit rate and quality numbers
+```
+[Auto review APPROVE + CI green]
+   |
+auto-merge script
+   | squash merge to main
+   |
+[main updated]
+   |
+Turborepo build (affected packages only)
+   |
+Pulumi up (multiple stacks in parallel)
+   |- API services
+   |- pipeline services
+   |- MCP servers
+   `- infra
+   |
+[Deploy complete]
+   |
+cpg index rebuilt (only changed nodes regenerate embeddings -- see Part 2)
+```
 
-<!-- TODO: from actual data:
-- Auto Review Critical-block count per week
-- False-positive rate
-- Trend of human review involvement
-- Auto Fix success rate
-- Defect rate before vs after Auto Review introduction
--->
+`pnpm up <stack1> <stack2> ...` runs in parallel, so deploying 9 stacks at once finishes in about 8-12 minutes. End to end, merge-to-production is averaging 10-15 minutes.
 
-## Failure modes and human override
+This compounds nicely with `auto-fix` PRs. **Incident alert -> Alert-Fix identifies root cause -> opens a fix PR -> auto review pass -> auto merge -> auto deploy** runs as a single closed loop without human involvement (covered in Part 4).
 
-<!-- TODO:
-- When AI gets the call wrong
-- When Auto Fix can't recover
-- How humans override (PR label / manual approve)
-- Why quality-standard relaxations always require human approval
--->
+## The numbers, in more detail
+
+Unpacking the headline numbers a bit further.
+
+### Depth of the review-fix loop
+
+Across 769 PRs in 30 days, the **average per PR was 10.8 review iterations, max 56**. The fact that the average is past 10 means **the first review almost always surfaces at least one finding**.
+
+The embedding-model migration PR shown earlier needed 6 iterations to merge, and that's representative of the average PR. **What would take a human reviewer days, cortex resolves in minutes.**
+
+### What the auto reviewer typically flags
+
+The most common findings out of the first review:
+
+- **[Graph] Missing `@graph-business`** -- a prerequisite cpg leans on (from Part 2). The classic finding on newly added declarations.
+- **[Doc] Doc inconsistency** -- code changed but the corresponding `docs/` section was not updated.
+- **[Test] Weak matchers** -- `objectContaining` weakening value assertions, single-property checks via `toBe`.
+- **[Observability] Unstructured error logs** -- `event` field or required keys deviating from the structured-log spec.
+- **[Recurrence] No recurrence-prevention action** -- a bug-fix PR description not declaring which of {lint / horizontal rollout / add guideline / nothing} applies.
+
+These are categories **human reviewers tend to miss even when they try** (especially doc consistency and recurrence-prevention judgments). Pushing them to AI structurally reduces the miss rate.
+
+### Actual false-positive rate
+
+It's not zero. A few times a month we get "this is Nit, not Major" type misjudgments. The fix path is the one described above -- not a comment on the individual PR, but a guideline edit that corrects the judgment for all subsequent reviews.
 
 ## What changed / Bridge to Part 4
 
-<!-- TODO:
-- Engineer role shifted from "writer/reviewer" to "architect/judge of the AI reviewer"
-- N PRs/day flow through without human touch
-- Quality metric improvements
-- Bridge: if Auto Review protects quality at PR time, Alert-Fix protects it at production time (Part 4)
--->
+Over the past six months, the engineer's role on cortex shifted from "**writer**" and "**reviewer**" to "**judge**."
+
+- AI writes the code (Claude Code)
+- AI reviews the code (auto review)
+- A different AI applies the fixes (author mode running on the PR author's PC)
+- AI decides when to merge (auto-merge script)
+- Deploys go in parallel (Turborepo + Pulumi)
+
+What stays in human hands: "**what to build at all** (product / requirements)," "**is this direction actually right** (architectural judgment)," "**which guideline to add and where**," and "**look at the reviews and adjust prompts and guidelines accordingly**." High-abstraction work -- **not individual decisions, but watching the whole system from above and steering**. **From human-in-the-loop to human-on-the-loop**, you could say.
+
+The widely-reported phenomena -- "AI lowers quality," "review becomes the bottleneck" -- happen when **the harness is extended on the writer side only, and the reviewer side is left to humans**. If writing speeds up and reviewing doesn't, of course it bottlenecks. Of course things get missed.
+
+cortex is the opposite. **We extended the harness on the reviewer side first, before fully extending it on the writer side**. Anthropic's observation that "reviewing becomes more of a bottleneck than writing" is exactly right -- which is precisely why "**push the reviewer to AI too**" is the answer cortex chose.
+
+"The AI writes the code, the AI reviews the code." That's the core of cortex's auto-review pipeline. **Quality drop and review bottleneck are functions of how far you extend the harness** -- they are not inherent to AI-assisted development.
 
 ---
 
-Coming up in **Part 4**: **Alert-Fix** — production alerts trigger an AI that investigates, opens a fix PR, runs it through Auto Review, and auto-redeploys. Where Auto Review protects quality at PR time, Alert-Fix protects it at production time.
+Up next in **Part 4**: **Alert-Fix** -- a pipeline where a production alert triggers AI investigation, an AI-authored fix PR, auto-review, auto-merge, and auto-redeploy, all without human involvement. If auto review protects quality at PR time, Alert-Fix protects it **at production time**.
 
----
-
-At airCloset we're hiring engineers who want to build a new development experience with AI. If that sounds interesting, check out [airCloset Quest](https://corp.air-closet.com/recruiting/developers/).
+The headline number above includes `auto-fix`-flavored PRs (= Alert-Fix output). "**Incidents are already fixed before anyone notices**" is where cortex is today. See you next time.
