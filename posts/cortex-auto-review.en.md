@@ -17,7 +17,7 @@ syndication:
   devto:
     id: 3738048
     slug: "code-written-by-ai-is-reviewed-by-ai-a-structural-answer-to-review-bottleneck-and-quality-drop-44bh-temp-slug-3737979"
-    contentHash: "29f8c1e5854eff1d"
+    contentHash: "7dc8a12702dfc950"
     publishAt: "2026-05-26T07:00:00-07:00"
 cover: /posts/cortex-auto-review.en.cover.png
 ---
