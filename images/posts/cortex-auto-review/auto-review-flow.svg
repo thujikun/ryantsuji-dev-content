@@ -43,7 +43,7 @@
 
   <!-- ============= 2. reviewerモード ============= -->
   <g font-family="Noto Sans JP, sans-serif">
-    <rect x="330" y="200" width="320" height="540" rx="14" fill="#0d1f2d" stroke="#38bdf8" stroke-width="2.5"/>
+    <rect x="330" y="200" width="320" height="580" rx="14" fill="#0d1f2d" stroke="#38bdf8" stroke-width="2.5"/>
     <text x="490" y="234" font-size="18" fill="#38bdf8" text-anchor="middle" font-weight="bold">webhook-server.mjs --mode reviewer</text>
     <text x="490" y="254" font-size="13" fill="#94a3b8" text-anchor="middle">レビュアーのPC上 (localhost:3456)</text>
 
@@ -58,33 +58,42 @@
     <text x="490" y="362" font-size="11" fill="#94a3b8" text-anchor="middle">変更ノード + 依存関係を pre-load</text>
 
     <!-- AI single session -->
-    <rect x="350" y="380" width="280" height="276" rx="8" fill="#251a0d" stroke="#fb923c" stroke-width="1.8"/>
+    <rect x="350" y="380" width="280" height="372" rx="8" fill="#251a0d" stroke="#fb923c" stroke-width="1.8"/>
     <text x="490" y="406" font-size="14" fill="#fb923c" text-anchor="middle" font-weight="bold">claude -p をspawn（1セッション）</text>
-    <text x="490" y="424" font-size="11" fill="#94a3b8" text-anchor="middle">6観点を順にチェック</text>
+    <text x="490" y="424" font-size="11" fill="#94a3b8" text-anchor="middle">9観点を順にチェック</text>
 
     <line x1="370" y1="436" x2="610" y2="436" stroke="#334155" stroke-width="1"/>
 
-    <rect x="370" y="448" width="240" height="28" rx="4" fill="#0a1820" stroke="#fb923c" stroke-width="1"/>
-    <text x="490" y="467" font-size="12" fill="#cbd5e1" text-anchor="middle">① [Graph] graph-integrity.md</text>
+    <rect x="370" y="446" width="240" height="22" rx="4" fill="#0a1820" stroke="#fb923c" stroke-width="1"/>
+    <text x="490" y="461" font-size="11" fill="#cbd5e1" text-anchor="middle">① [Graph] graph-integrity.md</text>
 
-    <rect x="370" y="480" width="240" height="28" rx="4" fill="#0a1820" stroke="#fb923c" stroke-width="1"/>
-    <text x="490" y="499" font-size="12" fill="#cbd5e1" text-anchor="middle">② [Arch] architecture.md</text>
+    <rect x="370" y="472" width="240" height="22" rx="4" fill="#0a1820" stroke="#fb923c" stroke-width="1"/>
+    <text x="490" y="487" font-size="11" fill="#cbd5e1" text-anchor="middle">② [Architecture] architecture.md</text>
 
-    <rect x="370" y="512" width="240" height="28" rx="4" fill="#0a1820" stroke="#fb923c" stroke-width="1"/>
-    <text x="490" y="531" font-size="12" fill="#cbd5e1" text-anchor="middle">③ [Security] security.md</text>
+    <rect x="370" y="498" width="240" height="22" rx="4" fill="#0a1820" stroke="#fb923c" stroke-width="1"/>
+    <text x="490" y="513" font-size="11" fill="#cbd5e1" text-anchor="middle">③ [Security] security.md</text>
 
-    <rect x="370" y="544" width="240" height="28" rx="4" fill="#0a1820" stroke="#fb923c" stroke-width="1"/>
-    <text x="490" y="563" font-size="12" fill="#cbd5e1" text-anchor="middle">④ [Test] testing.md</text>
+    <rect x="370" y="524" width="240" height="22" rx="4" fill="#0a1820" stroke="#fb923c" stroke-width="1"/>
+    <text x="490" y="539" font-size="11" fill="#cbd5e1" text-anchor="middle">④ [Test] testing.md</text>
 
-    <rect x="370" y="576" width="240" height="28" rx="4" fill="#0a1820" stroke="#fb923c" stroke-width="1"/>
-    <text x="490" y="595" font-size="12" fill="#cbd5e1" text-anchor="middle">⑤ [Doc] document-writing.md</text>
+    <rect x="370" y="550" width="240" height="22" rx="4" fill="#0a1820" stroke="#fb923c" stroke-width="1"/>
+    <text x="490" y="565" font-size="11" fill="#cbd5e1" text-anchor="middle">⑤ [Doc] document-writing.md</text>
 
-    <rect x="370" y="608" width="240" height="28" rx="4" fill="#0a1820" stroke="#fb923c" stroke-width="1"/>
-    <text x="490" y="627" font-size="12" fill="#cbd5e1" text-anchor="middle">⑥ [Impact] impact-analysis.md</text>
+    <rect x="370" y="576" width="240" height="22" rx="4" fill="#0a1820" stroke="#fb923c" stroke-width="1"/>
+    <text x="490" y="591" font-size="11" fill="#cbd5e1" text-anchor="middle">⑥ [Impact] impact-analysis.md</text>
 
-    <text x="490" y="676" font-size="11" fill="#94a3b8" text-anchor="middle">並列sub-agentではなく</text>
-    <text x="490" y="694" font-size="11" fill="#94a3b8" text-anchor="middle">1セッション内でコンテキストを共有しつつ</text>
-    <text x="490" y="712" font-size="11" fill="#94a3b8" text-anchor="middle">観点を切り替える設計</text>
+    <rect x="370" y="602" width="240" height="22" rx="4" fill="#0a1820" stroke="#fb923c" stroke-width="1"/>
+    <text x="490" y="617" font-size="11" fill="#cbd5e1" text-anchor="middle">⑦ [Observability] observability.md</text>
+
+    <rect x="370" y="628" width="240" height="22" rx="4" fill="#0a1820" stroke="#fb923c" stroke-width="1"/>
+    <text x="490" y="643" font-size="11" fill="#cbd5e1" text-anchor="middle">⑧ [AI-Antipattern] ai-antipattern.md</text>
+
+    <rect x="370" y="654" width="240" height="22" rx="4" fill="#0a1820" stroke="#fb923c" stroke-width="1"/>
+    <text x="490" y="669" font-size="11" fill="#cbd5e1" text-anchor="middle">⑨ [Recurrence] recurrence-prevention.md</text>
+
+    <text x="490" y="700" font-size="11" fill="#94a3b8" text-anchor="middle">並列sub-agentではなく</text>
+    <text x="490" y="718" font-size="11" fill="#94a3b8" text-anchor="middle">1セッション内でコンテキストを共有しつつ</text>
+    <text x="490" y="736" font-size="11" fill="#94a3b8" text-anchor="middle">観点を切り替える設計</text>
   </g>
 
   <!-- ============= 3. Verdict ============= -->
@@ -173,7 +182,7 @@
   <!-- Bottom note: real example -->
   <g font-family="Noto Sans JP, sans-serif">
     <rect x="80" y="780" width="1440" height="140" rx="14" fill="#1a1305" stroke="#fb923c" stroke-width="1.5"/>
-    <text x="800" y="812" font-size="16" fill="#fb923c" text-anchor="middle" font-weight="bold">実例: feat(meet): dual-write embeddings v2 (meet pipelineのembedding v2移行PR)</text>
+    <text x="800" y="812" font-size="16" fill="#fb923c" text-anchor="middle" font-weight="bold">実例: embeddingモデルをgemini-embedding-001からgemini-embedding-2に移行するPR</text>
     <text x="800" y="838" font-size="13" fill="#cbd5e1" text-anchor="middle">07:25 起票 → 07:35 初回 review (Critical x3 + Minor x2) → 07:54 → 08:16 → 08:33 → 08:42 → 08:50 APPROVE → auto-merge</text>
     <text x="800" y="862" font-size="13" fill="#cbd5e1" text-anchor="middle">人レビュアーなら数日かかる修正サイクルを、6 iteration / 1.5時間 で完結</text>
     <text x="800" y="892" font-size="12" fill="#94a3b8" text-anchor="middle">各 iteration で AI が深い指摘に進化: [Graph] → [Test] → [Observability] → 同 SHA 多重確認 → APPROVE</text>

@@ -9,8 +9,8 @@
   </defs>
 
   <!-- Title -->
-  <text x="800" y="56" font-size="30" fill="#e2e8f0" text-anchor="middle" font-weight="bold" font-family="Noto Sans JP, sans-serif">review-fix loop の実例 — meet pipeline の embedding v2 移行PR / 1.5時間 で 6 iteration</text>
-  <text x="800" y="92" font-size="18" fill="#94a3b8" text-anchor="middle" font-family="Noto Sans JP, sans-serif">feat(meet): dual-write embeddings to new 'embedding' column (v2) — 2026-05-19 07:25 起票 → 08:57 merge</text>
+  <text x="800" y="56" font-size="30" fill="#e2e8f0" text-anchor="middle" font-weight="bold" font-family="Noto Sans JP, sans-serif">review-fix loop の実例 — embeddingモデルをgemini-embedding-001からgemini-embedding-2に移行するPR</text>
+  <text x="800" y="92" font-size="18" fill="#94a3b8" text-anchor="middle" font-family="Noto Sans JP, sans-serif">2026-05-19 07:25 起票 → 08:57 merge / 1.5時間で 6 iteration</text>
 
   <!-- Timeline base line -->
   <line x1="80" y1="500" x2="1520" y2="500" stroke="#475569" stroke-width="3"/>

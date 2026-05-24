@@ -110,7 +110,7 @@
     <text x="880" y="358" font-size="13" fill="#94a3b8">07:35</text>
     <text x="880" y="384" font-size="16" fill="#f87171" font-weight="bold">1st AI レビュー → REQUEST_CHANGES</text>
     <text x="880" y="402" font-size="13" fill="#cbd5e1">Critical x3 + Minor x2 を一度に検知</text>
-    <text x="880" y="418" font-size="13" fill="#94a3b8">1セッションで6観点を順にcheck、ガイドラインを引用しながら指摘</text>
+    <text x="880" y="418" font-size="13" fill="#94a3b8">1セッションで9観点を順にcheck、ガイドラインを引用しながら指摘</text>
   </g>
 
   <line x1="1190" y1="430" x2="1190" y2="450" stroke="#94a3b8" stroke-width="2" marker-end="url(#a-94a3b8)"/>
@@ -150,7 +150,7 @@
     <rect x="830" y="790" width="720" height="120" rx="14" fill="#0a1612" stroke="#4ade80" stroke-width="2"/>
     <text x="1190" y="822" font-size="18" fill="#4ade80" text-anchor="middle" font-weight="bold">合計: PR 1本 で 1.5 時間</text>
     <text x="1190" y="850" font-size="14" fill="#cbd5e1" text-anchor="middle">レビュー詰まりなし、人の予定に依存しない</text>
-    <text x="1190" y="872" font-size="14" fill="#cbd5e1" text-anchor="middle">深い指摘も1セッション6観点の連続check でこぼさない</text>
+    <text x="1190" y="872" font-size="14" fill="#cbd5e1" text-anchor="middle">深い指摘も1セッション9観点の連続check でこぼさない</text>
     <text x="1190" y="894" font-size="14" fill="#cbd5e1" text-anchor="middle">PR 数が増えても線形に scale する (直近30日 769 PR)</text>
   </g>
 </svg>
