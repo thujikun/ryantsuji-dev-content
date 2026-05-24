@@ -103,6 +103,8 @@ One more upstream layer: before any of those three kicks in, **a 500-lines-per-f
 
 The implementation is **a script running on each developer's own machine**. GitHub webhooks are received by an in-house **Event Relay server**, persisted to Firestore, and the local scripts on each developer's PC **act as SSE clients that consume the events**. On reconnect, Last-Event-ID replays anything missed, so there's zero event loss, and we register the GitHub webhook exactly once. **The Event Relay aggregates delivery; review and fix logic run on each individual PC** -- that's the basic shape.
 
+To clarify the placement: **reviewer-mode machines are kept always-on** (so a review can be picked up the moment one arrives), while **author-mode runs in the background on the PR author's own PC** (which is already running during their normal dev work, with author mode living alongside that). If a PC is offline for an extended period, Event Relay keeps the events in Firestore and replays them when the connection comes back.
+
 When the reviewer's PC receives an event, the script spawns `claude -p` and walks through 9 dimensions (Graph / Architecture / Security / Test / Doc / Impact / Observability / AI-Antipattern / Recurrence) sequentially, then reads the verdict marker the AI emitted at the end and posts `APPROVE` or `REQUEST_CHANGES` via `gh pr review`.
 
 ![Auto review pipeline — distributed webhook architecture running on every developer's PC](/images/posts/cortex-auto-review/auto-review-flow-en.png)
