@@ -2,7 +2,6 @@
 title: "Human-on-the-Loop: AI Reviewing AI PRs at cortex (769 PRs/month, while raising the quality bar)"
 publishedAt: "2026-05-26T08:30:00+09:00"
 updatedAt: "2026-05-26T08:30:00+09:00"
-draft: true
 slug: "cortex-auto-review"
 summary: "Series Part 3. The common critiques of AI-assisted development -- 'review becomes the new bottleneck' and 'AI code drops the quality bar' -- largely don't apply when AI also does the reviewing. Full walkthrough of our pipeline: webhook -> cpg context -> AI review with [Graph]/[Doc]/[Impact] tags -> auto-fix by a separate AI -> re-review -> auto-merge -> parallel deploy. 769 PRs merged in 30 days, human review involvement per PR is near-zero."
 tags:

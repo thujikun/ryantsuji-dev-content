@@ -2,7 +2,6 @@
 title: "AIが書いたコードはAIが見る ── レビューが詰まらず、品質はむしろ上がる（連載Part 3）"
 publishedAt: "2026-05-26T08:30:00+09:00"
 updatedAt: "2026-05-26T08:30:00+09:00"
-draft: true
 slug: "cortex-auto-review"
 summary: "社内AI基盤cortexの連載Part 3。「AIで開発スピードが上がるとレビューがボトルネック化する／品質が下がる」という議論に対して、自動レビューがどう構造で対応しているかを解説。webhook受信 → cpgコンテキスト取得 → 自動レビュー → [Graph] Critical等の指摘 → 別AIが自動修正 → 再レビュー → 自動マージ → 並列デプロイまでを実装目線で。"
 tags:
