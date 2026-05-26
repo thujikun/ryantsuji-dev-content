@@ -109,6 +109,18 @@ Part 1 / Part 2で繰り返し書いた「**ハーネスをどこまで広げる
 
 立ち位置を補足すると、**レビュアーモードのスクリプトを動かすPCは常時起動**（レビューがいつ来てもすぐ反応できる体制）、**authorモードのスクリプトはPR作者が自分で作業している裏で動く**（PR作者は普段の開発でPCを立ち上げているので、そのプロセスとして同居）という運用です。長時間オフラインだった場合も、Event RelayがFirestoreで保留しているので接続が戻った時点で再配信されます。
 
+### Event Relayにたどり着くまで（補足）
+
+実はこの構成、最初からこうだったわけではありません。
+
+- **初期**: GitHub webhook → [smee.io](https://smee.io/) → 各PCで受信
+- **次**: GitHub webhook → Cloudflare Tunnel → 各PCで受信
+- **現在**: GitHub webhook → 自前 Event Relay + Firestore永続化 → SSEで各PCに配信
+
+smee.io / Cloudflare Tunnel いずれも **コネクション切れや配信欠落** が頻発して、見落としが何度かありました。自前 Event Relay に切り替えてからは、**Firestore永続化 + Last-Event-IDでの再送** で取りこぼしゼロ、かつ複数用途に使いまわせる汎用 layer になっています。
+
+実際、次回 Part 4 で扱う **Alert-Fix の Grafana webhook 受け取りも、まったく同じ Event Relay 経由** です。GitHub / Grafana / その他 webhook 系を1つの relay に集約して、各PCの SSE クライアントが必要なイベントを subscribe する形に整理できる。**汎用 webhook relay は1つ持っておくと、想定外の用途でも横展開しやすいインフラ** だと感じています。
+
 レビュアーのPCで動くスクリプトがイベントを受け取ったら、`claude -p`をspawnして9観点（Graph / Architecture / Security / Test / Doc / Impact / Observability / AI-Antipattern / Recurrence）を順にチェックし、AIが末尾に書いた最終判定マーカーを読み取って`gh pr review`で`APPROVE` / `REQUEST_CHANGES`を投稿します。
 
 ![自動レビュー全フロー — PR起票から自動デプロイまで人なしで完結](/images/posts/cortex-auto-review/auto-review-flow.png)

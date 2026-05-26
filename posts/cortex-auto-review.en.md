@@ -107,6 +107,18 @@ One more upstream layer: before any of those three kicks in, **a 500-lines-per-f
 
 The implementation is **a script running on each developer's machine**. GitHub webhooks land on an in-house **Event Relay server**, get persisted to Firestore, and each developer's machine subscribes as an SSE client. On reconnect, Last-Event-ID replays anything missed -- zero event loss, single webhook registration. **Reviewer-mode machines stay always-on**, so any incoming review fires immediately. **Author mode runs in the background on the PR author's own machine**, alongside their normal dev work.
 
+### How we ended up with Event Relay
+
+The current setup wasn't the original design.
+
+- **First**: GitHub webhook → [smee.io](https://smee.io/) → each machine
+- **Then**: GitHub webhook → Cloudflare Tunnel → each machine
+- **Now**: GitHub webhook → in-house **Event Relay** with Firestore persistence → SSE to each machine
+
+Both smee.io and Cloudflare Tunnel ran into **connection drops and missed deliveries**, which caused real misses for us. Switching to the in-house Event Relay brought event loss to zero (**Firestore persistence + Last-Event-ID replay**), and the relay turned into a general-purpose layer we could reuse.
+
+The webhook ingestion for **Alert-Fix** (covered in Part 4) actually goes through **the exact same Event Relay**. GitHub, Grafana, and other webhook sources get consolidated through one relay, and each machine's SSE client subscribes to whichever events it cares about. **Having a single general-purpose webhook relay is a piece of infra that keeps paying off in unexpected ways** -- worth investing in early.
+
 When the reviewer's machine receives an event, the script spawns `claude -p` and walks through 9 dimensions (Graph / Architecture / Security / Test / Doc / Impact / Observability / AI-Antipattern / Recurrence) sequentially, then reads the verdict marker the AI emitted at the end and posts `APPROVE` or `REQUEST_CHANGES` via `gh pr review`.
 
 ![Auto review pipeline — distributed webhook architecture running on every developer's machine](/images/posts/cortex-auto-review/auto-review-flow-en.png)
