@@ -130,7 +130,9 @@ A few notes:
 - **9 dimensions checked sequentially in one session** -- not parallel sub-agents. A single `claude -p` session walks the 9 dimensions while keeping context shared, which also catches cross-dimension contradictions.
 - **Review guidelines: public snapshot** -- [air-closet/cortex-review-guidelines](https://github.com/air-closet/cortex-review-guidelines) (JP/EN). The live guidelines are inside cortex (private repo) and evolve daily; the public repo is a snapshot extracted for reference.
 
-> Caveat: **guidelines alone scale only to projects in the tens-of-thousands-of-lines range**. At cortex's scale (**over 1M lines of code**), the **knowledge graph from [Part 2](/posts/cortex-product-graph) (cpg) is a hard prerequisite**. Porting the guidelines without cpg won't reproduce the same review quality -- the AI reviewer simply can't navigate the codebase fast enough to reason about impact.
+:::message alert
+**Guidelines alone scale only to projects in the tens-of-thousands-of-lines range.** At cortex's scale (**over 1M lines of code**), the **knowledge graph from [Part 2](/posts/cortex-product-graph) (cpg) is a hard prerequisite**. Porting the guidelines without cpg won't reproduce the same review quality -- the AI reviewer simply can't navigate the codebase fast enough to reason about impact.
+:::
 
 ### Why sequential single-session review, not parallel sub-agents
 
