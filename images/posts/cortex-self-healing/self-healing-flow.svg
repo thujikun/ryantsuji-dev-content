@@ -84,7 +84,7 @@
     <text x="710" y="365" font-size="14" fill="#94a3b8" text-anchor="middle">hotfix/auto-alert-{service}-{ts}</text>
 
     <!-- claude -p investigation -->
-    <rect x="590" y="380" width="240" height="220" rx="8" fill="#251a0d" stroke="#fb923c" stroke-width="1.8"/>
+    <rect x="590" y="380" width="240" height="240" rx="8" fill="#251a0d" stroke="#fb923c" stroke-width="1.8"/>
     <text x="710" y="404" font-size="17" fill="#fb923c" text-anchor="middle" font-weight="bold">claude -p in worktree</text>
 
     <line x1="606" y1="416" x2="814" y2="416" stroke="#334155" stroke-width="1"/>
@@ -118,7 +118,7 @@
     <text x="1060" y="240" font-size="16" fill="#94a3b8" text-anchor="middle">Self-Healing が起票したPRも</text>
     <text x="1060" y="260" font-size="16" fill="#94a3b8" text-anchor="middle">同じ条件で乗る（独立判定）</text>
 
-    <line x1="910" y1="276" x2="1210" y2="268" stroke="#334155" stroke-width="1"/>
+    <line x1="910" y1="276" x2="1210" y2="276" stroke="#334155" stroke-width="1"/>
 
     <text x="1060" y="300" font-size="17" fill="#38bdf8" text-anchor="middle" font-weight="bold">9観点を順次チェック</text>
 
@@ -136,7 +136,7 @@
       <text x="1060" y="405" fill="#a78bfa">⑨ [Recurrence] ← 再発防止 Guide追加を要求</text>
     </g>
 
-    <line x1="910" y1="424" x2="1210" y2="420" stroke="#334155" stroke-width="1"/>
+    <line x1="910" y1="424" x2="1210" y2="424" stroke="#334155" stroke-width="1"/>
 
     <text x="1060" y="448" font-size="16" fill="#cbd5e1" text-anchor="middle">Critical / Major あり</text>
     <text x="1060" y="468" font-size="15" fill="#f87171" text-anchor="middle">→ REQUEST_CHANGES (Self-Healingに戻る)</text>
@@ -144,7 +144,7 @@
     <text x="1060" y="492" font-size="16" fill="#cbd5e1" text-anchor="middle">Nit only / 指摘なし</text>
     <text x="1060" y="512" font-size="15" fill="#4ade80" text-anchor="middle">→ APPROVE</text>
 
-    <line x1="910" y1="530" x2="1210" y2="518" stroke="#334155" stroke-width="1"/>
+    <line x1="910" y1="530" x2="1210" y2="530" stroke="#334155" stroke-width="1"/>
 
     <text x="1060" y="554" font-size="15" fill="#94a3b8" text-anchor="middle">平均 10.8 回 review-fix loop</text>
     <text x="1060" y="574" font-size="15" fill="#94a3b8" text-anchor="middle">（fix側もAI、reviewer側もAI、別セッション）</text>
