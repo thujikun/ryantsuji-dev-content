@@ -17,6 +17,7 @@ seriesOrder: 4
 syndication:
   zenn:
     id: "74c7dfab13cea2"
+cover: /posts/cortex-self-healing.ja.cover.png
 ---
 
 
