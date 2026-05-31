@@ -58,7 +58,7 @@
       <text x="1160" y="44" font-size="15" fill="#cbd5e1" text-anchor="middle">Dashboard + Alert</text>
     </g>
 
-    <text x="800" y="424" font-size="16" fill="#94a3b8" text-anchor="middle">ログレベル規約: warn (機能低下) / error (処理失敗・閾値型アラートのトリガー) / fatal (人手エスカレーション)</text>
+    <text x="800" y="424" font-size="16" fill="#94a3b8" text-anchor="middle">ログレベル規約: warn (即時対応不要) / error (要データ復旧・影響20%未満) / fatal (機能全体の20%以上が失敗)</text>
   </g>
 
   <!-- Arrow Layer 1 → 2 -->
