@@ -320,13 +320,15 @@ cortexに積み上がっているcustom Guideの実例:
 
 これらは全部「**事前に教科書で習える**」のではなく、「**踏んでから機械化した**」もの。組織が踏んだ罠の数だけGuideが積み上がっていきます（ESLint / oxlint / CI guard / 型定義の4層で）。
 
-ここで気になるのは「AIが lint ルール自体をどう壊さず生成しているか」だと思いますが、効いているのは以下の構造です:
+### AIはどうやってlintルールを壊さず書くのか
+
+「AIが lint ルール自体をどう壊さず生成しているか」── ここを支えているのは以下の構造です:
 
 - **既存ルールがテンプレート**: `packages/eslint-plugin-graph/src/rules/` には26本の既存 custom ルールが `.ts` + `.test.ts` のペアで並んでいて、AIは新規ルールを書くとき「同じ形」を踏襲できる。AST 操作の boilerplate を毎回ゼロから書かない
-- **テストが先**: 違反パターン / 合格パターンの最小 fixture を `.test.ts` に書き、TDD で実装を埋める。テストカバレッジ閾値 90% を Part 3 の自動レビューが gate するので、テスト無しの lint は merge できない
-- **AST が辛い時は型側に倒す**: lint化に AST 走査が必要だが副作用を読まないと判定できない、というケースは custom lint より型制約 (branded type / discriminated union / 関数 signature tightening) に倒す。`recurrence-prevention.md` の判定マトリクスも「機械検証可能なら lint / CI guard、AST的に難しいなら型制約、それも無理ならガイドライン」の順序になっています
+- **テストが先**: 違反パターン / 合格パターンの最小 fixture を `.test.ts` に書き、TDD で実装を埋める。テストカバレッジ閾値 90% を [Part 3](/posts/cortex-auto-review) の自動レビューが gate するので、テスト無しの lint は merge できない
+- **lint / 型 / CI guard は同じ「機械化バケット」**: [`recurrence-prevention.md`](https://github.com/air-closet/cortex-review-guidelines/blob/main/ja/guidelines/recurrence-prevention.md) の判定マトリクスは lint・型制約・CI guard をひとまとめに「lint化必須」（= 機械化）として置いていて、3者の中での選択（lintとして書くか / 型側で表現するか / 別途 CI guard でチェックするか）は AST 操作量と副作用依存度に応じてAIに判断させる構造。AST 走査が必要だが runtime semantics に依存して判定しきれない罠は、custom lint よりも型制約（branded type / discriminated union / 関数 signature tightening）に倒すケースが多い
 
-つまり「AIに lint を書かせる」のは **既存ルール群 + テストハーネス + 判定マトリクス** の3点で支えられていて、AIが ESLint API を生で書き起こして事故るルートは構造的に閉じている、というのが運用の実感です。
+つまり「AIに lint を書かせる」のは **既存ルール群 + テストハーネス + 機械化バケットの選択基準** の3点で支えられていて、AIが ESLint API を生で書き起こして事故るルートは構造的に閉じている、というのが運用の実感です。
 
 ### 具体例: Cloud RunのOTel env注入漏れ → CI guardへの昇格
 

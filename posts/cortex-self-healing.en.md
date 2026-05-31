@@ -318,13 +318,15 @@ Custom Guides currently piled up in cortex:
 
 These aren't textbook-learnable rules -- they're "**stepped on once, then mechanized**." The number of traps the organization has stepped on translates directly into the number of Guides piled up (across ESLint / oxlint / CI guard / types).
 
-The obvious next question is "how does the AI write lint rules without breaking them?" Three structural things keep it sane:
+### How does the AI write a lint rule without breaking it?
+
+Three structural things keep this sane:
 
 - **Existing rules are the template**: `packages/eslint-plugin-graph/src/rules/` already holds 26 custom rules, each as `.ts` + `.test.ts` pairs. New rules follow the same shape, so the AI never has to write the AST-walking boilerplate from scratch
-- **Tests first**: violation / pass fixtures go into `.test.ts` first, implementation fills in TDD-style. Coverage threshold (90% statements + branches) is gated by the Part 3 auto-review, so a lint without tests cannot merge
-- **When AST gets hairy, fall back to types**: cases that need AST inspection but actually depend on runtime semantics get pushed out of custom lint and into the type system (branded types, discriminated unions, signature tightening). The decision matrix in `recurrence-prevention.md` literally orders preference as "machine-verifiable -> lint / CI guard; AST-hard -> type constraint; otherwise -> guideline"
+- **Tests first**: violation / pass fixtures go into `.test.ts` first, implementation fills in TDD-style. Coverage threshold (90% statements + branches) is gated by the [Part 3](/posts/cortex-auto-review) auto-review, so a lint without tests cannot merge
+- **lint / type / CI guard sit in the same "mechanize" bucket**: the decision matrix in [`recurrence-prevention.md`](https://github.com/air-closet/cortex-review-guidelines/blob/main/en/guidelines/recurrence-prevention.md) groups lint / type constraint / CI guard together as the "lint-required" row, and leaves the choice within that bucket (write it as a lint? express it at the type level? add a separate CI guard?) to the AI based on how much AST work is involved and whether runtime semantics matter. Traps that need AST inspection but actually hinge on runtime behavior usually end up as a type constraint (branded type / discriminated union / signature tightening) rather than a custom lint
 
-So "AI writes a lint rule" is supported by **existing rule corpus + the test harness + the decision matrix**, all three. The path where the AI hand-rolls raw ESLint API and bricks something is structurally closed.
+So "AI writes a lint rule" is supported by **existing rule corpus + the test harness + the mechanize-bucket selection criteria** -- three together. The path where the AI hand-rolls raw ESLint API and bricks something is structurally closed.
 
 ### A concrete example: Cloud Run OTel env injection -> promoted to CI guard
 
