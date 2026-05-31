@@ -16,7 +16,13 @@ series: "building-ai-harness"
 seriesOrder: 4
 syndication:
   devto:
+<<<<<<< Updated upstream
     publishAt: "2026-06-02T08:30:00+09:00"
+=======
+    id: 3787931
+    slug: "fixed-before-anyone-notices-stronger-after-every-fix-self-healing-auto-added-guardrails-at-5d5a-temp-slug-9351976"
+    contentHash: "d05e6a7235d246b9"
+>>>>>>> Stashed changes
 ---
 
 
