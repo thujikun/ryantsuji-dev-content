@@ -11,7 +11,7 @@
   </defs>
 
   <!-- Title -->
-  <text x="800" y="56" font-size="36" fill="#e2e8f0" text-anchor="middle" font-weight="bold" font-family="Noto Sans JP, sans-serif">Self-Healing 全フロー ── アラート発火から本番復旧まで平均10〜20分</text>
+  <text x="800" y="56" font-size="36" fill="#e2e8f0" text-anchor="middle" font-weight="bold" font-family="Noto Sans JP, sans-serif">Self-Healing 全フロー ── アラート発火から本番復旧まで中央値30分〜1時間</text>
   <text x="800" y="92" font-size="24" fill="#94a3b8" text-anchor="middle" font-family="Noto Sans JP, sans-serif">直近30日で 115本の Self-Healing PR がマージ + 自動再デプロイ。人の対応はAIが「修正不可」と判断したケースのみ。</text>
 
   <!-- Phase labels -->
@@ -181,7 +181,7 @@
 
     <line x1="1250" y1="504" x2="1550" y2="504" stroke="#334155" stroke-width="1"/>
 
-    <text x="1400" y="530" font-size="15" fill="#94a3b8" text-anchor="middle">平均: 10〜20分</text>
+    <text x="1400" y="530" font-size="15" fill="#94a3b8" text-anchor="middle">中央値: 30分〜1時間</text>
     <text x="1400" y="548" font-size="15" fill="#94a3b8" text-anchor="middle">7am発火 → 7:15復旧 →</text>
     <text x="1400" y="566" font-size="15" fill="#94a3b8" text-anchor="middle">9am出社時には Slack に ✓ だけ</text>
 
@@ -204,10 +204,10 @@
     <text x="700" y="775" font-size="15" fill="#94a3b8" text-anchor="middle">3〜8min</text>
     <line x1="700" y1="772" x2="700" y2="788" stroke="#94a3b8" stroke-width="1.5"/>
 
-    <text x="1100" y="775" font-size="15" fill="#94a3b8" text-anchor="middle">6〜16min</text>
+    <text x="1100" y="775" font-size="15" fill="#94a3b8" text-anchor="middle">25〜50min</text>
     <line x1="1100" y1="772" x2="1100" y2="788" stroke="#94a3b8" stroke-width="1.5"/>
 
-    <text x="1520" y="775" font-size="15" fill="#94a3b8" text-anchor="middle">10〜20min</text>
+    <text x="1520" y="775" font-size="15" fill="#94a3b8" text-anchor="middle">30min〜1hr</text>
     <line x1="1520" y1="772" x2="1520" y2="788" stroke="#94a3b8" stroke-width="1.5"/>
 
     <text x="800" y="820" font-size="17" fill="#cbd5e1" text-anchor="middle" font-weight="bold">アラート発火 → 本番復旧のタイムライン</text>
