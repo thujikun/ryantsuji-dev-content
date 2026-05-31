@@ -434,4 +434,4 @@ That said, this is a pattern that solidified inside **cortex, the internal AI pl
 
 "cortex built the pattern, toC services run that pattern at an order-of-magnitude-larger scale" -- that's the Part 5 positioning.
 
-The actual series wrap-up is **Part 6**: a retrospective covering **what makes this hard** and the **structural lessons learned from the failures we accumulated along the way**. This series so far has mostly been "what's working." But behind that is a substantial trail of mistakes and dead ends, and only by laying those out does the writing become a useful map for anyone trying to copy the pattern.
+The actual series wrap-up is **Part 6**: a retrospective. The series so far has been mostly "what's working," but behind that is a substantial trail of mistakes and dead ends we ran into. Part 6 will walk through **what's hard, what we tripped on, and what we learned** across the whole series. It's as much a retrospective for ourselves as a reference for anyone starting down a similar path.
