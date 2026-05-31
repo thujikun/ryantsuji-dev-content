@@ -68,7 +68,7 @@ The moment an alert fires, the AI starts an investigation, traces Loki / Product
 | 3 | Auto PR review | webhook -> AI review -> auto-fix -> squash merge | [cortex-auto-review](/posts/cortex-auto-review) |
 | 4 | Self-Healing + observability + auto-added guardrails | Alert -> AI investigates -> fix PR + new lint/type gate -> auto redeploy + same pattern auto-rejected from then on | This article ← you are here |
 | 5 | Scaling the harness from cortex to toC services | Non-engineer contributions in practice + scaling cortex's harness to the whole product org | Coming soon |
-| 6 | Series wrap-up | Retrospective: what makes this harness hard, and the structural lessons from the failures we hit | Coming soon |
+| 6 | Series wrap-up | The underlying philosophy (what was given up, what was kept, why this design) plus a retrospective on the failures and lessons | Coming soon |
 
 ## Big picture -- the three layers: Observation, Repair, Strengthening
 
@@ -432,4 +432,4 @@ That said, this is a pattern that solidified inside **cortex, the internal AI pl
 
 "cortex built the pattern, toC services run that pattern at an order-of-magnitude-larger scale" -- that's the Part 5 positioning.
 
-The actual series wrap-up is **Part 6**: a retrospective. The series so far has been mostly "what's working," but behind that is a substantial trail of mistakes and dead ends we ran into. Part 6 will walk through **what's hard, what we tripped on, and what we learned** across the whole series. It's as much a retrospective for ourselves as a reference for anyone starting down a similar path.
+The actual series wrap-up is **Part 6**. The center of it is **the underlying philosophy** -- why I picked this design, what I gave up, what I kept. Alongside that, since the series so far has been mostly "what's working," I want to look back at the failures and dead ends behind that surface, and the gap between the philosophy and the implementation. A retrospective for myself, and -- hopefully -- a reference for anyone starting down a similar path.

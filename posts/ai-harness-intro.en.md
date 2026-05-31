@@ -35,7 +35,7 @@ All of those run on top of an internal AI development platform we call **cortex*
 | 3 | AI PR review | webhook → AI review → auto-fix → squash merge | coming |
 | 4 | Self-Healing + observability + auto-added guardrails | Alert → AI investigates → fix PR + new lint/type gate → auto redeploy + same-pattern writes get auto-rejected | coming |
 | 5 | Scaling the harness from cortex to toC services | Non-engineer contributions in practice + scaling cortex's harness to the whole product org | coming |
-| 6 | Series wrap-up | Retrospective: what makes this harness hard, and the structural lessons from the failures we hit | coming |
+| 6 | Series wrap-up | The underlying philosophy (what was given up, what was kept, why this design) plus a retrospective on the failures and lessons | coming |
 
 ## Two Scenes, Up Front
 
