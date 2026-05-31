@@ -385,7 +385,7 @@ cortexに積み上がっているcustom Guideの実例:
 ここまでで、**Part 1〜4を通したcortexの全体像**がほぼ揃いました:
 
 - [Part 1](https://zenn.dev/aircloset/articles/d416342f46f16b): cortex全体像とハーネスエンジニアリングの位置取り
-- [Part 2](https://zenn.dev/aircloset/articles/f6c990989e60d4): Product Graph（cpg）── AIの「目」
+- [Part 2](https://zenn.dev/aircloset/articles/f6c990989e60d4): Product Graph（cpg）── AIの「脳」
 - [Part 3](https://zenn.dev/aircloset/articles/91824e55b7fc9c): 自動レビュー ── PR時点の品質を守る
 - **Part 4（本記事）: Self-Healing+Observability+自動lint追加 ── 本番時点の品質を守りつつ、品質ゲート自体を育てる**
 
