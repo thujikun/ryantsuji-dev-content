@@ -41,6 +41,7 @@ cover: /images/posts/cortex-auto-review.ja.cover.png
 | 3 | AI PRレビュー | webhook → AIレビュー → 自動修正 → squash merge | 本記事 ←現在地 |
 | 4 | Self-Healing + Observability + 自動lint追加 | アラート → AI調査 → 修正PR + 新規lint/型gate → 自動再デプロイで同じ書き方を機械的に弾く | 準備中 |
 | 5 | ハーネスをtoCサービスに広げる | 非エンジニア開発の実態と限界 + cortexの型をプロダクト組織全体にスケールする構想 | 準備中 |
+| 6 | 連載総括 | これまでの全パートを振り返り、「全然簡単じゃない」と「失敗の総量から学んだ構造」を整理 | 準備中 |
 
 ## いきなり1ヶ月分の数字から
 

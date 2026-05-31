@@ -39,6 +39,7 @@ This post is about **the automated PR review pipeline** -- AI reviews the PR, a 
 | 3 | Auto PR review | webhook -> AI review -> auto-fix -> squash merge | This article ← you are here |
 | 4 | Self-Healing + observability + auto-added guardrails | Alert -> AI investigates -> fix PR + new lint/type gate -> auto redeploy + same-pattern writes get auto-rejected | Coming soon |
 | 5 | Scaling the harness from cortex to toC services | Non-engineer contributions in practice + scaling cortex's harness to the whole product org | Coming soon |
+| 6 | Series wrap-up | Retrospective: what makes this harness hard, and the structural lessons from the failures we hit | Coming soon |
 
 ## Start with last month's numbers
 

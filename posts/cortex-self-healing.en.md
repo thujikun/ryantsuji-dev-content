@@ -68,6 +68,7 @@ The moment an alert fires, the AI starts an investigation, traces Loki / Product
 | 3 | Auto PR review | webhook -> AI review -> auto-fix -> squash merge | [cortex-auto-review](/posts/cortex-auto-review) |
 | 4 | Self-Healing + observability + auto-added guardrails | Alert -> AI investigates -> fix PR + new lint/type gate -> auto redeploy + same pattern auto-rejected from then on | This article ← you are here |
 | 5 | Scaling the harness from cortex to toC services | Non-engineer contributions in practice + scaling cortex's harness to the whole product org | Coming soon |
+| 6 | Series wrap-up | Retrospective: what makes this harness hard, and the structural lessons from the failures we hit | Coming soon |
 
 ## Big picture -- the three layers: Observation, Repair, Strengthening
 
@@ -431,4 +432,6 @@ That said, this is a pattern that solidified inside **cortex, the internal AI pl
 
 **Part 5** will cover **scaling cortex's harness to the whole product organization** -- the roadmap and the thinking. The first half is the actual operation of "non-engineers opening PRs into cortex" with its limits; the second half is the elements needed to extend the pattern to toC services (service-specialized review rules, the human understanding-of-AI-design process, IaC for test environments, etc.).
 
-"cortex built the pattern, toC services run that pattern at an order-of-magnitude-larger scale" -- that'll be the closing position of the series.
+"cortex built the pattern, toC services run that pattern at an order-of-magnitude-larger scale" -- that's the Part 5 positioning.
+
+The actual series wrap-up is **Part 6**: a retrospective covering **what makes this hard** and the **structural lessons learned from the failures we accumulated along the way**. This series so far has mostly been "what's working." But behind that is a substantial trail of mistakes and dead ends, and only by laying those out does the writing become a useful map for anyone trying to copy the pattern.
