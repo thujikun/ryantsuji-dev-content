@@ -17,7 +17,7 @@ syndication:
   devto:
     id: 3559369
     slug: "bridging-i-want-to-build-and-i-want-to-publish-safely-for-non-engineers-sandbox-mcp-392a"
-cover: /posts/sandbox-mcp.ja.cover.png
+cover: /images/posts/sandbox-mcp.ja.cover.png
 ---
 
 みなさまこんにちは！エアークローゼットでCTOをしている[辻](https://x.com/RyanAircloset)です。

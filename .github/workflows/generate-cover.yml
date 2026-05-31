@@ -1,0 +1,75 @@
+# post を新規追加（or タイトル等を変更）したときに、対応する cover PNG が
+# `images/posts/<slug>.<lang>.cover.png` に存在しなければ自動生成して commit back する workflow。
+#
+# - 既存 cover はデフォルト再生成しない（`scripts/generate-cover.mjs` の idempotent 動作）。
+#   タイトル更新時など意図的に再生成したい場合は手動で `--force` 付きでローカル実行 → push する想定。
+# - commit は GitHub App installation token で行うことで、後段の dispatch-on-push.yml が
+#   発火し self-management 側の bump-submodule に画像変更が伝搬する。GITHUB_TOKEN だと
+#   cascade workflow が発火しないため使わない。
+#
+# secrets:
+# - `APP_ID` / `APP_PRIVATE_KEY`: dispatch-on-push.yml と共通の GitHub App credentials
+name: Generate cover images
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "posts/**.md"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: generate-cover
+  cancel-in-progress: false
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate App installation token
+        id: app-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+
+      - name: Checkout (with App token so push cascades)
+        uses: actions/checkout@v6
+        with:
+          token: ${{ steps.app-token.outputs.token }}
+          # commit + push に履歴が要るので fetch-depth: 0
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: "24"
+
+      - name: Restore font cache
+        id: font-cache
+        uses: actions/cache@v4
+        with:
+          path: .cache/og-fonts
+          key: og-fonts-v1
+
+      - name: Install deps
+        run: npm install --no-audit --no-fund --silent
+
+      - name: Generate covers (idempotent)
+        run: node scripts/generate-cover.mjs
+
+      - name: Commit + push if changed
+        run: |
+          git config user.name "cover-gen bot"
+          git config user.email "noreply@github.com"
+          git add posts/ images/posts/
+          if git diff --cached --quiet; then
+            echo "no cover changes — nothing to commit"
+            exit 0
+          fi
+          git commit -m "chore: auto-generate missing cover images"
+          # 競合に強くするため pull --rebase --autostash
+          git pull --rebase --autostash origin main
+          git push origin HEAD:main

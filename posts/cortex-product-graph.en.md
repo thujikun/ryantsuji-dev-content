@@ -19,6 +19,7 @@ syndication:
     slug: "the-heart-of-the-ai-harness-a-knowledge-graph-of-the-ai-by-the-ai-for-the-ai-series-part-2-4a59-temp-slug-9510240"
     contentHash: "352a573e066002b9"
     publishAt: "2026-05-19T07:00:00-07:00"
+cover: /images/posts/cortex-product-graph.en.cover.png
 ---
 
 

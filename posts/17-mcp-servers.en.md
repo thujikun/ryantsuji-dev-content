@@ -17,7 +17,7 @@ syndication:
     id: 3467141
     slug: "we-built-17-mcp-servers-to-let-ai-run-our-internal-operations-3lk2"
     contentHash: "898f37f3dfbfc0a2"
-cover: /posts/17-mcp-servers.en.cover.png
+cover: /images/posts/17-mcp-servers.en.cover.png
 ---
 
 ## Introduction

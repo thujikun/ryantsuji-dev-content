@@ -17,7 +17,7 @@ syndication:
   devto:
     id: 3527776
     slug: "we-built-a-custom-graph-rag-to-let-ai-answer-did-that-initiative-actually-work-3oda"
-cover: /posts/initiative-graph-rag.ja.cover.png
+cover: /images/posts/initiative-graph-rag.ja.cover.png
 ---
 
 みなさまこんにちは！エアークローゼットでCTOをしている[辻](https://x.com/RyanAircloset)です。

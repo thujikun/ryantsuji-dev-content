@@ -17,7 +17,7 @@ syndication:
   devto:
     id: 3593900
     slug: "cutting-self-built-mcp-server-token-usage-by-90-the-parking-pattern-3e7o"
-cover: /posts/mcp-parking-pattern.ja.cover.png
+cover: /images/posts/mcp-parking-pattern.ja.cover.png
 ---
 
 みなさまこんにちは！エアークローゼットでCTOをしている[辻](https://x.com/RyanAircloset)です。

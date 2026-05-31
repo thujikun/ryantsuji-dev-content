@@ -19,7 +19,7 @@ syndication:
   devto:
     id: 3655760
     slug: "building-a-real-ai-harness-auto-reviewed-prs-self-healing-ops-and-non-engineer-contributors-3lfa"
-cover: /posts/ai-harness-intro.ja.cover.png
+cover: /images/posts/ai-harness-intro.ja.cover.png
 ---
 
 みなさまこんにちは！エアークローゼットでCTOをしている[辻](https://x.com/RyanAircloset)です。

@@ -1,0 +1,14 @@
+{
+  "name": "ryantsuji-dev-content",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Content repo for ryantsuji.dev (posts + images). Scripts here are CI tooling; no runtime app.",
+  "type": "module",
+  "scripts": {
+    "covers:generate": "node scripts/generate-cover.mjs"
+  },
+  "dependencies": {
+    "@resvg/resvg-js": "^2.6.2",
+    "satori": "^0.12.2"
+  }
+}

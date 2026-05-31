@@ -17,7 +17,7 @@ syndication:
     id: 3404451
     slug: "democratizing-internal-data-building-an-mcp-server-that-lets-you-search-991-tables-in-natural-1da5"
     contentHash: "267da9450e5609c7"
-cover: /posts/db-graph-mcp.en.cover.png
+cover: /images/posts/db-graph-mcp.en.cover.png
 ---
 
 Hi, I'm [Ryan](https://x.com/ryantsuji), CTO at [airCloset](https://www.air-closet.com/) — Japan's leading fashion rental subscription service.

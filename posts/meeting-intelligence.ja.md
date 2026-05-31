@@ -17,7 +17,7 @@ syndication:
   devto:
     id: 3486118
     slug: "how-we-built-an-automated-meeting-intelligence-system-with-google-meet-slack-and-rag-42ln"
-cover: /posts/meeting-intelligence.ja.cover.png
+cover: /images/posts/meeting-intelligence.ja.cover.png
 ---
 
 みなさまこんにちは！エアークローゼットでCTOをしている[辻](https://x.com/RyanAircloset)です。

@@ -17,6 +17,7 @@ syndication:
   zenn:
     id: "f6c990989e60d4"
     publishAt: "2026-05-19T09:00:00+09:00"
+cover: /images/posts/cortex-product-graph.ja.cover.png
 ---
 
 

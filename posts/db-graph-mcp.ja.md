@@ -17,7 +17,7 @@ syndication:
   devto:
     id: 3404451
     slug: "democratizing-internal-data-building-an-mcp-server-that-lets-you-search-991-tables-in-natural-1da5"
-cover: /posts/db-graph-mcp.ja.cover.png
+cover: /images/posts/db-graph-mcp.ja.cover.png
 ---
 
 みなさまこんにちは！エアークローゼットでCTOをしている[辻](https://x.com/RyanAircloset)です。

@@ -17,7 +17,7 @@ syndication:
   devto:
     id: 3467141
     slug: "we-built-17-mcp-servers-to-let-ai-run-our-internal-operations-3lk2"
-cover: /posts/17-mcp-servers.ja.cover.png
+cover: /images/posts/17-mcp-servers.ja.cover.png
 ---
 
 ## はじめに

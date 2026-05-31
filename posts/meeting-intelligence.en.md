@@ -17,7 +17,7 @@ syndication:
     id: 3486118
     slug: "how-we-built-an-automated-meeting-intelligence-system-with-google-meet-slack-and-rag-42ln"
     contentHash: "ca5a0a981abc2b85"
-cover: /posts/meeting-intelligence.en.cover.png
+cover: /images/posts/meeting-intelligence.en.cover.png
 ---
 
 Hi, I'm [Ryan](https://x.com/ryantsuji), CTO at airCloset — a fashion subscription service based in Japan.

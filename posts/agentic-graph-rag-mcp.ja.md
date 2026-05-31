@@ -16,7 +16,7 @@ syndication:
   devto:
     id: 3622364
     slug: "graph-rag-isnt-a-one-shot-anymore-the-case-for-agentic-graph-rag-mcps-1dj5"
-cover: /posts/agentic-graph-rag-mcp.ja.cover.png
+cover: /images/posts/agentic-graph-rag-mcp.ja.cover.png
 ---
 
 みなさまこんにちは！エアークローゼットでCTOをしている[辻](https://x.com/RyanAircloset)です。
