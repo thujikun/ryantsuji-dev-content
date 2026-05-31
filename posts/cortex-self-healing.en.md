@@ -15,6 +15,11 @@ lang: "en"
 series: "building-ai-harness"
 seriesOrder: 4
 cover: /images/posts/cortex-self-healing.en.cover.png
+syndication:
+  devto:
+    id: 3788644
+    slug: "fixed-before-anyone-notices-stronger-after-every-fix-self-healing-recurrence-prevention-series-1hgh-temp-slug-9492789"
+    contentHash: "f2863eef6ff20296"
 ---
 
 
