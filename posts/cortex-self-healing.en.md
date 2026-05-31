@@ -318,6 +318,14 @@ Custom Guides currently piled up in cortex:
 
 These aren't textbook-learnable rules -- they're "**stepped on once, then mechanized**." The number of traps the organization has stepped on translates directly into the number of Guides piled up (across ESLint / oxlint / CI guard / types).
 
+The obvious next question is "how does the AI write lint rules without breaking them?" Three structural things keep it sane:
+
+- **Existing rules are the template**: `packages/eslint-plugin-graph/src/rules/` already holds 26 custom rules, each as `.ts` + `.test.ts` pairs. New rules follow the same shape, so the AI never has to write the AST-walking boilerplate from scratch
+- **Tests first**: violation / pass fixtures go into `.test.ts` first, implementation fills in TDD-style. Coverage threshold (90% statements + branches) is gated by the Part 3 auto-review, so a lint without tests cannot merge
+- **When AST gets hairy, fall back to types**: cases that need AST inspection but actually depend on runtime semantics get pushed out of custom lint and into the type system (branded types, discriminated unions, signature tightening). The decision matrix in `recurrence-prevention.md` literally orders preference as "machine-verifiable -> lint / CI guard; AST-hard -> type constraint; otherwise -> guideline"
+
+So "AI writes a lint rule" is supported by **existing rule corpus + the test harness + the decision matrix**, all three. The path where the AI hand-rolls raw ESLint API and bricks something is structurally closed.
+
 ### A concrete example: Cloud Run OTel env injection -> promoted to CI guard
 
 Multiple services hit this trap: when a Cloud Run Service / Job is defined in Pulumi, forgetting to inject `OTEL_EXPORTER_OTLP_ENDPOINT` and `GRAFANA_CLOUD_API_KEY` via `secretKeyRef` causes OTel init to be skipped in production, no trace/log reaches Grafana, and incidents become silently invisible.
@@ -393,18 +401,6 @@ What kicked off Self-Healing in the past 30 days (with the mapping back to the f
 | **Pipeline Failure** -- data pipeline failing a configured number of times in a row | Production-runtime (61 side) |
 | **Generator Failure** -- AI generation jobs (embedding / annotation etc.) failing | Production-runtime (61 side) |
 | **Deploy Failed** -- deploy step failures (Pulumi up / Cloud Run revision failed) | Deploy step (54 side) |
-
-### How the denominator splits
-
-The headline **115** is "Self-Healing runs that reached PR open -> merge -> deploy." Separately, Self-Healing also runs and **exits without a PR** -- "this isn't fixable in code" -- several times a month (external transient outages, infra / config root causes, etc.). Those get a Slack thread with the investigation summary and a human handles it.
-
-```
-[Self-Healing run]
-   ├─ PR open -> merge + deploy complete ────── 115 / month
-   └─ judged unfixable -> exit clean ────────── several / month (Slack notification, human handles)
-```
-
-So it's **not "115 of which X failed"** -- the branches split at the start of the run.
 
 ### Alert-firing to production-recovery time
 

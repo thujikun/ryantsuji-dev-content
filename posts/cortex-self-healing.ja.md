@@ -320,6 +320,14 @@ cortexに積み上がっているcustom Guideの実例:
 
 これらは全部「**事前に教科書で習える**」のではなく、「**踏んでから機械化した**」もの。組織が踏んだ罠の数だけGuideが積み上がっていきます（ESLint / oxlint / CI guard / 型定義の4層で）。
 
+ここで気になるのは「AIが lint ルール自体をどう壊さず生成しているか」だと思いますが、効いているのは以下の構造です:
+
+- **既存ルールがテンプレート**: `packages/eslint-plugin-graph/src/rules/` には26本の既存 custom ルールが `.ts` + `.test.ts` のペアで並んでいて、AIは新規ルールを書くとき「同じ形」を踏襲できる。AST 操作の boilerplate を毎回ゼロから書かない
+- **テストが先**: 違反パターン / 合格パターンの最小 fixture を `.test.ts` に書き、TDD で実装を埋める。テストカバレッジ閾値 90% を Part 3 の自動レビューが gate するので、テスト無しの lint は merge できない
+- **AST が辛い時は型側に倒す**: lint化に AST 走査が必要だが副作用を読まないと判定できない、というケースは custom lint より型制約 (branded type / discriminated union / 関数 signature tightening) に倒す。`recurrence-prevention.md` の判定マトリクスも「機械検証可能なら lint / CI guard、AST的に難しいなら型制約、それも無理ならガイドライン」の順序になっています
+
+つまり「AIに lint を書かせる」のは **既存ルール群 + テストハーネス + 判定マトリクス** の3点で支えられていて、AIが ESLint API を生で書き起こして事故るルートは構造的に閉じている、というのが運用の実感です。
+
 ### 具体例: Cloud RunのOTel env注入漏れ → CI guardへの昇格
 
 過去に複数サービスで「Cloud Run Service/JobをPulumiで定義したとき、`OTEL_EXPORTER_OTLP_ENDPOINT`と`GRAFANA_CLOUD_API_KEY`を`secretKeyRef`でenvsに注入し忘れて、本番でOTel initがskipされ、Grafanaにtrace/logが届かず障害が検知不能になる」という罠を踏みました。
@@ -395,18 +403,6 @@ cortexに積み上がっているcustom Guideの実例:
 | **Pipeline Failure** ── データパイプラインの一定回数連続失敗 | 本番ランタイム系（61本側） |
 | **Generator Failure** ── AI生成系ジョブ（embedding / annotation等）の失敗 | 本番ランタイム系（61本側） |
 | **Deploy Failed** ── デプロイ失敗（Pulumi up / Cloud Run revision failed） | デプロイ段階（54本側） |
-
-### 母数の分け方
-
-冒頭の**115**は「Self-Healingが PR起票 → merge → deploy まで完走した数」。これとは別に、Self-Healingが起動したが「コード修正では対応不能」と判断して **PR化せず終了したケースが月数件**あります（外部サービスの一時障害、コードでなくインフラ・設定起因のもの等）。これらはSlackスレッドに調査結果付きで通知され、人が対応します。
-
-```
-[Self-Healing 起動]
-   ├─ PR化 → merge + deploy 完走 ──── 月115本
-   └─ 修正不能と判断 → 無変更で終了 ── 月数件 (Slackで人に通知)
-```
-
-つまり「**115本中の失敗率**」ではなく、「**起動の分岐先が分かれている**」構造です。
 
 ### アラート発火から本番復旧までの時間
 
