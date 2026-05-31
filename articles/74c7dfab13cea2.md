@@ -21,7 +21,7 @@ publication_name: "aircloset"
 
 ## いきなり1ヶ月分の数字から
 
-**直近30日でマージされた`auto-fix`系PR: 115本。**
+**直近30日でマージされたSelf-Healing PR: 115本。**
 
 **ほぼ全て人の介入なしでmerge + deploy完了。**
 
