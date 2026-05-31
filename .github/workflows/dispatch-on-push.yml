@@ -8,8 +8,10 @@
 # 抑止されるので、二重 dispatch にはならない。
 #
 # secrets:
-# - `MONOREPO_DISPATCH_PAT`: thujikun/self-management の `actions: write` 権限を
-#   持つ fine-grained PAT
+# - `APP_ID` / `APP_PRIVATE_KEY`: GitHub App (両 repo に install 済み) の credentials。
+#   installation token は user quota と独立した 5000/hr quota を持つので、user が
+#   gh CLI を連発しても workflow がレート枯渇で落ちなくなる。
+#   詳細セットアップ手順: ../../../self-management/docs/operations/github-app-setup.md
 name: Dispatch parent on content push
 
 on:
@@ -35,9 +37,18 @@ jobs:
     name: Notify parent monorepo
     runs-on: ubuntu-latest
     steps:
+      - name: Generate App installation token (cross-repo)
+        id: app-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+          owner: thujikun
+          repositories: self-management
+
       - name: Dispatch bump-submodule
         env:
-          GH_TOKEN: ${{ secrets.MONOREPO_DISPATCH_PAT }}
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
           REASON: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.reason || 'manual-content-push' }}
         run: |
           gh api repos/thujikun/self-management/dispatches \
