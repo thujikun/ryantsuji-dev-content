@@ -7,6 +7,10 @@ published: false
 publication_name: "aircloset"
 ---
 
+:::message
+[English Version is here](https://ryantsuji.dev/posts/cortex-self-healing?lang=en)
+:::
+
 みなさまこんにちは！エアークローゼットでCTOをしている[辻](https://x.com/RyanAircloset)です。
 
 :::message
