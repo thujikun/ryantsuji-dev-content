@@ -150,5 +150,5 @@
   <text x="1535" y="380" font-size="13" fill="#4ade80" font-family="Noto Sans JP, sans-serif" font-weight="bold" transform="rotate(-90, 1535, 380)">次の本番では同種障害が発生不可</text>
 
   <!-- Bottom footer -->
-  <text x="800" y="970" font-size="13" fill="#94a3b8" text-anchor="middle" font-family="Noto Sans JP, sans-serif">3層が揃って初めて self-healing + self-strengthening のループが回る。修復だけでは中長期で負ける。</text>
+  <text x="800" y="970" font-size="13" fill="#94a3b8" text-anchor="middle" font-family="Noto Sans JP, sans-serif">3層が揃って初めて「自己修復+自己強化」のループが回る。修復だけでは中長期で負ける。</text>
 </svg>

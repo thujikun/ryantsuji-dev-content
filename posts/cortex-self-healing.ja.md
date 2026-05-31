@@ -30,7 +30,7 @@ syndication:
 
 今回は**本番時点の品質を守る**側、**Self-Healing**（自己修復）です。本番アラートをAIが調査して修正PRを起票、自動レビューに乗せて自動マージ、自動再デプロイまで完結させる仕組み。そしてその修正PRには**再発防止のlint/型ゲートの追加が必須化**されていて、結果として**ガードレールが日々自動で増えていく**。
 
-「障害が自動で直る」だけだと派手で目を引きますが、たぶんそれだけでは中長期では負ける。**直したついでに同じ罠の再発を構造的に潰す** ──「self-healing」+「self-strengthening」の2つが組み合わさって初めて、品質ゲートは時間とともに育っていきます。
+「障害が自動で直る」だけだと派手で目を引きますが、たぶんそれだけでは中長期では負ける。**直したついでに同じ罠の再発を構造的に潰す** ──「自己修復」+「自己強化」の2つが組み合わさって初めて、品質ゲートは時間とともに育っていきます。
 
 ## いきなり1ヶ月分の数字から
 
@@ -67,7 +67,7 @@ syndication:
 
 ## 全体像 ── 「観測」「修復」「強化」の3層
 
-Self-Healingを機能させるには、その手前にちゃんと**観測層**が必要で、その後ろに**強化層**（再発防止）が必要です。Self-Healingそのものは真ん中の**修復層**に位置していて、3層が揃って初めて「self-healing + self-strengthening」のループが回ります。
+Self-Healingを機能させるには、その手前にちゃんと**観測層**が必要で、その後ろに**強化層**（再発防止）が必要です。Self-Healingそのものは真ん中の**修復層**に位置していて、3層が揃って初めて「自己修復+自己強化」のループが回ります。
 
 ![3層構造 ── 観測 → 修復 → 強化のループ](/images/posts/cortex-self-healing/three-layer-overview.png)
 
@@ -214,11 +214,11 @@ AIの調査の流れ:
 3. **過去のPRと突合せ** ──「逆方向の不整合」（Firestoreに名前があるがGoogle側から消えた＝404）は既に別PRで`patchMeetSubscriptionTtl` → null fallbackでself-heal済み。**今回の方向（Google側に残っているがFirestoreに無い＝409）はまだ対応されていない**ことを発見
 4. **判定**:「パターンが他にも存在しうる」状況 → `[Recurrence]`判定マトリクスの**「横展開必須」**のケース
 
-その場凌ぎの修正ではなく、**逆方向に存在していたfallbackと対称になるように同方向のself-healingを実装**しました:
+その場凌ぎの修正ではなく、**逆方向に存在していたfallbackと対称になるように同方向の自己修復を実装**しました:
 
 - `createMeetSubscription`をidempotentに変更
 - POSTが409を返したら、レスポンスから既存Subscription名を抽出して`patchMeetSubscriptionTtl`を呼ぶ
-- 戻り値を呼び出し元がFirestoreに書き戻すので、次回以降のrenewalは通常のPATCHパスに収束（**self-healing**）
+- 戻り値を呼び出し元がFirestoreに書き戻すので、次回以降のrenewalは通常のPATCHパスに収束（**自己修復**）
 - 既存lintルール`graph/no-silent-catch`に従って、JSON.parse失敗時も`logger.warn`+`serializeError`で構造化ログ
 - テスト3件追加
 
