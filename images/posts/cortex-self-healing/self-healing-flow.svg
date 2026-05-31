@@ -87,27 +87,27 @@
     <rect x="590" y="380" width="240" height="240" rx="8" fill="#251a0d" stroke="#fb923c" stroke-width="1.8"/>
     <text x="710" y="404" font-size="17" fill="#fb923c" text-anchor="middle" font-weight="bold">claude -p in worktree</text>
 
-    <line x1="606" y1="416" x2="814" y2="416" stroke="#334155" stroke-width="1"/>
+    <line x1="596" y1="416" x2="824" y2="416" stroke="#334155" stroke-width="1"/>
 
-    <rect x="606" y="424" width="208" height="22" rx="4" fill="#1a1525" stroke="#a78bfa" stroke-width="1"/>
-    <text x="710" y="439" font-size="14" fill="#cbd5e1" text-anchor="middle">① Product Graph MCP で関連検索</text>
+    <rect x="596" y="424" width="228" height="22" rx="4" fill="#1a1525" stroke="#a78bfa" stroke-width="1"/>
+    <text x="710" y="439" font-size="13" fill="#cbd5e1" text-anchor="middle">① Product Graph MCP で関連検索</text>
 
-    <rect x="606" y="450" width="208" height="22" rx="4" fill="#0d1f2d" stroke="#38bdf8" stroke-width="1"/>
-    <text x="710" y="465" font-size="14" fill="#cbd5e1" text-anchor="middle">② Grafana MCP で Loki クエリ</text>
+    <rect x="596" y="450" width="228" height="22" rx="4" fill="#0d1f2d" stroke="#38bdf8" stroke-width="1"/>
+    <text x="710" y="465" font-size="13" fill="#cbd5e1" text-anchor="middle">② Grafana MCP で Loki クエリ</text>
 
-    <rect x="606" y="476" width="208" height="22" rx="4" fill="#0a1820" stroke="#94a3b8" stroke-width="1"/>
-    <text x="710" y="491" font-size="14" fill="#cbd5e1" text-anchor="middle">③ git blame で原因コミット特定</text>
+    <rect x="596" y="476" width="228" height="22" rx="4" fill="#0a1820" stroke="#94a3b8" stroke-width="1"/>
+    <text x="710" y="491" font-size="13" fill="#cbd5e1" text-anchor="middle">③ git blame で原因コミット特定</text>
 
-    <rect x="606" y="502" width="208" height="22" rx="4" fill="#251a0d" stroke="#fb923c" stroke-width="1"/>
-    <text x="710" y="517" font-size="14" fill="#cbd5e1" text-anchor="middle">④ 修正実装 + テスト更新</text>
+    <rect x="596" y="502" width="228" height="22" rx="4" fill="#251a0d" stroke="#fb923c" stroke-width="1"/>
+    <text x="710" y="517" font-size="13" fill="#cbd5e1" text-anchor="middle">④ 修正実装 + テスト更新</text>
 
-    <rect x="606" y="528" width="208" height="22" rx="4" fill="#251a0d" stroke="#fb923c" stroke-width="1"/>
-    <text x="710" y="543" font-size="14" fill="#cbd5e1" text-anchor="middle">⑤ [Recurrence]: 横展開 + Guide追加</text>
+    <rect x="596" y="528" width="228" height="22" rx="4" fill="#251a0d" stroke="#fb923c" stroke-width="1"/>
+    <text x="710" y="543" font-size="13" fill="#cbd5e1" text-anchor="middle">⑤ [Recurrence]: 横展開 + Guide追加</text>
 
-    <rect x="606" y="554" width="208" height="22" rx="4" fill="#1a0d0a" stroke="#fb923c" stroke-width="1"/>
-    <text x="710" y="569" font-size="14" fill="#cbd5e1" text-anchor="middle">⑥ conventional commit</text>
+    <rect x="596" y="554" width="228" height="22" rx="4" fill="#1a0d0a" stroke="#fb923c" stroke-width="1"/>
+    <text x="710" y="569" font-size="13" fill="#cbd5e1" text-anchor="middle">⑥ conventional commit</text>
 
-    <text x="710" y="592" font-size="14" fill="#94a3b8" text-anchor="middle">修正不能なら無変更で終了 → Slack 通知</text>
+    <text x="710" y="592" font-size="13" fill="#94a3b8" text-anchor="middle">対応不可と判断 → Slack通知</text>
   </g>
   <line x1="852" y1="410" x2="888" y2="410" stroke="#fb923c" stroke-width="2" marker-end="url(#a-38bdf8)"/>
 
