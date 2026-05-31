@@ -4,6 +4,7 @@ publishedAt: "2026-05-19T09:00:00+09:00"
 updatedAt: "2026-05-19T09:00:00+09:00"
 slug: "cortex-product-graph"
 summary: "社内AI基盤cortexの連載Part 2。コード・docs・DBスキーマ・インフラ定義を1つのナレッジグラフに統合した cortex-product-graph (cpg) の設計と、JSDoc/Pulumi/docs をSSoT化したビルドパイプライン、Runbookパターンで AI を導くツール設計を実装目線で解説。"
+emoji: "🫀"
 tags:
   - "ai"
   - "typescript"

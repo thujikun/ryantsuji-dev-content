@@ -4,6 +4,7 @@ publishedAt: "2026-04-11"
 updatedAt: "2026-05-03"
 slug: "meeting-intelligence"
 summary: "Google Meet録画をSlackに自動共有し、文字起こしをRAGで自然言語検索できる社内会議情報基盤。AI議事録の先の活用。"
+emoji: "🔎"
 tags:
   - "ai"
   - "gcp"

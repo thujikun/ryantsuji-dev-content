@@ -4,6 +4,7 @@ publishedAt: "2026-03-25"
 updatedAt: "2026-05-03"
 slug: "db-graph-mcp"
 summary: "全社991テーブル・11 SQL DB・6 MongoDBを自然言語で横断検索できるDB Graph MCPの設計と、Graph RAGの中身。"
+emoji: "💽"
 tags:
   - "ai"
   - "security"

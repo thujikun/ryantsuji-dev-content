@@ -4,6 +4,7 @@ publishedAt: "2026-04-07"
 updatedAt: "2026-04-28"
 slug: "17-mcp-servers"
 summary: "エアークローゼットで3ヶ月で構築した17個の社内MCPサーバーを一挙公開。DB・インフラ・ドキュメント・PM・オブザーバビリティ・CIまでAIに開放。"
+emoji: "🚀"
 tags:
   - "ai"
   - "gcp"

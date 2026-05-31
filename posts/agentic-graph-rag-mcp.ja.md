@@ -4,6 +4,7 @@ publishedAt: "2026-05-07"
 updatedAt: "2026-05-16"
 slug: "agentic-graph-rag-mcp"
 summary: "Vector RAGと単発Graph RAGの限界、そしてLLMがMCP経由でグラフを能動的に探索するAgentic Graph RAGパターンの設計。"
+emoji: "🔁"
 tags:
   - "ai"
   - "webdev"

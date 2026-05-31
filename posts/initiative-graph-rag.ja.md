@@ -4,6 +4,7 @@ publishedAt: "2026-04-20"
 updatedAt: "2026-05-03"
 slug: "initiative-graph-rag"
 summary: "施策 × KPI をグラフで表し、LLM が MCP 経由で探索する Biz Graph。「あの施策、効果あった?」に AI が自動で答える仕組み。"
+emoji: "📊"
 tags:
   - "ai"
   - "typescript"

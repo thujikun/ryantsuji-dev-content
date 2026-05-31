@@ -4,6 +4,7 @@ publishedAt: "2026-04-27"
 updatedAt: "2026-05-16"
 slug: "sandbox-mcp"
 summary: "AIで作れるようになった非エンジニアのアプリを、Web/API/DB/Cron込みで1コマンドで社内公開できるSandbox MCPの設計。"
+emoji: "🦺"
 tags:
   - "ai"
   - "typescript"

@@ -4,6 +4,7 @@ publishedAt: "2026-05-01"
 updatedAt: "2026-05-16"
 slug: "mcp-parking-pattern"
 summary: "MCPのレスポンスがコンテキストを食い潰す問題に、重いペイロードをgitやblobに退避してキーだけ返すパターンで実測9割削減。"
+emoji: "✂️"
 tags:
   - "architecture"
   - "ai"

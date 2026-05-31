@@ -4,6 +4,7 @@ publishedAt: "2026-05-12"
 updatedAt: "2026-05-16"
 slug: "ai-harness-intro"
 summary: "社内AI基盤cortexの連載総論。PRの自動レビュー、運用の自動修復、非エンジニアの開発参加を実現する仕組みを順に公開していく。"
+emoji: "🏇"
 tags:
   - "ai"
   - "devops"
