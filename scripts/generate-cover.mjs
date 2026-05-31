@@ -16,24 +16,24 @@
  *   node scripts/generate-cover.mjs --force      # 既存も再生成（タイトル更新後など）
  */
 
-import { existsSync } from 'node:fs';
-import { mkdir, readdir, readFile, stat, writeFile } from 'node:fs/promises';
-import { dirname, resolve } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { existsSync } from "node:fs";
+import { mkdir, readdir, readFile, stat, writeFile } from "node:fs/promises";
+import { dirname, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 
-import { Resvg } from '@resvg/resvg-js';
-import satori from 'satori';
+import { Resvg } from "@resvg/resvg-js";
+import satori from "satori";
 
 const SCRIPTS_DIR = dirname(fileURLToPath(import.meta.url));
-const REPO_ROOT = resolve(SCRIPTS_DIR, '..');
-const POSTS_DIR = resolve(REPO_ROOT, 'posts');
-const COVERS_DIR = resolve(REPO_ROOT, 'images/posts');
-const FONT_CACHE_DIR = resolve(REPO_ROOT, '.cache/og-fonts');
+const REPO_ROOT = resolve(SCRIPTS_DIR, "..");
+const POSTS_DIR = resolve(REPO_ROOT, "posts");
+const COVERS_DIR = resolve(REPO_ROOT, "images/posts");
+const FONT_CACHE_DIR = resolve(REPO_ROOT, ".cache/og-fonts");
 
 const FONT_SOURCES = {
   serif:
-    'https://cdn.jsdelivr.net/npm/@fontsource/noto-serif-jp@5/files/noto-serif-jp-japanese-700-normal.woff',
-  sans: 'https://cdn.jsdelivr.net/npm/@fontsource/inter@5/files/inter-latin-500-normal.woff',
+    "https://cdn.jsdelivr.net/npm/@fontsource/noto-serif-jp@5/files/noto-serif-jp-japanese-700-normal.woff",
+  sans: "https://cdn.jsdelivr.net/npm/@fontsource/inter@5/files/inter-latin-500-normal.woff",
 };
 
 // ====================== font loading ======================
@@ -56,20 +56,15 @@ async function fetchFont(url, cachePath) {
 async function loadFonts() {
   const serif = await fetchFont(
     FONT_SOURCES.serif,
-    resolve(FONT_CACHE_DIR, 'noto-serif-jp-japanese-700.woff'),
+    resolve(FONT_CACHE_DIR, "noto-serif-jp-japanese-700.woff"),
   );
-  const sans = await fetchFont(
-    FONT_SOURCES.sans,
-    resolve(FONT_CACHE_DIR, 'inter-latin-500.woff'),
-  );
+  const sans = await fetchFont(FONT_SOURCES.sans, resolve(FONT_CACHE_DIR, "inter-latin-500.woff"));
   return { serif, sans };
 }
 
 // ====================== satori VNode factory ======================
 function h(type, props, ...children) {
-  const flat = children
-    .flat(Infinity)
-    .filter((c) => c !== null && c !== undefined && c !== false);
+  const flat = children.flat(Infinity).filter((c) => c !== null && c !== undefined && c !== false);
   return {
     type,
     props: {
@@ -80,39 +75,39 @@ function h(type, props, ...children) {
 }
 
 // ====================== OG template ======================
-const BRAND_TEAL = '#0abab5';
-const BRAND_TEAL_LIGHT = '#39c4bf';
-const TEXT_PRIMARY = '#f7f8f9';
-const TEXT_MUTED = '#a3a8af';
-const BG_BASE = '#0c1417';
+const BRAND_TEAL = "#0abab5";
+const BRAND_TEAL_LIGHT = "#39c4bf";
+const TEXT_PRIMARY = "#f7f8f9";
+const TEXT_MUTED = "#a3a8af";
+const BG_BASE = "#0c1417";
 
 /**
  * Box Drawing block (U+2500–U+257F) を em-dash に置換。Noto Serif JP に含まれず
  * tofu になるため block 単位で range 置換。
  */
 function sanitizeOgText(text) {
-  return text.replace(/[─-╿]/gu, '—');
+  return text.replace(/[─-╿]/gu, "—");
 }
 
 function OgTemplate({ title }) {
   const safeTitle = sanitizeOgText(title);
   return h(
-    'div',
+    "div",
     {
       style: {
-        width: '100%',
-        height: '100%',
-        display: 'flex',
-        flexDirection: 'column',
+        width: "100%",
+        height: "100%",
+        display: "flex",
+        flexDirection: "column",
         backgroundColor: BG_BASE,
-        padding: '48px 96px 48px 96px',
-        position: 'relative',
+        padding: "48px 96px 48px 96px",
+        position: "relative",
       },
     },
     // ambient blob (左上): site 本体の accent-bg と同じ teal glow
-    h('div', {
+    h("div", {
       style: {
-        position: 'absolute',
+        position: "absolute",
         top: -360,
         left: -360,
         width: 1080,
@@ -122,9 +117,9 @@ function OgTemplate({ title }) {
       },
     }),
     // ambient blob (右下): accent-border light
-    h('div', {
+    h("div", {
       style: {
-        position: 'absolute',
+        position: "absolute",
         bottom: -300,
         right: -300,
         width: 900,
@@ -135,51 +130,51 @@ function OgTemplate({ title }) {
     }),
     // 上段: rt logo
     h(
-      'div',
+      "div",
       {
-        style: { display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 18 },
+        style: { display: "flex", flexDirection: "row", alignItems: "center", gap: 18 },
       },
       h(
-        'div',
+        "div",
         {
           style: {
-            fontFamily: 'sans',
+            fontFamily: "sans",
             fontSize: 56,
             fontWeight: 700,
             color: BRAND_TEAL,
-            letterSpacing: '-0.04em',
+            letterSpacing: "-0.04em",
           },
         },
-        'rt',
+        "rt",
       ),
       h(
-        'div',
+        "div",
         {
           style: {
-            fontFamily: 'sans',
+            fontFamily: "sans",
             fontSize: 28,
             color: TEXT_MUTED,
-            letterSpacing: '0.02em',
+            letterSpacing: "0.02em",
           },
         },
-        'ryantsuji.dev',
+        "ryantsuji.dev",
       ),
     ),
     // 中央: title
     h(
-      'div',
+      "div",
       {
-        style: { flex: 1, display: 'flex', alignItems: 'flex-start', marginTop: 32 },
+        style: { flex: 1, display: "flex", alignItems: "flex-start", marginTop: 32 },
       },
       h(
-        'div',
+        "div",
         {
           style: {
-            fontFamily: 'serif',
+            fontFamily: "serif",
             fontSize: 64,
             lineHeight: 1.25,
             color: TEXT_PRIMARY,
-            letterSpacing: '-0.015em',
+            letterSpacing: "-0.015em",
           },
         },
         safeTitle,
@@ -187,24 +182,24 @@ function OgTemplate({ title }) {
     ),
     // 下段: tagline
     h(
-      'div',
+      "div",
       {
-        style: { display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 16 },
+        style: { display: "flex", flexDirection: "row", alignItems: "center", gap: 16 },
       },
-      h('div', {
+      h("div", {
         style: { width: 4, height: 40, backgroundColor: BRAND_TEAL, borderRadius: 2 },
       }),
       h(
-        'div',
+        "div",
         {
           style: {
-            fontFamily: 'sans',
+            fontFamily: "sans",
             fontSize: 24,
             color: TEXT_MUTED,
-            letterSpacing: '0.04em',
+            letterSpacing: "0.04em",
           },
         },
-        'engineering / design / product',
+        "engineering / design / product",
       ),
     ),
   );
@@ -216,11 +211,11 @@ async function renderCoverPng(title, fonts) {
     width: 1200,
     height: 630,
     fonts: [
-      { name: 'serif', data: fonts.serif, weight: 700, style: 'normal' },
-      { name: 'sans', data: fonts.sans, weight: 500, style: 'normal' },
+      { name: "serif", data: fonts.serif, weight: 700, style: "normal" },
+      { name: "sans", data: fonts.sans, weight: 500, style: "normal" },
     ],
   });
-  const png = new Resvg(svg, { fitTo: { mode: 'width', value: 1200 } }).render().asPng();
+  const png = new Resvg(svg, { fitTo: { mode: "width", value: 1200 } }).render().asPng();
   return Buffer.from(png);
 }
 
@@ -236,7 +231,7 @@ function parseFrontmatterBlock(source) {
  * ネストや配列は対象外。`title: "..."` / `title: ...` 両方に対応。
  */
 function readTopLevelField(frontmatterBody, key) {
-  const lines = frontmatterBody.split('\n');
+  const lines = frontmatterBody.split("\n");
   for (const line of lines) {
     if (/^\s/.test(line)) continue; // skip indented (= nested) lines
     const m = new RegExp(`^${key}\\s*:\\s*(.*)$`).exec(line);
@@ -262,7 +257,7 @@ function injectCoverLine(source, coverPath) {
   const fm = parseFrontmatterBlock(source);
   if (!fm) return { next: source, updated: false };
   const newCoverLine = `cover: ${coverPath}`;
-  const lines = fm.body.split('\n');
+  const lines = fm.body.split("\n");
 
   // top-level cover が存在するか確認
   let topLevelCoverIdx = -1;
@@ -279,7 +274,7 @@ function injectCoverLine(source, coverPath) {
       return { next: source, updated: false };
     }
     lines[topLevelCoverIdx] = newCoverLine;
-    newBody = lines.join('\n');
+    newBody = lines.join("\n");
   } else {
     newBody = `${fm.body}\n${newCoverLine}`;
   }
@@ -299,18 +294,16 @@ function parseFileName(filename) {
 // ====================== main ======================
 async function main() {
   const args = process.argv.slice(2);
-  const slugIdx = args.indexOf('--slug');
+  const slugIdx = args.indexOf("--slug");
   const slugFilter = slugIdx >= 0 ? args[slugIdx + 1] : null;
-  const force = args.includes('--force');
+  const force = args.includes("--force");
 
-  console.log('[cover-gen] loading fonts...');
+  console.log("[cover-gen] loading fonts...");
   const fonts = await loadFonts();
 
-  console.log('[cover-gen] reading posts...');
+  console.log("[cover-gen] reading posts...");
   const files = await readdir(POSTS_DIR);
-  const targets = files.filter(
-    (f) => /\.(ja|en)\.md$/.test(f) && !f.startsWith('_'),
-  );
+  const targets = files.filter((f) => /\.(ja|en)\.md$/.test(f) && !f.startsWith("_"));
 
   await mkdir(COVERS_DIR, { recursive: true });
 
@@ -324,13 +317,13 @@ async function main() {
     if (slugFilter && meta.slug !== slugFilter) continue;
 
     const filepath = resolve(POSTS_DIR, f);
-    const source = await readFile(filepath, 'utf-8');
+    const source = await readFile(filepath, "utf-8");
     const fm = parseFrontmatterBlock(source);
     if (!fm) {
       console.log(`  [skip] ${f}: no frontmatter`);
       continue;
     }
-    if (readTopLevelField(fm.body, 'excludeFromSyndication') === 'true') {
+    if (readTopLevelField(fm.body, "excludeFromSyndication") === "true") {
       console.log(`  [skip] ${f}: excludeFromSyndication`);
       continue;
     }
@@ -352,7 +345,7 @@ async function main() {
       continue;
     }
 
-    const title = readTopLevelField(fm.body, 'title');
+    const title = readTopLevelField(fm.body, "title");
     if (!title) {
       console.log(`  [skip] ${f}: no title`);
       continue;
