@@ -1,5 +1,5 @@
 ---
-title: "Fixed Before Anyone Notices, Stronger After Every Fix -- Self-Healing + Auto-Added Guardrails at cortex (Series Part 4)"
+title: "Fixed Before Anyone Notices, Stronger After Every Fix: Self-Healing + Self-Strengthening (Series Part 4)"
 publishedAt: "2026-06-02T08:30:00+09:00"
 updatedAt: "2026-06-02T08:30:00+09:00"
 draft: true
