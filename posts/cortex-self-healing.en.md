@@ -18,7 +18,7 @@ syndication:
   devto:
     id: 3787931
     slug: "fixed-before-anyone-notices-stronger-after-every-fix-self-healing-auto-added-guardrails-at-5d5a-temp-slug-9351976"
-    contentHash: "3bdebda7e318f449"
+    contentHash: "85bc525b209dc975"
     publishAt: "2026-06-02T08:30:00+09:00"
 cover: /images/posts/cortex-self-healing.en.cover.png
 ---

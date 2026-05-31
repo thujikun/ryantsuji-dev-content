@@ -16,7 +16,7 @@ syndication:
   devto:
     id: 3486118
     slug: "how-we-built-an-automated-meeting-intelligence-system-with-google-meet-slack-and-rag-42ln"
-    contentHash: "ca5a0a981abc2b85"
+    contentHash: "3a24d64dbbe9cf21"
 cover: /images/posts/meeting-intelligence.en.cover.png
 ---
 

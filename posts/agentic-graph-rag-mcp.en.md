@@ -16,7 +16,7 @@ syndication:
   devto:
     id: 3622364
     slug: "graph-rag-isnt-a-one-shot-anymore-the-case-for-agentic-graph-rag-mcps-1dj5"
-    contentHash: "525b095c551d96f6"
+    contentHash: "4ed8587fd733031f"
 cover: /images/posts/agentic-graph-rag-mcp.en.cover.png
 ---
 

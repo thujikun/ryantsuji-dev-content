@@ -16,7 +16,7 @@ syndication:
   devto:
     id: 3559369
     slug: "bridging-i-want-to-build-and-i-want-to-publish-safely-for-non-engineers-sandbox-mcp-392a"
-    contentHash: "aef91bd354011eb9"
+    contentHash: "4cba5550404df585"
 cover: /images/posts/sandbox-mcp.en.cover.png
 ---
 
