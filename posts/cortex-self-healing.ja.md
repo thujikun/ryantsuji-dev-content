@@ -14,10 +14,6 @@ tags:
 lang: "ja"
 series: "building-ai-harness"
 seriesOrder: 4
-syndication:
-  zenn:
-    id: ""
-    publishAt: "2026-06-02T08:30:00+09:00"
 ---
 
 
