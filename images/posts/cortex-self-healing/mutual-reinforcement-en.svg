@@ -69,17 +69,17 @@
   <line x1="365" y1="495" x2="600" y2="358" stroke="#fb923c" stroke-width="2.5" marker-end="url(#a-a78bfa)"/>
   <g font-family="Inter, Noto Sans, system-ui, sans-serif">
     <rect x="315" y="395" width="280" height="44" rx="6" fill="#0f172a" stroke="#a78bfa" stroke-width="1"/>
-    <text x="455" y="415" font-size="15" fill="#cbd5e1" text-anchor="middle" font-weight="bold">Root cause + horizontal expansion</text>
-    <text x="455" y="431" font-size="14" fill="#94a3b8" text-anchor="middle">trace_connections / search_nodes</text>
+    <text x="455" y="415" font-size="14" fill="#cbd5e1" text-anchor="middle" font-weight="bold">Root cause + horizontal expansion</text>
+    <text x="455" y="431" font-size="13" fill="#94a3b8" text-anchor="middle">trace_connections / search_nodes</text>
   </g>
 
   <!-- cpg ↔ Auto-review: bidirectional -->
   <line x1="815" y1="360" x2="1050" y2="500" stroke="#a78bfa" stroke-width="2.5" marker-end="url(#a-38bdf8)"/>
   <line x1="1035" y1="495" x2="800" y2="358" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#a-a78bfa)"/>
   <g font-family="Inter, Noto Sans, system-ui, sans-serif">
-    <rect x="825" y="395" width="240" height="44" rx="6" fill="#0f172a" stroke="#a78bfa" stroke-width="1"/>
-    <text x="945" y="415" font-size="15" fill="#cbd5e1" text-anchor="middle" font-weight="bold">Impact analysis + dependency check</text>
-    <text x="945" y="431" font-size="14" fill="#94a3b8" text-anchor="middle">Pre-load changed nodes</text>
+    <rect x="805" y="395" width="280" height="44" rx="6" fill="#0f172a" stroke="#a78bfa" stroke-width="1"/>
+    <text x="945" y="415" font-size="14" fill="#cbd5e1" text-anchor="middle" font-weight="bold">Impact analysis + dependency check</text>
+    <text x="945" y="431" font-size="13" fill="#94a3b8" text-anchor="middle">Pre-load changed nodes</text>
   </g>
 
   <!-- Self-Healing ↔ Auto-review: bidirectional, curved -->
@@ -87,8 +87,8 @@
   <path d="M 960 640 Q 700 780 440 640" fill="none" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#a-fb923c)"/>
   <g font-family="Inter, Noto Sans, system-ui, sans-serif">
     <rect x="540" y="745" width="320" height="46" rx="6" fill="#0f172a" stroke="#cbd5e1" stroke-width="1"/>
-    <text x="700" y="765" font-size="15" fill="#cbd5e1" text-anchor="middle" font-weight="bold">Open PR → review → fix</text>
-    <text x="700" y="781" font-size="14" fill="#94a3b8" text-anchor="middle">Via [Recurrence] lens: forces recurrence prevention</text>
+    <text x="700" y="765" font-size="14" fill="#cbd5e1" text-anchor="middle" font-weight="bold">Open PR → review → fix</text>
+    <text x="700" y="781" font-size="12" fill="#94a3b8" text-anchor="middle">Via [Recurrence] lens, prevention is required</text>
   </g>
 
   <!-- ============= Output: Guides ============= -->
