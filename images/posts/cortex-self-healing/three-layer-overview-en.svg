@@ -88,7 +88,7 @@
 
       <rect x="500" y="0" width="220" height="60" rx="8" fill="#1a0d0a" stroke="#fb923c" stroke-width="1.5"/>
       <text x="610" y="24" font-size="17" fill="#fb923c" text-anchor="middle" font-weight="bold">cpg + Loki + git blame</text>
-      <text x="610" y="44" font-size="15" fill="#cbd5e1" text-anchor="middle">Root cause + horizontal expansion</text>
+      <text x="610" y="44" font-size="13" fill="#cbd5e1" text-anchor="middle">Root cause + horizontal expansion</text>
 
       <line x1="720" y1="30" x2="760" y2="30" stroke="#fb923c" stroke-width="2" marker-end="url(#a-fb923c)"/>
 
@@ -141,13 +141,13 @@
 
       <rect x="1200" y="0" width="320" height="86" rx="8" fill="#0d251a" stroke="#4ade80" stroke-width="1.8"/>
       <text x="1360" y="24" font-size="19" fill="#4ade80" text-anchor="middle" font-weight="bold">Result</text>
-      <text x="1360" y="48" font-size="16" fill="#cbd5e1" text-anchor="middle">From then on, this class of incident</text>
-      <text x="1360" y="68" font-size="16" fill="#cbd5e1" text-anchor="middle"><tspan font-weight="bold" fill="#4ade80">Is mechanically rejected by CI / lint</tspan></text>
+      <text x="1360" y="48" font-size="14" fill="#cbd5e1" text-anchor="middle">From then on, this class of incident</text>
+      <text x="1360" y="68" font-size="14" fill="#cbd5e1" text-anchor="middle"><tspan font-weight="bold" fill="#4ade80">Is mechanically rejected by CI / lint</tspan></text>
     </g>
   </g>
 
   <!-- Feedback loop arrow on the right side (Layer 3 → Production for future) -->
-  <path d="M 1480 600 Q 1570 600 1570 170 Q 1570 130 1480 130" fill="none" stroke="#4ade80" stroke-width="2.5" stroke-dasharray="6,4" marker-end="url(#a-4ade80)"/>
+  <path d="M 1480 600 Q 1570 600 1570 188 Q 1570 148 1480 148" fill="none" stroke="#4ade80" stroke-width="2.5" stroke-dasharray="6,4" marker-end="url(#a-4ade80)"/>
   <text x="1535" y="594" font-size="17" fill="#4ade80" font-family="Inter, Noto Sans, system-ui, sans-serif" font-weight="bold" text-anchor="middle" transform="rotate(-90, 1535, 594)">Same pattern mechanically rejected next time</text>
 
   <!-- Bottom footer -->

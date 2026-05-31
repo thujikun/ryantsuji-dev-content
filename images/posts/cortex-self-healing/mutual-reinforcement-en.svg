@@ -25,9 +25,9 @@
 
     <line x1="560" y1="262" x2="840" y2="262" stroke="#334155" stroke-width="1"/>
 
-    <text x="700" y="286" font-size="16" fill="#94a3b8" text-anchor="middle">Impact scope, dependencies, related docs in one hop</text>
-    <text x="700" y="306" font-size="16" fill="#94a3b8" text-anchor="middle">Answers 'where else does this trap exist' instantly</text>
-    <text x="700" y="326" font-size="16" fill="#94a3b8" text-anchor="middle">Semantic search + graph traversal</text>
+    <text x="700" y="286" font-size="14" fill="#94a3b8" text-anchor="middle">Impact scope, dependencies, related docs in one hop</text>
+    <text x="700" y="304" font-size="14" fill="#94a3b8" text-anchor="middle">Answers 'where else does this trap exist' instantly</text>
+    <text x="700" y="322" font-size="14" fill="#94a3b8" text-anchor="middle">Semantic search + graph traversal</text>
 
     <text x="700" y="348" font-size="15" fill="#a78bfa" text-anchor="middle" font-weight="bold">→ Detailed in Part 2</text>
   </g>
@@ -36,7 +36,7 @@
   <g font-family="Inter, Noto Sans, system-ui, sans-serif">
     <rect x="120" y="500" width="320" height="220" rx="14" fill="#251a0d" stroke="#fb923c" stroke-width="2.5"/>
     <text x="280" y="540" font-size="28" fill="#fb923c" text-anchor="middle" font-weight="bold">Self-Healing</text>
-    <text x="280" y="562" font-size="15" fill="#cbd5e1" text-anchor="middle">AI investigates and fixes production alerts</text>
+    <text x="280" y="562" font-size="14" fill="#cbd5e1" text-anchor="middle">AI investigates and fixes production alerts</text>
 
     <line x1="140" y1="580" x2="420" y2="580" stroke="#334155" stroke-width="1"/>
 
@@ -51,7 +51,7 @@
   <g font-family="Inter, Noto Sans, system-ui, sans-serif">
     <rect x="960" y="500" width="320" height="220" rx="14" fill="#0d1f2d" stroke="#38bdf8" stroke-width="2.5"/>
     <text x="1120" y="540" font-size="28" fill="#38bdf8" text-anchor="middle" font-weight="bold">Auto-review</text>
-    <text x="1120" y="562" font-size="15" fill="#cbd5e1" text-anchor="middle">Gates PR-stage quality across 9 lenses</text>
+    <text x="1120" y="562" font-size="14" fill="#cbd5e1" text-anchor="middle">Gates PR-stage quality across 9 lenses</text>
 
     <line x1="980" y1="580" x2="1260" y2="580" stroke="#334155" stroke-width="1"/>
 

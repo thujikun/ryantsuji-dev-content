@@ -132,7 +132,7 @@
       <text x="1060" y="379">⑦ [Observability]  ⑧ [AI-Antipattern]</text>
 
       <rect x="900" y="390" width="320" height="22" rx="4" fill="#1a1525" stroke="#a78bfa" stroke-width="1.5"/>
-      <text x="1060" y="405" fill="#a78bfa">⑨ [Recurrence] ← requires recurrence-prevention Guide</text>
+      <text x="1060" y="405" font-size="12" fill="#a78bfa">⑨ [Recurrence] ← requires a new Guide</text>
     </g>
 
     <line x1="900" y1="424" x2="1220" y2="424" stroke="#334155" stroke-width="1"/>

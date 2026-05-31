@@ -31,18 +31,19 @@
     <text x="380" y="187" font-size="28" fill="#a78bfa" text-anchor="middle" font-weight="bold">1</text>
 
     <rect x="282" y="225" width="200" height="200" rx="14" fill="#1a1525" stroke="#a78bfa" stroke-width="2"/>
-    <text x="382" y="255" font-size="19" fill="#a78bfa" text-anchor="middle" font-weight="bold">Horizontal expansion via cpg</text>
+    <text x="382" y="250" font-size="16" fill="#a78bfa" text-anchor="middle" font-weight="bold">Horizontal expansion</text>
+    <text x="382" y="270" font-size="16" fill="#a78bfa" text-anchor="middle" font-weight="bold">via cpg</text>
 
-    <line x1="302" y1="270" x2="462" y2="270" stroke="#334155" stroke-width="1"/>
+    <line x1="302" y1="285" x2="462" y2="285" stroke="#334155" stroke-width="1"/>
 
-    <text x="382" y="294" font-size="16" fill="#cbd5e1" text-anchor="middle">Not just the fix target —</text>
-    <text x="382" y="312" font-size="16" fill="#cbd5e1" text-anchor="middle">every similar node enumerated</text>
+    <text x="382" y="306" font-size="14" fill="#cbd5e1" text-anchor="middle">Not just the fix target —</text>
+    <text x="382" y="322" font-size="14" fill="#cbd5e1" text-anchor="middle">every similar node enumerated</text>
 
-    <text x="382" y="344" font-size="15" fill="#94a3b8" text-anchor="middle">trace_connections /</text>
-    <text x="382" y="360" font-size="15" fill="#94a3b8" text-anchor="middle">search_product_graph_nodes</text>
+    <text x="382" y="350" font-size="13" fill="#94a3b8" text-anchor="middle">trace_connections /</text>
+    <text x="382" y="366" font-size="13" fill="#94a3b8" text-anchor="middle">search_product_graph_nodes</text>
 
-    <text x="382" y="392" font-size="15" fill="#94a3b8" text-anchor="middle">'Where else does</text>
-    <text x="382" y="408" font-size="15" fill="#94a3b8" text-anchor="middle">this trap exist?' answered instantly</text>
+    <text x="382" y="394" font-size="13" fill="#94a3b8" text-anchor="middle">'Where else does this trap exist?'</text>
+    <text x="382" y="410" font-size="13" fill="#94a3b8" text-anchor="middle">answered instantly</text>
   </g>
 
   <line x1="486" y1="320" x2="522" y2="320" stroke="#a78bfa" stroke-width="2" marker-end="url(#a-fb923c)"/>
@@ -53,23 +54,24 @@
     <text x="644" y="187" font-size="28" fill="#fb923c" text-anchor="middle" font-weight="bold">2</text>
 
     <rect x="524" y="225" width="240" height="200" rx="14" fill="#251a0d" stroke="#fb923c" stroke-width="2"/>
-    <text x="644" y="255" font-size="19" fill="#fb923c" text-anchor="middle" font-weight="bold">New Guide added in same PR</text>
+    <text x="644" y="250" font-size="17" fill="#fb923c" text-anchor="middle" font-weight="bold">New Guide added</text>
+    <text x="644" y="270" font-size="17" fill="#fb923c" text-anchor="middle" font-weight="bold">in same PR</text>
 
-    <line x1="544" y1="270" x2="764" y2="270" stroke="#334155" stroke-width="1"/>
+    <line x1="544" y1="285" x2="764" y2="285" stroke="#334155" stroke-width="1"/>
 
-    <rect x="540" y="282" width="208" height="22" rx="4" fill="#1a0d0a" stroke="#fb923c" stroke-width="1"/>
-    <text x="644" y="297" font-size="15" fill="#cbd5e1" text-anchor="middle">Custom ESLint rule</text>
+    <rect x="540" y="294" width="208" height="22" rx="4" fill="#1a0d0a" stroke="#fb923c" stroke-width="1"/>
+    <text x="644" y="309" font-size="14" fill="#cbd5e1" text-anchor="middle">Custom ESLint rule</text>
 
-    <rect x="540" y="308" width="208" height="22" rx="4" fill="#1a0d0a" stroke="#fb923c" stroke-width="1"/>
-    <text x="644" y="323" font-size="14" fill="#cbd5e1" text-anchor="middle">CI guard (scripts/check-*)</text>
+    <rect x="540" y="320" width="208" height="22" rx="4" fill="#1a0d0a" stroke="#fb923c" stroke-width="1"/>
+    <text x="644" y="335" font-size="14" fill="#cbd5e1" text-anchor="middle">CI guard (scripts/check-*)</text>
 
-    <rect x="540" y="334" width="208" height="22" rx="4" fill="#1a0d0a" stroke="#fb923c" stroke-width="1"/>
-    <text x="644" y="349" font-size="14" fill="#cbd5e1" text-anchor="middle">TypeScript type constraint</text>
+    <rect x="540" y="346" width="208" height="22" rx="4" fill="#1a0d0a" stroke="#fb923c" stroke-width="1"/>
+    <text x="644" y="361" font-size="14" fill="#cbd5e1" text-anchor="middle">TypeScript type constraint</text>
 
-    <rect x="540" y="360" width="208" height="22" rx="4" fill="#1a0d0a" stroke="#fb923c" stroke-width="1"/>
-    <text x="644" y="375" font-size="15" fill="#cbd5e1" text-anchor="middle">Guideline entry</text>
+    <rect x="540" y="372" width="208" height="22" rx="4" fill="#1a0d0a" stroke="#fb923c" stroke-width="1"/>
+    <text x="644" y="387" font-size="14" fill="#cbd5e1" text-anchor="middle">Guideline entry</text>
 
-    <text x="644" y="404" font-size="15" fill="#94a3b8" text-anchor="middle">(one of these)</text>
+    <text x="644" y="412" font-size="13" fill="#94a3b8" text-anchor="middle">(one of these)</text>
   </g>
 
   <line x1="766" y1="320" x2="786" y2="320" stroke="#fb923c" stroke-width="2" marker-end="url(#a-38bdf8)"/>
