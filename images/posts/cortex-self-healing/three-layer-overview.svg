@@ -120,28 +120,28 @@
     <text x="100" y="786" font-size="17" fill="#94a3b8">[Recurrence] 観点が「同じ罠を2回以上踏んだ → lint化必須」を強制。修正PRに新規Guideも含めないとマージされない。</text>
 
     <g transform="translate(0, 812)">
-      <rect x="100" y="0" width="280" height="86" rx="8" fill="#120a25" stroke="#a78bfa" stroke-width="1.5"/>
-      <text x="240" y="24" font-size="19" fill="#a78bfa" text-anchor="middle" font-weight="bold">機械が読むGuide</text>
-      <text x="240" y="46" font-size="16" fill="#cbd5e1" text-anchor="middle">Custom ESLint 26本 / CI guard 13本</text>
-      <text x="240" y="64" font-size="16" fill="#cbd5e1" text-anchor="middle">oxlint 183本 / TS strict / 90% coverage</text>
-      <text x="240" y="80" font-size="15" fill="#94a3b8" text-anchor="middle">マージ前にCIで違反を弾く</text>
+      <rect x="80" y="0" width="340" height="86" rx="8" fill="#120a25" stroke="#a78bfa" stroke-width="1.5"/>
+      <text x="250" y="24" font-size="19" fill="#a78bfa" text-anchor="middle" font-weight="bold">機械が読むGuide</text>
+      <text x="250" y="46" font-size="15" fill="#cbd5e1" text-anchor="middle">Custom ESLint 26本 / CI guard 13本</text>
+      <text x="250" y="64" font-size="15" fill="#cbd5e1" text-anchor="middle">oxlint 183本 / TS strict / 90% coverage</text>
+      <text x="250" y="80" font-size="14" fill="#94a3b8" text-anchor="middle">マージ前にCIで違反を弾く</text>
 
-      <rect x="420" y="0" width="280" height="86" rx="8" fill="#120a25" stroke="#a78bfa" stroke-width="1.5"/>
-      <text x="560" y="24" font-size="19" fill="#a78bfa" text-anchor="middle" font-weight="bold">人とAIが読むGuide</text>
-      <text x="560" y="46" font-size="16" fill="#cbd5e1" text-anchor="middle">recurrence-prevention.md</text>
-      <text x="560" y="64" font-size="16" fill="#cbd5e1" text-anchor="middle">severity.md / ai-antipattern.md 等</text>
-      <text x="560" y="80" font-size="15" fill="#94a3b8" text-anchor="middle">自動レビューの判定基準</text>
+      <rect x="440" y="0" width="320" height="86" rx="8" fill="#120a25" stroke="#a78bfa" stroke-width="1.5"/>
+      <text x="600" y="24" font-size="19" fill="#a78bfa" text-anchor="middle" font-weight="bold">人とAIが読むGuide</text>
+      <text x="600" y="46" font-size="15" fill="#cbd5e1" text-anchor="middle">recurrence-prevention.md</text>
+      <text x="600" y="64" font-size="15" fill="#cbd5e1" text-anchor="middle">severity.md / ai-antipattern.md 等</text>
+      <text x="600" y="80" font-size="14" fill="#94a3b8" text-anchor="middle">自動レビューの判定基準</text>
 
-      <rect x="740" y="0" width="320" height="86" rx="8" fill="#120a25" stroke="#a78bfa" stroke-width="1.5"/>
-      <text x="900" y="24" font-size="19" fill="#a78bfa" text-anchor="middle" font-weight="bold">Self-Healingが動くたびに追加</text>
-      <text x="900" y="46" font-size="16" fill="#cbd5e1" text-anchor="middle">「踏んだら機械化」: no-silent-catch /</text>
-      <text x="900" y="64" font-size="16" fill="#cbd5e1" text-anchor="middle">require-fetch-timeout / check-otel-env-injection</text>
-      <text x="900" y="80" font-size="15" fill="#94a3b8" text-anchor="middle">既存違反も同PRで0化</text>
+      <rect x="780" y="0" width="400" height="86" rx="8" fill="#120a25" stroke="#a78bfa" stroke-width="1.5"/>
+      <text x="980" y="24" font-size="19" fill="#a78bfa" text-anchor="middle" font-weight="bold">Self-Healingが動くたびに追加</text>
+      <text x="980" y="46" font-size="15" fill="#cbd5e1" text-anchor="middle">「踏んだら機械化」: no-silent-catch /</text>
+      <text x="980" y="64" font-size="15" fill="#cbd5e1" text-anchor="middle">require-fetch-timeout / check-otel-env-injection</text>
+      <text x="980" y="80" font-size="14" fill="#94a3b8" text-anchor="middle">既存違反も同PRで0化</text>
 
-      <rect x="1100" y="0" width="340" height="86" rx="8" fill="#0d251a" stroke="#4ade80" stroke-width="1.8"/>
-      <text x="1270" y="24" font-size="19" fill="#4ade80" text-anchor="middle" font-weight="bold">結果</text>
-      <text x="1270" y="48" font-size="17" fill="#cbd5e1" text-anchor="middle">以降、同種クラスの障害は</text>
-      <text x="1270" y="68" font-size="17" fill="#cbd5e1" text-anchor="middle"><tspan font-weight="bold" fill="#4ade80">CI / lint で構造的に発生不可能</tspan></text>
+      <rect x="1200" y="0" width="320" height="86" rx="8" fill="#0d251a" stroke="#4ade80" stroke-width="1.8"/>
+      <text x="1360" y="24" font-size="19" fill="#4ade80" text-anchor="middle" font-weight="bold">結果</text>
+      <text x="1360" y="48" font-size="16" fill="#cbd5e1" text-anchor="middle">以降、同種クラスの障害は</text>
+      <text x="1360" y="68" font-size="16" fill="#cbd5e1" text-anchor="middle"><tspan font-weight="bold" fill="#4ade80">CI / lintで構造的に発生不可能</tspan></text>
     </g>
   </g>
 
