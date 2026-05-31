@@ -37,7 +37,7 @@ This post is about **the automated PR review pipeline** -- AI reviews the PR, a 
 | 1 | Series intro: cortex harness | PRs merging unattended / incidents fixed before anyone notices | [ai-harness-intro](/posts/ai-harness-intro) |
 | 2 | Product Graph (cpg) | Code / docs / DB / infra unified into one graph | [cortex-product-graph](/posts/cortex-product-graph) |
 | 3 | Auto PR review | webhook -> AI review -> auto-fix -> squash merge | This article ← you are here |
-| 4 | Self-Healing + observability + auto-added guardrails | Alert -> AI investigates -> fix PR + new lint/type gate -> auto redeploy + recurrence blocked | Coming soon |
+| 4 | Self-Healing + observability + auto-added guardrails | Alert -> AI investigates -> fix PR + new lint/type gate -> auto redeploy + same-pattern writes get auto-rejected | Coming soon |
 | 5 | Scaling the harness from cortex to toC services | Non-engineer contributions in practice + scaling cortex's harness to the whole product org | Coming soon |
 
 ## Start with last month's numbers
