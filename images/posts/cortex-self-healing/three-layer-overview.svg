@@ -16,7 +16,7 @@
 
   <!-- Production anomaly at top -->
   <g font-family="Noto Sans JP, sans-serif">
-    <rect x="630" y="130" width="340" height="80" rx="14" fill="#251a0d" stroke="#f87171" stroke-width="2.5"/>
+    <rect x="540" y="130" width="520" height="80" rx="14" fill="#251a0d" stroke="#f87171" stroke-width="2.5"/>
     <text x="800" y="162" font-size="24" fill="#f87171" text-anchor="middle" font-weight="bold">本番異常</text>
     <text x="800" y="184" font-size="17" fill="#cbd5e1" text-anchor="middle">エラーログ閾値超え / デプロイ失敗 / pipeline失敗等</text>
     <text x="800" y="200" font-size="15" fill="#94a3b8" text-anchor="middle">人が気づく前に発火</text>
