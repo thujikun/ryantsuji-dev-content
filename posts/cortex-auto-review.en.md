@@ -398,7 +398,7 @@ cpg index rebuilt (only changed nodes regenerate embeddings -- see Part 2)
 
 `pulumi up <stack1> <stack2> ...` runs in parallel, so deploying 9 stacks at once finishes in about 8-12 minutes. End to end, merge-to-production is averaging 10-15 minutes.
 
-This compounds nicely with `auto-fix` PRs. **Incident alert -> Self-Healing identifies root cause -> opens a fix PR -> auto review pass -> auto merge -> auto deploy** runs as a single closed loop without human involvement (covered in Part 4).
+This compounds nicely with Self-Healing PRs. **Incident alert -> Self-Healing identifies root cause -> opens a fix PR -> auto review pass -> auto merge -> auto deploy** runs as a single closed loop without human involvement (covered in Part 4).
 
 ## The numbers, in more detail
 
@@ -448,4 +448,4 @@ cortex is the opposite. **We extended the harness on the reviewer side first, be
 
 Up next in **Part 4**: **Self-Healing + observability + auto-added guardrails** -- a pipeline where a production alert (observed via OTel/Loki/Mimir/Tempo/Faro) triggers AI investigation, an AI-authored fix PR plus a new lint/type gate, auto-review, auto-merge, and auto-redeploy. The fix and a recurrence-prevention guardrail land together, so the same class of incident structurally can't fire again. If auto review protects quality at PR time, Part 4 protects it **at production time, while growing the quality gates themselves**.
 
-The headline number above includes `auto-fix`-flavored PRs (= Self-Healing output). For certain classes of incidents, the fix is already merged before anyone has time to react -- that's where cortex sits today. See you next time.
+The headline number above includes Self-Healing PRs (production alerts that AI investigates, fixes, and auto-deploys). For certain classes of incidents, the fix is already merged before anyone has time to react -- that's where cortex sits today. See you next time.

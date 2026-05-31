@@ -12,7 +12,7 @@
 
   <!-- Title -->
   <text x="800" y="56" font-size="30" fill="#e2e8f0" text-anchor="middle" font-weight="bold" font-family="Noto Sans JP, sans-serif">Self-Healing 全フロー ── アラート発火から本番復旧まで平均10〜20分</text>
-  <text x="800" y="92" font-size="18" fill="#94a3b8" text-anchor="middle" font-family="Noto Sans JP, sans-serif">直近30日で 115本の auto-fix PR がマージ + 自動再デプロイ。人の対応はAIが「修正不可」と判断したケースのみ。</text>
+  <text x="800" y="92" font-size="18" fill="#94a3b8" text-anchor="middle" font-family="Noto Sans JP, sans-serif">直近30日で 115本の Self-Healing PR がマージ + 自動再デプロイ。人の対応はAIが「修正不可」と判断したケースのみ。</text>
 
   <!-- Phase labels -->
   <g font-family="Noto Sans JP, sans-serif" font-size="16">

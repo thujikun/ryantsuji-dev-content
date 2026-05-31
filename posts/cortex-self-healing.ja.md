@@ -4,7 +4,7 @@ publishedAt: "2026-06-02T08:30:00+09:00"
 updatedAt: "2026-06-02T08:30:00+09:00"
 draft: true
 slug: "cortex-self-healing"
-summary: "社内AI基盤cortexの連載Part 4。本番アラートをAIが調査・修正・デプロイまで完結させるSelf-Healingと、その手前のOTel/Loki/Mimir/Tempo/Faro観測スタック、そして修正と同時に再発防止のlint/型ゲートが自動で増えていく仕組み。直近30日で115本のauto-fix PRがマージされ、同種障害が構造的に再発できなくなっていく流れを実装目線で。"
+summary: "社内AI基盤cortexの連載Part 4。本番アラートをAIが調査・修正・デプロイまで完結させるSelf-Healingと、その手前のOTel/Loki/Mimir/Tempo/Faro観測スタック、そして修正と同時に再発防止のlint/型ゲートが自動で増えていく仕組み。直近30日で115本のSelf-Healing PRがマージされ、同種障害が構造的に再発できなくなっていく流れを実装目線で。"
 tags:
   - "ai"
   - "typescript"
@@ -34,7 +34,7 @@ syndication:
 
 ## いきなり1ヶ月分の数字から
 
-**直近30日でマージされた`auto-fix`系PR: 115本。**
+**直近30日でマージされたSelf-Healing PR: 115本。**
 
 **ほぼ全て人の介入なしでmerge + deploy完了。**
 
