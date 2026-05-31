@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <rect width="1600" height="900" fill="#0f172a"/>
+
+  <defs>
+    <marker id="a-94a3b8" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#94a3b8"/></marker>
+    <marker id="a-4ade80" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#4ade80"/></marker>
+    <marker id="a-38bdf8" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#38bdf8"/></marker>
+    <marker id="a-fb923c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#fb923c"/></marker>
+    <marker id="a-f87171" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#f87171"/></marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="800" y="56" font-size="30" fill="#e2e8f0" text-anchor="middle" font-weight="bold" font-family="Noto Sans JP, sans-serif">Self-Healing 全フロー ── アラート発火から本番復旧まで平均10〜20分</text>
+  <text x="800" y="92" font-size="18" fill="#94a3b8" text-anchor="middle" font-family="Noto Sans JP, sans-serif">直近30日で 115本の auto-fix PR がマージ + 自動再デプロイ。人の対応はAIが「修正不可」と判断したケースのみ。</text>
+
+  <!-- Phase labels -->
+  <g font-family="Noto Sans JP, sans-serif" font-size="16">
+    <text x="140" y="150" fill="#cbd5e1" text-anchor="middle" font-weight="bold">1. Trigger</text>
+    <text x="400" y="150" fill="#cbd5e1" text-anchor="middle" font-weight="bold">2. Relay</text>
+    <text x="660" y="150" fill="#cbd5e1" text-anchor="middle" font-weight="bold">3. self-healing mode</text>
+    <text x="960" y="150" fill="#cbd5e1" text-anchor="middle" font-weight="bold">4. Review (Part 3)</text>
+    <text x="1320" y="150" fill="#cbd5e1" text-anchor="middle" font-weight="bold">5. Merge &amp; Deploy</text>
+  </g>
+
+  <!-- ============= 1. Trigger ============= -->
+  <g font-family="Noto Sans JP, sans-serif">
+    <rect x="30" y="180" width="220" height="280" rx="14" fill="#251a0d" stroke="#f87171" stroke-width="2.5"/>
+    <text x="140" y="218" font-size="18" fill="#f87171" text-anchor="middle" font-weight="bold">Grafana Alert</text>
+    <text x="140" y="240" font-size="13" fill="#cbd5e1" text-anchor="middle">firing</text>
+
+    <line x1="50" y1="258" x2="230" y2="258" stroke="#334155" stroke-width="1"/>
+
+    <text x="140" y="282" font-size="13" fill="#94a3b8" text-anchor="middle">Pulumi で declarative</text>
+    <text x="140" y="300" font-size="13" fill="#94a3b8" text-anchor="middle">に管理された Alert Rule</text>
+    <text x="140" y="328" font-size="13" fill="#94a3b8" text-anchor="middle">error 閾値超え /</text>
+    <text x="140" y="346" font-size="13" fill="#94a3b8" text-anchor="middle">deploy failed /</text>
+    <text x="140" y="364" font-size="13" fill="#94a3b8" text-anchor="middle">pipeline 失敗</text>
+
+    <line x1="50" y1="384" x2="230" y2="384" stroke="#334155" stroke-width="1"/>
+
+    <text x="140" y="408" font-size="12" fill="#cbd5e1" text-anchor="middle" font-weight="bold">POST /webhook/grafana</text>
+    <text x="140" y="430" font-size="11" fill="#94a3b8" text-anchor="middle">ペイロードを relay へ</text>
+  </g>
+  <line x1="252" y1="320" x2="288" y2="320" stroke="#f87171" stroke-width="2" marker-end="url(#a-fb923c)"/>
+
+  <!-- ============= 2. Event Relay ============= -->
+  <g font-family="Noto Sans JP, sans-serif">
+    <rect x="290" y="180" width="220" height="280" rx="14" fill="#1a0d0a" stroke="#fb923c" stroke-width="2.5"/>
+    <text x="400" y="218" font-size="17" fill="#fb923c" text-anchor="middle" font-weight="bold">Event Relay (自前)</text>
+    <text x="400" y="240" font-size="12" fill="#94a3b8" text-anchor="middle">Cloud Run + Firestore</text>
+
+    <line x1="310" y1="258" x2="490" y2="258" stroke="#334155" stroke-width="1"/>
+
+    <text x="400" y="284" font-size="13" fill="#cbd5e1" text-anchor="middle">webhook 受信</text>
+    <text x="400" y="302" font-size="13" fill="#cbd5e1" text-anchor="middle">→ Firestore に永続化</text>
+
+    <text x="400" y="332" font-size="13" fill="#cbd5e1" text-anchor="middle">SSE で各PCに配信</text>
+    <text x="400" y="350" font-size="11" fill="#94a3b8" text-anchor="middle">event: grafana-alert</text>
+
+    <line x1="310" y1="370" x2="490" y2="370" stroke="#334155" stroke-width="1"/>
+
+    <text x="400" y="394" font-size="11" fill="#94a3b8" text-anchor="middle">Last-Event-IDで未送信再送</text>
+    <text x="400" y="412" font-size="11" fill="#94a3b8" text-anchor="middle">取りこぼしゼロ</text>
+    <text x="400" y="436" font-size="11" fill="#94a3b8" text-anchor="middle">GitHub webhook と共用</text>
+  </g>
+  <line x1="512" y1="320" x2="548" y2="320" stroke="#fb923c" stroke-width="2" marker-end="url(#a-fb923c)"/>
+
+  <!-- ============= 3. self-healing mode ============= -->
+  <g font-family="Noto Sans JP, sans-serif">
+    <rect x="550" y="180" width="280" height="460" rx="14" fill="#1a0d0a" stroke="#fb923c" stroke-width="2.5"/>
+    <text x="690" y="218" font-size="16" fill="#fb923c" text-anchor="middle" font-weight="bold">webhook-server.mjs</text>
+    <text x="690" y="238" font-size="14" fill="#fb923c" text-anchor="middle" font-weight="bold">MODE=self-healing</text>
+    <text x="690" y="258" font-size="11" fill="#94a3b8" text-anchor="middle">担当PC上で常駐</text>
+
+    <!-- Throttle -->
+    <rect x="570" y="276" width="240" height="44" rx="6" fill="#0a1820" stroke="#fb923c" stroke-width="1.3"/>
+    <text x="690" y="297" font-size="12" fill="#cbd5e1" text-anchor="middle" font-weight="bold">スロットル判定</text>
+    <text x="690" y="313" font-size="10" fill="#94a3b8" text-anchor="middle">同一 fingerprint は 4h 以内スキップ</text>
+
+    <!-- Worktree spawn -->
+    <rect x="570" y="328" width="240" height="44" rx="6" fill="#0a1820" stroke="#fb923c" stroke-width="1.3"/>
+    <text x="690" y="349" font-size="12" fill="#cbd5e1" text-anchor="middle" font-weight="bold">git worktree add</text>
+    <text x="690" y="365" font-size="10" fill="#94a3b8" text-anchor="middle">hotfix/auto-alert-{service}-{ts}</text>
+
+    <!-- claude -p investigation -->
+    <rect x="570" y="380" width="240" height="220" rx="8" fill="#251a0d" stroke="#fb923c" stroke-width="1.8"/>
+    <text x="690" y="404" font-size="13" fill="#fb923c" text-anchor="middle" font-weight="bold">claude -p in worktree</text>
+
+    <line x1="586" y1="416" x2="794" y2="416" stroke="#334155" stroke-width="1"/>
+
+    <rect x="586" y="424" width="208" height="22" rx="4" fill="#1a1525" stroke="#a78bfa" stroke-width="1"/>
+    <text x="690" y="439" font-size="10" fill="#cbd5e1" text-anchor="middle">① Product Graph MCP で関連検索</text>
+
+    <rect x="586" y="450" width="208" height="22" rx="4" fill="#0d1f2d" stroke="#38bdf8" stroke-width="1"/>
+    <text x="690" y="465" font-size="10" fill="#cbd5e1" text-anchor="middle">② Grafana MCP で Loki クエリ</text>
+
+    <rect x="586" y="476" width="208" height="22" rx="4" fill="#0a1820" stroke="#94a3b8" stroke-width="1"/>
+    <text x="690" y="491" font-size="10" fill="#cbd5e1" text-anchor="middle">③ git blame で原因コミット特定</text>
+
+    <rect x="586" y="502" width="208" height="22" rx="4" fill="#251a0d" stroke="#fb923c" stroke-width="1"/>
+    <text x="690" y="517" font-size="10" fill="#cbd5e1" text-anchor="middle">④ 修正実装 + テスト更新</text>
+
+    <rect x="586" y="528" width="208" height="22" rx="4" fill="#251a0d" stroke="#fb923c" stroke-width="1"/>
+    <text x="690" y="543" font-size="10" fill="#cbd5e1" text-anchor="middle">⑤ [Recurrence]: 横展開 + Sensor追加</text>
+
+    <rect x="586" y="554" width="208" height="22" rx="4" fill="#1a0d0a" stroke="#fb923c" stroke-width="1"/>
+    <text x="690" y="569" font-size="10" fill="#cbd5e1" text-anchor="middle">⑥ conventional commit</text>
+
+    <text x="690" y="592" font-size="10" fill="#94a3b8" text-anchor="middle">修正不能なら無変更で終了 → Slack 通知</text>
+  </g>
+  <line x1="832" y1="410" x2="868" y2="410" stroke="#fb923c" stroke-width="2" marker-end="url(#a-38bdf8)"/>
+
+  <!-- ============= 4. Auto-review (Part 3) ============= -->
+  <g font-family="Noto Sans JP, sans-serif">
+    <rect x="870" y="180" width="320" height="460" rx="14" fill="#0d1f2d" stroke="#38bdf8" stroke-width="2.5"/>
+    <text x="1030" y="218" font-size="16" fill="#38bdf8" text-anchor="middle" font-weight="bold">Part 3 自動レビューパイプライン</text>
+    <text x="1030" y="238" font-size="12" fill="#94a3b8" text-anchor="middle">Self-Healing が起票したPRも</text>
+    <text x="1030" y="252" font-size="12" fill="#94a3b8" text-anchor="middle">同じ条件で乗る（独立判定）</text>
+
+    <line x1="890" y1="268" x2="1170" y2="268" stroke="#334155" stroke-width="1"/>
+
+    <text x="1030" y="292" font-size="13" fill="#38bdf8" text-anchor="middle" font-weight="bold">9観点を順次チェック</text>
+
+    <g font-size="11" fill="#cbd5e1" text-anchor="middle">
+      <rect x="890" y="304" width="280" height="22" rx="4" fill="#0a1820" stroke="#38bdf8" stroke-width="1"/>
+      <text x="1030" y="319">① [Graph]  ② [Architecture]  ③ [Security]</text>
+
+      <rect x="890" y="330" width="280" height="22" rx="4" fill="#0a1820" stroke="#38bdf8" stroke-width="1"/>
+      <text x="1030" y="345">④ [Test]  ⑤ [Doc]  ⑥ [Impact]</text>
+
+      <rect x="890" y="356" width="280" height="22" rx="4" fill="#0a1820" stroke="#38bdf8" stroke-width="1"/>
+      <text x="1030" y="371">⑦ [Observability]  ⑧ [AI-Antipattern]</text>
+
+      <rect x="890" y="382" width="280" height="22" rx="4" fill="#1a1525" stroke="#a78bfa" stroke-width="1.5"/>
+      <text x="1030" y="397" fill="#a78bfa">⑨ [Recurrence] ← 再発防止 Sensor追加を要求</text>
+    </g>
+
+    <line x1="890" y1="420" x2="1170" y2="420" stroke="#334155" stroke-width="1"/>
+
+    <text x="1030" y="446" font-size="12" fill="#cbd5e1" text-anchor="middle">Critical / Major あり</text>
+    <text x="1030" y="462" font-size="11" fill="#f87171" text-anchor="middle">→ REQUEST_CHANGES (Self-Healingに戻る)</text>
+
+    <text x="1030" y="486" font-size="12" fill="#cbd5e1" text-anchor="middle">Nit only / 指摘なし</text>
+    <text x="1030" y="502" font-size="11" fill="#4ade80" text-anchor="middle">→ APPROVE</text>
+
+    <line x1="890" y1="518" x2="1170" y2="518" stroke="#334155" stroke-width="1"/>
+
+    <text x="1030" y="542" font-size="11" fill="#94a3b8" text-anchor="middle">平均 10.8 回 review-fix loop</text>
+    <text x="1030" y="558" font-size="11" fill="#94a3b8" text-anchor="middle">（fix側もAI、reviewer側もAI、別セッション）</text>
+
+    <text x="1030" y="588" font-size="11" fill="#94a3b8" text-anchor="middle">「lint化なしの fix は通さない」</text>
+    <text x="1030" y="606" font-size="11" fill="#94a3b8" text-anchor="middle">で 強化層と接続</text>
+  </g>
+  <line x1="1192" y1="410" x2="1228" y2="410" stroke="#38bdf8" stroke-width="2" marker-end="url(#a-4ade80)"/>
+
+  <!-- ============= 5. Merge & Deploy ============= -->
+  <g font-family="Noto Sans JP, sans-serif">
+    <rect x="1230" y="180" width="340" height="460" rx="14" fill="#0d251a" stroke="#4ade80" stroke-width="2.5"/>
+    <text x="1400" y="218" font-size="17" fill="#4ade80" text-anchor="middle" font-weight="bold">自動マージ → 自動再デプロイ</text>
+    <text x="1400" y="240" font-size="12" fill="#94a3b8" text-anchor="middle">人の介入なし</text>
+
+    <line x1="1250" y1="258" x2="1550" y2="258" stroke="#334155" stroke-width="1"/>
+
+    <rect x="1250" y="276" width="300" height="44" rx="6" fill="#0a1820" stroke="#4ade80" stroke-width="1.3"/>
+    <text x="1400" y="297" font-size="13" fill="#cbd5e1" text-anchor="middle" font-weight="bold">squash merge to main</text>
+    <text x="1400" y="313" font-size="10" fill="#94a3b8" text-anchor="middle">CI green + APPROVE 揃って自動マージ</text>
+
+    <rect x="1250" y="328" width="300" height="44" rx="6" fill="#0a1820" stroke="#4ade80" stroke-width="1.3"/>
+    <text x="1400" y="349" font-size="13" fill="#cbd5e1" text-anchor="middle" font-weight="bold">Turborepo build</text>
+    <text x="1400" y="365" font-size="10" fill="#94a3b8" text-anchor="middle">影響範囲だけ差分ビルド</text>
+
+    <rect x="1250" y="380" width="300" height="44" rx="6" fill="#0a1820" stroke="#4ade80" stroke-width="1.3"/>
+    <text x="1400" y="401" font-size="13" fill="#cbd5e1" text-anchor="middle" font-weight="bold">Pulumi parallel deploy</text>
+    <text x="1400" y="417" font-size="10" fill="#94a3b8" text-anchor="middle">stack単位で並列 up</text>
+
+    <line x1="1250" y1="438" x2="1550" y2="438" stroke="#334155" stroke-width="1"/>
+
+    <text x="1400" y="464" font-size="13" fill="#4ade80" text-anchor="middle" font-weight="bold">本番復旧完了</text>
+    <text x="1400" y="486" font-size="11" fill="#cbd5e1" text-anchor="middle">Slackスレッドに ✓ 通知</text>
+
+    <line x1="1250" y1="504" x2="1550" y2="504" stroke="#334155" stroke-width="1"/>
+
+    <text x="1400" y="530" font-size="11" fill="#94a3b8" text-anchor="middle">平均: 10〜20分</text>
+    <text x="1400" y="548" font-size="11" fill="#94a3b8" text-anchor="middle">7am発火 → 7:15復旧 →</text>
+    <text x="1400" y="566" font-size="11" fill="#94a3b8" text-anchor="middle">9am出社時には Slack に ✓ だけ</text>
+
+    <text x="1400" y="598" font-size="11" fill="#94a3b8" text-anchor="middle" font-weight="bold">+ 新規Sensorも一緒に</text>
+    <text x="1400" y="615" font-size="11" fill="#94a3b8" text-anchor="middle" font-weight="bold">本番投入されている</text>
+  </g>
+
+  <!-- Bottom info -->
+  <text x="800" y="720" font-size="14" fill="#94a3b8" text-anchor="middle" font-family="Noto Sans JP, sans-serif">重複防止: 同一 fingerprint は 4h 以内スキップ / クレデンシャル系は恒久スキップ (人手エスカレーション)</text>
+
+  <!-- Timeline at bottom -->
+  <g font-family="Noto Sans JP, sans-serif">
+    <line x1="80" y1="780" x2="1520" y2="780" stroke="#94a3b8" stroke-width="1.5"/>
+    <text x="80" y="775" font-size="11" fill="#94a3b8" text-anchor="middle">0min</text>
+    <line x1="80" y1="772" x2="80" y2="788" stroke="#94a3b8" stroke-width="1.5"/>
+
+    <text x="290" y="775" font-size="11" fill="#94a3b8" text-anchor="middle">1min</text>
+    <line x1="290" y1="772" x2="290" y2="788" stroke="#94a3b8" stroke-width="1.5"/>
+
+    <text x="700" y="775" font-size="11" fill="#94a3b8" text-anchor="middle">3〜8min</text>
+    <line x1="700" y1="772" x2="700" y2="788" stroke="#94a3b8" stroke-width="1.5"/>
+
+    <text x="1100" y="775" font-size="11" fill="#94a3b8" text-anchor="middle">6〜16min</text>
+    <line x1="1100" y1="772" x2="1100" y2="788" stroke="#94a3b8" stroke-width="1.5"/>
+
+    <text x="1520" y="775" font-size="11" fill="#94a3b8" text-anchor="middle">10〜20min</text>
+    <line x1="1520" y1="772" x2="1520" y2="788" stroke="#94a3b8" stroke-width="1.5"/>
+
+    <text x="800" y="820" font-size="13" fill="#cbd5e1" text-anchor="middle" font-weight="bold">アラート発火 → 本番復旧のタイムライン</text>
+    <text x="800" y="842" font-size="11" fill="#94a3b8" text-anchor="middle">人が起きる前に終わっているケースも多い</text>
+  </g>
+</svg>

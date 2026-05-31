@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="950" viewBox="0 0 1400 950">
+  <rect width="1400" height="950" fill="#0f172a"/>
+
+  <defs>
+    <marker id="a-94a3b8" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#94a3b8"/></marker>
+    <marker id="a-4ade80" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#4ade80"/></marker>
+    <marker id="a-38bdf8" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#38bdf8"/></marker>
+    <marker id="a-fb923c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#fb923c"/></marker>
+    <marker id="a-a78bfa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#a78bfa"/></marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="700" y="56" font-size="30" fill="#e2e8f0" text-anchor="middle" font-weight="bold" font-family="Noto Sans JP, sans-serif">cpg を共有基盤に、Self-Healing と 自動レビューが Sensors を育てる</text>
+  <text x="700" y="92" font-size="18" fill="#94a3b8" text-anchor="middle" font-family="Noto Sans JP, sans-serif">片方の出力がもう片方の判定基準になる相互強化の三角形。土台にあるのは Product Graph (cpg)。</text>
+
+  <!-- ============= cpg (center, top) ============= -->
+  <g font-family="Noto Sans JP, sans-serif">
+    <!-- Outer glow effect using larger semi-transparent rect -->
+    <rect x="540" y="160" width="320" height="200" rx="20" fill="#1a1525" stroke="#a78bfa" stroke-width="3"/>
+    <text x="700" y="200" font-size="22" fill="#a78bfa" text-anchor="middle" font-weight="bold">Product Graph (cpg)</text>
+    <text x="700" y="224" font-size="13" fill="#cbd5e1" text-anchor="middle">コード・docs・DB・インフラを統合</text>
+    <text x="700" y="244" font-size="13" fill="#cbd5e1" text-anchor="middle">した「AIの目」</text>
+
+    <line x1="560" y1="262" x2="840" y2="262" stroke="#334155" stroke-width="1"/>
+
+    <text x="700" y="286" font-size="12" fill="#94a3b8" text-anchor="middle">影響範囲・依存関係・関連docs を1ホップで</text>
+    <text x="700" y="306" font-size="12" fill="#94a3b8" text-anchor="middle">「この罠は他にも何箇所あるか」を即答</text>
+    <text x="700" y="326" font-size="12" fill="#94a3b8" text-anchor="middle">セマンティック検索 + グラフ traversal</text>
+
+    <text x="700" y="348" font-size="11" fill="#a78bfa" text-anchor="middle" font-weight="bold">→ Part 2 で詳細</text>
+  </g>
+
+  <!-- ============= Self-Healing (bottom-left) ============= -->
+  <g font-family="Noto Sans JP, sans-serif">
+    <rect x="120" y="500" width="320" height="220" rx="14" fill="#251a0d" stroke="#fb923c" stroke-width="2.5"/>
+    <text x="280" y="540" font-size="22" fill="#fb923c" text-anchor="middle" font-weight="bold">Self-Healing</text>
+    <text x="280" y="562" font-size="13" fill="#cbd5e1" text-anchor="middle">本番アラートをAIが調査・修正</text>
+
+    <line x1="140" y1="580" x2="420" y2="580" stroke="#334155" stroke-width="1"/>
+
+    <text x="280" y="604" font-size="12" fill="#94a3b8" text-anchor="middle">「同種パターンが他にも存在する」</text>
+    <text x="280" y="622" font-size="12" fill="#94a3b8" text-anchor="middle">を cpg で発見</text>
+    <text x="280" y="646" font-size="12" fill="#94a3b8" text-anchor="middle">→ 横展開 + Sensor追加 を</text>
+    <text x="280" y="664" font-size="12" fill="#94a3b8" text-anchor="middle">自動レビューに要求</text>
+    <text x="280" y="694" font-size="11" fill="#fb923c" text-anchor="middle" font-weight="bold">→ Part 4 (本記事)</text>
+  </g>
+
+  <!-- ============= Auto-Review (bottom-right) ============= -->
+  <g font-family="Noto Sans JP, sans-serif">
+    <rect x="960" y="500" width="320" height="220" rx="14" fill="#0d1f2d" stroke="#38bdf8" stroke-width="2.5"/>
+    <text x="1120" y="540" font-size="22" fill="#38bdf8" text-anchor="middle" font-weight="bold">自動レビュー</text>
+    <text x="1120" y="562" font-size="13" fill="#cbd5e1" text-anchor="middle">PR時点の品質を9観点でゲート</text>
+
+    <line x1="980" y1="580" x2="1260" y2="580" stroke="#334155" stroke-width="1"/>
+
+    <text x="1120" y="604" font-size="12" fill="#94a3b8" text-anchor="middle">[Recurrence] 観点で</text>
+    <text x="1120" y="622" font-size="12" fill="#94a3b8" text-anchor="middle">「lint化なしの fix は通さない」</text>
+    <text x="1120" y="646" font-size="12" fill="#94a3b8" text-anchor="middle">→ Self-Healingに Sensor追加を</text>
+    <text x="1120" y="664" font-size="12" fill="#94a3b8" text-anchor="middle">強制 (REQUEST_CHANGES)</text>
+    <text x="1120" y="694" font-size="11" fill="#38bdf8" text-anchor="middle" font-weight="bold">→ Part 3 で詳細</text>
+  </g>
+
+  <!-- ============= Arrows ============= -->
+
+  <!-- cpg ↔ Self-Healing: bidirectional -->
+  <line x1="585" y1="360" x2="350" y2="500" stroke="#a78bfa" stroke-width="2.5" marker-end="url(#a-fb923c)"/>
+  <line x1="365" y1="495" x2="600" y2="358" stroke="#fb923c" stroke-width="2.5" marker-end="url(#a-a78bfa)"/>
+  <g font-family="Noto Sans JP, sans-serif">
+    <rect x="365" y="395" width="180" height="44" rx="6" fill="#0f172a" stroke="#a78bfa" stroke-width="1"/>
+    <text x="455" y="415" font-size="11" fill="#cbd5e1" text-anchor="middle" font-weight="bold">原因特定・横展開検出</text>
+    <text x="455" y="431" font-size="10" fill="#94a3b8" text-anchor="middle">trace_connections / search_nodes</text>
+  </g>
+
+  <!-- cpg ↔ Auto-review: bidirectional -->
+  <line x1="815" y1="360" x2="1050" y2="500" stroke="#a78bfa" stroke-width="2.5" marker-end="url(#a-38bdf8)"/>
+  <line x1="1035" y1="495" x2="800" y2="358" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#a-a78bfa)"/>
+  <g font-family="Noto Sans JP, sans-serif">
+    <rect x="855" y="395" width="180" height="44" rx="6" fill="#0f172a" stroke="#a78bfa" stroke-width="1"/>
+    <text x="945" y="415" font-size="11" fill="#cbd5e1" text-anchor="middle" font-weight="bold">影響範囲調査・依存先確認</text>
+    <text x="945" y="431" font-size="10" fill="#94a3b8" text-anchor="middle">変更ノードのpre-load</text>
+  </g>
+
+  <!-- Self-Healing ↔ Auto-review: bidirectional, curved -->
+  <path d="M 440 620 Q 700 760 960 620" fill="none" stroke="#fb923c" stroke-width="2.5" marker-end="url(#a-38bdf8)"/>
+  <path d="M 960 640 Q 700 780 440 640" fill="none" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#a-fb923c)"/>
+  <g font-family="Noto Sans JP, sans-serif">
+    <rect x="600" y="745" width="200" height="46" rx="6" fill="#0f172a" stroke="#cbd5e1" stroke-width="1"/>
+    <text x="700" y="765" font-size="11" fill="#cbd5e1" text-anchor="middle" font-weight="bold">PR起票 → レビュー → 修正</text>
+    <text x="700" y="781" font-size="10" fill="#94a3b8" text-anchor="middle">[Recurrence] 観点で再発防止強制</text>
+  </g>
+
+  <!-- ============= Output: Sensors ============= -->
+  <g font-family="Noto Sans JP, sans-serif">
+    <rect x="380" y="830" width="640" height="100" rx="14" fill="#0d251a" stroke="#4ade80" stroke-width="2.5"/>
+    <text x="700" y="868" font-size="18" fill="#4ade80" text-anchor="middle" font-weight="bold">Sensors が日々増えていく</text>
+
+    <line x1="400" y1="884" x2="1000" y2="884" stroke="#334155" stroke-width="1"/>
+
+    <text x="700" y="908" font-size="12" fill="#cbd5e1" text-anchor="middle">Custom ESLint 26本  /  CI guard 13本  /  oxlint 183本  /  TS strict 9 gate  /  Coverage 90%</text>
+    <text x="700" y="924" font-size="11" fill="#94a3b8" text-anchor="middle">機械が読むSensor (lint/型/CI) + 人とAIが読むSensor (ガイドライン) の両輪</text>
+  </g>
+
+  <!-- Arrows from SH and AR to Sensors -->
+  <line x1="320" y1="725" x2="450" y2="828" stroke="#fb923c" stroke-width="2" stroke-dasharray="5,4" marker-end="url(#a-4ade80)"/>
+  <line x1="1080" y1="725" x2="950" y2="828" stroke="#38bdf8" stroke-width="2" stroke-dasharray="5,4" marker-end="url(#a-4ade80)"/>
+</svg>

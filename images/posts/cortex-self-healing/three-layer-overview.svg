@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000">
+  <rect width="1600" height="1000" fill="#0f172a"/>
+
+  <defs>
+    <marker id="a-94a3b8" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#94a3b8"/></marker>
+    <marker id="a-4ade80" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#4ade80"/></marker>
+    <marker id="a-38bdf8" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#38bdf8"/></marker>
+    <marker id="a-fb923c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#fb923c"/></marker>
+    <marker id="a-a78bfa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#a78bfa"/></marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="800" y="56" font-size="30" fill="#e2e8f0" text-anchor="middle" font-weight="bold" font-family="Noto Sans JP, sans-serif">3層構造 ── 観測 → 修復 → 強化のループ</text>
+  <text x="800" y="92" font-size="18" fill="#94a3b8" text-anchor="middle" font-family="Noto Sans JP, sans-serif">本番異常を起点に、AIが調査・修正・デプロイを完結。修復のたびに lint / CI guard / ガイドラインが増えて、同種障害は構造的に再発不可へ。</text>
+
+  <!-- Production anomaly at top -->
+  <g font-family="Noto Sans JP, sans-serif">
+    <rect x="630" y="130" width="340" height="80" rx="14" fill="#251a0d" stroke="#f87171" stroke-width="2.5"/>
+    <text x="800" y="162" font-size="18" fill="#f87171" text-anchor="middle" font-weight="bold">本番異常</text>
+    <text x="800" y="184" font-size="13" fill="#cbd5e1" text-anchor="middle">エラーログ閾値超え / デプロイ失敗 / pipeline失敗等</text>
+    <text x="800" y="200" font-size="11" fill="#94a3b8" text-anchor="middle">人が気づく前に発火</text>
+  </g>
+
+  <!-- Down arrow to layer 1 -->
+  <line x1="800" y1="216" x2="800" y2="252" stroke="#f87171" stroke-width="2" marker-end="url(#a-94a3b8)"/>
+
+  <!-- ============= Layer 1: 観測 ============= -->
+  <g font-family="Noto Sans JP, sans-serif">
+    <rect x="60" y="260" width="1480" height="180" rx="14" fill="#0d1f2d" stroke="#38bdf8" stroke-width="2.5"/>
+    <text x="100" y="295" font-size="22" fill="#38bdf8" font-weight="bold">① 観測層</text>
+    <text x="100" y="318" font-size="13" fill="#94a3b8">人間が見るのと同じものを、AIも見るためのインフラ</text>
+
+    <!-- Components row -->
+    <g transform="translate(0, 348)">
+      <rect x="220" y="0" width="150" height="60" rx="8" fill="#0a1820" stroke="#38bdf8" stroke-width="1.5"/>
+      <text x="295" y="24" font-size="14" fill="#38bdf8" text-anchor="middle" font-weight="bold">OTel SDK</text>
+      <text x="295" y="44" font-size="11" fill="#cbd5e1" text-anchor="middle">trace / metric / log</text>
+
+      <rect x="390" y="0" width="150" height="60" rx="8" fill="#0a1820" stroke="#38bdf8" stroke-width="1.5"/>
+      <text x="465" y="24" font-size="14" fill="#38bdf8" text-anchor="middle" font-weight="bold">Loki</text>
+      <text x="465" y="44" font-size="11" fill="#cbd5e1" text-anchor="middle">Pino + trace_id</text>
+
+      <rect x="560" y="0" width="150" height="60" rx="8" fill="#0a1820" stroke="#38bdf8" stroke-width="1.5"/>
+      <text x="635" y="24" font-size="14" fill="#38bdf8" text-anchor="middle" font-weight="bold">Mimir</text>
+      <text x="635" y="44" font-size="11" fill="#cbd5e1" text-anchor="middle">メトリック</text>
+
+      <rect x="730" y="0" width="150" height="60" rx="8" fill="#0a1820" stroke="#38bdf8" stroke-width="1.5"/>
+      <text x="805" y="24" font-size="14" fill="#38bdf8" text-anchor="middle" font-weight="bold">Tempo</text>
+      <text x="805" y="44" font-size="11" fill="#cbd5e1" text-anchor="middle">分散トレース</text>
+
+      <rect x="900" y="0" width="150" height="60" rx="8" fill="#0a1820" stroke="#38bdf8" stroke-width="1.5"/>
+      <text x="975" y="24" font-size="14" fill="#38bdf8" text-anchor="middle" font-weight="bold">Faro</text>
+      <text x="975" y="44" font-size="11" fill="#cbd5e1" text-anchor="middle">フロントエンド</text>
+
+      <rect x="1070" y="0" width="180" height="60" rx="8" fill="#0a1820" stroke="#38bdf8" stroke-width="1.5"/>
+      <text x="1160" y="24" font-size="14" fill="#38bdf8" text-anchor="middle" font-weight="bold">Grafana</text>
+      <text x="1160" y="44" font-size="11" fill="#cbd5e1" text-anchor="middle">Dashboard + Alert</text>
+    </g>
+
+    <text x="800" y="424" font-size="12" fill="#94a3b8" text-anchor="middle">ログレベル規約: warn (機能低下) / error (処理失敗・閾値型アラートのトリガー) / fatal (人手エスカレーション)</text>
+  </g>
+
+  <!-- Arrow Layer 1 → 2 -->
+  <line x1="800" y1="448" x2="800" y2="486" stroke="#38bdf8" stroke-width="2" marker-end="url(#a-fb923c)"/>
+  <text x="820" y="472" font-size="13" fill="#94a3b8" font-family="Noto Sans JP, sans-serif">firing alert</text>
+
+  <!-- ============= Layer 2: 修復 ============= -->
+  <g font-family="Noto Sans JP, sans-serif">
+    <rect x="60" y="494" width="1480" height="180" rx="14" fill="#251a0d" stroke="#fb923c" stroke-width="2.5"/>
+    <text x="100" y="529" font-size="22" fill="#fb923c" font-weight="bold">② 修復層 ── Self-Healing</text>
+    <text x="100" y="552" font-size="13" fill="#94a3b8">AIが原因調査 → 修正PR起票 → 自動レビュー → 自動マージ → 自動再デプロイ</text>
+
+    <!-- Pipeline boxes -->
+    <g transform="translate(0, 580)">
+      <rect x="120" y="0" width="160" height="60" rx="8" fill="#1a0d0a" stroke="#fb923c" stroke-width="1.5"/>
+      <text x="200" y="24" font-size="13" fill="#fb923c" text-anchor="middle" font-weight="bold">Event Relay</text>
+      <text x="200" y="44" font-size="11" fill="#cbd5e1" text-anchor="middle">SSE push (自前)</text>
+
+      <line x1="280" y1="30" x2="310" y2="30" stroke="#fb923c" stroke-width="2" marker-end="url(#a-fb923c)"/>
+
+      <rect x="310" y="0" width="180" height="60" rx="8" fill="#1a0d0a" stroke="#fb923c" stroke-width="1.5"/>
+      <text x="400" y="24" font-size="13" fill="#fb923c" text-anchor="middle" font-weight="bold">self-healing mode</text>
+      <text x="400" y="44" font-size="11" fill="#cbd5e1" text-anchor="middle">claude -p / worktree</text>
+
+      <line x1="490" y1="30" x2="520" y2="30" stroke="#fb923c" stroke-width="2" marker-end="url(#a-fb923c)"/>
+
+      <rect x="520" y="0" width="180" height="60" rx="8" fill="#1a0d0a" stroke="#fb923c" stroke-width="1.5"/>
+      <text x="610" y="24" font-size="13" fill="#fb923c" text-anchor="middle" font-weight="bold">cpg + Loki + git blame</text>
+      <text x="610" y="44" font-size="11" fill="#cbd5e1" text-anchor="middle">原因特定 + 横展開検出</text>
+
+      <line x1="700" y1="30" x2="730" y2="30" stroke="#fb923c" stroke-width="2" marker-end="url(#a-fb923c)"/>
+
+      <rect x="730" y="0" width="160" height="60" rx="8" fill="#1a0d0a" stroke="#fb923c" stroke-width="1.5"/>
+      <text x="810" y="24" font-size="13" fill="#fb923c" text-anchor="middle" font-weight="bold">gh pr create</text>
+      <text x="810" y="44" font-size="11" fill="#cbd5e1" text-anchor="middle">修正PR起票</text>
+
+      <line x1="890" y1="30" x2="920" y2="30" stroke="#fb923c" stroke-width="2" marker-end="url(#a-fb923c)"/>
+
+      <rect x="920" y="0" width="180" height="60" rx="8" fill="#1a0d0a" stroke="#fb923c" stroke-width="1.5"/>
+      <text x="1010" y="24" font-size="13" fill="#fb923c" text-anchor="middle" font-weight="bold">自動レビュー (Part 3)</text>
+      <text x="1010" y="44" font-size="11" fill="#cbd5e1" text-anchor="middle">9観点 + [Recurrence]</text>
+
+      <line x1="1100" y1="30" x2="1130" y2="30" stroke="#fb923c" stroke-width="2" marker-end="url(#a-fb923c)"/>
+
+      <rect x="1130" y="0" width="200" height="60" rx="8" fill="#1a0d0a" stroke="#fb923c" stroke-width="1.5"/>
+      <text x="1230" y="24" font-size="13" fill="#fb923c" text-anchor="middle" font-weight="bold">自動マージ → 再デプロイ</text>
+      <text x="1230" y="44" font-size="11" fill="#cbd5e1" text-anchor="middle">復旧完了 (Slack ✓)</text>
+    </g>
+  </g>
+
+  <!-- Arrow Layer 2 → 3 -->
+  <line x1="800" y1="682" x2="800" y2="720" stroke="#fb923c" stroke-width="2" marker-end="url(#a-a78bfa)"/>
+  <text x="820" y="706" font-size="13" fill="#94a3b8" font-family="Noto Sans JP, sans-serif">同PR内で再発防止も要求</text>
+
+  <!-- ============= Layer 3: 強化 ============= -->
+  <g font-family="Noto Sans JP, sans-serif">
+    <rect x="60" y="728" width="1480" height="200" rx="14" fill="#1a1525" stroke="#a78bfa" stroke-width="2.5"/>
+    <text x="100" y="763" font-size="22" fill="#a78bfa" font-weight="bold">③ 強化層 ── Sensors (lint + ガイドライン) が増えていく</text>
+    <text x="100" y="786" font-size="13" fill="#94a3b8">[Recurrence] 観点が「同じ罠を2回以上踏んだ → lint化必須」を強制。修正PRに新規Sensorも含めないとマージされない。</text>
+
+    <g transform="translate(0, 812)">
+      <rect x="100" y="0" width="280" height="86" rx="8" fill="#120a25" stroke="#a78bfa" stroke-width="1.5"/>
+      <text x="240" y="24" font-size="14" fill="#a78bfa" text-anchor="middle" font-weight="bold">機械が読むSensor</text>
+      <text x="240" y="46" font-size="12" fill="#cbd5e1" text-anchor="middle">Custom ESLint 26本 / CI guard 13本</text>
+      <text x="240" y="64" font-size="12" fill="#cbd5e1" text-anchor="middle">oxlint 183本 / TS strict / 90% coverage</text>
+      <text x="240" y="80" font-size="11" fill="#94a3b8" text-anchor="middle">マージ前にCIで違反を弾く</text>
+
+      <rect x="420" y="0" width="280" height="86" rx="8" fill="#120a25" stroke="#a78bfa" stroke-width="1.5"/>
+      <text x="560" y="24" font-size="14" fill="#a78bfa" text-anchor="middle" font-weight="bold">人とAIが読むSensor</text>
+      <text x="560" y="46" font-size="12" fill="#cbd5e1" text-anchor="middle">recurrence-prevention.md</text>
+      <text x="560" y="64" font-size="12" fill="#cbd5e1" text-anchor="middle">severity.md / ai-antipattern.md 等</text>
+      <text x="560" y="80" font-size="11" fill="#94a3b8" text-anchor="middle">自動レビューの判定基準</text>
+
+      <rect x="740" y="0" width="320" height="86" rx="8" fill="#120a25" stroke="#a78bfa" stroke-width="1.5"/>
+      <text x="900" y="24" font-size="14" fill="#a78bfa" text-anchor="middle" font-weight="bold">Self-Healingが動くたびに追加</text>
+      <text x="900" y="46" font-size="12" fill="#cbd5e1" text-anchor="middle">「踏んだら機械化」: no-silent-catch /</text>
+      <text x="900" y="64" font-size="12" fill="#cbd5e1" text-anchor="middle">require-fetch-timeout / check-otel-env-injection</text>
+      <text x="900" y="80" font-size="11" fill="#94a3b8" text-anchor="middle">既存違反も同PRで0化</text>
+
+      <rect x="1100" y="0" width="340" height="86" rx="8" fill="#0d251a" stroke="#4ade80" stroke-width="1.8"/>
+      <text x="1270" y="24" font-size="14" fill="#4ade80" text-anchor="middle" font-weight="bold">結果</text>
+      <text x="1270" y="48" font-size="13" fill="#cbd5e1" text-anchor="middle">以降、同種クラスの障害は</text>
+      <text x="1270" y="68" font-size="13" fill="#cbd5e1" text-anchor="middle"><tspan font-weight="bold" fill="#4ade80">CI / lint で構造的に発生不可能</tspan></text>
+    </g>
+  </g>
+
+  <!-- Feedback loop arrow on the right side (Layer 3 → Production for future) -->
+  <path d="M 1480 600 Q 1570 600 1570 170 Q 1570 130 1480 130" fill="none" stroke="#4ade80" stroke-width="2.5" stroke-dasharray="6,4" marker-end="url(#a-4ade80)"/>
+  <text x="1535" y="380" font-size="13" fill="#4ade80" font-family="Noto Sans JP, sans-serif" font-weight="bold" transform="rotate(-90, 1535, 380)">次の本番では同種障害が発生不可</text>
+
+  <!-- Bottom footer -->
+  <text x="800" y="970" font-size="13" fill="#94a3b8" text-anchor="middle" font-family="Noto Sans JP, sans-serif">3層が揃って初めて self-healing + self-strengthening のループが回る。修復だけでは中長期で負ける。</text>
+</svg>
