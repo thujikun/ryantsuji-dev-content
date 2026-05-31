@@ -56,6 +56,15 @@ publication_name: "aircloset"
 
 Self-Healingを機能させるには、その手前にちゃんと**観測層**が必要で、その後ろに**強化層**（再発防止）が必要です。Self-Healingそのものは真ん中の**修復層**に位置していて、3層が揃って初めて「自己修復+自己強化」のループが回ります。
 
+:::message
+**前提**: この3層が成立する大前提として、[Part 2](https://zenn.dev/aircloset/articles/f6c990989e60d4)で書いた **cpg（コード・docs・DB・インフラを統合したナレッジグラフ）** と、本記事で扱う **Observability スタック**の2つが先に存在している必要があります。
+
+- **Observabilityが無い** → 観測層が空っぽで何も検知できない → 修復層は起動すらしない
+- **cpgが無い** → AIは「この罠は他にも何箇所あるか」を見られない → 修復層は症状を消すだけの場当たり対応に留まり、強化層の横展開も効かない
+
+Part 1で書いたFowlerの分類で言えば、cpg と Observability は **Guides 側の supporting foundations**。Self-Healing と自動レビュー（Sensors）はこの土台の上で初めて機能する、というのが本記事を通じた構造です。
+:::
+
 ![3層構造 ── 観測 → 修復 → 強化のループ](https://ryantsuji.dev/images/posts/cortex-self-healing/three-layer-overview.png)
 
 | 層 | 何をするか | 主な構成要素 |
@@ -336,6 +345,8 @@ cortexに積み上がっているcustom Guideの実例:
 ```
 
 このループは**人の介入なしで一周まわる**。修復だけでなく、修復のたびに品質ゲートが育つ ── これがcortexの「自動回復+自動強化」の中身です。
+
+ただし冒頭でも書いた通り、**このループが成立するのはcpgとObservabilityがあるから**です。cpgが影響範囲の横展開を可能にし、Observabilityが本番異常を構造化データとして拾う。この2つが土台にあって初めて、AIが「修復」「強化」を回せる側に立てる。**Self-Healingは単独で立つ仕組みではなく、cortexのGuides（cpg + Observability + lint + ガイドライン）の上に乗っているSensorです** ── ここが本記事の一番伝えたいところです。
 
 ## 数字で見るSelf-Healing
 
