@@ -101,22 +101,21 @@
     <text x="1108" y="187" font-size="28" fill="#4ade80" text-anchor="middle" font-weight="bold">4</text>
 
     <rect x="1008" y="225" width="200" height="200" rx="14" fill="#0d251a" stroke="#4ade80" stroke-width="2"/>
-    <text x="1108" y="255" font-size="17" fill="#4ade80" text-anchor="middle" font-weight="bold">自動レビュー → マージ → 再デプロイ</text>
+    <text x="1108" y="252" font-size="17" fill="#4ade80" text-anchor="middle" font-weight="bold">自動レビュー → マージ</text>
+    <text x="1108" y="274" font-size="17" fill="#4ade80" text-anchor="middle" font-weight="bold">→ 再デプロイ</text>
 
-    <line x1="1028" y1="270" x2="1188" y2="270" stroke="#334155" stroke-width="1"/>
+    <line x1="1028" y1="288" x2="1188" y2="288" stroke="#334155" stroke-width="1"/>
 
-    <text x="1108" y="294" font-size="16" fill="#cbd5e1" text-anchor="middle">Part 3 の通常パイプライン</text>
+    <rect x="1024" y="300" width="168" height="22" rx="4" fill="#0a1820" stroke="#4ade80" stroke-width="1"/>
+    <text x="1108" y="315" font-size="15" fill="#cbd5e1" text-anchor="middle">9観点 + [Recurrence] check</text>
 
-    <rect x="1024" y="306" width="168" height="22" rx="4" fill="#0a1820" stroke="#4ade80" stroke-width="1"/>
-    <text x="1108" y="321" font-size="15" fill="#cbd5e1" text-anchor="middle">9観点 + [Recurrence] check</text>
+    <rect x="1024" y="326" width="168" height="22" rx="4" fill="#0a1820" stroke="#4ade80" stroke-width="1"/>
+    <text x="1108" y="341" font-size="15" fill="#cbd5e1" text-anchor="middle">CI green で自動マージ</text>
 
-    <rect x="1024" y="332" width="168" height="22" rx="4" fill="#0a1820" stroke="#4ade80" stroke-width="1"/>
-    <text x="1108" y="347" font-size="15" fill="#cbd5e1" text-anchor="middle">CI green で自動マージ</text>
+    <rect x="1024" y="352" width="168" height="22" rx="4" fill="#0a1820" stroke="#4ade80" stroke-width="1"/>
+    <text x="1108" y="367" font-size="15" fill="#cbd5e1" text-anchor="middle">Pulumi parallel deploy</text>
 
-    <rect x="1024" y="358" width="168" height="22" rx="4" fill="#0a1820" stroke="#4ade80" stroke-width="1"/>
-    <text x="1108" y="373" font-size="15" fill="#cbd5e1" text-anchor="middle">Pulumi parallel deploy</text>
-
-    <text x="1108" y="402" font-size="15" fill="#94a3b8" text-anchor="middle">人の介入なし</text>
+    <text x="1108" y="396" font-size="15" fill="#94a3b8" text-anchor="middle">Part 3 と同じパイプライン</text>
   </g>
 
   <line x1="1212" y1="320" x2="1248" y2="320" stroke="#4ade80" stroke-width="2" marker-end="url(#a-4ade80)"/>
