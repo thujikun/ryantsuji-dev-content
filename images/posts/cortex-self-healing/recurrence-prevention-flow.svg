@@ -11,15 +11,15 @@
   </defs>
 
   <!-- Title -->
-  <text x="800" y="56" font-size="30" fill="#e2e8f0" text-anchor="middle" font-weight="bold" font-family="Noto Sans JP, sans-serif">Self-Healing が動くたびに起きる 5 ステップ ── 再発防止主役のフロー</text>
-  <text x="800" y="92" font-size="18" fill="#94a3b8" text-anchor="middle" font-family="Noto Sans JP, sans-serif">「直したついでに防ぐ」を構造化。1回の Self-Healing で Sensor が 1個増え、同種クラスの障害が CI で構造的に発生不可能になる。</text>
+  <text x="800" y="56" font-size="36" fill="#e2e8f0" text-anchor="middle" font-weight="bold" font-family="Noto Sans JP, sans-serif">Self-Healing が動くたびに起きる 5 ステップ ── 再発防止主役のフロー</text>
+  <text x="800" y="92" font-size="24" fill="#94a3b8" text-anchor="middle" font-family="Noto Sans JP, sans-serif">「直したついでに防ぐ」を構造化。1回の Self-Healing で Sensor が 1個増え、同種クラスの障害が CI で構造的に発生不可能になる。</text>
 
   <!-- Input: alert + Self-Healing -->
   <g font-family="Noto Sans JP, sans-serif">
     <rect x="40" y="170" width="200" height="100" rx="14" fill="#251a0d" stroke="#f87171" stroke-width="2.5"/>
-    <text x="140" y="206" font-size="16" fill="#f87171" text-anchor="middle" font-weight="bold">本番アラート</text>
-    <text x="140" y="228" font-size="12" fill="#cbd5e1" text-anchor="middle">Grafana firing</text>
-    <text x="140" y="248" font-size="11" fill="#94a3b8" text-anchor="middle">Self-Healing起動</text>
+    <text x="140" y="206" font-size="21" fill="#f87171" text-anchor="middle" font-weight="bold">本番アラート</text>
+    <text x="140" y="228" font-size="16" fill="#cbd5e1" text-anchor="middle">Grafana firing</text>
+    <text x="140" y="248" font-size="15" fill="#94a3b8" text-anchor="middle">Self-Healing起動</text>
   </g>
 
   <line x1="244" y1="220" x2="280" y2="220" stroke="#f87171" stroke-width="2" marker-end="url(#a-a78bfa)"/>
@@ -27,21 +27,21 @@
   <!-- ============= Step 1: cpg horizontal expansion ============= -->
   <g font-family="Noto Sans JP, sans-serif">
     <circle cx="380" cy="180" r="28" fill="#1a1525" stroke="#a78bfa" stroke-width="2.5"/>
-    <text x="380" y="187" font-size="22" fill="#a78bfa" text-anchor="middle" font-weight="bold">1</text>
+    <text x="380" y="187" font-size="28" fill="#a78bfa" text-anchor="middle" font-weight="bold">1</text>
 
     <rect x="282" y="225" width="200" height="200" rx="14" fill="#1a1525" stroke="#a78bfa" stroke-width="2"/>
-    <text x="382" y="255" font-size="14" fill="#a78bfa" text-anchor="middle" font-weight="bold">cpgで横展開検出</text>
+    <text x="382" y="255" font-size="19" fill="#a78bfa" text-anchor="middle" font-weight="bold">cpgで横展開検出</text>
 
     <line x1="302" y1="270" x2="462" y2="270" stroke="#334155" stroke-width="1"/>
 
-    <text x="382" y="294" font-size="12" fill="#cbd5e1" text-anchor="middle">修正対象だけでなく</text>
-    <text x="382" y="312" font-size="12" fill="#cbd5e1" text-anchor="middle">類似ノードを全列挙</text>
+    <text x="382" y="294" font-size="16" fill="#cbd5e1" text-anchor="middle">修正対象だけでなく</text>
+    <text x="382" y="312" font-size="16" fill="#cbd5e1" text-anchor="middle">類似ノードを全列挙</text>
 
-    <text x="382" y="344" font-size="11" fill="#94a3b8" text-anchor="middle">trace_connections /</text>
-    <text x="382" y="360" font-size="11" fill="#94a3b8" text-anchor="middle">search_product_graph_nodes</text>
+    <text x="382" y="344" font-size="15" fill="#94a3b8" text-anchor="middle">trace_connections /</text>
+    <text x="382" y="360" font-size="15" fill="#94a3b8" text-anchor="middle">search_product_graph_nodes</text>
 
-    <text x="382" y="392" font-size="11" fill="#94a3b8" text-anchor="middle">「この罠は他にも</text>
-    <text x="382" y="408" font-size="11" fill="#94a3b8" text-anchor="middle">何箇所あるか」を即答</text>
+    <text x="382" y="392" font-size="15" fill="#94a3b8" text-anchor="middle">「この罠は他にも</text>
+    <text x="382" y="408" font-size="15" fill="#94a3b8" text-anchor="middle">何箇所あるか」を即答</text>
   </g>
 
   <line x1="486" y1="320" x2="522" y2="320" stroke="#a78bfa" stroke-width="2" marker-end="url(#a-fb923c)"/>
@@ -49,26 +49,26 @@
   <!-- ============= Step 2: new Sensor in same PR ============= -->
   <g font-family="Noto Sans JP, sans-serif">
     <circle cx="624" cy="180" r="28" fill="#251a0d" stroke="#fb923c" stroke-width="2.5"/>
-    <text x="624" y="187" font-size="22" fill="#fb923c" text-anchor="middle" font-weight="bold">2</text>
+    <text x="624" y="187" font-size="28" fill="#fb923c" text-anchor="middle" font-weight="bold">2</text>
 
     <rect x="524" y="225" width="200" height="200" rx="14" fill="#251a0d" stroke="#fb923c" stroke-width="2"/>
-    <text x="624" y="255" font-size="14" fill="#fb923c" text-anchor="middle" font-weight="bold">新規Sensorを同PRで追加</text>
+    <text x="624" y="255" font-size="19" fill="#fb923c" text-anchor="middle" font-weight="bold">新規Sensorを同PRで追加</text>
 
     <line x1="544" y1="270" x2="704" y2="270" stroke="#334155" stroke-width="1"/>
 
     <rect x="540" y="282" width="168" height="22" rx="4" fill="#1a0d0a" stroke="#fb923c" stroke-width="1"/>
-    <text x="624" y="297" font-size="11" fill="#cbd5e1" text-anchor="middle">Custom ESLint rule</text>
+    <text x="624" y="297" font-size="15" fill="#cbd5e1" text-anchor="middle">Custom ESLint rule</text>
 
     <rect x="540" y="308" width="168" height="22" rx="4" fill="#1a0d0a" stroke="#fb923c" stroke-width="1"/>
-    <text x="624" y="323" font-size="11" fill="#cbd5e1" text-anchor="middle">CI guard (scripts/check-*)</text>
+    <text x="624" y="323" font-size="15" fill="#cbd5e1" text-anchor="middle">CI guard (scripts/check-*)</text>
 
     <rect x="540" y="334" width="168" height="22" rx="4" fill="#1a0d0a" stroke="#fb923c" stroke-width="1"/>
-    <text x="624" y="349" font-size="11" fill="#cbd5e1" text-anchor="middle">TypeScript 型制約</text>
+    <text x="624" y="349" font-size="15" fill="#cbd5e1" text-anchor="middle">TypeScript 型制約</text>
 
     <rect x="540" y="360" width="168" height="22" rx="4" fill="#1a0d0a" stroke="#fb923c" stroke-width="1"/>
-    <text x="624" y="375" font-size="11" fill="#cbd5e1" text-anchor="middle">ガイドライン項目</text>
+    <text x="624" y="375" font-size="15" fill="#cbd5e1" text-anchor="middle">ガイドライン項目</text>
 
-    <text x="624" y="404" font-size="11" fill="#94a3b8" text-anchor="middle">のいずれか</text>
+    <text x="624" y="404" font-size="15" fill="#94a3b8" text-anchor="middle">のいずれか</text>
   </g>
 
   <line x1="728" y1="320" x2="764" y2="320" stroke="#fb923c" stroke-width="2" marker-end="url(#a-38bdf8)"/>
@@ -76,21 +76,21 @@
   <!-- ============= Step 3: zero existing violations ============= -->
   <g font-family="Noto Sans JP, sans-serif">
     <circle cx="866" cy="180" r="28" fill="#0d1f2d" stroke="#38bdf8" stroke-width="2.5"/>
-    <text x="866" y="187" font-size="22" fill="#38bdf8" text-anchor="middle" font-weight="bold">3</text>
+    <text x="866" y="187" font-size="28" fill="#38bdf8" text-anchor="middle" font-weight="bold">3</text>
 
     <rect x="766" y="225" width="200" height="200" rx="14" fill="#0d1f2d" stroke="#38bdf8" stroke-width="2"/>
-    <text x="866" y="255" font-size="14" fill="#38bdf8" text-anchor="middle" font-weight="bold">既存違反を同PRで0化</text>
+    <text x="866" y="255" font-size="19" fill="#38bdf8" text-anchor="middle" font-weight="bold">既存違反を同PRで0化</text>
 
     <line x1="786" y1="270" x2="946" y2="270" stroke="#334155" stroke-width="1"/>
 
-    <text x="866" y="294" font-size="12" fill="#cbd5e1" text-anchor="middle">warn 投入での</text>
-    <text x="866" y="312" font-size="12" fill="#cbd5e1" text-anchor="middle">deferral 禁止</text>
+    <text x="866" y="294" font-size="16" fill="#cbd5e1" text-anchor="middle">warn 投入での</text>
+    <text x="866" y="312" font-size="16" fill="#cbd5e1" text-anchor="middle">deferral 禁止</text>
 
-    <text x="866" y="346" font-size="12" fill="#cbd5e1" text-anchor="middle">同PR内で全箇所修正</text>
-    <text x="866" y="364" font-size="12" fill="#cbd5e1" text-anchor="middle">→ error で投入</text>
+    <text x="866" y="346" font-size="16" fill="#cbd5e1" text-anchor="middle">同PR内で全箇所修正</text>
+    <text x="866" y="364" font-size="16" fill="#cbd5e1" text-anchor="middle">→ error で投入</text>
 
-    <text x="866" y="396" font-size="11" fill="#94a3b8" text-anchor="middle">「将来的に対応」も禁止</text>
-    <text x="866" y="412" font-size="11" fill="#94a3b8" text-anchor="middle">＝逃げ道を先回りで潰す</text>
+    <text x="866" y="396" font-size="15" fill="#94a3b8" text-anchor="middle">「将来的に対応」も禁止</text>
+    <text x="866" y="412" font-size="15" fill="#94a3b8" text-anchor="middle">＝逃げ道を先回りで潰す</text>
   </g>
 
   <line x1="970" y1="320" x2="1006" y2="320" stroke="#38bdf8" stroke-width="2" marker-end="url(#a-4ade80)"/>
@@ -98,25 +98,25 @@
   <!-- ============= Step 4: auto review → merge → deploy ============= -->
   <g font-family="Noto Sans JP, sans-serif">
     <circle cx="1108" cy="180" r="28" fill="#0d251a" stroke="#4ade80" stroke-width="2.5"/>
-    <text x="1108" y="187" font-size="22" fill="#4ade80" text-anchor="middle" font-weight="bold">4</text>
+    <text x="1108" y="187" font-size="28" fill="#4ade80" text-anchor="middle" font-weight="bold">4</text>
 
     <rect x="1008" y="225" width="200" height="200" rx="14" fill="#0d251a" stroke="#4ade80" stroke-width="2"/>
-    <text x="1108" y="255" font-size="13" fill="#4ade80" text-anchor="middle" font-weight="bold">自動レビュー → マージ → 再デプロイ</text>
+    <text x="1108" y="255" font-size="17" fill="#4ade80" text-anchor="middle" font-weight="bold">自動レビュー → マージ → 再デプロイ</text>
 
     <line x1="1028" y1="270" x2="1188" y2="270" stroke="#334155" stroke-width="1"/>
 
-    <text x="1108" y="294" font-size="12" fill="#cbd5e1" text-anchor="middle">Part 3 の通常パイプライン</text>
+    <text x="1108" y="294" font-size="16" fill="#cbd5e1" text-anchor="middle">Part 3 の通常パイプライン</text>
 
     <rect x="1024" y="306" width="168" height="22" rx="4" fill="#0a1820" stroke="#4ade80" stroke-width="1"/>
-    <text x="1108" y="321" font-size="11" fill="#cbd5e1" text-anchor="middle">9観点 + [Recurrence] check</text>
+    <text x="1108" y="321" font-size="15" fill="#cbd5e1" text-anchor="middle">9観点 + [Recurrence] check</text>
 
     <rect x="1024" y="332" width="168" height="22" rx="4" fill="#0a1820" stroke="#4ade80" stroke-width="1"/>
-    <text x="1108" y="347" font-size="11" fill="#cbd5e1" text-anchor="middle">CI green で自動マージ</text>
+    <text x="1108" y="347" font-size="15" fill="#cbd5e1" text-anchor="middle">CI green で自動マージ</text>
 
     <rect x="1024" y="358" width="168" height="22" rx="4" fill="#0a1820" stroke="#4ade80" stroke-width="1"/>
-    <text x="1108" y="373" font-size="11" fill="#cbd5e1" text-anchor="middle">Pulumi parallel deploy</text>
+    <text x="1108" y="373" font-size="15" fill="#cbd5e1" text-anchor="middle">Pulumi parallel deploy</text>
 
-    <text x="1108" y="402" font-size="11" fill="#94a3b8" text-anchor="middle">人の介入なし</text>
+    <text x="1108" y="402" font-size="15" fill="#94a3b8" text-anchor="middle">人の介入なし</text>
   </g>
 
   <line x1="1212" y1="320" x2="1248" y2="320" stroke="#4ade80" stroke-width="2" marker-end="url(#a-4ade80)"/>
@@ -124,75 +124,75 @@
   <!-- ============= Step 5: structural impossibility ============= -->
   <g font-family="Noto Sans JP, sans-serif">
     <circle cx="1350" cy="180" r="28" fill="#0d251a" stroke="#4ade80" stroke-width="2.5"/>
-    <text x="1350" y="187" font-size="22" fill="#4ade80" text-anchor="middle" font-weight="bold">5</text>
+    <text x="1350" y="187" font-size="28" fill="#4ade80" text-anchor="middle" font-weight="bold">5</text>
 
     <rect x="1250" y="225" width="320" height="200" rx="14" fill="#0d251a" stroke="#4ade80" stroke-width="2"/>
-    <text x="1410" y="255" font-size="14" fill="#4ade80" text-anchor="middle" font-weight="bold">同種クラスの障害が発生不可</text>
+    <text x="1410" y="255" font-size="19" fill="#4ade80" text-anchor="middle" font-weight="bold">同種クラスの障害が発生不可</text>
 
     <line x1="1270" y1="270" x2="1550" y2="270" stroke="#334155" stroke-width="1"/>
 
-    <text x="1410" y="294" font-size="13" fill="#cbd5e1" text-anchor="middle">以降、同じパターンを書こうとすると</text>
-    <text x="1410" y="312" font-size="13" fill="#cbd5e1" text-anchor="middle">CI / lint で機械的に弾かれる</text>
+    <text x="1410" y="294" font-size="17" fill="#cbd5e1" text-anchor="middle">以降、同じパターンを書こうとすると</text>
+    <text x="1410" y="312" font-size="17" fill="#cbd5e1" text-anchor="middle">CI / lint で機械的に弾かれる</text>
 
-    <text x="1410" y="346" font-size="13" fill="#cbd5e1" text-anchor="middle"><tspan font-weight="bold" fill="#4ade80">「踏んだら lint 化」</tspan></text>
-    <text x="1410" y="364" font-size="12" fill="#cbd5e1" text-anchor="middle">の積み上げで Sensor が +1</text>
+    <text x="1410" y="346" font-size="17" fill="#cbd5e1" text-anchor="middle"><tspan font-weight="bold" fill="#4ade80">「踏んだら lint 化」</tspan></text>
+    <text x="1410" y="364" font-size="16" fill="#cbd5e1" text-anchor="middle">の積み上げで Sensor が +1</text>
 
-    <text x="1410" y="396" font-size="11" fill="#94a3b8" text-anchor="middle">ガードレールが日々増えていく構造</text>
+    <text x="1410" y="396" font-size="15" fill="#94a3b8" text-anchor="middle">ガードレールが日々増えていく構造</text>
   </g>
 
   <!-- ============= Example: Cloud Run OTel env injection ============= -->
   <g font-family="Noto Sans JP, sans-serif">
     <rect x="80" y="490" width="1440" height="350" rx="14" fill="#0a1820" stroke="#94a3b8" stroke-width="1.5"/>
-    <text x="800" y="528" font-size="20" fill="#e2e8f0" text-anchor="middle" font-weight="bold">具体例: Cloud Run の OTel env 注入漏れ → 5 ステップを実際に踏んだケース</text>
+    <text x="800" y="528" font-size="26" fill="#e2e8f0" text-anchor="middle" font-weight="bold">具体例: Cloud Run の OTel env 注入漏れ → 5 ステップを実際に踏んだケース</text>
 
     <line x1="100" y1="546" x2="1500" y2="546" stroke="#334155" stroke-width="1"/>
 
-    <text x="100" y="576" font-size="14" fill="#f87171" font-weight="bold">[ 罠 ]</text>
-    <text x="100" y="600" font-size="12" fill="#cbd5e1">Cloud Run Service/Job を Pulumi で定義したとき、`OTEL_EXPORTER_OTLP_ENDPOINT` と `GRAFANA_CLOUD_API_KEY` を `secretKeyRef` で</text>
-    <text x="100" y="618" font-size="12" fill="#cbd5e1">envs に注入し忘れて、本番で OTel init が skip され、Grafana に trace/log が届かず障害が検知不能になる</text>
+    <text x="100" y="576" font-size="19" fill="#f87171" font-weight="bold">[ 罠 ]</text>
+    <text x="100" y="600" font-size="16" fill="#cbd5e1">Cloud Run Service/Job を Pulumi で定義したとき、`OTEL_EXPORTER_OTLP_ENDPOINT` と `GRAFANA_CLOUD_API_KEY` を `secretKeyRef` で</text>
+    <text x="100" y="618" font-size="16" fill="#cbd5e1">envs に注入し忘れて、本番で OTel init が skip され、Grafana に trace/log が届かず障害が検知不能になる</text>
 
     <!-- 5 step boxes -->
     <g transform="translate(0, 644)">
       <rect x="100" y="0" width="260" height="170" rx="8" fill="#1a1525" stroke="#a78bfa" stroke-width="1.5"/>
-      <text x="230" y="22" font-size="13" fill="#a78bfa" text-anchor="middle" font-weight="bold">1. 横展開検出</text>
-      <text x="230" y="48" font-size="11" fill="#cbd5e1" text-anchor="middle">cpg で `infra` 配下の</text>
-      <text x="230" y="66" font-size="11" fill="#cbd5e1" text-anchor="middle">Cloud Run リソース定義</text>
-      <text x="230" y="84" font-size="11" fill="#cbd5e1" text-anchor="middle">を全列挙</text>
-      <text x="230" y="118" font-size="11" fill="#94a3b8" text-anchor="middle">env 注入漏れの</text>
-      <text x="230" y="136" font-size="11" fill="#94a3b8" text-anchor="middle">サービスを全把握</text>
+      <text x="230" y="22" font-size="17" fill="#a78bfa" text-anchor="middle" font-weight="bold">1. 横展開検出</text>
+      <text x="230" y="48" font-size="15" fill="#cbd5e1" text-anchor="middle">cpg で `infra` 配下の</text>
+      <text x="230" y="66" font-size="15" fill="#cbd5e1" text-anchor="middle">Cloud Run リソース定義</text>
+      <text x="230" y="84" font-size="15" fill="#cbd5e1" text-anchor="middle">を全列挙</text>
+      <text x="230" y="118" font-size="15" fill="#94a3b8" text-anchor="middle">env 注入漏れの</text>
+      <text x="230" y="136" font-size="15" fill="#94a3b8" text-anchor="middle">サービスを全把握</text>
 
       <rect x="370" y="0" width="240" height="170" rx="8" fill="#251a0d" stroke="#fb923c" stroke-width="1.5"/>
-      <text x="490" y="22" font-size="13" fill="#fb923c" text-anchor="middle" font-weight="bold">2. CI guard 追加</text>
-      <text x="490" y="48" font-size="11" fill="#cbd5e1" text-anchor="middle">scripts/</text>
-      <text x="490" y="66" font-size="11" fill="#cbd5e1" text-anchor="middle">check-otel-env-injection.ts</text>
-      <text x="490" y="92" font-size="11" fill="#94a3b8" text-anchor="middle">Cloud Run リソース定義に</text>
-      <text x="490" y="110" font-size="11" fill="#94a3b8" text-anchor="middle">対して OTel env 必須化を</text>
-      <text x="490" y="128" font-size="11" fill="#94a3b8" text-anchor="middle">機械検証</text>
+      <text x="490" y="22" font-size="17" fill="#fb923c" text-anchor="middle" font-weight="bold">2. CI guard 追加</text>
+      <text x="490" y="48" font-size="15" fill="#cbd5e1" text-anchor="middle">scripts/</text>
+      <text x="490" y="66" font-size="15" fill="#cbd5e1" text-anchor="middle">check-otel-env-injection.ts</text>
+      <text x="490" y="92" font-size="15" fill="#94a3b8" text-anchor="middle">Cloud Run リソース定義に</text>
+      <text x="490" y="110" font-size="15" fill="#94a3b8" text-anchor="middle">対して OTel env 必須化を</text>
+      <text x="490" y="128" font-size="15" fill="#94a3b8" text-anchor="middle">機械検証</text>
 
       <rect x="620" y="0" width="220" height="170" rx="8" fill="#0d1f2d" stroke="#38bdf8" stroke-width="1.5"/>
-      <text x="730" y="22" font-size="13" fill="#38bdf8" text-anchor="middle" font-weight="bold">3. 既存違反0化</text>
-      <text x="730" y="48" font-size="11" fill="#cbd5e1" text-anchor="middle">既存サービス全体も</text>
-      <text x="730" y="66" font-size="11" fill="#cbd5e1" text-anchor="middle">同PRで env 注入を補完</text>
-      <text x="730" y="100" font-size="11" fill="#94a3b8" text-anchor="middle">warn 投入で延期せず</text>
-      <text x="730" y="118" font-size="11" fill="#94a3b8" text-anchor="middle">同PRで error 投入</text>
+      <text x="730" y="22" font-size="17" fill="#38bdf8" text-anchor="middle" font-weight="bold">3. 既存違反0化</text>
+      <text x="730" y="48" font-size="15" fill="#cbd5e1" text-anchor="middle">既存サービス全体も</text>
+      <text x="730" y="66" font-size="15" fill="#cbd5e1" text-anchor="middle">同PRで env 注入を補完</text>
+      <text x="730" y="100" font-size="15" fill="#94a3b8" text-anchor="middle">warn 投入で延期せず</text>
+      <text x="730" y="118" font-size="15" fill="#94a3b8" text-anchor="middle">同PRで error 投入</text>
 
       <rect x="850" y="0" width="240" height="170" rx="8" fill="#0d251a" stroke="#4ade80" stroke-width="1.5"/>
-      <text x="970" y="22" font-size="13" fill="#4ade80" text-anchor="middle" font-weight="bold">4. 自動マージ → デプロイ</text>
-      <text x="970" y="48" font-size="11" fill="#cbd5e1" text-anchor="middle">[Recurrence] 観点が</text>
-      <text x="970" y="66" font-size="11" fill="#cbd5e1" text-anchor="middle">APPROVE → 自動マージ</text>
-      <text x="970" y="100" font-size="11" fill="#94a3b8" text-anchor="middle">Pulumi で並列再デプロイ</text>
-      <text x="970" y="118" font-size="11" fill="#94a3b8" text-anchor="middle">本番復旧</text>
+      <text x="970" y="22" font-size="17" fill="#4ade80" text-anchor="middle" font-weight="bold">4. 自動マージ → デプロイ</text>
+      <text x="970" y="48" font-size="15" fill="#cbd5e1" text-anchor="middle">[Recurrence] 観点が</text>
+      <text x="970" y="66" font-size="15" fill="#cbd5e1" text-anchor="middle">APPROVE → 自動マージ</text>
+      <text x="970" y="100" font-size="15" fill="#94a3b8" text-anchor="middle">Pulumi で並列再デプロイ</text>
+      <text x="970" y="118" font-size="15" fill="#94a3b8" text-anchor="middle">本番復旧</text>
 
       <rect x="1100" y="0" width="320" height="170" rx="8" fill="#0d251a" stroke="#4ade80" stroke-width="1.8"/>
-      <text x="1260" y="22" font-size="13" fill="#4ade80" text-anchor="middle" font-weight="bold">5. 同種罠が CI で弾かれる</text>
-      <text x="1260" y="48" font-size="11" fill="#cbd5e1" text-anchor="middle">以降、Cloud Run リソース定義で</text>
-      <text x="1260" y="66" font-size="11" fill="#cbd5e1" text-anchor="middle">OTel env を書き忘れても</text>
-      <text x="1260" y="84" font-size="11" fill="#cbd5e1" text-anchor="middle"><tspan font-weight="bold" fill="#4ade80">CI guard が PR を弾く</tspan></text>
-      <text x="1260" y="118" font-size="11" fill="#94a3b8" text-anchor="middle">「気をつけよう」では終わらない</text>
-      <text x="1260" y="136" font-size="11" fill="#94a3b8" text-anchor="middle">罠の class そのものが封じられる</text>
+      <text x="1260" y="22" font-size="17" fill="#4ade80" text-anchor="middle" font-weight="bold">5. 同種罠が CI で弾かれる</text>
+      <text x="1260" y="48" font-size="15" fill="#cbd5e1" text-anchor="middle">以降、Cloud Run リソース定義で</text>
+      <text x="1260" y="66" font-size="15" fill="#cbd5e1" text-anchor="middle">OTel env を書き忘れても</text>
+      <text x="1260" y="84" font-size="15" fill="#cbd5e1" text-anchor="middle"><tspan font-weight="bold" fill="#4ade80">CI guard が PR を弾く</tspan></text>
+      <text x="1260" y="118" font-size="15" fill="#94a3b8" text-anchor="middle">「気をつけよう」では終わらない</text>
+      <text x="1260" y="136" font-size="15" fill="#94a3b8" text-anchor="middle">罠の class そのものが封じられる</text>
     </g>
   </g>
 
   <!-- Bottom -->
-  <text x="800" y="880" font-size="13" fill="#94a3b8" text-anchor="middle" font-family="Noto Sans JP, sans-serif">Self-Healing が動くたびに Sensor が +1。組織が踏んだ罠の数だけガードレールが積み上がっていく。</text>
+  <text x="800" y="880" font-size="17" fill="#94a3b8" text-anchor="middle" font-family="Noto Sans JP, sans-serif">Self-Healing が動くたびに Sensor が +1。組織が踏んだ罠の数だけガードレールが積み上がっていく。</text>
 </svg>
