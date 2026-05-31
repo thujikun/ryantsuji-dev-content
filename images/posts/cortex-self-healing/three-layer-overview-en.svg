@@ -12,18 +12,19 @@
 
   <!-- Title -->
   <text x="800" y="56" font-size="36" fill="#e2e8f0" text-anchor="middle" font-weight="bold" font-family="Inter, Noto Sans, system-ui, sans-serif">Three-Layer Loop: Observation → Repair → Strengthening</text>
-  <text x="800" y="92" font-size="24" fill="#94a3b8" text-anchor="middle" font-family="Inter, Noto Sans, system-ui, sans-serif">AI investigates, fixes, and deploys, all driven by a production anomaly. Each fix grows the lint / CI guard / guideline set, so the same anti-pattern gets mechanically rejected from then on.</text>
+  <text x="800" y="90" font-size="20" fill="#94a3b8" text-anchor="middle" font-family="Inter, Noto Sans, system-ui, sans-serif">AI investigates, fixes, and deploys, all driven by a production anomaly.</text>
+  <text x="800" y="116" font-size="20" fill="#94a3b8" text-anchor="middle" font-family="Inter, Noto Sans, system-ui, sans-serif">Each fix grows the lint / CI guard / guideline set, so the same anti-pattern gets mechanically rejected from then on.</text>
 
   <!-- Production anomaly at top -->
   <g font-family="Inter, Noto Sans, system-ui, sans-serif">
-    <rect x="540" y="130" width="520" height="80" rx="14" fill="#251a0d" stroke="#f87171" stroke-width="2.5"/>
-    <text x="800" y="162" font-size="24" fill="#f87171" text-anchor="middle" font-weight="bold">Production anomaly</text>
-    <text x="800" y="184" font-size="17" fill="#cbd5e1" text-anchor="middle">Error log threshold tripped / deploy failed / pipeline failed / etc.</text>
-    <text x="800" y="200" font-size="15" fill="#94a3b8" text-anchor="middle">Fires before anyone notices</text>
+    <rect x="540" y="148" width="520" height="80" rx="14" fill="#251a0d" stroke="#f87171" stroke-width="2.5"/>
+    <text x="800" y="180" font-size="24" fill="#f87171" text-anchor="middle" font-weight="bold">Production anomaly</text>
+    <text x="800" y="202" font-size="17" fill="#cbd5e1" text-anchor="middle">Error log threshold tripped / deploy failed / pipeline failed / etc.</text>
+    <text x="800" y="218" font-size="15" fill="#94a3b8" text-anchor="middle">Fires before anyone notices</text>
   </g>
 
   <!-- Down arrow to layer 1 -->
-  <line x1="800" y1="216" x2="800" y2="252" stroke="#f87171" stroke-width="2" marker-end="url(#a-94a3b8)"/>
+  <line x1="800" y1="234" x2="800" y2="252" stroke="#f87171" stroke-width="2" marker-end="url(#a-94a3b8)"/>
 
   <!-- ============= Layer 1: 観測 ============= -->
   <g font-family="Inter, Noto Sans, system-ui, sans-serif">
@@ -147,7 +148,7 @@
 
   <!-- Feedback loop arrow on the right side (Layer 3 → Production for future) -->
   <path d="M 1480 600 Q 1570 600 1570 170 Q 1570 130 1480 130" fill="none" stroke="#4ade80" stroke-width="2.5" stroke-dasharray="6,4" marker-end="url(#a-4ade80)"/>
-  <text x="1535" y="380" font-size="17" fill="#4ade80" font-family="Inter, Noto Sans, system-ui, sans-serif" font-weight="bold" transform="rotate(-90, 1535, 380)">Same pattern mechanically rejected next time</text>
+  <text x="1535" y="594" font-size="17" fill="#4ade80" font-family="Inter, Noto Sans, system-ui, sans-serif" font-weight="bold" text-anchor="middle" transform="rotate(-90, 1535, 594)">Same pattern mechanically rejected next time</text>
 
   <!-- Bottom footer -->
   <text x="800" y="970" font-size="17" fill="#94a3b8" text-anchor="middle" font-family="Inter, Noto Sans, system-ui, sans-serif">All three layers must be in place for the 'self-healing + self-strengthening' loop to spin. Repair alone loses over the long run.</text>

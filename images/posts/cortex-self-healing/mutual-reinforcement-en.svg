@@ -12,7 +12,8 @@
 
   <!-- Title -->
   <text x="700" y="56" font-size="36" fill="#e2e8f0" text-anchor="middle" font-weight="bold" font-family="Inter, Noto Sans, system-ui, sans-serif">cpg as the shared substrate: Self-Healing and Auto-review grow Guides</text>
-  <text x="700" y="92" font-size="24" fill="#94a3b8" text-anchor="middle" font-family="Inter, Noto Sans, system-ui, sans-serif">Each side's output becomes the other side's decision basis -- a mutually reinforcing triangle, with Product Graph (cpg) at the foundation.</text>
+  <text x="700" y="92" font-size="20" fill="#94a3b8" text-anchor="middle" font-family="Inter, Noto Sans, system-ui, sans-serif">Each side's output becomes the other side's decision basis —</text>
+  <text x="700" y="118" font-size="20" fill="#94a3b8" text-anchor="middle" font-family="Inter, Noto Sans, system-ui, sans-serif">a mutually reinforcing triangle, with Product Graph (cpg) at the foundation.</text>
 
   <!-- ============= cpg (center, top) ============= -->
   <g font-family="Inter, Noto Sans, system-ui, sans-serif">
@@ -35,7 +36,7 @@
   <g font-family="Inter, Noto Sans, system-ui, sans-serif">
     <rect x="120" y="500" width="320" height="220" rx="14" fill="#251a0d" stroke="#fb923c" stroke-width="2.5"/>
     <text x="280" y="540" font-size="28" fill="#fb923c" text-anchor="middle" font-weight="bold">Self-Healing</text>
-    <text x="280" y="562" font-size="17" fill="#cbd5e1" text-anchor="middle">AI investigates and fixes production alerts</text>
+    <text x="280" y="562" font-size="15" fill="#cbd5e1" text-anchor="middle">AI investigates and fixes production alerts</text>
 
     <line x1="140" y1="580" x2="420" y2="580" stroke="#334155" stroke-width="1"/>
 
@@ -50,7 +51,7 @@
   <g font-family="Inter, Noto Sans, system-ui, sans-serif">
     <rect x="960" y="500" width="320" height="220" rx="14" fill="#0d1f2d" stroke="#38bdf8" stroke-width="2.5"/>
     <text x="1120" y="540" font-size="28" fill="#38bdf8" text-anchor="middle" font-weight="bold">Auto-review</text>
-    <text x="1120" y="562" font-size="17" fill="#cbd5e1" text-anchor="middle">Gates PR-stage quality across 9 lenses</text>
+    <text x="1120" y="562" font-size="15" fill="#cbd5e1" text-anchor="middle">Gates PR-stage quality across 9 lenses</text>
 
     <line x1="980" y1="580" x2="1260" y2="580" stroke="#334155" stroke-width="1"/>
 
@@ -97,8 +98,8 @@
 
     <line x1="400" y1="884" x2="1000" y2="884" stroke="#334155" stroke-width="1"/>
 
-    <text x="700" y="908" font-size="16" fill="#cbd5e1" text-anchor="middle">Custom ESLint 26  /  CI guards 13  /  oxlint 183  /  TS strict 9  /  Coverage 90%</text>
-    <text x="700" y="924" font-size="15" fill="#94a3b8" text-anchor="middle">Machine-read Guides (lint/type/CI) + Human-and-AI-read Guides (guidelines) — both rails together</text>
+    <text x="700" y="904" font-size="16" fill="#cbd5e1" text-anchor="middle">Custom ESLint 26  /  CI guards 13  /  oxlint 183  /  TS strict 9  /  Coverage 90%</text>
+    <text x="700" y="922" font-size="14" fill="#94a3b8" text-anchor="middle">Machine-read Guides (lint / type / CI) + Human-and-AI-read Guides (guidelines)</text>
   </g>
 
   <!-- Arrows from SH and AR to Guides -->
