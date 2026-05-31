@@ -14,6 +14,9 @@ tags:
 lang: "en"
 series: "building-ai-harness"
 seriesOrder: 4
+syndication:
+  devto:
+    publishAt: "2026-06-02T08:30:00+09:00"
 ---
 
 
