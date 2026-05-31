@@ -270,7 +270,7 @@ Self-Healingが起票するfix PRは、自動レビューで`[Recurrence]`観点
 cortexに積み上がっているcustom Guideの実例:
 
 - **`graph/no-silent-catch`**（ESLint） ── 冒頭の「上振れ」の元凶。catchブロックで例外を握り潰すパターンを禁止
-- **`cortex-quality/require-fetch-timeout`**（oxlint） ── 外部APIへの`fetch`に`signal: AbortSignal.timeout(...)`必須。timeout無しfetchがhangしてCloud Tasks再配信ストームを引き起こした事例から
+- **`cortex-quality/require-fetch-timeout`**（oxlint^[oxlint = Rust製のJS/TS lint。ESLint互換のルールセットを動かしつつ、Rust実装ゆえESLintより数十倍高速。cortexでは標準ルールはoxlint、AST情報が必要なcustom ルールはESLintという棲み分けで併用しています。]） ── 外部APIへの`fetch`に`signal: AbortSignal.timeout(...)`必須。timeout無しfetchがhangしてCloud Tasks再配信ストームを引き起こした事例から
 - **`graph/no-bq-string-timestamp-param`**（ESLint） ── BigQueryのクエリパラメータでTIMESTAMPをstringで渡すと、serializerバグでNULL化してINSERT全失敗する事例から
 - **`graph/require-firestore-ignore-undefined`**（ESLint） ── Firestoreの`new Firestore()`に`ignoreUndefinedProperties: true`必須化。NULL行で同期batchが100%失敗した事例から
 - **`check-otel-env-injection`**（CI guard） ── 後述のCloud Run OTel env注入漏れの再発防止
