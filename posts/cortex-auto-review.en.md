@@ -1,5 +1,5 @@
 ---
-title: "Human-on-the-Loop: AI Reviewing AI PRs at cortex (769 PRs/month, while raising the quality bar)"
+title: "Human-on-the-Loop: AI Reviewing AI PRs at cortex -- 769 PRs/month while raising the quality bar (Series Part 3)"
 publishedAt: "2026-05-26T08:30:00+09:00"
 updatedAt: "2026-05-26T08:30:00+09:00"
 slug: "cortex-auto-review"

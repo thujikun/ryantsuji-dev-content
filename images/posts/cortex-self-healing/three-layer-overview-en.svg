@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000">
+  <rect width="1600" height="1000" fill="#0f172a"/>
+
+  <defs>
+    <marker id="a-94a3b8" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#94a3b8"/></marker>
+    <marker id="a-4ade80" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#4ade80"/></marker>
+    <marker id="a-38bdf8" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#38bdf8"/></marker>
+    <marker id="a-fb923c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#fb923c"/></marker>
+    <marker id="a-a78bfa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#a78bfa"/></marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="800" y="56" font-size="36" fill="#e2e8f0" text-anchor="middle" font-weight="bold" font-family="Inter, Noto Sans, system-ui, sans-serif">Three-Layer Loop: Observation → Repair → Strengthening</text>
+  <text x="800" y="92" font-size="24" fill="#94a3b8" text-anchor="middle" font-family="Inter, Noto Sans, system-ui, sans-serif">AI investigates, fixes, and deploys, all driven by a production anomaly. Each fix grows the lint / CI guard / guideline set, so the same anti-pattern gets mechanically rejected from then on.</text>
+
+  <!-- Production anomaly at top -->
+  <g font-family="Inter, Noto Sans, system-ui, sans-serif">
+    <rect x="540" y="130" width="520" height="80" rx="14" fill="#251a0d" stroke="#f87171" stroke-width="2.5"/>
+    <text x="800" y="162" font-size="24" fill="#f87171" text-anchor="middle" font-weight="bold">Production anomaly</text>
+    <text x="800" y="184" font-size="17" fill="#cbd5e1" text-anchor="middle">Error log threshold tripped / deploy failed / pipeline failed / etc.</text>
+    <text x="800" y="200" font-size="15" fill="#94a3b8" text-anchor="middle">Fires before anyone notices</text>
+  </g>
+
+  <!-- Down arrow to layer 1 -->
+  <line x1="800" y1="216" x2="800" y2="252" stroke="#f87171" stroke-width="2" marker-end="url(#a-94a3b8)"/>
+
+  <!-- ============= Layer 1: 観測 ============= -->
+  <g font-family="Inter, Noto Sans, system-ui, sans-serif">
+    <rect x="60" y="260" width="1480" height="180" rx="14" fill="#0d1f2d" stroke="#38bdf8" stroke-width="2.5"/>
+    <text x="100" y="295" font-size="28" fill="#38bdf8" font-weight="bold">① Observation</text>
+    <text x="100" y="318" font-size="17" fill="#94a3b8">The infrastructure that lets AI see the same things humans see</text>
+
+    <!-- Components row -->
+    <g transform="translate(0, 348)">
+      <rect x="220" y="0" width="150" height="60" rx="8" fill="#0a1820" stroke="#38bdf8" stroke-width="1.5"/>
+      <text x="295" y="24" font-size="19" fill="#38bdf8" text-anchor="middle" font-weight="bold">OTel SDK</text>
+      <text x="295" y="44" font-size="15" fill="#cbd5e1" text-anchor="middle">trace / metric / log</text>
+
+      <rect x="390" y="0" width="150" height="60" rx="8" fill="#0a1820" stroke="#38bdf8" stroke-width="1.5"/>
+      <text x="465" y="24" font-size="19" fill="#38bdf8" text-anchor="middle" font-weight="bold">Loki</text>
+      <text x="465" y="44" font-size="15" fill="#cbd5e1" text-anchor="middle">Pino + trace_id</text>
+
+      <rect x="560" y="0" width="150" height="60" rx="8" fill="#0a1820" stroke="#38bdf8" stroke-width="1.5"/>
+      <text x="635" y="24" font-size="19" fill="#38bdf8" text-anchor="middle" font-weight="bold">Mimir</text>
+      <text x="635" y="44" font-size="15" fill="#cbd5e1" text-anchor="middle">Metrics</text>
+
+      <rect x="730" y="0" width="150" height="60" rx="8" fill="#0a1820" stroke="#38bdf8" stroke-width="1.5"/>
+      <text x="805" y="24" font-size="19" fill="#38bdf8" text-anchor="middle" font-weight="bold">Tempo</text>
+      <text x="805" y="44" font-size="15" fill="#cbd5e1" text-anchor="middle">Distributed traces</text>
+
+      <rect x="900" y="0" width="150" height="60" rx="8" fill="#0a1820" stroke="#38bdf8" stroke-width="1.5"/>
+      <text x="975" y="24" font-size="19" fill="#38bdf8" text-anchor="middle" font-weight="bold">Faro</text>
+      <text x="975" y="44" font-size="15" fill="#cbd5e1" text-anchor="middle">Frontend</text>
+
+      <rect x="1070" y="0" width="180" height="60" rx="8" fill="#0a1820" stroke="#38bdf8" stroke-width="1.5"/>
+      <text x="1160" y="24" font-size="19" fill="#38bdf8" text-anchor="middle" font-weight="bold">Grafana</text>
+      <text x="1160" y="44" font-size="15" fill="#cbd5e1" text-anchor="middle">Dashboard + Alert</text>
+    </g>
+
+    <text x="800" y="424" font-size="16" fill="#94a3b8" text-anchor="middle">Log level contract: warn (no immediate action) / error (recovery needed, &lt;20% impact) / fatal (≥20% of feature failing)</text>
+  </g>
+
+  <!-- Arrow Layer 1 → 2 -->
+  <line x1="800" y1="448" x2="800" y2="486" stroke="#38bdf8" stroke-width="2" marker-end="url(#a-fb923c)"/>
+  <text x="820" y="472" font-size="17" fill="#94a3b8" font-family="Inter, Noto Sans, system-ui, sans-serif">firing alert</text>
+
+  <!-- ============= Layer 2: 修復 ============= -->
+  <g font-family="Inter, Noto Sans, system-ui, sans-serif">
+    <rect x="60" y="494" width="1480" height="180" rx="14" fill="#251a0d" stroke="#fb923c" stroke-width="2.5"/>
+    <text x="100" y="529" font-size="28" fill="#fb923c" font-weight="bold">② Repair — Self-Healing</text>
+    <text x="100" y="552" font-size="17" fill="#94a3b8">AI investigates root cause → opens fix PR → auto-review → auto-merge → auto-redeploy</text>
+
+    <!-- Pipeline boxes -->
+    <g transform="translate(0, 580)">
+      <rect x="80" y="0" width="160" height="60" rx="8" fill="#1a0d0a" stroke="#fb923c" stroke-width="1.5"/>
+      <text x="160" y="24" font-size="17" fill="#fb923c" text-anchor="middle" font-weight="bold">Event Relay</text>
+      <text x="160" y="44" font-size="15" fill="#cbd5e1" text-anchor="middle">SSE push (in-house)</text>
+
+      <line x1="240" y1="30" x2="280" y2="30" stroke="#fb923c" stroke-width="2" marker-end="url(#a-fb923c)"/>
+
+      <rect x="280" y="0" width="180" height="60" rx="8" fill="#1a0d0a" stroke="#fb923c" stroke-width="1.5"/>
+      <text x="370" y="24" font-size="17" fill="#fb923c" text-anchor="middle" font-weight="bold">self-healing mode</text>
+      <text x="370" y="44" font-size="15" fill="#cbd5e1" text-anchor="middle">claude -p / worktree</text>
+
+      <line x1="460" y1="30" x2="500" y2="30" stroke="#fb923c" stroke-width="2" marker-end="url(#a-fb923c)"/>
+
+      <rect x="500" y="0" width="220" height="60" rx="8" fill="#1a0d0a" stroke="#fb923c" stroke-width="1.5"/>
+      <text x="610" y="24" font-size="17" fill="#fb923c" text-anchor="middle" font-weight="bold">cpg + Loki + git blame</text>
+      <text x="610" y="44" font-size="15" fill="#cbd5e1" text-anchor="middle">Root cause + horizontal expansion</text>
+
+      <line x1="720" y1="30" x2="760" y2="30" stroke="#fb923c" stroke-width="2" marker-end="url(#a-fb923c)"/>
+
+      <rect x="760" y="0" width="160" height="60" rx="8" fill="#1a0d0a" stroke="#fb923c" stroke-width="1.5"/>
+      <text x="840" y="24" font-size="17" fill="#fb923c" text-anchor="middle" font-weight="bold">gh pr create</text>
+      <text x="840" y="44" font-size="15" fill="#cbd5e1" text-anchor="middle">Open fix PR</text>
+
+      <line x1="920" y1="30" x2="960" y2="30" stroke="#fb923c" stroke-width="2" marker-end="url(#a-fb923c)"/>
+
+      <rect x="960" y="0" width="220" height="60" rx="8" fill="#1a0d0a" stroke="#fb923c" stroke-width="1.5"/>
+      <text x="1070" y="24" font-size="17" fill="#fb923c" text-anchor="middle" font-weight="bold">Auto-review (Part 3)</text>
+      <text x="1070" y="44" font-size="15" fill="#cbd5e1" text-anchor="middle">9 lenses + [Recurrence]</text>
+
+      <line x1="1180" y1="30" x2="1220" y2="30" stroke="#fb923c" stroke-width="2" marker-end="url(#a-fb923c)"/>
+
+      <rect x="1220" y="0" width="240" height="60" rx="8" fill="#1a0d0a" stroke="#fb923c" stroke-width="1.5"/>
+      <text x="1340" y="24" font-size="17" fill="#fb923c" text-anchor="middle" font-weight="bold">Auto-merge → redeploy</text>
+      <text x="1340" y="44" font-size="15" fill="#cbd5e1" text-anchor="middle">Recovered (Slack ✓)</text>
+    </g>
+  </g>
+
+  <!-- Arrow Layer 2 → 3 -->
+  <line x1="800" y1="682" x2="800" y2="720" stroke="#fb923c" stroke-width="2" marker-end="url(#a-a78bfa)"/>
+  <text x="820" y="706" font-size="17" fill="#94a3b8" font-family="Inter, Noto Sans, system-ui, sans-serif">Same PR must add recurrence prevention</text>
+
+  <!-- ============= Layer 3: 強化 ============= -->
+  <g font-family="Inter, Noto Sans, system-ui, sans-serif">
+    <rect x="60" y="728" width="1480" height="200" rx="14" fill="#1a1525" stroke="#a78bfa" stroke-width="2.5"/>
+    <text x="100" y="763" font-size="28" fill="#a78bfa" font-weight="bold">③ Strengthening — Guides (lint + guidelines) grow</text>
+    <text x="100" y="786" font-size="17" fill="#94a3b8">The [Recurrence] lens enforces 'same trap twice → lint required.' A fix PR can't merge without a new Guide.</text>
+
+    <g transform="translate(0, 812)">
+      <rect x="80" y="0" width="340" height="86" rx="8" fill="#120a25" stroke="#a78bfa" stroke-width="1.5"/>
+      <text x="250" y="24" font-size="19" fill="#a78bfa" text-anchor="middle" font-weight="bold">Machine-read Guides</text>
+      <text x="250" y="46" font-size="15" fill="#cbd5e1" text-anchor="middle">Custom ESLint 26 / CI guards 13</text>
+      <text x="250" y="64" font-size="15" fill="#cbd5e1" text-anchor="middle">oxlint 183 / TS strict / 90% coverage</text>
+      <text x="250" y="80" font-size="14" fill="#94a3b8" text-anchor="middle">CI rejects violations pre-merge</text>
+
+      <rect x="440" y="0" width="320" height="86" rx="8" fill="#120a25" stroke="#a78bfa" stroke-width="1.5"/>
+      <text x="600" y="24" font-size="19" fill="#a78bfa" text-anchor="middle" font-weight="bold">Human-and-AI-read Guides</text>
+      <text x="600" y="46" font-size="15" fill="#cbd5e1" text-anchor="middle">recurrence-prevention.md</text>
+      <text x="600" y="64" font-size="15" fill="#cbd5e1" text-anchor="middle">severity.md / ai-antipattern.md / etc.</text>
+      <text x="600" y="80" font-size="14" fill="#94a3b8" text-anchor="middle">Decision basis for auto-review</text>
+
+      <rect x="780" y="0" width="400" height="86" rx="8" fill="#120a25" stroke="#a78bfa" stroke-width="1.5"/>
+      <text x="980" y="24" font-size="19" fill="#a78bfa" text-anchor="middle" font-weight="bold">Added each Self-Healing run</text>
+      <text x="980" y="46" font-size="15" fill="#cbd5e1" text-anchor="middle">'Step on it, mechanize it': no-silent-catch /</text>
+      <text x="980" y="64" font-size="15" fill="#cbd5e1" text-anchor="middle">require-fetch-timeout / check-otel-env-injection</text>
+      <text x="980" y="80" font-size="14" fill="#94a3b8" text-anchor="middle">Existing violations zeroed in same PR</text>
+
+      <rect x="1200" y="0" width="320" height="86" rx="8" fill="#0d251a" stroke="#4ade80" stroke-width="1.8"/>
+      <text x="1360" y="24" font-size="19" fill="#4ade80" text-anchor="middle" font-weight="bold">Result</text>
+      <text x="1360" y="48" font-size="16" fill="#cbd5e1" text-anchor="middle">From then on, this class of incident</text>
+      <text x="1360" y="68" font-size="16" fill="#cbd5e1" text-anchor="middle"><tspan font-weight="bold" fill="#4ade80">Is mechanically rejected by CI / lint</tspan></text>
+    </g>
+  </g>
+
+  <!-- Feedback loop arrow on the right side (Layer 3 → Production for future) -->
+  <path d="M 1480 600 Q 1570 600 1570 170 Q 1570 130 1480 130" fill="none" stroke="#4ade80" stroke-width="2.5" stroke-dasharray="6,4" marker-end="url(#a-4ade80)"/>
+  <text x="1535" y="380" font-size="17" fill="#4ade80" font-family="Inter, Noto Sans, system-ui, sans-serif" font-weight="bold" transform="rotate(-90, 1535, 380)">Same pattern mechanically rejected next time</text>
+
+  <!-- Bottom footer -->
+  <text x="800" y="970" font-size="17" fill="#94a3b8" text-anchor="middle" font-family="Inter, Noto Sans, system-ui, sans-serif">All three layers must be in place for the 'self-healing + self-strengthening' loop to spin. Repair alone loses over the long run.</text>
+</svg>

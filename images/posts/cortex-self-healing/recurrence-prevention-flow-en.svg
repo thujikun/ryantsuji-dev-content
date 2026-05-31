@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <rect width="1600" height="900" fill="#0f172a"/>
+
+  <defs>
+    <marker id="a-94a3b8" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#94a3b8"/></marker>
+    <marker id="a-4ade80" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#4ade80"/></marker>
+    <marker id="a-38bdf8" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#38bdf8"/></marker>
+    <marker id="a-fb923c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#fb923c"/></marker>
+    <marker id="a-a78bfa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#a78bfa"/></marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="800" y="56" font-size="36" fill="#e2e8f0" text-anchor="middle" font-weight="bold" font-family="Inter, Noto Sans, system-ui, sans-serif">5 Steps Every Self-Healing Run — Recurrence-Prevention-First Flow</text>
+  <text x="800" y="92" font-size="24" fill="#94a3b8" text-anchor="middle" font-family="Inter, Noto Sans, system-ui, sans-serif">'Add the guard while you fix.' Each Self-Healing run adds one new Guide, and the same pattern is mechanically rejected by CI from then on.</text>
+
+  <!-- Input: alert + Self-Healing -->
+  <g font-family="Inter, Noto Sans, system-ui, sans-serif">
+    <rect x="40" y="170" width="200" height="100" rx="14" fill="#251a0d" stroke="#f87171" stroke-width="2.5"/>
+    <text x="140" y="206" font-size="21" fill="#f87171" text-anchor="middle" font-weight="bold">Production alert</text>
+    <text x="140" y="228" font-size="16" fill="#cbd5e1" text-anchor="middle">Grafana firing</text>
+    <text x="140" y="248" font-size="15" fill="#94a3b8" text-anchor="middle">Self-Healing triggered</text>
+  </g>
+
+  <line x1="244" y1="220" x2="280" y2="220" stroke="#f87171" stroke-width="2" marker-end="url(#a-a78bfa)"/>
+
+  <!-- ============= Step 1: cpg horizontal expansion ============= -->
+  <g font-family="Inter, Noto Sans, system-ui, sans-serif">
+    <circle cx="380" cy="180" r="28" fill="#1a1525" stroke="#a78bfa" stroke-width="2.5"/>
+    <text x="380" y="187" font-size="28" fill="#a78bfa" text-anchor="middle" font-weight="bold">1</text>
+
+    <rect x="282" y="225" width="200" height="200" rx="14" fill="#1a1525" stroke="#a78bfa" stroke-width="2"/>
+    <text x="382" y="255" font-size="19" fill="#a78bfa" text-anchor="middle" font-weight="bold">Horizontal expansion via cpg</text>
+
+    <line x1="302" y1="270" x2="462" y2="270" stroke="#334155" stroke-width="1"/>
+
+    <text x="382" y="294" font-size="16" fill="#cbd5e1" text-anchor="middle">Not just the fix target —</text>
+    <text x="382" y="312" font-size="16" fill="#cbd5e1" text-anchor="middle">every similar node enumerated</text>
+
+    <text x="382" y="344" font-size="15" fill="#94a3b8" text-anchor="middle">trace_connections /</text>
+    <text x="382" y="360" font-size="15" fill="#94a3b8" text-anchor="middle">search_product_graph_nodes</text>
+
+    <text x="382" y="392" font-size="15" fill="#94a3b8" text-anchor="middle">'Where else does</text>
+    <text x="382" y="408" font-size="15" fill="#94a3b8" text-anchor="middle">this trap exist?' answered instantly</text>
+  </g>
+
+  <line x1="486" y1="320" x2="522" y2="320" stroke="#a78bfa" stroke-width="2" marker-end="url(#a-fb923c)"/>
+
+  <!-- ============= Step 2: new Guide in same PR ============= -->
+  <g font-family="Inter, Noto Sans, system-ui, sans-serif">
+    <circle cx="644" cy="180" r="28" fill="#251a0d" stroke="#fb923c" stroke-width="2.5"/>
+    <text x="644" y="187" font-size="28" fill="#fb923c" text-anchor="middle" font-weight="bold">2</text>
+
+    <rect x="524" y="225" width="240" height="200" rx="14" fill="#251a0d" stroke="#fb923c" stroke-width="2"/>
+    <text x="644" y="255" font-size="19" fill="#fb923c" text-anchor="middle" font-weight="bold">New Guide added in same PR</text>
+
+    <line x1="544" y1="270" x2="764" y2="270" stroke="#334155" stroke-width="1"/>
+
+    <rect x="540" y="282" width="208" height="22" rx="4" fill="#1a0d0a" stroke="#fb923c" stroke-width="1"/>
+    <text x="644" y="297" font-size="15" fill="#cbd5e1" text-anchor="middle">Custom ESLint rule</text>
+
+    <rect x="540" y="308" width="208" height="22" rx="4" fill="#1a0d0a" stroke="#fb923c" stroke-width="1"/>
+    <text x="644" y="323" font-size="15" fill="#cbd5e1" text-anchor="middle">CI guard (scripts/check-*)</text>
+
+    <rect x="540" y="334" width="208" height="22" rx="4" fill="#1a0d0a" stroke="#fb923c" stroke-width="1"/>
+    <text x="644" y="349" font-size="15" fill="#cbd5e1" text-anchor="middle">TypeScript type constraint</text>
+
+    <rect x="540" y="360" width="208" height="22" rx="4" fill="#1a0d0a" stroke="#fb923c" stroke-width="1"/>
+    <text x="644" y="375" font-size="15" fill="#cbd5e1" text-anchor="middle">Guideline entry</text>
+
+    <text x="644" y="404" font-size="15" fill="#94a3b8" text-anchor="middle">(one of these)</text>
+  </g>
+
+  <line x1="766" y1="320" x2="786" y2="320" stroke="#fb923c" stroke-width="2" marker-end="url(#a-38bdf8)"/>
+
+  <!-- ============= Step 3: zero existing violations ============= -->
+  <g font-family="Inter, Noto Sans, system-ui, sans-serif">
+    <circle cx="886" cy="180" r="28" fill="#0d1f2d" stroke="#38bdf8" stroke-width="2.5"/>
+    <text x="886" y="187" font-size="28" fill="#38bdf8" text-anchor="middle" font-weight="bold">3</text>
+
+    <rect x="786" y="225" width="200" height="200" rx="14" fill="#0d1f2d" stroke="#38bdf8" stroke-width="2"/>
+    <text x="886" y="255" font-size="19" fill="#38bdf8" text-anchor="middle" font-weight="bold">Zero existing violations in same PR</text>
+
+    <line x1="806" y1="270" x2="966" y2="270" stroke="#334155" stroke-width="1"/>
+
+    <text x="886" y="294" font-size="16" fill="#cbd5e1" text-anchor="middle">'warn'-based</text>
+    <text x="886" y="312" font-size="16" fill="#cbd5e1" text-anchor="middle">deferral banned</text>
+
+    <text x="886" y="346" font-size="16" fill="#cbd5e1" text-anchor="middle">Fix every site in same PR</text>
+    <text x="886" y="364" font-size="16" fill="#cbd5e1" text-anchor="middle">→ ship at 'error'</text>
+
+    <text x="886" y="396" font-size="15" fill="#94a3b8" text-anchor="middle">'Plan to address later' is also banned</text>
+    <text x="886" y="412" font-size="15" fill="#94a3b8" text-anchor="middle">= shut the escape hatch up front</text>
+  </g>
+
+  <line x1="990" y1="320" x2="1026" y2="320" stroke="#38bdf8" stroke-width="2" marker-end="url(#a-4ade80)"/>
+
+  <!-- ============= Step 4: auto review → merge → deploy ============= -->
+  <g font-family="Inter, Noto Sans, system-ui, sans-serif">
+    <circle cx="1128" cy="180" r="28" fill="#0d251a" stroke="#4ade80" stroke-width="2.5"/>
+    <text x="1128" y="187" font-size="28" fill="#4ade80" text-anchor="middle" font-weight="bold">4</text>
+
+    <rect x="1008" y="225" width="240" height="200" rx="14" fill="#0d251a" stroke="#4ade80" stroke-width="2"/>
+    <text x="1128" y="252" font-size="17" fill="#4ade80" text-anchor="middle" font-weight="bold">Auto-review → merge</text>
+    <text x="1128" y="274" font-size="17" fill="#4ade80" text-anchor="middle" font-weight="bold">→ redeploy</text>
+
+    <line x1="1024" y1="288" x2="1232" y2="288" stroke="#334155" stroke-width="1"/>
+
+    <rect x="1024" y="300" width="208" height="22" rx="4" fill="#0a1820" stroke="#4ade80" stroke-width="1"/>
+    <text x="1128" y="315" font-size="14" fill="#cbd5e1" text-anchor="middle">9 lenses + [Recurrence] check</text>
+
+    <rect x="1024" y="326" width="208" height="22" rx="4" fill="#0a1820" stroke="#4ade80" stroke-width="1"/>
+    <text x="1128" y="341" font-size="14" fill="#cbd5e1" text-anchor="middle">Auto-merge when CI is green</text>
+
+    <rect x="1024" y="352" width="208" height="22" rx="4" fill="#0a1820" stroke="#4ade80" stroke-width="1"/>
+    <text x="1128" y="367" font-size="14" fill="#cbd5e1" text-anchor="middle">Pulumi parallel deploy</text>
+
+    <text x="1128" y="396" font-size="15" fill="#94a3b8" text-anchor="middle">Same pipeline as Part 3</text>
+  </g>
+
+  <line x1="1252" y1="320" x2="1268" y2="320" stroke="#4ade80" stroke-width="2" marker-end="url(#a-4ade80)"/>
+
+  <!-- ============= Step 5: structural impossibility ============= -->
+  <g font-family="Inter, Noto Sans, system-ui, sans-serif">
+    <circle cx="1420" cy="180" r="28" fill="#0d251a" stroke="#4ade80" stroke-width="2.5"/>
+    <text x="1420" y="187" font-size="28" fill="#4ade80" text-anchor="middle" font-weight="bold">5</text>
+
+    <rect x="1270" y="225" width="300" height="200" rx="14" fill="#0d251a" stroke="#4ade80" stroke-width="2"/>
+    <text x="1420" y="255" font-size="19" fill="#4ade80" text-anchor="middle" font-weight="bold">Same pattern mechanically rejected</text>
+
+    <line x1="1290" y1="270" x2="1550" y2="270" stroke="#334155" stroke-width="1"/>
+
+    <text x="1420" y="294" font-size="17" fill="#cbd5e1" text-anchor="middle">From then on, writing the same pattern</text>
+    <text x="1420" y="312" font-size="17" fill="#cbd5e1" text-anchor="middle">gets mechanically rejected by CI / lint</text>
+
+    <text x="1420" y="346" font-size="17" fill="#cbd5e1" text-anchor="middle"><tspan font-weight="bold" fill="#4ade80">'Step on it, lint it'</tspan></text>
+    <text x="1420" y="364" font-size="16" fill="#cbd5e1" text-anchor="middle">+1 Guide each time</text>
+
+    <text x="1420" y="396" font-size="15" fill="#94a3b8" text-anchor="middle">The guardrails grow every day</text>
+  </g>
+
+  <!-- ============= Example: Cloud Run OTel env injection ============= -->
+  <g font-family="Inter, Noto Sans, system-ui, sans-serif">
+    <rect x="80" y="490" width="1440" height="350" rx="14" fill="#0a1820" stroke="#94a3b8" stroke-width="1.5"/>
+    <text x="800" y="528" font-size="26" fill="#e2e8f0" text-anchor="middle" font-weight="bold">Walk-through: Cloud Run OTel env-injection trap — the 5 steps applied to a real case</text>
+
+    <line x1="100" y1="546" x2="1500" y2="546" stroke="#334155" stroke-width="1"/>
+
+    <text x="100" y="576" font-size="19" fill="#f87171" font-weight="bold">[ Trap ]</text>
+    <text x="100" y="600" font-size="16" fill="#cbd5e1">When defining a Cloud Run Service/Job in Pulumi, forgetting to inject `OTEL_EXPORTER_OTLP_ENDPOINT` and `GRAFANA_CLOUD_API_KEY` via `secretKeyRef`</text>
+    <text x="100" y="618" font-size="16" fill="#cbd5e1">into envs causes OTel init to be skipped in production. Trace/log never reaches Grafana, and incidents become silently undetectable.</text>
+
+    <!-- 5 step boxes -->
+    <g transform="translate(0, 644)">
+      <rect x="100" y="0" width="260" height="170" rx="8" fill="#1a1525" stroke="#a78bfa" stroke-width="1.5"/>
+      <text x="230" y="22" font-size="17" fill="#a78bfa" text-anchor="middle" font-weight="bold">1. Horizontal expansion</text>
+      <text x="230" y="48" font-size="15" fill="#cbd5e1" text-anchor="middle">Enumerate every Cloud Run</text>
+      <text x="230" y="66" font-size="15" fill="#cbd5e1" text-anchor="middle">resource definition under `infra/`</text>
+      <text x="230" y="84" font-size="15" fill="#cbd5e1" text-anchor="middle">via cpg</text>
+      <text x="230" y="118" font-size="15" fill="#94a3b8" text-anchor="middle">Identify all services</text>
+      <text x="230" y="136" font-size="15" fill="#94a3b8" text-anchor="middle">missing env injection</text>
+
+      <rect x="370" y="0" width="240" height="170" rx="8" fill="#251a0d" stroke="#fb923c" stroke-width="1.5"/>
+      <text x="490" y="22" font-size="17" fill="#fb923c" text-anchor="middle" font-weight="bold">2. Add CI guard</text>
+      <text x="490" y="48" font-size="15" fill="#cbd5e1" text-anchor="middle">scripts/</text>
+      <text x="490" y="66" font-size="15" fill="#cbd5e1" text-anchor="middle">check-otel-env-injection.ts</text>
+      <text x="490" y="92" font-size="15" fill="#94a3b8" text-anchor="middle">to Cloud Run resource definitions under `infra/`</text>
+      <text x="490" y="110" font-size="15" fill="#94a3b8" text-anchor="middle">resource definitions for</text>
+      <text x="490" y="128" font-size="15" fill="#94a3b8" text-anchor="middle">required OTel env</text>
+
+      <rect x="620" y="0" width="220" height="170" rx="8" fill="#0d1f2d" stroke="#38bdf8" stroke-width="1.5"/>
+      <text x="730" y="22" font-size="17" fill="#38bdf8" text-anchor="middle" font-weight="bold">3. Zero existing violations</text>
+      <text x="730" y="48" font-size="15" fill="#cbd5e1" text-anchor="middle">Also complete env injection</text>
+      <text x="730" y="66" font-size="15" fill="#cbd5e1" text-anchor="middle">for all existing services in same PR</text>
+      <text x="730" y="100" font-size="15" fill="#94a3b8" text-anchor="middle">No 'warn'-based deferral —</text>
+      <text x="730" y="118" font-size="15" fill="#94a3b8" text-anchor="middle">ship at 'error' in same PR</text>
+
+      <rect x="850" y="0" width="240" height="170" rx="8" fill="#0d251a" stroke="#4ade80" stroke-width="1.5"/>
+      <text x="970" y="22" font-size="17" fill="#4ade80" text-anchor="middle" font-weight="bold">4. Auto-merge → deploy</text>
+      <text x="970" y="48" font-size="15" fill="#cbd5e1" text-anchor="middle">[Recurrence] lens</text>
+      <text x="970" y="66" font-size="15" fill="#cbd5e1" text-anchor="middle">approves → auto-merge</text>
+      <text x="970" y="100" font-size="15" fill="#94a3b8" text-anchor="middle">Pulumi parallel redeploy</text>
+      <text x="970" y="118" font-size="15" fill="#94a3b8" text-anchor="middle">Production recovered</text>
+
+      <rect x="1100" y="0" width="320" height="170" rx="8" fill="#0d251a" stroke="#4ade80" stroke-width="1.8"/>
+      <text x="1260" y="22" font-size="17" fill="#4ade80" text-anchor="middle" font-weight="bold">5. Same trap rejected by CI</text>
+      <text x="1260" y="48" font-size="15" fill="#cbd5e1" text-anchor="middle">From then on, in any Cloud Run resource definition,</text>
+      <text x="1260" y="66" font-size="15" fill="#cbd5e1" text-anchor="middle">definition without OTel env</text>
+      <text x="1260" y="84" font-size="15" fill="#cbd5e1" text-anchor="middle"><tspan font-weight="bold" fill="#4ade80">is rejected by the CI guard</tspan></text>
+      <text x="1260" y="118" font-size="15" fill="#94a3b8" text-anchor="middle">It's not 'let's be careful next time' —</text>
+      <text x="1260" y="136" font-size="15" fill="#94a3b8" text-anchor="middle">the trap class itself is sealed</text>
+    </g>
+  </g>
+
+  <!-- Bottom -->
+  <text x="800" y="880" font-size="17" fill="#94a3b8" text-anchor="middle" font-family="Inter, Noto Sans, system-ui, sans-serif">+1 Guide each time Self-Healing runs. The guardrails accumulate at the same rate as the org's trap encounters.</text>
+</svg>

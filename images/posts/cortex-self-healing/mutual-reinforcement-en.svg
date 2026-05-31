@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="950" viewBox="0 0 1400 950">
+  <rect width="1400" height="950" fill="#0f172a"/>
+
+  <defs>
+    <marker id="a-94a3b8" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#94a3b8"/></marker>
+    <marker id="a-4ade80" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#4ade80"/></marker>
+    <marker id="a-38bdf8" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#38bdf8"/></marker>
+    <marker id="a-fb923c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#fb923c"/></marker>
+    <marker id="a-a78bfa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#a78bfa"/></marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="700" y="56" font-size="36" fill="#e2e8f0" text-anchor="middle" font-weight="bold" font-family="Inter, Noto Sans, system-ui, sans-serif">cpg as the shared substrate: Self-Healing and Auto-review grow Guides</text>
+  <text x="700" y="92" font-size="24" fill="#94a3b8" text-anchor="middle" font-family="Inter, Noto Sans, system-ui, sans-serif">Each side's output becomes the other side's decision basis -- a mutually reinforcing triangle, with Product Graph (cpg) at the foundation.</text>
+
+  <!-- ============= cpg (center, top) ============= -->
+  <g font-family="Inter, Noto Sans, system-ui, sans-serif">
+    <!-- Outer glow effect using larger semi-transparent rect -->
+    <rect x="540" y="160" width="320" height="200" rx="20" fill="#1a1525" stroke="#a78bfa" stroke-width="3"/>
+    <text x="700" y="200" font-size="28" fill="#a78bfa" text-anchor="middle" font-weight="bold">Product Graph (cpg)</text>
+    <text x="700" y="224" font-size="17" fill="#cbd5e1" text-anchor="middle">Unified code / docs / DB / infra</text>
+    <text x="700" y="244" font-size="17" fill="#cbd5e1" text-anchor="middle">as 'the AI's brain'</text>
+
+    <line x1="560" y1="262" x2="840" y2="262" stroke="#334155" stroke-width="1"/>
+
+    <text x="700" y="286" font-size="16" fill="#94a3b8" text-anchor="middle">Impact scope, dependencies, related docs in one hop</text>
+    <text x="700" y="306" font-size="16" fill="#94a3b8" text-anchor="middle">Answers 'where else does this trap exist' instantly</text>
+    <text x="700" y="326" font-size="16" fill="#94a3b8" text-anchor="middle">Semantic search + graph traversal</text>
+
+    <text x="700" y="348" font-size="15" fill="#a78bfa" text-anchor="middle" font-weight="bold">→ Detailed in Part 2</text>
+  </g>
+
+  <!-- ============= Self-Healing (bottom-left) ============= -->
+  <g font-family="Inter, Noto Sans, system-ui, sans-serif">
+    <rect x="120" y="500" width="320" height="220" rx="14" fill="#251a0d" stroke="#fb923c" stroke-width="2.5"/>
+    <text x="280" y="540" font-size="28" fill="#fb923c" text-anchor="middle" font-weight="bold">Self-Healing</text>
+    <text x="280" y="562" font-size="17" fill="#cbd5e1" text-anchor="middle">AI investigates and fixes production alerts</text>
+
+    <line x1="140" y1="580" x2="420" y2="580" stroke="#334155" stroke-width="1"/>
+
+    <text x="280" y="604" font-size="16" fill="#94a3b8" text-anchor="middle">'Same pattern exists elsewhere'</text>
+    <text x="280" y="622" font-size="16" fill="#94a3b8" text-anchor="middle">discovered via cpg</text>
+    <text x="280" y="646" font-size="16" fill="#94a3b8" text-anchor="middle">→ Demands horizontal expansion +</text>
+    <text x="280" y="664" font-size="16" fill="#94a3b8" text-anchor="middle">new Guide from auto-review</text>
+    <text x="280" y="694" font-size="15" fill="#fb923c" text-anchor="middle" font-weight="bold">→ Part 4 (this post)</text>
+  </g>
+
+  <!-- ============= Auto-Review (bottom-right) ============= -->
+  <g font-family="Inter, Noto Sans, system-ui, sans-serif">
+    <rect x="960" y="500" width="320" height="220" rx="14" fill="#0d1f2d" stroke="#38bdf8" stroke-width="2.5"/>
+    <text x="1120" y="540" font-size="28" fill="#38bdf8" text-anchor="middle" font-weight="bold">Auto-review</text>
+    <text x="1120" y="562" font-size="17" fill="#cbd5e1" text-anchor="middle">Gates PR-stage quality across 9 lenses</text>
+
+    <line x1="980" y1="580" x2="1260" y2="580" stroke="#334155" stroke-width="1"/>
+
+    <text x="1120" y="604" font-size="16" fill="#94a3b8" text-anchor="middle">Via [Recurrence] lens:</text>
+    <text x="1120" y="622" font-size="16" fill="#94a3b8" text-anchor="middle">'No fix without a lint'</text>
+    <text x="1120" y="646" font-size="16" fill="#94a3b8" text-anchor="middle">→ Forces Self-Healing to add a Guide</text>
+    <text x="1120" y="664" font-size="16" fill="#94a3b8" text-anchor="middle">(REQUEST_CHANGES)</text>
+    <text x="1120" y="694" font-size="15" fill="#38bdf8" text-anchor="middle" font-weight="bold">→ Detailed in Part 3</text>
+  </g>
+
+  <!-- ============= Arrows ============= -->
+
+  <!-- cpg ↔ Self-Healing: bidirectional -->
+  <line x1="585" y1="360" x2="350" y2="500" stroke="#a78bfa" stroke-width="2.5" marker-end="url(#a-fb923c)"/>
+  <line x1="365" y1="495" x2="600" y2="358" stroke="#fb923c" stroke-width="2.5" marker-end="url(#a-a78bfa)"/>
+  <g font-family="Inter, Noto Sans, system-ui, sans-serif">
+    <rect x="315" y="395" width="280" height="44" rx="6" fill="#0f172a" stroke="#a78bfa" stroke-width="1"/>
+    <text x="455" y="415" font-size="15" fill="#cbd5e1" text-anchor="middle" font-weight="bold">Root cause + horizontal expansion</text>
+    <text x="455" y="431" font-size="14" fill="#94a3b8" text-anchor="middle">trace_connections / search_nodes</text>
+  </g>
+
+  <!-- cpg ↔ Auto-review: bidirectional -->
+  <line x1="815" y1="360" x2="1050" y2="500" stroke="#a78bfa" stroke-width="2.5" marker-end="url(#a-38bdf8)"/>
+  <line x1="1035" y1="495" x2="800" y2="358" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#a-a78bfa)"/>
+  <g font-family="Inter, Noto Sans, system-ui, sans-serif">
+    <rect x="825" y="395" width="240" height="44" rx="6" fill="#0f172a" stroke="#a78bfa" stroke-width="1"/>
+    <text x="945" y="415" font-size="15" fill="#cbd5e1" text-anchor="middle" font-weight="bold">Impact analysis + dependency check</text>
+    <text x="945" y="431" font-size="14" fill="#94a3b8" text-anchor="middle">Pre-load changed nodes</text>
+  </g>
+
+  <!-- Self-Healing ↔ Auto-review: bidirectional, curved -->
+  <path d="M 440 620 Q 700 760 960 620" fill="none" stroke="#fb923c" stroke-width="2.5" marker-end="url(#a-38bdf8)"/>
+  <path d="M 960 640 Q 700 780 440 640" fill="none" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#a-fb923c)"/>
+  <g font-family="Inter, Noto Sans, system-ui, sans-serif">
+    <rect x="540" y="745" width="320" height="46" rx="6" fill="#0f172a" stroke="#cbd5e1" stroke-width="1"/>
+    <text x="700" y="765" font-size="15" fill="#cbd5e1" text-anchor="middle" font-weight="bold">Open PR → review → fix</text>
+    <text x="700" y="781" font-size="14" fill="#94a3b8" text-anchor="middle">Via [Recurrence] lens: forces recurrence prevention</text>
+  </g>
+
+  <!-- ============= Output: Guides ============= -->
+  <g font-family="Inter, Noto Sans, system-ui, sans-serif">
+    <rect x="380" y="830" width="640" height="100" rx="14" fill="#0d251a" stroke="#4ade80" stroke-width="2.5"/>
+    <text x="700" y="868" font-size="24" fill="#4ade80" text-anchor="middle" font-weight="bold">Guides grow over time</text>
+
+    <line x1="400" y1="884" x2="1000" y2="884" stroke="#334155" stroke-width="1"/>
+
+    <text x="700" y="908" font-size="16" fill="#cbd5e1" text-anchor="middle">Custom ESLint 26  /  CI guards 13  /  oxlint 183  /  TS strict 9  /  Coverage 90%</text>
+    <text x="700" y="924" font-size="15" fill="#94a3b8" text-anchor="middle">Machine-read Guides (lint/type/CI) + Human-and-AI-read Guides (guidelines) — both rails together</text>
+  </g>
+
+  <!-- Arrows from SH and AR to Guides -->
+  <line x1="320" y1="725" x2="450" y2="828" stroke="#fb923c" stroke-width="2" stroke-dasharray="5,4" marker-end="url(#a-4ade80)"/>
+  <line x1="1080" y1="725" x2="950" y2="828" stroke="#38bdf8" stroke-width="2" stroke-dasharray="5,4" marker-end="url(#a-4ade80)"/>
+</svg>

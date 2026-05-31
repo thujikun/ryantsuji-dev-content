@@ -1,5 +1,5 @@
 ---
-title: "Fixed Before Anyone Notices, Stronger After Every Fix: Self-Healing + Self-Strengthening (Series Part 4)"
+title: "Fixed Before Anyone Notices, Stronger After Every Fix: Self-Healing + Recurrence Prevention (Series Part 4)"
 publishedAt: "2026-06-02T08:30:00+09:00"
 updatedAt: "2026-06-02T08:30:00+09:00"
 draft: true
@@ -85,7 +85,7 @@ For Self-Healing to work, you need an **Observation layer** in front and a **Str
 >
 > In Fowler's Guides / Sensors terms from Part 1, cpg and Observability are **the substrate that supports both Guides (pre-execution controls like lint) and Sensors (post-execution gates like auto-review and Self-Healing)**. Observability feeds Sensors via firing alerts; cpg feeds the Guides side by supplying the auto-review with impact-scoping context. **Neither belongs on one side only** -- they're foundational to both, and Self-Healing and auto-review only function on top of this substrate. That's the structural claim this post is built around.
 
-![Three layers -- Observation -> Repair -> Strengthening loop](/images/posts/cortex-self-healing/three-layer-overview.png)
+![Three layers -- Observation -> Repair -> Strengthening loop](/images/posts/cortex-self-healing/three-layer-overview-en.png)
 
 | Layer | Role | Key components |
 |---|---|---|
@@ -140,7 +140,7 @@ This isn't really a limitation of Self-Healing -- it's the **importance of growi
 
 `MODE=self-healing` runs the same `webhook-server` script as the auto-review setup from [Part 3](/posts/cortex-auto-review), but listening for Grafana firing alerts.
 
-![Self-Healing full flow -- median 30 min to 1 hr from firing alert to production recovery](/images/posts/cortex-self-healing/self-healing-flow.png)
+![Self-Healing full flow -- median 30 min to 1 hr from firing alert to production recovery](/images/posts/cortex-self-healing/self-healing-flow-en.png)
 
 The textual flow looks like:
 
@@ -269,7 +269,7 @@ The Sensors side -- Self-Healing and auto-review -- **grow these Guides every ti
 
 cpg is what lets the AI ask "where else does this trap exist." Self-Healing and auto-review (= the Sensors side) **share cpg as a substrate, and each run thickens Guides by one notch**.
 
-![cpg as the shared substrate; Self-Healing and auto-review (Sensors) grow Guides](/images/posts/cortex-self-healing/mutual-reinforcement.png)
+![cpg as the shared substrate; Self-Healing and auto-review (Sensors) grow Guides](/images/posts/cortex-self-healing/mutual-reinforcement-en.png)
 
 ### What happens every time Self-Healing runs (the recurrence-prevention-first flow)
 
@@ -290,7 +290,7 @@ When the "stepped on 2+ times" situation applies, **the fix PR can't merge witho
 4. **Auto-review -> auto-merge -> auto-redeploy** -- the regular Part 3 pipeline
 5. **Going forward, writing the same pattern gets mechanically rejected by CI / lint** -- the recurrence class is structurally closed
 
-![5 steps every Self-Healing run produces -- recurrence-prevention-first flow](/images/posts/cortex-self-healing/recurrence-prevention-flow.png)
+![5 steps every Self-Healing run produces -- recurrence-prevention-first flow](/images/posts/cortex-self-healing/recurrence-prevention-flow-en.png)
 
 "Add the guard while you fix the bug" runs as a self-sustaining loop driven by Self-Healing.
 
