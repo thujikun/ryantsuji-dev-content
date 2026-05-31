@@ -33,7 +33,7 @@ All of those run on top of an internal AI development platform we call **cortex*
 | 1 | Series intro: cortex's harness | PRs auto-merge / incidents self-heal before you notice | this post ← you are here |
 | 2 | Product Graph (cpg) | Code, docs, DB, infra unified into one graph | [cortex-product-graph](/posts/cortex-product-graph) |
 | 3 | AI PR review | webhook → AI review → auto-fix → squash merge | coming |
-| 4 | Alert-Fix + observability + auto-added guardrails | Alert → AI investigates → fix PR + new lint/type gate → auto redeploy + recurrence blocked | coming |
+| 4 | Self-Healing + observability + auto-added guardrails | Alert → AI investigates → fix PR + new lint/type gate → auto redeploy + recurrence blocked | coming |
 | 5 | Scaling the harness from cortex to toC services | Non-engineer contributions in practice + scaling cortex's harness to the whole product org | coming |
 
 ## Two Scenes, Up Front
@@ -171,7 +171,7 @@ What you might mentally classify as "AI review" — surface-level — isn't this
 
 The only PRs that actually need a human are "AI review hits a hard case." Day-to-day PRs go from push to merge without anyone touching them.
 
-### ④ Alert-Fix (Sensors — re-injecting production anomalies into the loop)
+### ④ Self-Healing (Sensors — re-injecting production anomalies into the loop)
 
 Scene 2 above is exactly this. Starting from a Grafana alert, the AI traces the root cause through Product Graph + Loki + git blame, opens a fix PR, and pushes it through ③ Auto Review until it's auto-merged. **Re-injecting anomalies into the loop** is the essence of Sensors. Details in a later post.
 
@@ -182,7 +182,7 @@ These 4 elements **mutually reinforce one another**:
 - ① Product Graph exists, so ③ Auto Review can comment with real impact awareness
 - ② Lint enforces the ground rules, so ③ Auto Review can assume "everything in the codebase meets the bar"
 - ③ Auto Review exists, so new code lands in ① Product Graph with correct semantic annotations
-- ④ Alert-Fix's incidents loop back through ③, maintaining the quality bar all the way back to ①
+- ④ Self-Healing's incidents loop back through ③, maintaining the quality bar all the way back to ①
 
 **The harness's effectiveness scales with the size of the codebase**, not against it.
 
@@ -260,7 +260,7 @@ These numbers are **not explained by "we use AI" alone**. The prerequisites:
 - **Composable Architecture** — `packages/` holds reusable parts; `apps/` compose them. Direct imports between `apps/` are forbidden — everything routes through `packages/`. This is what guarantees components don't interfere with each other.
 - **Strict quality gates** — lint / coverage / annotations are run "no lowering, no working around"
 - **Unified graph** — code, docs, DB, infrastructure on a single graph as the foundation that lets the AI act with context
-- **Auto PR review / auto fix / auto merge / auto alert-fix** — the harness that swaps the rate-limiting manual step for AI
+- **Auto PR review / auto fix / auto merge / auto self-healing** — the harness that swaps the rate-limiting manual step for AI
 - **Unified observability** — humans and AI see the same data (OTel + Faro + Prometheus)
 
 The design has to be in place first, and AI runs on top of it. That's what makes both volume and quality possible at the same time.
@@ -299,7 +299,7 @@ The series is planned as 6 parts.
    GitHub webhook → AI review → on REQUEST_CHANGES, AI fixes via worktree → auto squash merge → changed-stack detection → parallel deploy: the full pipeline.
 
 **Part 4: Incidents self-heal, guardrails self-strengthen**
-   Grafana alert → AI investigation (Loki + Product Graph + git blame) → fix PR + new lint/type gate → auto merge → automatic redeploy: the auto alert-fix system. Also covers the full OTel + Faro + Prometheus stack, Gemini cost tracking, and how the quality gates are designed to be "non-loweriable, non-bypassable, and self-growing."
+   Grafana alert → AI investigation (Loki + Product Graph + git blame) → fix PR + new lint/type gate → auto merge → automatic redeploy: the auto self-healing system. Also covers the full OTel + Loki + Mimir + Tempo + Faro stack, Gemini cost tracking, and how the quality gates are designed to be "non-loweriable, non-bypassable, and self-growing."
 
 **Part 5: Scaling the harness from cortex to toC services**
    The first half covers how business members can already open PRs directly to cortex -- and where that breaks (additions to existing pipelines work; new pipelines and architectural changes still need humans in the loop). The second half is the roadmap and the thinking behind scaling cortex's harness across the whole product org (multiple services, multiple infra stacks, multiple teams).

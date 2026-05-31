@@ -37,7 +37,7 @@ This post is about **the automated PR review pipeline** -- AI reviews the PR, a 
 | 1 | Series intro: cortex harness | PRs merging unattended / incidents fixed before anyone notices | [ai-harness-intro](/posts/ai-harness-intro) |
 | 2 | Product Graph (cpg) | Code / docs / DB / infra unified into one graph | [cortex-product-graph](/posts/cortex-product-graph) |
 | 3 | Auto PR review | webhook -> AI review -> auto-fix -> squash merge | This article ← you are here |
-| 4 | Alert-Fix + observability + auto-added guardrails | Alert -> AI investigates -> fix PR + new lint/type gate -> auto redeploy + recurrence blocked | Coming soon |
+| 4 | Self-Healing + observability + auto-added guardrails | Alert -> AI investigates -> fix PR + new lint/type gate -> auto redeploy + recurrence blocked | Coming soon |
 | 5 | Scaling the harness from cortex to toC services | Non-engineer contributions in practice + scaling cortex's harness to the whole product org | Coming soon |
 
 ## Start with last month's numbers
@@ -101,7 +101,7 @@ Three conditions had to hold for this to work:
 
 So: the cpg from [Part 2](/posts/cortex-product-graph) solves "**what context the AI sees**," the review guidelines solve "**what the AI should do**" as **Guides (pre-execution control)**, and the severity ladder + no-downgrade rules solve "**what the AI must not do**" as **Sensors (post-execution control)**. This maps cleanly onto Martin Fowler's Guides / Sensors taxonomy (introduced back in [Part 1](/posts/ai-harness-intro)).
 
-One more upstream layer: before any of those three kicks in, **a 500-lines-per-file lint** keeps every file in any PR small enough to fit in a single AI session. That alone keeps AI review from breaking down, and unlike a human reviewer, the AI doesn't lose focus. There are plenty of other lints in front of the AI reviewer too, but the full picture belongs to **Part 4 (Alert-Fix + observability + auto-added guardrails)**.
+One more upstream layer: before any of those three kicks in, **a 500-lines-per-file lint** keeps every file in any PR small enough to fit in a single AI session. That alone keeps AI review from breaking down, and unlike a human reviewer, the AI doesn't lose focus. There are plenty of other lints in front of the AI reviewer too, but the full picture belongs to **Part 4 (Self-Healing + observability + auto-added guardrails)**.
 
 ## How the auto-review system is wired
 
@@ -117,7 +117,7 @@ The current setup wasn't the original design.
 
 Both smee.io and Cloudflare Tunnel ran into **connection drops and missed deliveries**, which caused real misses for us. Switching to the in-house Event Relay brought event loss to zero (**Firestore persistence + Last-Event-ID replay**), and the relay turned into a general-purpose layer we could reuse.
 
-The webhook ingestion for **Alert-Fix** (covered in Part 4) actually goes through **the exact same Event Relay**. GitHub, Grafana, and other webhook sources get consolidated through one relay, and each machine's SSE client subscribes to whichever events it cares about. **Having a single general-purpose webhook relay is a piece of infra that keeps paying off in unexpected ways** -- worth investing in early.
+The webhook ingestion for **Self-Healing** (covered in Part 4) actually goes through **the exact same Event Relay**. GitHub, Grafana, and other webhook sources get consolidated through one relay, and each machine's SSE client subscribes to whichever events it cares about. **Having a single general-purpose webhook relay is a piece of infra that keeps paying off in unexpected ways** -- worth investing in early.
 
 When the reviewer's machine receives an event, the script spawns `claude -p` and walks through 9 dimensions (Graph / Architecture / Security / Test / Doc / Impact / Observability / AI-Antipattern / Recurrence) sequentially, then reads the verdict marker the AI emitted at the end and posts `APPROVE` or `REQUEST_CHANGES` via `gh pr review`.
 
@@ -348,7 +348,7 @@ The common thread: "**when the AI gets it wrong, don't override the individual P
 
 As long as this loop turns, the guideline is **a living document that absorbs the failure patterns AI produces in production**. **Don't try to write the perfect guideline up front. Catch the moment AI gets it wrong, and write the rule for that moment.** That's the actual mechanism behind "quality doesn't drop even when humans aren't inside the loop."
 
-And one more thread. Right now, the trigger for "AI got it wrong, time to rewrite the guideline" is still mostly a human judgment, but **parts of that maintenance are gradually becoming automatable too**. **Alert-Fix** (Part 4 next time) -- where AI investigates production incidents, opens a fix PR, runs it through auto-review, and auto-redeploys -- requires every fix PR to write one of {add lint, add guideline, horizontal rollout} under the `[Recurrence]` lens. So the **AI is increasingly participating in the maintenance of its own review criteria**, with humans still in the loop on adoption. I'll come back to this in Part 4.
+And one more thread. Right now, the trigger for "AI got it wrong, time to rewrite the guideline" is still mostly a human judgment, but **parts of that maintenance are gradually becoming automatable too**. **Self-Healing** (Part 4 next time) -- where AI investigates production incidents, opens a fix PR, runs it through auto-review, and auto-redeploys -- requires every fix PR to write one of {add lint, add guideline, horizontal rollout} under the `[Recurrence]` lens. So the **AI is increasingly participating in the maintenance of its own review criteria**, with humans still in the loop on adoption. I'll come back to this in Part 4.
 
 ## Auto-fix: a separate AI applies the changes and pushes
 
@@ -398,7 +398,7 @@ cpg index rebuilt (only changed nodes regenerate embeddings -- see Part 2)
 
 `pulumi up <stack1> <stack2> ...` runs in parallel, so deploying 9 stacks at once finishes in about 8-12 minutes. End to end, merge-to-production is averaging 10-15 minutes.
 
-This compounds nicely with `auto-fix` PRs. **Incident alert -> Alert-Fix identifies root cause -> opens a fix PR -> auto review pass -> auto merge -> auto deploy** runs as a single closed loop without human involvement (covered in Part 4).
+This compounds nicely with `auto-fix` PRs. **Incident alert -> Self-Healing identifies root cause -> opens a fix PR -> auto review pass -> auto merge -> auto deploy** runs as a single closed loop without human involvement (covered in Part 4).
 
 ## The numbers, in more detail
 
@@ -446,6 +446,6 @@ cortex is the opposite. **We extended the harness on the reviewer side first, be
 
 ---
 
-Up next in **Part 4**: **Alert-Fix + observability + auto-added guardrails** -- a pipeline where a production alert (observed via OTel/Faro/Prometheus) triggers AI investigation, an AI-authored fix PR plus a new lint/type gate, auto-review, auto-merge, and auto-redeploy. The fix and a recurrence-prevention guardrail land together, so the same class of incident structurally can't fire again. If auto review protects quality at PR time, Part 4 protects it **at production time, while growing the quality gates themselves**.
+Up next in **Part 4**: **Self-Healing + observability + auto-added guardrails** -- a pipeline where a production alert (observed via OTel/Loki/Mimir/Tempo/Faro) triggers AI investigation, an AI-authored fix PR plus a new lint/type gate, auto-review, auto-merge, and auto-redeploy. The fix and a recurrence-prevention guardrail land together, so the same class of incident structurally can't fire again. If auto review protects quality at PR time, Part 4 protects it **at production time, while growing the quality gates themselves**.
 
-The headline number above includes `auto-fix`-flavored PRs (= Alert-Fix output). For certain classes of incidents, the fix is already merged before anyone has time to react -- that's where cortex sits today. See you next time.
+The headline number above includes `auto-fix`-flavored PRs (= Self-Healing output). For certain classes of incidents, the fix is already merged before anyone has time to react -- that's where cortex sits today. See you next time.

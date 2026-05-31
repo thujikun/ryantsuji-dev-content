@@ -37,7 +37,7 @@ In Part 1, I described cpg at a high level: "all of cortex is indexed in one gra
 | 1 | Series intro: cortex's harness | PRs auto-merge / incidents self-heal before you notice | [ai-harness-intro](/posts/ai-harness-intro) |
 | 2 | Product Graph (cpg) | Code, docs, DB, infra unified into one graph | this post ← you are here |
 | 3 | AI PR review | webhook → AI review → auto-fix → squash merge | coming |
-| 4 | Alert-Fix + observability + auto-added guardrails | Alert → AI investigates → fix PR + new lint/type gate → auto redeploy + recurrence blocked | coming |
+| 4 | Self-Healing + observability + auto-added guardrails | Alert → AI investigates → fix PR + new lint/type gate → auto redeploy + recurrence blocked | coming |
 | 5 | Scaling the harness from cortex to toC services | Non-engineer contributions in practice + scaling cortex's harness to the whole product org | coming |
 
 ## Start with One Scene
@@ -421,7 +421,7 @@ Every tool accepts a **`usecase` parameter** where the AI declares what kind of 
 
 The same `search_product_graph_nodes` call with `usecase: "code-review"` returns next action candidates optimized for "verify the change's impact first." With `usecase: "bug"` it returns candidates optimized for "trace deep from error origin + fetch logs." The Runbook switches to match the declared intent.
 
-This matters because **having the AI declare "what kind of investigation I'm doing"** yields different angles from the same graph. Auto Review internally fires with `code-review`; Alert-Fix fires with `bug` — the flywheel elements from Part 1 each run a different Runbook.
+This matters because **having the AI declare "what kind of investigation I'm doing"** yields different angles from the same graph. Auto Review internally fires with `code-review`; Self-Healing fires with `bug` — the flywheel elements from Part 1 each run a different Runbook.
 
 ### CLAUDE.md Convention — Forcing AI to Always Hit cpg First
 
@@ -436,7 +436,7 @@ Throughout this post I've said "the AI uses cpg," but AI doesn't **spontaneously
 
 Two things matter here. First, the explicit ordering — "cpg first, grep only as fallback." Second, **fallback to grep is explicitly forbidden if cpg is unavailable**. Without that second clause, the AI happily degrades to "cpg seems down, I'll just grep" and proceeds with stale context and wrong assumptions. With it, cpg unavailability is a hard stop, not a graceful degradation.
 
-One clause in CLAUDE.md, and Claude Code's first move on any code investigation is pinned to cpg. Article writing, Auto Review, Alert-Fix — all follow the same convention, so the entry point is always unified.
+One clause in CLAUDE.md, and Claude Code's first move on any code investigation is pinned to cpg. Article writing, Auto Review, Self-Healing — all follow the same convention, so the entry point is always unified.
 
 ## A Live Example — Investigating cpg with cpg
 
@@ -493,7 +493,7 @@ This article was drafted by Claude Code, not by me — I provided direction and 
 
 In other words: the **`generateEmbeddings` JSDoc, the Pulumi `productGraphNodesTable` description, the `graph-boundary-daily` cron annotation, the auto-link to `docs/product-graph/README.md`** — none of these came from my memory. **Claude queried cpg and found the real artifacts**. My role is only the review judgment: "this is right / this is wrong."
 
-This is the pattern repeating across all of cortex. **Humans set the direction; AI uses cpg to verify and generate implementations / text / reviews**. Part 1's ③ Auto Review and ④ Alert-Fix run on the same structure. Article writing isn't a special case — as long as cpg exists, AI-driven work always takes this shape.
+This is the pattern repeating across all of cortex. **Humans set the direction; AI uses cpg to verify and generate implementations / text / reviews**. Part 1's ③ Auto Review and ④ Self-Healing run on the same structure. Article writing isn't a special case — as long as cpg exists, AI-driven work always takes this shape.
 
 ## What Changed / Bridge to Part 3
 
@@ -507,9 +507,9 @@ Without knowing file names or symbol names, I can get the relevant code back by 
 
 The `[Graph]` / `[Impact]` / `[Doc]` / `[Security]` level comments Part 1's ③ Auto Review produces all stand on cpg. The substance is **review carried out with the entire codebase as context** — that's the real benefit of the cpg integration.
 
-**3. Alert-Fix can trace from error origin to root cause**
+**3. Self-Healing can trace from error origin to root cause**
 
-Part 1's ④ Alert-Fix can hop from a Grafana alert → code → dependent tables → related docs in one graph traversal because cpg exists. It fires with `usecase: "bug"` and takes the shortest path from error to root cause.
+Part 1's ④ Self-Healing can hop from a Grafana alert → code → dependent tables → related docs in one graph traversal because cpg exists. It fires with `usecase: "bug"` and takes the shortest path from error to root cause.
 
 **4. The static-analysis code graph is working somewhere else**
 
