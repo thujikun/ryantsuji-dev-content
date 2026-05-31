@@ -17,7 +17,7 @@ syndication:
   devto:
     id: 3687754
     slug: "the-heart-of-the-ai-harness-a-knowledge-graph-of-the-ai-by-the-ai-for-the-ai-series-part-2-53bm"
-    contentHash: "dcd5bf518df48534"
+    contentHash: "8fb20feb43729268"
     publishAt: "2026-05-19T07:00:00-07:00"
 cover: /images/posts/cortex-product-graph.en.cover.png
 ---
