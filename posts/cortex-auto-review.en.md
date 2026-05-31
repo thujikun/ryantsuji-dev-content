@@ -15,7 +15,7 @@ seriesOrder: 3
 syndication:
   devto:
     id: 3738048
-    slug: "code-written-by-ai-is-reviewed-by-ai-a-structural-answer-to-review-bottleneck-and-quality-drop-44bh-temp-slug-3737979"
+    slug: "human-on-the-loop-ai-reviewing-ai-prs-at-cortex-769-prsmonth-while-raising-the-quality-bar-4lh5"
     contentHash: "89bdbb05916030e5"
     publishAt: "2026-05-26T07:00:00-07:00"
 cover: /images/posts/cortex-auto-review.en.cover.png
