@@ -1,5 +1,5 @@
 ---
-title: "気づく前に直り、二度と起きなくなる ── 障害の自動修復と再発防止（連載Part 4）"
+title: "気づく前に直り、直すたびに強くなる ── Self-Healingと再発防止の仕組み（連載Part 4）"
 emoji: "🤖"
 type: tech
 topics: ["ai", "devops", "github", "observability", "typescript"]
