@@ -4,7 +4,7 @@ publishedAt: "2026-06-02T08:30:00+09:00"
 updatedAt: "2026-06-02T08:30:00+09:00"
 draft: true
 slug: "cortex-self-healing"
-summary: "Series Part 4. Production alerts trigger AI investigation, fix PR, auto-review, auto-merge, auto-redeploy. The same fix PR is required to add a new lint or CI guard so that the same class of writes gets auto-rejected from then on. 115 Self-Healing PRs merged in the past 30 days, and the quality gates grow every time."
+summary: "Series Part 4. Production alerts trigger AI investigation, fix PR, auto-review, auto-merge, auto-redeploy. The same fix PR is required to add a new Guide -- a lint rule, CI guard, type constraint, or guideline entry -- so the same anti-pattern gets auto-rejected from then on. 115 Self-Healing PRs merged in the past 30 days, and the quality gates compound over time."
 tags:
   - "ai"
   - "typescript"
@@ -28,9 +28,9 @@ Hi, I'm [Ryan](https://x.com/ryantsuji), CTO at airCloset.
 
 > **Disclaimer**: "cortex" in this article is the internal codename for an AI platform built in-house at airCloset. It is unrelated to existing commercial services like Snowflake Cortex or Palo Alto Networks Cortex.
 
-In [Part 3](/posts/cortex-auto-review) I covered **AI reviewing AI PRs** -- the auto-review pipeline that defends quality **at PR time**.
+In [Part 3](/posts/cortex-auto-review) I covered **AI reviewing AI PRs** -- the auto-review pipeline that defends quality **at the PR stage**.
 
-This post is the other side: **defending quality at production time**, via **Self-Healing**. A production alert fires, an AI investigates it, opens a fix PR, the PR goes through the same auto-review pipeline from Part 3, gets auto-merged and auto-redeployed. And the same fix PR is **required to add a new lint, CI guard, or type constraint** so the same class of writes gets auto-rejected from then on -- the guardrails grow every time.
+This post is the other side: **defending quality in production**, via **Self-Healing**. A production alert fires, an AI investigates it, opens a fix PR, the PR goes through the same auto-review pipeline from Part 3, gets auto-merged and auto-redeployed. And the same fix PR is **required to add a new Guide -- whether that's a lint rule, CI guard, type constraint, or guideline update** -- so the same anti-pattern gets auto-rejected from then on. The guardrails grow every time.
 
 "Incidents get fixed automatically" is catchy on its own, but on its own it's probably not enough in the long run. You have to **close the recurrence class while you fix the incident** -- self-healing **plus** self-strengthening -- before the quality gates start to compound over time.
 
@@ -55,7 +55,7 @@ There's also a clear pattern of **the same service firing repeatedly** (e.g. `gc
 
 One more honest note: **the recent month's number is slightly inflated**. The codebase had a fair number of "silent catch" patterns -- catch blocks that swallow exceptions without logging anything. We added the `no-silent-catch` lint rule and **swept the existing silent catches in batches**, which exposed previously hidden production errors as alerts. So part of the spike is "monitoring caught up to reality." Once the `[Recurrence]` loop converts these into lint over time, the number should converge. **"Things we couldn't see, we can see now" is a quality improvement** -- what we're seeing is the catch-up phase.
 
-One more thing worth saying: doing this by hand is not realistic at all. 115 cycles of "ack alert -> read logs -> context switch -> understand the code -> fix -> open PR -> review -> deploy" would melt any team's available time. **The system absorbs them without anyone noticing, and converts the fix into a lint or CI guard at the same time** -- that's the actual subject of this post.
+One more thing worth saying: doing this by hand is utterly unsustainable. Running 115 manual cycles of "ack alert -> read logs -> context switch -> understand the code -> fix -> open PR -> review -> deploy" would bankrupt any team's engineering bandwidth. **The system absorbs them without anyone noticing, and converts the fix into a new Guide (lint / CI guard / type constraint / guideline) at the same time** -- that's the actual subject of this post.
 
 The moment an alert fires, the AI starts an investigation, traces Loki / Product Graph / git blame to root cause, opens a fix PR, runs it through the auto-review from [Part 3](/posts/cortex-auto-review), APPROVE -> auto-merge -> auto-redeploy. One full loop.
 
@@ -66,7 +66,7 @@ The moment an alert fires, the AI starts an investigation, traces Loki / Product
 | 1 | Series intro: cortex harness | PRs merging unattended / incidents fixed before anyone notices | [ai-harness-intro](/posts/ai-harness-intro) |
 | 2 | Product Graph (cpg) | Code / docs / DB / infra unified into one graph | [cortex-product-graph](/posts/cortex-product-graph) |
 | 3 | Auto PR review | webhook -> AI review -> auto-fix -> squash merge | [cortex-auto-review](/posts/cortex-auto-review) |
-| 4 | Self-Healing + observability + auto-added guardrails | Alert -> AI investigates -> fix PR + new lint/type gate -> auto redeploy + same-pattern writes get auto-rejected | This article ← you are here |
+| 4 | Self-Healing + observability + auto-added guardrails | Alert -> AI investigates -> fix PR + new lint/type gate -> auto redeploy + same pattern auto-rejected from then on | This article ← you are here |
 | 5 | Scaling the harness from cortex to toC services | Non-engineer contributions in practice + scaling cortex's harness to the whole product org | Coming soon |
 
 ## Big picture -- the three layers: Observation, Repair, Strengthening
@@ -80,7 +80,7 @@ For Self-Healing to work, you need an **Observation layer** in front and a **Str
 >
 > Put differently: **trying to copy this setup without those two will just multiply incidents**. An AI that blindly looks at error logs and rewrites production code is just speeding up the rate at which `gh pr create` ships accidents. cpg and Observability are the **minimum bar** for being able to delegate auto-repair to AI.
 >
-> Note also that cortex is a **mid-six-figure-line codebase** (i.e. several hundred thousand lines), and at that scale loading the whole codebase as AI context is **impossible for the AI as well** (let alone for a human). Tell the AI to trace impact with just grep and file reads, and it'll run out of context window before it finds anything. cpg is what lets it ask "which other code does this function's change ripple into" and get the answer in one hop. Small repos may not need this. Past a certain scale, cpg is not optional, it's **required**.
+> Note also that cortex is a **several-hundred-thousand-line codebase**, and at that scale loading the whole codebase as AI context is **impossible for the AI as well** (let alone for a human). Tell the AI to trace impact with just grep and file reads, and it'll run out of context window before it finds anything. cpg is what lets it ask "which other code does this function's change ripple into" and get the answer in one hop. Small repos may not need this. Past a certain scale, cpg is not optional, it's **required**.
 >
 > In Fowler's Guides / Sensors terms from Part 1, cpg and Observability are **the substrate that supports both Guides (pre-execution controls like lint) and Sensors (post-execution gates like auto-review and Self-Healing)**. Observability feeds Sensors via firing alerts; cpg feeds the Guides side by supplying the auto-review with impact-scoping context. **Neither belongs on one side only** -- they're foundational to both, and Self-Healing and auto-review only function on top of this substrate. That's the structural claim this post is built around.
 
@@ -90,7 +90,7 @@ For Self-Healing to work, you need an **Observation layer** in front and a **Str
 |---|---|---|
 | **Observation** | Real-time detection of production anomalies | OTel SDK / Loki / Mimir / Tempo / Faro / Grafana / Pino logs with trace_id |
 | **Repair** | AI receives the alert, investigates root cause, opens a fix PR, auto-review, auto-merge, auto-redeploy | Event Relay -> SSE -> `self-healing` mode script -> claude -p (worktree) -> gh pr create |
-| **Strengthening** | The fix PR is required to add a new Guide (lint / CI guard / guideline). The same class of writes can't reach production again | `@cortex/eslint-plugin-graph` (26 rules), `scripts/check-*.ts` (13 guards), [`recurrence-prevention.md`](https://github.com/air-closet/cortex-review-guidelines/blob/main/en/guidelines/recurrence-prevention.md), the `[Recurrence]` lens of auto-review |
+| **Strengthening** | The fix PR is required to add a new Guide (lint / CI guard / type constraint / guideline). The same anti-pattern can't reach production again | `@cortex/eslint-plugin-graph` (26 rules), `scripts/check-*.ts` (13 guards), [`recurrence-prevention.md`](https://github.com/air-closet/cortex-review-guidelines/blob/main/en/guidelines/recurrence-prevention.md), the `[Recurrence]` lens of auto-review |
 
 I'll walk through them in order.
 
@@ -170,7 +170,7 @@ The textual flow looks like:
 
 Not every alert is fixable by code. The implementation has a rule: "if you judge it unfixable, exit without changing anything." In that case Slack gets a notification of the form "**This alert cannot be addressed in code. Investigation: ...**" -- **including what the AI investigated**.
 
-Worth clarifying on the numbers side: the headline **115** is "Self-Healing runs that reached PR-created -> merged -> deployed." This "unfixable, exit clean" case is a **separate bucket**, happening several times a month (external transient outages, infra / config issues that aren't code, alerts the AI judges too high-stakes). **The "humans show up" bucket is this separate one** -- it isn't a "some of the 115 failed" failure rate.
+Worth clarifying on the numbers side: the headline **115** is "Self-Healing runs that reached PR-created -> merged -> deployed." This "unfixable, exit clean" case is a **separate bucket**, happening several times a month (external transient outages, infra / config issues that aren't code, cases too complex for the AI to judge confidently). **The "humans show up" bucket is this separate one** -- it isn't a "some of the 115 failed" failure rate.
 
 Here's what a real Slack message looks like (a `styling-pattern-watch-transformer` case where the GitHub PAT had expired):
 
@@ -215,7 +215,7 @@ The important bit: **this is not a monolithic "AI fixing AI" loop**. The fixer-s
 
 - **Different process, different session**: the self-healing-mode AI and the reviewer-mode AI are launched as separate `claude -p` processes. They do not share context
 - **Different input sources**: the fixer builds the problem from Grafana alert + Loki + cpg. The reviewer judges from the PR diff + cpg + review guidelines
-- **Different objectives**: the fixer is optimizing for "stop the incident." The reviewer is judging "does this violate the 9 lenses or the severity contract?" The incentives don't align
+- **Different objectives**: the fixer is optimizing for "stop the incident." The reviewer is judging "does this violate the 9 lenses or the severity contract?" A deliberate separation of concerns where the two roles' incentives are intentionally misaligned
 
 As a result, **PRs the fixer dashed off get blocked by the reviewer** (REQUEST_CHANGES -> back to the fixer). The AI does not approve its own output. "Just-make-it-work" fixes don't get through.
 
@@ -308,7 +308,7 @@ These extend the **no-downgrade rules** from [Part 3](/posts/cortex-auto-review)
 Custom Guides currently piled up in cortex:
 
 - **`graph/no-silent-catch`** (ESLint) -- the source of the "inflated number" mentioned in the intro. Bans catch blocks that swallow exceptions
-- **Stacktrace-preservation guideline** (codified as a Major violation in [`docs/guidelines/observability.md`](https://github.com/air-closet/cortex-review-guidelines/blob/main/en/guidelines/observability.md), caught by auto-review) -- forbids `logger.error(err.message)` style logs that drop the stack and keep only the message string. Forces the `err` field to hold `serializeError(error)` so `name` / `message` / `stack` are preserved as structured fields. **Observability is everything** here, so logs that drop stack info are treated as inherently broken
+- **Stacktrace-preservation guideline** (codified as a Major violation in [`observability.md`](https://github.com/air-closet/cortex-review-guidelines/blob/main/en/guidelines/observability.md), caught by auto-review) -- forbids `logger.error(err.message)` style logs that drop the stack and keep only the message string. Forces the `err` field to hold `serializeError(error)` so `name` / `message` / `stack` are preserved as structured fields. **Observability is everything** here, so logs that drop stack info are treated as inherently broken
 - **`cortex-quality/require-fetch-timeout`** (oxlint -- a Rust-implemented JS/TS lint that runs ESLint-compatible rule sets, dozens of times faster than ESLint due to the Rust impl. cortex uses oxlint for the standard ruleset and ESLint for custom rules that need AST-level work) -- mandates `signal: AbortSignal.timeout(...)` on external `fetch` calls. Born from a case where a no-timeout `fetch` hung indefinitely and triggered a Cloud Tasks redelivery storm
 - **`graph/no-bq-string-timestamp-param`** (ESLint) -- from a case where passing TIMESTAMP as a string to a BigQuery query parameter NULLed the value out through a serializer bug and silently failed every INSERT
 - **`graph/require-firestore-ignore-undefined`** (ESLint) -- forces `ignoreUndefinedProperties: true` on `new Firestore()`. From a case where a single NULL row caused a 100% failure rate in a sync batch
@@ -346,7 +346,7 @@ Snapshot of cortex's Guide inventory:
 | **Prettier** | 1 config | Format auto-fix |
 | **Guidelines** | the entire review-guidelines repo | Used as the decision basis by auto-review |
 
-The first two categories plus the type-tightening row -- **Custom ESLint, CI guard, type tightening** -- are the part **growing right-shouldered** through the `[Recurrence]` lens every time Self-Healing or auto-review runs. **The guardrails grow with time.** That's the substance of the Strengthening layer.
+The first two categories plus the type-tightening row -- **Custom ESLint, CI guard, type tightening** -- are the part that **compounds over time** through the `[Recurrence]` lens every time Self-Healing or auto-review runs. **The guardrails grow with time.** That's the substance of the Strengthening layer.
 
 ## The whole loop, from the top
 
@@ -371,7 +371,7 @@ When you compose the three layers:
                                               ↓
 [auto-merge -> Turborepo build -> Pulumi parallel deploy]
                                               ↓
-[production recovered + same-pattern writes mechanically rejected from now on]
+[production recovered + same anti-pattern mechanically rejected from now on]
 ```
 
 The loop **completes without human intervention**. Not just repair, but the quality gates that grow with every repair -- that's the "auto-recovery + auto-strengthening" substance at cortex.
@@ -422,8 +422,8 @@ We've now covered **the cortex picture across Parts 1-4**:
 
 - [Part 1](/posts/ai-harness-intro): the cortex big picture and harness-engineering framing
 - [Part 2](/posts/cortex-product-graph): Product Graph (cpg) -- the AI's "brain"
-- [Part 3](/posts/cortex-auto-review): auto-review -- defending quality at PR time
-- **Part 4 (this post): Self-Healing + Observability + auto-added guardrails -- defending quality at production time while growing the quality gates themselves**
+- [Part 3](/posts/cortex-auto-review): auto-review -- defending quality at the PR stage
+- **Part 4 (this post): Self-Healing + Observability + auto-added guardrails -- defending quality in production while growing the quality gates themselves**
 
 The engineering role has shifted, over the last half-year, from "**write**, **review**, **fix**, **merge**, **deploy**, **incident-respond**" -- all of that -- toward **looking at the whole system from above and tuning it**. `human-on-the-loop`, working at the Policy layer.
 
@@ -431,4 +431,4 @@ That said, this is a pattern that solidified inside **cortex, the internal AI pl
 
 **Part 5** will cover **scaling cortex's harness to the whole product organization** -- the roadmap and the thinking. The first half is the actual operation of "non-engineers opening PRs into cortex" with its limits; the second half is the elements needed to extend the pattern to toC services (service-specialized review rules, the human understanding-of-AI-design process, IaC for test environments, etc.).
 
-"cortex built the type system, toC services run that system at an order-of-magnitude-larger scale" -- that'll be the closing position of the series.
+"cortex built the pattern, toC services run that pattern at an order-of-magnitude-larger scale" -- that'll be the closing position of the series.
