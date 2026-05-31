@@ -25,8 +25,8 @@
 
     <line x1="560" y1="262" x2="840" y2="262" stroke="#334155" stroke-width="1"/>
 
-    <text x="700" y="286" font-size="14" fill="#94a3b8" text-anchor="middle">Impact scope, dependencies, related docs in one hop</text>
-    <text x="700" y="304" font-size="14" fill="#94a3b8" text-anchor="middle">Answers 'where else does this trap exist' instantly</text>
+    <text x="700" y="286" font-size="14" fill="#94a3b8" text-anchor="middle">Impact / dependencies / docs in one hop</text>
+    <text x="700" y="304" font-size="14" fill="#94a3b8" text-anchor="middle">Finds 'where else this trap exists' instantly</text>
     <text x="700" y="322" font-size="14" fill="#94a3b8" text-anchor="middle">Semantic search + graph traversal</text>
 
     <text x="700" y="348" font-size="15" fill="#a78bfa" text-anchor="middle" font-weight="bold">→ Detailed in Part 2</text>

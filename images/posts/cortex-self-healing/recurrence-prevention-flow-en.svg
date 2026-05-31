@@ -36,14 +36,14 @@
 
     <line x1="302" y1="285" x2="462" y2="285" stroke="#334155" stroke-width="1"/>
 
-    <text x="382" y="306" font-size="14" fill="#cbd5e1" text-anchor="middle">Not just the fix target —</text>
-    <text x="382" y="322" font-size="14" fill="#cbd5e1" text-anchor="middle">every similar node enumerated</text>
+    <text x="382" y="306" font-size="13" fill="#cbd5e1" text-anchor="middle">Not just the fix target —</text>
+    <text x="382" y="322" font-size="13" fill="#cbd5e1" text-anchor="middle">every similar node included</text>
 
-    <text x="382" y="350" font-size="13" fill="#94a3b8" text-anchor="middle">trace_connections /</text>
-    <text x="382" y="366" font-size="13" fill="#94a3b8" text-anchor="middle">search_product_graph_nodes</text>
+    <text x="382" y="350" font-size="12" fill="#94a3b8" text-anchor="middle">trace_connections /</text>
+    <text x="382" y="366" font-size="12" fill="#94a3b8" text-anchor="middle">search_product_graph_nodes</text>
 
-    <text x="382" y="394" font-size="13" fill="#94a3b8" text-anchor="middle">'Where else does this trap exist?'</text>
-    <text x="382" y="410" font-size="13" fill="#94a3b8" text-anchor="middle">answered instantly</text>
+    <text x="382" y="394" font-size="12" fill="#94a3b8" text-anchor="middle">'Where else this exists?'</text>
+    <text x="382" y="410" font-size="12" fill="#94a3b8" text-anchor="middle">answered instantly</text>
   </g>
 
   <line x1="486" y1="320" x2="522" y2="320" stroke="#a78bfa" stroke-width="2" marker-end="url(#a-fb923c)"/>
@@ -87,14 +87,14 @@
 
     <line x1="806" y1="285" x2="966" y2="285" stroke="#334155" stroke-width="1"/>
 
-    <text x="886" y="306" font-size="15" fill="#cbd5e1" text-anchor="middle">'warn'-based</text>
-    <text x="886" y="322" font-size="15" fill="#cbd5e1" text-anchor="middle">deferral banned</text>
+    <text x="886" y="306" font-size="14" fill="#cbd5e1" text-anchor="middle">'warn'-based</text>
+    <text x="886" y="322" font-size="14" fill="#cbd5e1" text-anchor="middle">deferral banned</text>
 
-    <text x="886" y="350" font-size="15" fill="#cbd5e1" text-anchor="middle">Fix every site in same PR</text>
-    <text x="886" y="366" font-size="15" fill="#cbd5e1" text-anchor="middle">→ ship at 'error'</text>
+    <text x="886" y="350" font-size="13" fill="#cbd5e1" text-anchor="middle">Fix every site in same PR</text>
+    <text x="886" y="366" font-size="13" fill="#cbd5e1" text-anchor="middle">→ ship at 'error'</text>
 
-    <text x="886" y="394" font-size="13" fill="#94a3b8" text-anchor="middle">'Plan to address later' is also banned</text>
-    <text x="886" y="410" font-size="13" fill="#94a3b8" text-anchor="middle">= shut the escape hatch up front</text>
+    <text x="886" y="394" font-size="12" fill="#94a3b8" text-anchor="middle">'Defer to later' also banned</text>
+    <text x="886" y="410" font-size="12" fill="#94a3b8" text-anchor="middle">— escape hatch shut up front</text>
   </g>
 
   <line x1="990" y1="320" x2="1026" y2="320" stroke="#38bdf8" stroke-width="2" marker-end="url(#a-4ade80)"/>
@@ -111,15 +111,15 @@
     <line x1="1024" y1="288" x2="1232" y2="288" stroke="#334155" stroke-width="1"/>
 
     <rect x="1024" y="300" width="208" height="22" rx="4" fill="#0a1820" stroke="#4ade80" stroke-width="1"/>
-    <text x="1128" y="315" font-size="14" fill="#cbd5e1" text-anchor="middle">9 lenses + [Recurrence] check</text>
+    <text x="1128" y="315" font-size="13" fill="#cbd5e1" text-anchor="middle">9 lenses + [Recurrence] check</text>
 
     <rect x="1024" y="326" width="208" height="22" rx="4" fill="#0a1820" stroke="#4ade80" stroke-width="1"/>
-    <text x="1128" y="341" font-size="14" fill="#cbd5e1" text-anchor="middle">Auto-merge when CI is green</text>
+    <text x="1128" y="341" font-size="13" fill="#cbd5e1" text-anchor="middle">Auto-merge when CI is green</text>
 
     <rect x="1024" y="352" width="208" height="22" rx="4" fill="#0a1820" stroke="#4ade80" stroke-width="1"/>
-    <text x="1128" y="367" font-size="14" fill="#cbd5e1" text-anchor="middle">Pulumi parallel deploy</text>
+    <text x="1128" y="367" font-size="13" fill="#cbd5e1" text-anchor="middle">Pulumi parallel deploy</text>
 
-    <text x="1128" y="396" font-size="15" fill="#94a3b8" text-anchor="middle">Same pipeline as Part 3</text>
+    <text x="1128" y="396" font-size="13" fill="#94a3b8" text-anchor="middle">Same pipeline as Part 3</text>
   </g>
 
   <line x1="1252" y1="320" x2="1268" y2="320" stroke="#4ade80" stroke-width="2" marker-end="url(#a-4ade80)"/>
