@@ -37,7 +37,7 @@ In Part 1, I described cpg at a high level: "all of cortex is indexed in one gra
 |---|---|---|---|
 | 1 | Series intro: cortex's harness | PRs auto-merge / incidents self-heal before you notice | [ai-harness-intro](/posts/ai-harness-intro) |
 | 2 | Product Graph (cpg) | Code, docs, DB, infra unified into one graph | this post ← you are here |
-| 3 | AI PR review | webhook → AI review → auto-fix → squash merge | coming |
+| 3 | AI PR review | webhook → AI review → auto-fix → squash merge | [cortex-auto-review](/posts/cortex-auto-review) |
 | 4 | Self-Healing + observability + auto-added guardrails | Alert → AI investigates → fix PR + new lint/type gate → auto redeploy + same-pattern writes get auto-rejected | coming |
 | 5 | Scaling the harness from cortex to toC services | Non-engineer contributions in practice + scaling cortex's harness to the whole product org | coming |
 | 6 | Series wrap-up | The underlying philosophy (what was given up, what was kept, why this design) plus a retrospective on the failures and lessons | coming |
@@ -522,4 +522,4 @@ Most AI coding setups try to make the AI better at reading an *unchanged* reposi
 In that sense, Product Graph is literally a knowledge graph of the AI, by the AI, for the AI: generated alongside AI-written code, maintained through AI review, and consumed by AI agents as their primary map of the product.
 
 
-Coming up in **Part 3**: the full pipeline of **automated PR review** built on top of cpg — from GitHub webhook ingestion through AI review / automated fix / automated merge / parallel deploy. What happens when Auto Review fires with `usecase: "code-review"`, how `[Graph] Critical` comments are generated, and the worktree mechanism that lets AI apply fixes and push back.
+Coming up in **[Part 3 — automated PR review](/posts/cortex-auto-review)**: the full pipeline of automated PR review built on top of cpg — from GitHub webhook ingestion through AI review / automated fix / automated merge / parallel deploy. What happens when Auto Review fires with `usecase: "code-review"`, how `[Graph] Critical` comments are generated, and the worktree mechanism that lets AI apply fixes and push back.
