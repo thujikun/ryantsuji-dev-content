@@ -17,7 +17,7 @@ syndication:
   devto:
     id: 3687754
     slug: "the-heart-of-the-ai-harness-a-knowledge-graph-of-the-ai-by-the-ai-for-the-ai-series-part-2-4a59-temp-slug-9510240"
-    contentHash: "15d616d68459ac82"
+    contentHash: "352a573e066002b9"
     publishAt: "2026-05-19T07:00:00-07:00"
 ---
 
