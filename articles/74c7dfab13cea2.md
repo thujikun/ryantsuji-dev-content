@@ -274,8 +274,9 @@ cortexに積み上がっているcustom Guideの実例:
 - **`graph/no-bq-string-timestamp-param`**（ESLint） ── BigQueryのクエリパラメータでTIMESTAMPをstringで渡すと、serializerバグでNULL化してINSERT全失敗する事例から
 - **`graph/require-firestore-ignore-undefined`**（ESLint） ── Firestoreの`new Firestore()`に`ignoreUndefinedProperties: true`必須化。NULL行で同期batchが100%失敗した事例から
 - **`check-otel-env-injection`**（CI guard） ── 後述のCloud Run OTel env注入漏れの再発防止
+- **TypeScriptの型定義の強化**（型レベル） ── 関数シグネチャをstricterにする / 取り違え防止のbranded type追加 / discriminated unionで網羅性を強制 等。lint化できないがtype gateで弾けるパターンは型側で潰す
 
-これらは全部「**事前に教科書で習える**」のではなく、「**踏んでから機械化した**」もの。組織が踏んだ罠の数だけGuideが積み上がっていきます。
+これらは全部「**事前に教科書で習える**」のではなく、「**踏んでから機械化した**」もの。組織が踏んだ罠の数だけGuideが積み上がっていきます（ESLint / oxlint / CI guard / 型定義の4層で）。
 
 ### 具体例: Cloud RunのOTel env注入漏れ → CI guardへの昇格
 
@@ -300,12 +301,13 @@ cortexに積み上がっているcustom Guideの実例:
 | **Custom ESLintルール**（`@cortex/eslint-plugin-graph`） | 26本 | `no-silent-catch` / `require-firestore-ignore-undefined` / `no-bq-string-timestamp-param`等 |
 | **CI guard**（`scripts/check-*.ts`） | 13本 | `check-otel-env-injection` / `check-cloudscheduler-oidctoken-audience`等 |
 | **Standard oxlintルール**（`error`設定） | 183本 | base configで一律 error 投入 |
-| **TypeScript strict系** | 9 gate | `strict` / `noImplicitAny` / `strictNullChecks` / `noUncheckedIndexedAccess`等 |
+| **TypeScript strict系（baseline）** | 9 gate | `strict` / `noImplicitAny` / `strictNullChecks` / `noUncheckedIndexedAccess`等 |
+| **TypeScript型定義の強化**（per-recurrence） | 都度追加 | branded type / discriminated union / 関数シグネチャ tightening 等。lint化できないがtype gateで弾けるパターンを型側で潰す |
 | **テストカバレッジ閾値** | statements + branches 90% | 全packageで一律 |
 | **Prettier** | 1 config | フォーマット自動修正 |
 | **ガイドライン** | review-guidelines repository 全文 | 自動レビューの判定基準 |
 
-このうち上3つ（Custom ESLint / CI guard / oxlint）が**直近で増え続けている**部分。Self-Healingと自動レビューが動くたびに、`[Recurrence]`観点が新規追加を要求するので、グラフが右肩上がりで増えていきます。**ガードレールは時間とともに育つ** ── これが強化層の本質です。
+このうち**Custom ESLint / CI guard / 型定義の強化**が、`[Recurrence]`観点を通じて Self-Healing と自動レビューが動くたびに右肩上がりで増えていく部分。**ガードレールは時間とともに育つ** ── これが強化層の本質です。
 
 ## 全体ループの俯瞰
 
@@ -354,14 +356,14 @@ cortexに積み上がっているcustom Guideの実例:
 
 ### アラート発火から本番復旧までの時間
 
-平均**10〜20分程度**。内訳は概ね:
+中央値で**30分〜1時間程度**。内訳は概ね:
 
 - アラート発火 → AI調査開始: 1分以内（Event Relay+SSE）
 - AI調査・修正・PR起票: 3〜8分
-- 自動レビュー（複数iteration含む）: 3〜8分
+- 自動レビュー（[Part 3](https://zenn.dev/aircloset/articles/91824e55b7fc9c)で書いた**平均10.8回のreview-fix loop**を含む）: 20〜45分
 - 自動マージ+デプロイ: 3〜10分
 
-人が起きる前に終わっているケースも多いです（7am発火 → 7:15復旧 → 9am出社時にはSlackに ✅ だけ）。
+人が起きる前に終わっているケースも多いです（早朝発火 → 出社時にはSlackに ✅ 通知だけ）。
 
 ## 何が変わったか / Bridge to Part 5
 
