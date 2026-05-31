@@ -116,18 +116,18 @@
   <!-- ============= Layer 3: 強化 ============= -->
   <g font-family="Noto Sans JP, sans-serif">
     <rect x="60" y="728" width="1480" height="200" rx="14" fill="#1a1525" stroke="#a78bfa" stroke-width="2.5"/>
-    <text x="100" y="763" font-size="28" fill="#a78bfa" font-weight="bold">③ 強化層 ── Sensors (lint + ガイドライン) が増えていく</text>
-    <text x="100" y="786" font-size="17" fill="#94a3b8">[Recurrence] 観点が「同じ罠を2回以上踏んだ → lint化必須」を強制。修正PRに新規Sensorも含めないとマージされない。</text>
+    <text x="100" y="763" font-size="28" fill="#a78bfa" font-weight="bold">③ 強化層 ── Guides (lint + ガイドライン) が増えていく</text>
+    <text x="100" y="786" font-size="17" fill="#94a3b8">[Recurrence] 観点が「同じ罠を2回以上踏んだ → lint化必須」を強制。修正PRに新規Guideも含めないとマージされない。</text>
 
     <g transform="translate(0, 812)">
       <rect x="100" y="0" width="280" height="86" rx="8" fill="#120a25" stroke="#a78bfa" stroke-width="1.5"/>
-      <text x="240" y="24" font-size="19" fill="#a78bfa" text-anchor="middle" font-weight="bold">機械が読むSensor</text>
+      <text x="240" y="24" font-size="19" fill="#a78bfa" text-anchor="middle" font-weight="bold">機械が読むGuide</text>
       <text x="240" y="46" font-size="16" fill="#cbd5e1" text-anchor="middle">Custom ESLint 26本 / CI guard 13本</text>
       <text x="240" y="64" font-size="16" fill="#cbd5e1" text-anchor="middle">oxlint 183本 / TS strict / 90% coverage</text>
       <text x="240" y="80" font-size="15" fill="#94a3b8" text-anchor="middle">マージ前にCIで違反を弾く</text>
 
       <rect x="420" y="0" width="280" height="86" rx="8" fill="#120a25" stroke="#a78bfa" stroke-width="1.5"/>
-      <text x="560" y="24" font-size="19" fill="#a78bfa" text-anchor="middle" font-weight="bold">人とAIが読むSensor</text>
+      <text x="560" y="24" font-size="19" fill="#a78bfa" text-anchor="middle" font-weight="bold">人とAIが読むGuide</text>
       <text x="560" y="46" font-size="16" fill="#cbd5e1" text-anchor="middle">recurrence-prevention.md</text>
       <text x="560" y="64" font-size="16" fill="#cbd5e1" text-anchor="middle">severity.md / ai-antipattern.md 等</text>
       <text x="560" y="80" font-size="15" fill="#94a3b8" text-anchor="middle">自動レビューの判定基準</text>

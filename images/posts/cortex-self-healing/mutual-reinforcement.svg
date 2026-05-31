@@ -11,7 +11,7 @@
   </defs>
 
   <!-- Title -->
-  <text x="700" y="56" font-size="36" fill="#e2e8f0" text-anchor="middle" font-weight="bold" font-family="Noto Sans JP, sans-serif">cpg を共有基盤に、Self-Healing と 自動レビューが Sensors を育てる</text>
+  <text x="700" y="56" font-size="36" fill="#e2e8f0" text-anchor="middle" font-weight="bold" font-family="Noto Sans JP, sans-serif">cpg を共有基盤に、Self-Healing と 自動レビューが Guides を育てる</text>
   <text x="700" y="92" font-size="24" fill="#94a3b8" text-anchor="middle" font-family="Noto Sans JP, sans-serif">片方の出力がもう片方の判定基準になる相互強化の三角形。土台にあるのは Product Graph (cpg)。</text>
 
   <!-- ============= cpg (center, top) ============= -->
@@ -41,7 +41,7 @@
 
     <text x="280" y="604" font-size="16" fill="#94a3b8" text-anchor="middle">「同種パターンが他にも存在する」</text>
     <text x="280" y="622" font-size="16" fill="#94a3b8" text-anchor="middle">を cpg で発見</text>
-    <text x="280" y="646" font-size="16" fill="#94a3b8" text-anchor="middle">→ 横展開 + Sensor追加 を</text>
+    <text x="280" y="646" font-size="16" fill="#94a3b8" text-anchor="middle">→ 横展開 + Guide追加 を</text>
     <text x="280" y="664" font-size="16" fill="#94a3b8" text-anchor="middle">自動レビューに要求</text>
     <text x="280" y="694" font-size="15" fill="#fb923c" text-anchor="middle" font-weight="bold">→ Part 4 (本記事)</text>
   </g>
@@ -56,7 +56,7 @@
 
     <text x="1120" y="604" font-size="16" fill="#94a3b8" text-anchor="middle">[Recurrence] 観点で</text>
     <text x="1120" y="622" font-size="16" fill="#94a3b8" text-anchor="middle">「lint化なしの fix は通さない」</text>
-    <text x="1120" y="646" font-size="16" fill="#94a3b8" text-anchor="middle">→ Self-Healingに Sensor追加を</text>
+    <text x="1120" y="646" font-size="16" fill="#94a3b8" text-anchor="middle">→ Self-Healingに Guide追加を</text>
     <text x="1120" y="664" font-size="16" fill="#94a3b8" text-anchor="middle">強制 (REQUEST_CHANGES)</text>
     <text x="1120" y="694" font-size="15" fill="#38bdf8" text-anchor="middle" font-weight="bold">→ Part 3 で詳細</text>
   </g>
@@ -90,18 +90,18 @@
     <text x="700" y="781" font-size="14" fill="#94a3b8" text-anchor="middle">[Recurrence] 観点で再発防止強制</text>
   </g>
 
-  <!-- ============= Output: Sensors ============= -->
+  <!-- ============= Output: Guides ============= -->
   <g font-family="Noto Sans JP, sans-serif">
     <rect x="380" y="830" width="640" height="100" rx="14" fill="#0d251a" stroke="#4ade80" stroke-width="2.5"/>
-    <text x="700" y="868" font-size="24" fill="#4ade80" text-anchor="middle" font-weight="bold">Sensors が日々増えていく</text>
+    <text x="700" y="868" font-size="24" fill="#4ade80" text-anchor="middle" font-weight="bold">Guides が日々増えていく</text>
 
     <line x1="400" y1="884" x2="1000" y2="884" stroke="#334155" stroke-width="1"/>
 
     <text x="700" y="908" font-size="16" fill="#cbd5e1" text-anchor="middle">Custom ESLint 26本  /  CI guard 13本  /  oxlint 183本  /  TS strict 9 gate  /  Coverage 90%</text>
-    <text x="700" y="924" font-size="15" fill="#94a3b8" text-anchor="middle">機械が読むSensor (lint/型/CI) + 人とAIが読むSensor (ガイドライン) の両輪</text>
+    <text x="700" y="924" font-size="15" fill="#94a3b8" text-anchor="middle">機械が読むGuide (lint/型/CI) + 人とAIが読むGuide (ガイドライン) の両輪</text>
   </g>
 
-  <!-- Arrows from SH and AR to Sensors -->
+  <!-- Arrows from SH and AR to Guides -->
   <line x1="320" y1="725" x2="450" y2="828" stroke="#fb923c" stroke-width="2" stroke-dasharray="5,4" marker-end="url(#a-4ade80)"/>
   <line x1="1080" y1="725" x2="950" y2="828" stroke="#38bdf8" stroke-width="2" stroke-dasharray="5,4" marker-end="url(#a-4ade80)"/>
 </svg>

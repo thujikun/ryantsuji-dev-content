@@ -102,7 +102,7 @@
     <text x="690" y="517" font-size="14" fill="#cbd5e1" text-anchor="middle">④ 修正実装 + テスト更新</text>
 
     <rect x="586" y="528" width="208" height="22" rx="4" fill="#251a0d" stroke="#fb923c" stroke-width="1"/>
-    <text x="690" y="543" font-size="14" fill="#cbd5e1" text-anchor="middle">⑤ [Recurrence]: 横展開 + Sensor追加</text>
+    <text x="690" y="543" font-size="14" fill="#cbd5e1" text-anchor="middle">⑤ [Recurrence]: 横展開 + Guide追加</text>
 
     <rect x="586" y="554" width="208" height="22" rx="4" fill="#1a0d0a" stroke="#fb923c" stroke-width="1"/>
     <text x="690" y="569" font-size="14" fill="#cbd5e1" text-anchor="middle">⑥ conventional commit</text>
@@ -133,7 +133,7 @@
       <text x="1030" y="371">⑦ [Observability]  ⑧ [AI-Antipattern]</text>
 
       <rect x="890" y="382" width="280" height="22" rx="4" fill="#1a1525" stroke="#a78bfa" stroke-width="1.5"/>
-      <text x="1030" y="397" fill="#a78bfa">⑨ [Recurrence] ← 再発防止 Sensor追加を要求</text>
+      <text x="1030" y="397" fill="#a78bfa">⑨ [Recurrence] ← 再発防止 Guide追加を要求</text>
     </g>
 
     <line x1="890" y1="420" x2="1170" y2="420" stroke="#334155" stroke-width="1"/>
@@ -185,7 +185,7 @@
     <text x="1400" y="548" font-size="15" fill="#94a3b8" text-anchor="middle">7am発火 → 7:15復旧 →</text>
     <text x="1400" y="566" font-size="15" fill="#94a3b8" text-anchor="middle">9am出社時には Slack に ✓ だけ</text>
 
-    <text x="1400" y="598" font-size="15" fill="#94a3b8" text-anchor="middle" font-weight="bold">+ 新規Sensorも一緒に</text>
+    <text x="1400" y="598" font-size="15" fill="#94a3b8" text-anchor="middle" font-weight="bold">+ 新規Guideも一緒に</text>
     <text x="1400" y="615" font-size="15" fill="#94a3b8" text-anchor="middle" font-weight="bold">本番投入されている</text>
   </g>
 

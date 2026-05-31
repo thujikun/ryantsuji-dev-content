@@ -12,7 +12,7 @@
 
   <!-- Title -->
   <text x="800" y="56" font-size="36" fill="#e2e8f0" text-anchor="middle" font-weight="bold" font-family="Noto Sans JP, sans-serif">Self-Healing が動くたびに起きる 5 ステップ ── 再発防止主役のフロー</text>
-  <text x="800" y="92" font-size="24" fill="#94a3b8" text-anchor="middle" font-family="Noto Sans JP, sans-serif">「直したついでに防ぐ」を構造化。1回の Self-Healing で Sensor が 1個増え、同種クラスの障害が CI で構造的に発生不可能になる。</text>
+  <text x="800" y="92" font-size="24" fill="#94a3b8" text-anchor="middle" font-family="Noto Sans JP, sans-serif">「直したついでに防ぐ」を構造化。1回の Self-Healing で Guide が 1個増え、同種クラスの障害が CI で構造的に発生不可能になる。</text>
 
   <!-- Input: alert + Self-Healing -->
   <g font-family="Noto Sans JP, sans-serif">
@@ -46,13 +46,13 @@
 
   <line x1="486" y1="320" x2="522" y2="320" stroke="#a78bfa" stroke-width="2" marker-end="url(#a-fb923c)"/>
 
-  <!-- ============= Step 2: new Sensor in same PR ============= -->
+  <!-- ============= Step 2: new Guide in same PR ============= -->
   <g font-family="Noto Sans JP, sans-serif">
     <circle cx="624" cy="180" r="28" fill="#251a0d" stroke="#fb923c" stroke-width="2.5"/>
     <text x="624" y="187" font-size="28" fill="#fb923c" text-anchor="middle" font-weight="bold">2</text>
 
     <rect x="524" y="225" width="200" height="200" rx="14" fill="#251a0d" stroke="#fb923c" stroke-width="2"/>
-    <text x="624" y="255" font-size="19" fill="#fb923c" text-anchor="middle" font-weight="bold">新規Sensorを同PRで追加</text>
+    <text x="624" y="255" font-size="19" fill="#fb923c" text-anchor="middle" font-weight="bold">新規Guideを同PRで追加</text>
 
     <line x1="544" y1="270" x2="704" y2="270" stroke="#334155" stroke-width="1"/>
 
@@ -135,7 +135,7 @@
     <text x="1410" y="312" font-size="17" fill="#cbd5e1" text-anchor="middle">CI / lint で機械的に弾かれる</text>
 
     <text x="1410" y="346" font-size="17" fill="#cbd5e1" text-anchor="middle"><tspan font-weight="bold" fill="#4ade80">「踏んだら lint 化」</tspan></text>
-    <text x="1410" y="364" font-size="16" fill="#cbd5e1" text-anchor="middle">の積み上げで Sensor が +1</text>
+    <text x="1410" y="364" font-size="16" fill="#cbd5e1" text-anchor="middle">の積み上げで Guide が +1</text>
 
     <text x="1410" y="396" font-size="15" fill="#94a3b8" text-anchor="middle">ガードレールが日々増えていく構造</text>
   </g>
@@ -194,5 +194,5 @@
   </g>
 
   <!-- Bottom -->
-  <text x="800" y="880" font-size="17" fill="#94a3b8" text-anchor="middle" font-family="Noto Sans JP, sans-serif">Self-Healing が動くたびに Sensor が +1。組織が踏んだ罠の数だけガードレールが積み上がっていく。</text>
+  <text x="800" y="880" font-size="17" fill="#94a3b8" text-anchor="middle" font-family="Noto Sans JP, sans-serif">Self-Healing が動くたびに Guide が +1。組織が踏んだ罠の数だけガードレールが積み上がっていく。</text>
 </svg>
