@@ -399,7 +399,7 @@ cortexに積み上がっているcustom Guideの実例:
 ここまでで、**Part 1〜4を通したcortexの全体像**がほぼ揃いました:
 
 - [Part 1](/posts/ai-harness-intro): cortex全体像とハーネスエンジニアリングの位置取り
-- [Part 2](/posts/cortex-product-graph): Product Graph（cpg）── AIの「目」
+- [Part 2](/posts/cortex-product-graph): Product Graph（cpg）── AIの「脳」
 - [Part 3](/posts/cortex-auto-review): 自動レビュー ── PR時点の品質を守る
 - **Part 4（本記事）: Self-Healing+Observability+自動lint追加 ── 本番時点の品質を守りつつ、品質ゲート自体を育てる**
 

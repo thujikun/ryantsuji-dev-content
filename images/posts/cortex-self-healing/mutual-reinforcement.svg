@@ -20,7 +20,7 @@
     <rect x="540" y="160" width="320" height="200" rx="20" fill="#1a1525" stroke="#a78bfa" stroke-width="3"/>
     <text x="700" y="200" font-size="28" fill="#a78bfa" text-anchor="middle" font-weight="bold">Product Graph (cpg)</text>
     <text x="700" y="224" font-size="17" fill="#cbd5e1" text-anchor="middle">コード・docs・DB・インフラを統合</text>
-    <text x="700" y="244" font-size="17" fill="#cbd5e1" text-anchor="middle">した「AIの目」</text>
+    <text x="700" y="244" font-size="17" fill="#cbd5e1" text-anchor="middle">した「AIの脳」</text>
 
     <line x1="560" y1="262" x2="840" y2="262" stroke="#334155" stroke-width="1"/>
 
@@ -67,7 +67,7 @@
   <line x1="585" y1="360" x2="350" y2="500" stroke="#a78bfa" stroke-width="2.5" marker-end="url(#a-fb923c)"/>
   <line x1="365" y1="495" x2="600" y2="358" stroke="#fb923c" stroke-width="2.5" marker-end="url(#a-a78bfa)"/>
   <g font-family="Noto Sans JP, sans-serif">
-    <rect x="365" y="395" width="180" height="44" rx="6" fill="#0f172a" stroke="#a78bfa" stroke-width="1"/>
+    <rect x="315" y="395" width="280" height="44" rx="6" fill="#0f172a" stroke="#a78bfa" stroke-width="1"/>
     <text x="455" y="415" font-size="15" fill="#cbd5e1" text-anchor="middle" font-weight="bold">原因特定・横展開検出</text>
     <text x="455" y="431" font-size="14" fill="#94a3b8" text-anchor="middle">trace_connections / search_nodes</text>
   </g>
@@ -76,7 +76,7 @@
   <line x1="815" y1="360" x2="1050" y2="500" stroke="#a78bfa" stroke-width="2.5" marker-end="url(#a-38bdf8)"/>
   <line x1="1035" y1="495" x2="800" y2="358" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#a-a78bfa)"/>
   <g font-family="Noto Sans JP, sans-serif">
-    <rect x="855" y="395" width="180" height="44" rx="6" fill="#0f172a" stroke="#a78bfa" stroke-width="1"/>
+    <rect x="825" y="395" width="240" height="44" rx="6" fill="#0f172a" stroke="#a78bfa" stroke-width="1"/>
     <text x="945" y="415" font-size="15" fill="#cbd5e1" text-anchor="middle" font-weight="bold">影響範囲調査・依存先確認</text>
     <text x="945" y="431" font-size="14" fill="#94a3b8" text-anchor="middle">変更ノードのpre-load</text>
   </g>
@@ -85,9 +85,9 @@
   <path d="M 440 620 Q 700 760 960 620" fill="none" stroke="#fb923c" stroke-width="2.5" marker-end="url(#a-38bdf8)"/>
   <path d="M 960 640 Q 700 780 440 640" fill="none" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#a-fb923c)"/>
   <g font-family="Noto Sans JP, sans-serif">
-    <rect x="600" y="745" width="200" height="46" rx="6" fill="#0f172a" stroke="#cbd5e1" stroke-width="1"/>
+    <rect x="540" y="745" width="320" height="46" rx="6" fill="#0f172a" stroke="#cbd5e1" stroke-width="1"/>
     <text x="700" y="765" font-size="15" fill="#cbd5e1" text-anchor="middle" font-weight="bold">PR起票 → レビュー → 修正</text>
-    <text x="700" y="781" font-size="14" fill="#94a3b8" text-anchor="middle">[Recurrence] 観点で再発防止強制</text>
+    <text x="700" y="781" font-size="14" fill="#94a3b8" text-anchor="middle">[Recurrence] 観点で再発防止を強制</text>
   </g>
 
   <!-- ============= Output: Guides ============= -->

@@ -48,77 +48,77 @@
 
   <!-- ============= Step 2: new Guide in same PR ============= -->
   <g font-family="Noto Sans JP, sans-serif">
-    <circle cx="624" cy="180" r="28" fill="#251a0d" stroke="#fb923c" stroke-width="2.5"/>
-    <text x="624" y="187" font-size="28" fill="#fb923c" text-anchor="middle" font-weight="bold">2</text>
+    <circle cx="644" cy="180" r="28" fill="#251a0d" stroke="#fb923c" stroke-width="2.5"/>
+    <text x="644" y="187" font-size="28" fill="#fb923c" text-anchor="middle" font-weight="bold">2</text>
 
-    <rect x="524" y="225" width="200" height="200" rx="14" fill="#251a0d" stroke="#fb923c" stroke-width="2"/>
-    <text x="624" y="255" font-size="19" fill="#fb923c" text-anchor="middle" font-weight="bold">新規Guideを同PRで追加</text>
+    <rect x="524" y="225" width="240" height="200" rx="14" fill="#251a0d" stroke="#fb923c" stroke-width="2"/>
+    <text x="644" y="255" font-size="19" fill="#fb923c" text-anchor="middle" font-weight="bold">新規Guideを同PRで追加</text>
 
-    <line x1="544" y1="270" x2="704" y2="270" stroke="#334155" stroke-width="1"/>
+    <line x1="544" y1="270" x2="764" y2="270" stroke="#334155" stroke-width="1"/>
 
-    <rect x="540" y="282" width="168" height="22" rx="4" fill="#1a0d0a" stroke="#fb923c" stroke-width="1"/>
-    <text x="624" y="297" font-size="15" fill="#cbd5e1" text-anchor="middle">Custom ESLint rule</text>
+    <rect x="540" y="282" width="208" height="22" rx="4" fill="#1a0d0a" stroke="#fb923c" stroke-width="1"/>
+    <text x="644" y="297" font-size="15" fill="#cbd5e1" text-anchor="middle">Custom ESLint rule</text>
 
-    <rect x="540" y="308" width="168" height="22" rx="4" fill="#1a0d0a" stroke="#fb923c" stroke-width="1"/>
-    <text x="624" y="323" font-size="15" fill="#cbd5e1" text-anchor="middle">CI guard (scripts/check-*)</text>
+    <rect x="540" y="308" width="208" height="22" rx="4" fill="#1a0d0a" stroke="#fb923c" stroke-width="1"/>
+    <text x="644" y="323" font-size="15" fill="#cbd5e1" text-anchor="middle">CI guard (scripts/check-*)</text>
 
-    <rect x="540" y="334" width="168" height="22" rx="4" fill="#1a0d0a" stroke="#fb923c" stroke-width="1"/>
-    <text x="624" y="349" font-size="15" fill="#cbd5e1" text-anchor="middle">TypeScript 型制約</text>
+    <rect x="540" y="334" width="208" height="22" rx="4" fill="#1a0d0a" stroke="#fb923c" stroke-width="1"/>
+    <text x="644" y="349" font-size="15" fill="#cbd5e1" text-anchor="middle">TypeScript 型制約</text>
 
-    <rect x="540" y="360" width="168" height="22" rx="4" fill="#1a0d0a" stroke="#fb923c" stroke-width="1"/>
-    <text x="624" y="375" font-size="15" fill="#cbd5e1" text-anchor="middle">ガイドライン項目</text>
+    <rect x="540" y="360" width="208" height="22" rx="4" fill="#1a0d0a" stroke="#fb923c" stroke-width="1"/>
+    <text x="644" y="375" font-size="15" fill="#cbd5e1" text-anchor="middle">ガイドライン項目</text>
 
-    <text x="624" y="404" font-size="15" fill="#94a3b8" text-anchor="middle">のいずれか</text>
+    <text x="644" y="404" font-size="15" fill="#94a3b8" text-anchor="middle">のいずれか</text>
   </g>
 
-  <line x1="728" y1="320" x2="764" y2="320" stroke="#fb923c" stroke-width="2" marker-end="url(#a-38bdf8)"/>
+  <line x1="766" y1="320" x2="786" y2="320" stroke="#fb923c" stroke-width="2" marker-end="url(#a-38bdf8)"/>
 
   <!-- ============= Step 3: zero existing violations ============= -->
   <g font-family="Noto Sans JP, sans-serif">
-    <circle cx="866" cy="180" r="28" fill="#0d1f2d" stroke="#38bdf8" stroke-width="2.5"/>
-    <text x="866" y="187" font-size="28" fill="#38bdf8" text-anchor="middle" font-weight="bold">3</text>
+    <circle cx="886" cy="180" r="28" fill="#0d1f2d" stroke="#38bdf8" stroke-width="2.5"/>
+    <text x="886" y="187" font-size="28" fill="#38bdf8" text-anchor="middle" font-weight="bold">3</text>
 
-    <rect x="766" y="225" width="200" height="200" rx="14" fill="#0d1f2d" stroke="#38bdf8" stroke-width="2"/>
-    <text x="866" y="255" font-size="19" fill="#38bdf8" text-anchor="middle" font-weight="bold">既存違反を同PRで0化</text>
+    <rect x="786" y="225" width="200" height="200" rx="14" fill="#0d1f2d" stroke="#38bdf8" stroke-width="2"/>
+    <text x="886" y="255" font-size="19" fill="#38bdf8" text-anchor="middle" font-weight="bold">既存違反を同PRで0化</text>
 
-    <line x1="786" y1="270" x2="946" y2="270" stroke="#334155" stroke-width="1"/>
+    <line x1="806" y1="270" x2="966" y2="270" stroke="#334155" stroke-width="1"/>
 
-    <text x="866" y="294" font-size="16" fill="#cbd5e1" text-anchor="middle">warn 投入での</text>
-    <text x="866" y="312" font-size="16" fill="#cbd5e1" text-anchor="middle">deferral 禁止</text>
+    <text x="886" y="294" font-size="16" fill="#cbd5e1" text-anchor="middle">warn 投入での</text>
+    <text x="886" y="312" font-size="16" fill="#cbd5e1" text-anchor="middle">deferral 禁止</text>
 
-    <text x="866" y="346" font-size="16" fill="#cbd5e1" text-anchor="middle">同PR内で全箇所修正</text>
-    <text x="866" y="364" font-size="16" fill="#cbd5e1" text-anchor="middle">→ error で投入</text>
+    <text x="886" y="346" font-size="16" fill="#cbd5e1" text-anchor="middle">同PR内で全箇所修正</text>
+    <text x="886" y="364" font-size="16" fill="#cbd5e1" text-anchor="middle">→ error で投入</text>
 
-    <text x="866" y="396" font-size="15" fill="#94a3b8" text-anchor="middle">「将来的に対応」も禁止</text>
-    <text x="866" y="412" font-size="15" fill="#94a3b8" text-anchor="middle">＝逃げ道を先回りで潰す</text>
+    <text x="886" y="396" font-size="15" fill="#94a3b8" text-anchor="middle">「将来的に対応」も禁止</text>
+    <text x="886" y="412" font-size="15" fill="#94a3b8" text-anchor="middle">＝逃げ道を先回りで潰す</text>
   </g>
 
-  <line x1="970" y1="320" x2="1006" y2="320" stroke="#38bdf8" stroke-width="2" marker-end="url(#a-4ade80)"/>
+  <line x1="990" y1="320" x2="1026" y2="320" stroke="#38bdf8" stroke-width="2" marker-end="url(#a-4ade80)"/>
 
   <!-- ============= Step 4: auto review → merge → deploy ============= -->
   <g font-family="Noto Sans JP, sans-serif">
-    <circle cx="1108" cy="180" r="28" fill="#0d251a" stroke="#4ade80" stroke-width="2.5"/>
-    <text x="1108" y="187" font-size="28" fill="#4ade80" text-anchor="middle" font-weight="bold">4</text>
+    <circle cx="1128" cy="180" r="28" fill="#0d251a" stroke="#4ade80" stroke-width="2.5"/>
+    <text x="1128" y="187" font-size="28" fill="#4ade80" text-anchor="middle" font-weight="bold">4</text>
 
-    <rect x="1008" y="225" width="200" height="200" rx="14" fill="#0d251a" stroke="#4ade80" stroke-width="2"/>
-    <text x="1108" y="252" font-size="17" fill="#4ade80" text-anchor="middle" font-weight="bold">自動レビュー → マージ</text>
-    <text x="1108" y="274" font-size="17" fill="#4ade80" text-anchor="middle" font-weight="bold">→ 再デプロイ</text>
+    <rect x="1028" y="225" width="200" height="200" rx="14" fill="#0d251a" stroke="#4ade80" stroke-width="2"/>
+    <text x="1128" y="252" font-size="17" fill="#4ade80" text-anchor="middle" font-weight="bold">自動レビュー → マージ</text>
+    <text x="1128" y="274" font-size="17" fill="#4ade80" text-anchor="middle" font-weight="bold">→ 再デプロイ</text>
 
-    <line x1="1028" y1="288" x2="1188" y2="288" stroke="#334155" stroke-width="1"/>
+    <line x1="1048" y1="288" x2="1208" y2="288" stroke="#334155" stroke-width="1"/>
 
-    <rect x="1024" y="300" width="168" height="22" rx="4" fill="#0a1820" stroke="#4ade80" stroke-width="1"/>
-    <text x="1108" y="315" font-size="15" fill="#cbd5e1" text-anchor="middle">9観点 + [Recurrence] check</text>
+    <rect x="1044" y="300" width="168" height="22" rx="4" fill="#0a1820" stroke="#4ade80" stroke-width="1"/>
+    <text x="1128" y="315" font-size="15" fill="#cbd5e1" text-anchor="middle">9観点 + [Recurrence] check</text>
 
-    <rect x="1024" y="326" width="168" height="22" rx="4" fill="#0a1820" stroke="#4ade80" stroke-width="1"/>
-    <text x="1108" y="341" font-size="15" fill="#cbd5e1" text-anchor="middle">CI green で自動マージ</text>
+    <rect x="1044" y="326" width="168" height="22" rx="4" fill="#0a1820" stroke="#4ade80" stroke-width="1"/>
+    <text x="1128" y="341" font-size="15" fill="#cbd5e1" text-anchor="middle">CI green で自動マージ</text>
 
-    <rect x="1024" y="352" width="168" height="22" rx="4" fill="#0a1820" stroke="#4ade80" stroke-width="1"/>
-    <text x="1108" y="367" font-size="15" fill="#cbd5e1" text-anchor="middle">Pulumi parallel deploy</text>
+    <rect x="1044" y="352" width="168" height="22" rx="4" fill="#0a1820" stroke="#4ade80" stroke-width="1"/>
+    <text x="1128" y="367" font-size="15" fill="#cbd5e1" text-anchor="middle">Pulumi parallel deploy</text>
 
-    <text x="1108" y="396" font-size="15" fill="#94a3b8" text-anchor="middle">Part 3 と同じパイプライン</text>
+    <text x="1128" y="396" font-size="15" fill="#94a3b8" text-anchor="middle">Part 3 と同じパイプライン</text>
   </g>
 
-  <line x1="1212" y1="320" x2="1248" y2="320" stroke="#4ade80" stroke-width="2" marker-end="url(#a-4ade80)"/>
+  <line x1="1232" y1="320" x2="1248" y2="320" stroke="#4ade80" stroke-width="2" marker-end="url(#a-4ade80)"/>
 
   <!-- ============= Step 5: structural impossibility ============= -->
   <g font-family="Noto Sans JP, sans-serif">
