@@ -1,6 +1,6 @@
 ---
 title: "気づく前に直り、直すたびに強くなる ── Self-Healingと再発防止の仕組み（連載Part 4）"
-emoji: "🤖"
+emoji: "💤"
 type: tech
 topics: ["ai", "devops", "github", "observability", "typescript"]
 published: false
@@ -57,6 +57,7 @@ publication_name: "aircloset"
 | 3 | AI PRレビュー | webhook → AIレビュー → 自動修正 → squash merge | [cortex-auto-review](https://zenn.dev/aircloset/articles/91824e55b7fc9c) |
 | 4 | Self-Healing + Observability + 自動lint追加 | アラート → AI調査 → 修正PR + 新規lint/型ゲート → 自動再デプロイで同じ書き方を機械的に弾く | 本記事 ←現在地 |
 | 5 | ハーネスをtoCサービスに広げる | 非エンジニア開発の実態と限界 + cortexの型をプロダクト組織全体にスケールする構想 | 準備中 |
+| 6 | 連載総括 | これまでの全パートを振り返り、「全然簡単じゃない」と「失敗の総量から学んだ構造」を整理 | 準備中 |
 
 ## 全体像 ── 「観測」「修復」「強化」の3層
 
@@ -308,6 +309,16 @@ cortexに積み上がっているcustom Guideの実例:
 
 これらは全部「**事前に教科書で習える**」のではなく、「**踏んでから機械化した**」もの。組織が踏んだ罠の数だけGuideが積み上がっていきます（ESLint / oxlint / CI guard / 型定義の4層で）。
 
+### AIはどうやってlintルールを壊さず書くのか
+
+「AIが lint ルール自体をどう壊さず生成しているか」── ここを支えているのは以下の構造です:
+
+- **既存ルールがテンプレート**: `packages/eslint-plugin-graph/src/rules/` には26本の既存 custom ルールが `.ts` + `.test.ts` のペアで並んでいて、AIは新規ルールを書くとき「同じ形」を踏襲できる。AST 操作の boilerplate を毎回ゼロから書かない
+- **テストが先**: 違反パターン / 合格パターンの最小 fixture を `.test.ts` に書き、TDD で実装を埋める。テストカバレッジ閾値 90% を [Part 3](https://zenn.dev/aircloset/articles/91824e55b7fc9c) の自動レビューが gate するので、テスト無しの lint は merge できない
+- **lint / 型 / CI guard は同じ「機械化バケット」**: [`recurrence-prevention.md`](https://github.com/air-closet/cortex-review-guidelines/blob/main/ja/guidelines/recurrence-prevention.md) の判定マトリクスは lint・型制約・CI guard をひとまとめに「lint化必須」（= 機械化）として置いていて、3者の中での選択（lintとして書くか / 型側で表現するか / 別途 CI guard でチェックするか）は AST 操作量と副作用依存度に応じてAIに判断させる構造。AST 走査が必要だが runtime semantics に依存して判定しきれない罠は、custom lint よりも型制約（branded type / discriminated union / 関数 signature tightening）に倒すケースが多い
+
+つまり「AIに lint を書かせる」のは **既存ルール群 + テストハーネス + 機械化バケットの選択基準** の3点で支えられていて、AIが ESLint API を生で書き起こして事故るルートは構造的に閉じている、というのが運用の実感です。
+
 ### 具体例: Cloud RunのOTel env注入漏れ → CI guardへの昇格
 
 過去に複数サービスで「Cloud Run Service/JobをPulumiで定義したとき、`OTEL_EXPORTER_OTLP_ENDPOINT`と`GRAFANA_CLOUD_API_KEY`を`secretKeyRef`でenvsに注入し忘れて、本番でOTel initがskipされ、Grafanaにtrace/logが届かず障害が検知不能になる」という罠を踏みました。
@@ -384,18 +395,6 @@ cortexに積み上がっているcustom Guideの実例:
 | **Generator Failure** ── AI生成系ジョブ（embedding / annotation等）の失敗 | 本番ランタイム系（61本側） |
 | **Deploy Failed** ── デプロイ失敗（Pulumi up / Cloud Run revision failed） | デプロイ段階（54本側） |
 
-### 母数の分け方
-
-冒頭の**115**は「Self-Healingが PR起票 → merge → deploy まで完走した数」。これとは別に、Self-Healingが起動したが「コード修正では対応不能」と判断して **PR化せず終了したケースが月数件**あります（外部サービスの一時障害、コードでなくインフラ・設定起因のもの等）。これらはSlackスレッドに調査結果付きで通知され、人が対応します。
-
-```
-[Self-Healing 起動]
-   ├─ PR化 → merge + deploy 完走 ──── 月115本
-   └─ 修正不能と判断 → 無変更で終了 ── 月数件 (Slackで人に通知)
-```
-
-つまり「**115本中の失敗率**」ではなく、「**起動の分岐先が分かれている**」構造です。
-
 ### アラート発火から本番復旧までの時間
 
 中央値で**30分〜1時間程度**。内訳は概ね:
@@ -422,7 +421,9 @@ cortexに積み上がっているcustom Guideの実例:
 
 次回**Part 5**では、ここまでのcortexのharnessを**プロダクト組織全体にスケールするロードマップと思想**を書きます。前半は「非エンジニアがcortexにPRを出せている運用」の実態と限界、後半はtoCサービスへの展開で必要になる要素（service特化ルール、AI設計の人間理解プロセス、test環境のIaC化、etc）について。
 
-「cortexは型を作った、toCサービスはその型を桁を変えるスケールで運用する」 ── 連載締めの位置取りで書く予定です。
+「cortexは型を作った、toCサービスはその型を桁を変えるスケールで運用する」 ── これがPart 5の位置取りです。
+
+そして最後の**Part 6**は連載全体の総括です。記事ではここまで「うまく回っている結果」を中心に書いてきましたが、実際にはその裏に踏んできた失敗・つまずきの量があります。**何が難しくて、どこでつまずいて、何を学んだか**を全パートを通して整理したい。Part 6は私たち自身にとっての振り返りであり、同じようなことを始めようとしている人にとっての参考にもなれば、という位置取りで書きます。
 
 ---
 
