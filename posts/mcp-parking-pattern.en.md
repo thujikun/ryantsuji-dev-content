@@ -16,7 +16,7 @@ syndication:
   devto:
     id: 3593900
     slug: "cutting-self-built-mcp-server-token-usage-by-90-the-parking-pattern-3e7o"
-    contentHash: "c325025c50f3693a"
+    contentHash: "92ec92b995a96558"
 cover: /images/posts/mcp-parking-pattern.en.cover.png
 ---
 
