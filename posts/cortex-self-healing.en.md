@@ -17,8 +17,8 @@ cover: /images/posts/cortex-self-healing.en.cover.png
 syndication:
   devto:
     id: 3788644
-    slug: "fixed-before-anyone-notices-stronger-after-every-fix-self-healing-recurrence-prevention-series-1hgh-temp-slug-9492789"
-    contentHash: "dc3640f7d0e283a8"
+    slug: "fixed-before-anyone-notices-stronger-after-every-fix-self-healing-recurrence-prevention-series-1e86"
+    contentHash: "7bf146d6e9dc8274"
 ---
 
 
