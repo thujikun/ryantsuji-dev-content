@@ -2,7 +2,6 @@
 title: "気づく前に直り、直すたびに強くなる ── Self-Healingと再発防止の仕組み（連載Part 4）"
 publishedAt: "2026-06-02T08:30:00+09:00"
 updatedAt: "2026-06-02T08:30:00+09:00"
-draft: true
 slug: "cortex-self-healing"
 summary: "社内AI基盤cortexの連載Part 4。本番アラートをAIが調査・修正・デプロイまで完結させるSelf-Healingと、その手前のOTel/Loki/Mimir/Tempo/Faro観測スタック、そして修正と同時に再発防止のlint/型ゲートが自動で増えていく仕組み。直近30日で115本のSelf-Healing PRがマージされ、同じ書き方は機械的に弾かれていく流れを実装目線で。"
 emoji: "💤"

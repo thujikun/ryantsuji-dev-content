@@ -2,7 +2,6 @@
 title: "Fixed Before Anyone Notices, Stronger After Every Fix: Self-Healing + Recurrence Prevention (Series Part 4)"
 publishedAt: "2026-06-02T08:30:00+09:00"
 updatedAt: "2026-06-02T08:30:00+09:00"
-draft: true
 slug: "cortex-self-healing"
 summary: "Series Part 4. Production alerts trigger AI investigation, fix PR, auto-review, auto-merge, auto-redeploy. The same fix PR is required to add a new Guide -- a lint rule, CI guard, type constraint, or guideline entry -- so the same anti-pattern gets auto-rejected from then on. 115 Self-Healing PRs merged in the past 30 days, and the quality gates compound over time."
 tags:
