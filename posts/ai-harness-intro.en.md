@@ -16,7 +16,7 @@ syndication:
   devto:
     id: 3655760
     slug: "building-a-real-ai-harness-auto-reviewed-prs-self-healing-ops-and-non-engineer-contributors-3lfa"
-    contentHash: "65edc3542217289d"
+    contentHash: "a6f600bb8b746fe7"
 cover: /images/posts/ai-harness-intro.en.cover.png
 ---
 
