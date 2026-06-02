@@ -39,7 +39,7 @@ cover: /images/posts/cortex-auto-review.ja.cover.png
 | 1 | 総論：cortexのハーネス | PRが無人マージ / 障害が気づく前に治っている | [ai-harness-intro](/posts/ai-harness-intro) |
 | 2 | Product Graph（cpg） | コード・ドキュメント・DB・インフラを1グラフに統合 | [cortex-product-graph](/posts/cortex-product-graph) |
 | 3 | AI PRレビュー | webhook → AIレビュー → 自動修正 → squash merge | 本記事 ←現在地 |
-| 4 | Self-Healing + Observability + 自動lint追加 | アラート → AI調査 → 修正PR + 新規lint/型gate → 自動再デプロイで同じ書き方を機械的に弾く | 準備中 |
+| 4 | Self-Healing + Observability + 自動lint追加 | アラート → AI調査 → 修正PR + 新規lint/型gate → 自動再デプロイで同じ書き方を機械的に弾く | [cortex-self-healing](/posts/cortex-self-healing) |
 | 5 | ハーネスをtoCサービスに広げる | 非エンジニア開発の実態と限界 + cortexの型をプロダクト組織全体にスケールする構想 | 準備中 |
 | 6 | 連載総括 | 根底にある思想（何を捨てて何を取ったか / なぜこの設計か）を中心に、失敗と学びも振り返る | 準備中 |
 
@@ -455,6 +455,6 @@ cortexは逆です。**書く側よりも先に、見る側にハーネスを広
 
 ---
 
-次回 **Part 4** では、**Self-Healing + Observability + 自動lint追加** ── 本番のアラート（OTel/Loki/Mimir/Tempo/Faroで観測）を起点にAIが原因調査 → 修正PR + 新規lint/型gateの追加 → 自動レビューに乗せて自動マージ → 自動再デプロイで完結させる仕組みを取り扱います。修正と同時に再発防止のガードレールが自動で増えていくので、**同種alertが構造的に再発できなくなる**。自動レビューがPR時点の品質を守るのに対し、Part 4 は **production時点の品質を守りつつ、品質ゲート自体を育てる** 役割です。
+次回 **[Part 4 ── Self-Healing + 再発防止の仕組み](/posts/cortex-self-healing)** では、本番のアラート（OTel/Loki/Mimir/Tempo/Faroで観測）を起点にAIが原因調査 → 修正PR + 新規lint/型gateの追加 → 自動レビューに乗せて自動マージ → 自動再デプロイで完結させる仕組みを取り扱います。修正と同時に再発防止のガードレールが自動で増えていくので、**同種alertが構造的に再発できなくなる**。自動レビューがPR時点の品質を守るのに対し、Part 4 は **production時点の品質を守りつつ、品質ゲート自体を育てる** 役割です。
 
-冒頭の数字にはSelf-Healing PR（本番アラートをAIが原因特定→修正→自動マージ→自動デプロイで一周まわす仕組みの出力）も含まれています。「**障害は気づく前に直っている**」が、cortexの現状です。次回お楽しみに。
+冒頭の数字にはSelf-Healing PR（本番アラートをAIが原因特定→修正→自動マージ→自動デプロイで一周まわす仕組みの出力）も含まれています。「**障害は気づく前に直っている**」が、cortexの現状です。

@@ -37,7 +37,7 @@ This post is about **the automated PR review pipeline** -- AI reviews the PR, a 
 | 1 | Series intro: cortex harness | PRs merging unattended / incidents fixed before anyone notices | [ai-harness-intro](/posts/ai-harness-intro) |
 | 2 | Product Graph (cpg) | Code / docs / DB / infra unified into one graph | [cortex-product-graph](/posts/cortex-product-graph) |
 | 3 | Auto PR review | webhook -> AI review -> auto-fix -> squash merge | This article ← you are here |
-| 4 | Self-Healing + observability + auto-added guardrails | Alert -> AI investigates -> fix PR + new lint/type gate -> auto redeploy + same-pattern writes get auto-rejected | Coming soon |
+| 4 | Self-Healing + observability + auto-added guardrails | Alert -> AI investigates -> fix PR + new lint/type gate -> auto redeploy + same-pattern writes get auto-rejected | [cortex-self-healing](/posts/cortex-self-healing) |
 | 5 | Scaling the harness from cortex to toC services | Non-engineer contributions in practice + scaling cortex's harness to the whole product org | Coming soon |
 | 6 | Series wrap-up | The underlying philosophy (what was given up, what was kept, why this design) plus a retrospective on the failures and lessons | Coming soon |
 
@@ -447,6 +447,6 @@ cortex is the opposite. **We extended the harness on the reviewer side first, be
 
 ---
 
-Up next in **Part 4**: **Self-Healing + observability + auto-added guardrails** -- a pipeline where a production alert (observed via OTel/Loki/Mimir/Tempo/Faro) triggers AI investigation, an AI-authored fix PR plus a new lint/type gate, auto-review, auto-merge, and auto-redeploy. The fix and a recurrence-prevention guardrail land together, so the same class of incident structurally can't fire again. If auto review protects quality at PR time, Part 4 protects it **at production time, while growing the quality gates themselves**.
+Up next in **[Part 4 — Self-Healing + Recurrence Prevention](/posts/cortex-self-healing?lang=en)**: a pipeline where a production alert (observed via OTel/Loki/Mimir/Tempo/Faro) triggers AI investigation, an AI-authored fix PR plus a new lint/type gate, auto-review, auto-merge, and auto-redeploy. The fix and a recurrence-prevention guardrail land together, so the same class of incident structurally can't fire again. If auto review protects quality at PR time, Part 4 protects it **at production time, while growing the quality gates themselves**.
 
-The headline number above includes Self-Healing PRs (production alerts that AI investigates, fixes, and auto-deploys). For certain classes of incidents, the fix is already merged before anyone has time to react -- that's where cortex sits today. See you next time.
+The headline number above includes Self-Healing PRs (production alerts that AI investigates, fixes, and auto-deploys). For certain classes of incidents, the fix is already merged before anyone has time to react — that's where cortex sits today.
