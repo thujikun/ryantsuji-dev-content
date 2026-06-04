@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="820" viewBox="0 0 1600 820">
+  <rect width="1600" height="820" fill="#0f172a"/>
+
+  <defs>
+    <marker id="a-94a3b8" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#94a3b8"/></marker>
+    <marker id="a-4ade80" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#4ade80"/></marker>
+    <marker id="a-f87171" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#f87171"/></marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="800" y="56" font-size="34" fill="#e2e8f0" text-anchor="middle" font-weight="bold" font-family="Noto Sans JP, sans-serif">業務要件 → 本番反映までの動線 ── 翻訳レイヤーと待ち行列が消える</text>
+  <text x="800" y="92" font-size="20" fill="#94a3b8" text-anchor="middle" font-family="Noto Sans JP, sans-serif">ハーネスが品質を担保するので、業務要件を一番把握している人が直接書く動線が成立する</text>
+
+  <!-- Center divider -->
+  <line x1="800" y1="140" x2="800" y2="760" stroke="#334155" stroke-width="1" stroke-dasharray="4,4"/>
+
+  <!-- ============= Left column: Before ============= -->
+  <g font-family="Noto Sans JP, sans-serif">
+    <text x="400" y="160" font-size="22" fill="#94a3b8" text-anchor="middle" font-weight="bold">Before ── 翻訳レイヤー + 待ち行列</text>
+    <text x="400" y="184" font-size="14" fill="#64748b" text-anchor="middle">業務要件 → エンジニア依頼 → 数日〜1週間</text>
+
+    <!-- Stage 1 -->
+    <rect x="100" y="210" width="600" height="64" rx="8" fill="#1e293b" stroke="#94a3b8" stroke-width="1.5"/>
+    <text x="400" y="234" font-size="16" fill="#cbd5e1" text-anchor="middle" font-weight="bold">業務側に要件発生</text>
+    <text x="400" y="258" font-size="13" fill="#94a3b8" text-anchor="middle">「ダッシュボードの指標を増やしたい」「集計条件が業務実態と違う」</text>
+
+    <line x1="400" y1="280" x2="400" y2="306" stroke="#94a3b8" stroke-width="1.8" marker-end="url(#a-94a3b8)"/>
+
+    <!-- Stage 2 -->
+    <rect x="100" y="310" width="600" height="64" rx="8" fill="#1e293b" stroke="#94a3b8" stroke-width="1.5"/>
+    <text x="400" y="334" font-size="16" fill="#cbd5e1" text-anchor="middle" font-weight="bold">エンジニアに依頼</text>
+    <text x="400" y="358" font-size="13" fill="#94a3b8" text-anchor="middle">Slack / チケットに要件をテキスト化 ── ここで翻訳レイヤーが発生</text>
+
+    <line x1="400" y1="380" x2="400" y2="406" stroke="#f87171" stroke-width="1.8" stroke-dasharray="5,3" marker-end="url(#a-f87171)"/>
+
+    <!-- Stage 3 (red highlighted as bottleneck) -->
+    <rect x="100" y="410" width="600" height="64" rx="8" fill="#1e0a0a" stroke="#f87171" stroke-width="1.8"/>
+    <text x="400" y="434" font-size="16" fill="#f87171" text-anchor="middle" font-weight="bold">優先順位待ち (数日)</text>
+    <text x="400" y="458" font-size="13" fill="#cbd5e1" text-anchor="middle">エンジニアの本筋タスクの合間に入るまで待ち行列</text>
+
+    <line x1="400" y1="480" x2="400" y2="506" stroke="#94a3b8" stroke-width="1.8" marker-end="url(#a-94a3b8)"/>
+
+    <!-- Stage 4 -->
+    <rect x="100" y="510" width="600" height="64" rx="8" fill="#1e293b" stroke="#94a3b8" stroke-width="1.5"/>
+    <text x="400" y="534" font-size="16" fill="#cbd5e1" text-anchor="middle" font-weight="bold">実装 (仕様解釈と差し戻し)</text>
+    <text x="400" y="558" font-size="13" fill="#94a3b8" text-anchor="middle">エンジニアが業務文脈を読み取って実装、認識ズレで差し戻しも</text>
+
+    <line x1="400" y1="580" x2="400" y2="606" stroke="#94a3b8" stroke-width="1.8" marker-end="url(#a-94a3b8)"/>
+
+    <!-- Stage 5 -->
+    <rect x="100" y="610" width="600" height="64" rx="8" fill="#1e293b" stroke="#94a3b8" stroke-width="1.5"/>
+    <text x="400" y="634" font-size="16" fill="#cbd5e1" text-anchor="middle" font-weight="bold">レビュー → 本番反映</text>
+    <text x="400" y="658" font-size="13" fill="#94a3b8" text-anchor="middle">他者レビュー → 修正 → 本番反映</text>
+
+    <!-- Total time annotation -->
+    <text x="400" y="710" font-size="20" fill="#f87171" text-anchor="middle" font-weight="bold">合計: 数日 〜 1週間</text>
+  </g>
+
+  <!-- ============= Right column: After ============= -->
+  <g font-family="Noto Sans JP, sans-serif">
+    <text x="1200" y="160" font-size="22" fill="#4ade80" text-anchor="middle" font-weight="bold">After ── 業務要件を一番把握している人が直接書く</text>
+    <text x="1200" y="184" font-size="14" fill="#94a3b8" text-anchor="middle">業務要件 → Claude Code → PR → 数時間</text>
+
+    <!-- Stage 1 -->
+    <rect x="900" y="210" width="600" height="64" rx="8" fill="#0d251a" stroke="#4ade80" stroke-width="1.5"/>
+    <text x="1200" y="234" font-size="16" fill="#4ade80" text-anchor="middle" font-weight="bold">業務側に要件発生</text>
+    <text x="1200" y="258" font-size="13" fill="#cbd5e1" text-anchor="middle">「ダッシュボードの指標を増やしたい」「集計条件が業務実態と違う」</text>
+
+    <line x1="1200" y1="280" x2="1200" y2="306" stroke="#4ade80" stroke-width="1.8" marker-end="url(#a-4ade80)"/>
+
+    <!-- Stage 2 -->
+    <rect x="900" y="310" width="600" height="64" rx="8" fill="#0d251a" stroke="#4ade80" stroke-width="1.5"/>
+    <text x="1200" y="334" font-size="16" fill="#4ade80" text-anchor="middle" font-weight="bold">本人がClaude Codeに投げる</text>
+    <text x="1200" y="358" font-size="13" fill="#cbd5e1" text-anchor="middle">cpgで関連コード (画面 / API / DB / docs) を取得 → 実装</text>
+
+    <line x1="1200" y1="380" x2="1200" y2="406" stroke="#4ade80" stroke-width="1.8" marker-end="url(#a-4ade80)"/>
+
+    <!-- Stage 3 -->
+    <rect x="900" y="410" width="600" height="64" rx="8" fill="#0d251a" stroke="#4ade80" stroke-width="1.5"/>
+    <text x="1200" y="434" font-size="16" fill="#4ade80" text-anchor="middle" font-weight="bold">PR open</text>
+    <text x="1200" y="458" font-size="13" fill="#cbd5e1" text-anchor="middle">差分そのまま本番リポジトリへ。エンジニア優先順位待ちは無し</text>
+
+    <line x1="1200" y1="480" x2="1200" y2="506" stroke="#4ade80" stroke-width="1.8" marker-end="url(#a-4ade80)"/>
+
+    <!-- Stage 4 -->
+    <rect x="900" y="510" width="600" height="64" rx="8" fill="#0d251a" stroke="#4ade80" stroke-width="1.5"/>
+    <text x="1200" y="534" font-size="16" fill="#4ade80" text-anchor="middle" font-weight="bold">AI Auto Review ↔ 修正push</text>
+    <text x="1200" y="558" font-size="13" fill="#cbd5e1" text-anchor="middle">9 lensのreview-fix loop。author自身が指摘を受けて直す</text>
+
+    <line x1="1200" y1="580" x2="1200" y2="606" stroke="#4ade80" stroke-width="1.8" marker-end="url(#a-4ade80)"/>
+
+    <!-- Stage 5 -->
+    <rect x="900" y="610" width="600" height="64" rx="8" fill="#0d251a" stroke="#4ade80" stroke-width="1.5"/>
+    <text x="1200" y="634" font-size="16" fill="#4ade80" text-anchor="middle" font-weight="bold">APPROVE → auto-merge → 本番反映</text>
+    <text x="1200" y="658" font-size="13" fill="#cbd5e1" text-anchor="middle">CI green + APPROVE が揃った瞬間に自動マージ</text>
+
+    <!-- Total time annotation -->
+    <text x="1200" y="710" font-size="20" fill="#4ade80" text-anchor="middle" font-weight="bold">合計: 数時間</text>
+  </g>
+
+  <!-- Footer -->
+  <text x="800" y="770" font-size="14" fill="#94a3b8" text-anchor="middle" font-family="Noto Sans JP, sans-serif">翻訳レイヤー = 業務要件を別の人が解釈してコードに落とす一手間 / 待ち行列 = エンジニアの本筋タスクとの順位争い</text>
+  <text x="800" y="795" font-size="14" fill="#94a3b8" text-anchor="middle" font-family="Noto Sans JP, sans-serif">どちらもハーネスが品質を担保することで省略可能になる</text>
+</svg>
