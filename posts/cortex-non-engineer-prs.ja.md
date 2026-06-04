@@ -15,6 +15,7 @@ series: "building-ai-harness"
 seriesOrder: 5
 syndication:
   zenn:
+    id: "07e276eeb77c3e"
     publishAt: "2026-06-09T08:30:00+09:00"
   devto:
     publishAt: "2026-06-09T08:30:00+09:00"
