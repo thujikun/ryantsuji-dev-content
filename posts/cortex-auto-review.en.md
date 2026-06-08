@@ -16,7 +16,7 @@ syndication:
   devto:
     id: 3738048
     slug: "human-on-the-loop-ai-reviewing-ai-prs-at-cortex-769-prsmonth-while-raising-the-quality-bar-4lh5"
-    contentHash: "ebf99e7990788104"
+    contentHash: "8fb956e48892fe34"
     publishAt: "2026-05-26T07:00:00-07:00"
 cover: /images/posts/cortex-auto-review.en.cover.png
 ---
