@@ -16,7 +16,7 @@ syndication:
   devto:
     id: 3849280
     slug: "non-engineers-now-ship-production-prs-the-harness-owns-quality-series-part-5-1jo-temp-slug-5100481"
-    contentHash: "d4cc09deda31e842"
+    contentHash: "3b1460a97807d476"
     publishAt: "2026-06-09T08:30:00+09:00"
 cover: /images/posts/cortex-non-engineer-prs.en.cover.png
 ---
