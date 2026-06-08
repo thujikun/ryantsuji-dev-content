@@ -1,5 +1,5 @@
 ---
-title: "Non-Engineers Now Ship Production PRs: The Harness Owns Quality (Series Part 5)"
+title: "Eliminating the Translation Layer: Non-Engineers Shipping Straight to Production (Series Part 5)"
 publishedAt: "2026-06-09T08:30:00+09:00"
 updatedAt: "2026-06-09T08:30:00+09:00"
 slug: "cortex-non-engineer-prs"
@@ -69,7 +69,7 @@ The review-fix cycle ran like this:
 7. **author bot push (iteration 2)**: hardens loading skeleton, reverts an unnecessary JSDoc tweak
 8. **auto-review pass 4: APPROVED** → CI green + APPROVE both met → auto-merge → production
 
-From PR open to merge: **four review-fix rounds, three author-bot pushes, zero human reviewers in the loop.** The reviews come from the auto-review bot, the fixes come from an author bot (an automated review-response agent that the PR author has running on their machine), the final APPROVE is submitted by the AI, and an auto-merge script picks it up the instant CI is green. Production lands with Type SSoT 56/56, API 2,284/2,284, Web 1,113/1,113, and lint at 0 errors. (cortex splits the lint job between [oxlint](https://oxc.rs/docs/guide/usage/linter) for general checks and a custom eslint plugin for the `@graph-*` rules.)
+From PR open to merge: **four review-fix rounds, three author-bot pushes, zero human reviewers in the loop.** The reviews come from the auto-review bot, the fixes come from an author bot (an automated review-response agent that the PR author has running on their machine), the final APPROVE is submitted by the AI, and an auto-merge script picks it up the instant CI is green. Production lands with **56/56 shared type checks (SSoT), 2,284/2,284 API tests, 1,113/1,113 web specs, and 0 lint errors.** (cortex splits the lint job between [oxlint](https://oxc.rs/docs/guide/usage/linter) for general checks and a custom eslint plugin for the `@graph-*` rules.)
 
 The second review pass is worth noting. "Scope fall-through" is a somewhat technical finding -- a hole in the permission filter meant data from divisions other than your own could leak into the view. This is an internal dashboard, so it's not an external-leak incident, but **"only see what's relevant to you" is the whole point of a dashboard like this** -- losing it doesn't just risk an information slip, it drowns the user in noise that they shouldn't be filtering through in the first place. That's the kind of issue that's easy to merge by mistake and painful to notice in production. **The fact that auto-review caught it on pass one and bounced it back for the author side to fix is what makes this whole flow viable for non-engineers.** Without that loop, a PR of this size from a non-engineer would be a bad bet.
 
