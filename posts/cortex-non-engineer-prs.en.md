@@ -1,5 +1,5 @@
 ---
-title: "Eliminating the Translation Layer: Non-Engineers Shipping Straight to Production (Series Part 5)"
+title: "The Author Doesn't Have to Be an Engineer: How the Harness Holds Quality (Series Part 5)"
 publishedAt: "2026-06-09T08:30:00+09:00"
 updatedAt: "2026-06-09T08:30:00+09:00"
 slug: "cortex-non-engineer-prs"
