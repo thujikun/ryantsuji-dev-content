@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <rect width="1600" height="900" fill="#0f172a"/>
+
+  <defs>
+    <marker id="a-94a3b8" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#94a3b8"/></marker>
+    <marker id="a-a78bfa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#a78bfa"/></marker>
+    <marker id="a-fb923c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#fb923c"/></marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="800" y="56" font-size="34" fill="#e2e8f0" text-anchor="middle" font-weight="bold" font-family="Inter, Noto Sans, system-ui, sans-serif">Carrying cortex's shape into consumer-facing toC services</text>
+  <text x="800" y="92" font-size="20" fill="#94a3b8" text-anchor="middle" font-family="Inter, Noto Sans, system-ui, sans-serif">The context layer and the final-approval step shift -- everything else holds</text>
+
+  <!-- Center divider -->
+  <line x1="800" y1="140" x2="800" y2="820" stroke="#334155" stroke-width="1" stroke-dasharray="4,4"/>
+
+  <!-- ============= Left column: cortex ============= -->
+  <g font-family="Inter, Noto Sans, system-ui, sans-serif">
+    <text x="400" y="170" font-size="24" fill="#a78bfa" text-anchor="middle" font-weight="bold">cortex (internal AI platform)</text>
+    <text x="400" y="196" font-size="14" fill="#94a3b8" text-anchor="middle">No human reviewer needed; runs all the way to auto-merge</text>
+
+    <!-- Stage 1: internal knowledge graph -->
+    <rect x="100" y="220" width="600" height="88" rx="8" fill="#1a1525" stroke="#a78bfa" stroke-width="2"/>
+    <text x="400" y="248" font-size="17" fill="#a78bfa" text-anchor="middle" font-weight="bold">Internal knowledge graph -- one repository</text>
+    <text x="400" y="274" font-size="13" fill="#cbd5e1" text-anchor="middle">Code, docs, DB schema, and infrastructure unified</text>
+    <text x="400" y="292" font-size="13" fill="#cbd5e1" text-anchor="middle">into a single semantic graph</text>
+
+    <line x1="400" y1="314" x2="400" y2="340" stroke="#a78bfa" stroke-width="1.8" marker-end="url(#a-a78bfa)"/>
+
+    <!-- Stage 2: Auto Review (common) -->
+    <rect x="100" y="344" width="600" height="88" rx="8" fill="#1a1525" stroke="#a78bfa" stroke-width="1.5"/>
+    <text x="400" y="372" font-size="17" fill="#cbd5e1" text-anchor="middle" font-weight="bold">PR open → AI Auto Review</text>
+    <text x="400" y="398" font-size="13" fill="#94a3b8" text-anchor="middle">9-dimension review-fix loop</text>
+    <text x="400" y="416" font-size="13" fill="#64748b" text-anchor="middle">← this layer is shared →</text>
+
+    <line x1="400" y1="438" x2="400" y2="464" stroke="#a78bfa" stroke-width="1.8" marker-end="url(#a-a78bfa)"/>
+
+    <!-- Stage 3: AI APPROVE → auto-merge -->
+    <rect x="100" y="468" width="600" height="88" rx="8" fill="#1a1525" stroke="#a78bfa" stroke-width="2"/>
+    <text x="400" y="496" font-size="17" fill="#a78bfa" text-anchor="middle" font-weight="bold">AI APPROVE → auto-merge</text>
+    <text x="400" y="522" font-size="13" fill="#cbd5e1" text-anchor="middle">No human in the loop. Auto-merge fires the instant</text>
+    <text x="400" y="540" font-size="13" fill="#cbd5e1" text-anchor="middle">CI green + APPROVE both hold</text>
+
+    <line x1="400" y1="562" x2="400" y2="588" stroke="#a78bfa" stroke-width="1.8" marker-end="url(#a-a78bfa)"/>
+
+    <!-- Stage 4: Production -->
+    <rect x="100" y="592" width="600" height="74" rx="8" fill="#1a1525" stroke="#a78bfa" stroke-width="1.5"/>
+    <text x="400" y="620" font-size="17" fill="#cbd5e1" text-anchor="middle" font-weight="bold">Production deploy</text>
+    <text x="400" y="646" font-size="13" fill="#94a3b8" text-anchor="middle">"Incidents fixed before anyone notices" is acceptable</text>
+
+    <line x1="400" y1="666" x2="400" y2="692" stroke="#a78bfa" stroke-width="1.8" marker-end="url(#a-a78bfa)"/>
+
+    <!-- Stage 5: Self-Healing -->
+    <rect x="100" y="696" width="600" height="88" rx="8" fill="#1a1525" stroke="#a78bfa" stroke-width="2"/>
+    <text x="400" y="724" font-size="17" fill="#a78bfa" text-anchor="middle" font-weight="bold">Self-Healing</text>
+    <text x="400" y="750" font-size="13" fill="#cbd5e1" text-anchor="middle">Alert → AI root-cause investigation → fix PR →</text>
+    <text x="400" y="768" font-size="13" fill="#cbd5e1" text-anchor="middle">auto-merge → auto-redeploy (Part 4)</text>
+  </g>
+
+  <!-- ============= Right column: toC ============= -->
+  <g font-family="Inter, Noto Sans, system-ui, sans-serif">
+    <text x="1200" y="170" font-size="24" fill="#fb923c" text-anchor="middle" font-weight="bold">toC (consumer-facing service)</text>
+    <text x="1200" y="196" font-size="14" fill="#94a3b8" text-anchor="middle">One extra "human sign-off" at the very end</text>
+
+    <!-- Stage 1: service-side knowledge graph ★diff★ -->
+    <rect x="900" y="220" width="600" height="88" rx="8" fill="#251a0d" stroke="#fb923c" stroke-width="2.5"/>
+    <text x="1490" y="240" font-size="11" fill="#fb923c" text-anchor="end" font-style="italic">★ shifts ★</text>
+    <text x="1200" y="248" font-size="17" fill="#fb923c" text-anchor="middle" font-weight="bold">Service-side knowledge graph -- 40+ repos</text>
+    <text x="1200" y="274" font-size="13" fill="#cbd5e1" text-anchor="middle">Frontend / backend / batch / admin UI etc.</text>
+    <text x="1200" y="292" font-size="13" fill="#cbd5e1" text-anchor="middle">A graph that spans multiple repositories</text>
+
+    <line x1="1200" y1="314" x2="1200" y2="340" stroke="#fb923c" stroke-width="1.8" marker-end="url(#a-fb923c)"/>
+
+    <!-- Stage 2: Auto Review (common) -->
+    <rect x="900" y="344" width="600" height="88" rx="8" fill="#251a0d" stroke="#fb923c" stroke-width="1.5"/>
+    <text x="1200" y="372" font-size="17" fill="#cbd5e1" text-anchor="middle" font-weight="bold">PR open → AI Auto Review</text>
+    <text x="1200" y="398" font-size="13" fill="#94a3b8" text-anchor="middle">9-dimension review-fix loop</text>
+    <text x="1200" y="416" font-size="13" fill="#64748b" text-anchor="middle">← this layer is shared →</text>
+
+    <line x1="1200" y1="438" x2="1200" y2="464" stroke="#fb923c" stroke-width="1.8" marker-end="url(#a-fb923c)"/>
+
+    <!-- Stage 3: AI prep + human sign-off ★diff★ -->
+    <rect x="900" y="468" width="600" height="88" rx="8" fill="#251a0d" stroke="#fb923c" stroke-width="2.5"/>
+    <text x="1490" y="488" font-size="11" fill="#fb923c" text-anchor="end" font-style="italic">★ shifts ★</text>
+    <text x="1200" y="496" font-size="17" fill="#fb923c" text-anchor="middle" font-weight="bold">AI prep + human sign-off → merge</text>
+    <text x="1200" y="522" font-size="13" fill="#cbd5e1" text-anchor="middle">AI handles test writing / running / review;</text>
+    <text x="1200" y="540" font-size="13" fill="#cbd5e1" text-anchor="middle">a human still presses the final APPROVE</text>
+
+    <line x1="1200" y1="562" x2="1200" y2="588" stroke="#fb923c" stroke-width="1.8" marker-end="url(#a-fb923c)"/>
+
+    <!-- Stage 4: Production -->
+    <rect x="900" y="592" width="600" height="74" rx="8" fill="#251a0d" stroke="#fb923c" stroke-width="1.5"/>
+    <text x="1200" y="620" font-size="17" fill="#cbd5e1" text-anchor="middle" font-weight="bold">Production deploy</text>
+    <text x="1200" y="646" font-size="13" fill="#94a3b8" text-anchor="middle">Premise: incidents shouldn't happen (user impact intolerable)</text>
+
+    <line x1="1200" y1="666" x2="1200" y2="692" stroke="#fb923c" stroke-width="1.8" marker-end="url(#a-fb923c)"/>
+
+    <!-- Stage 5: incident response ★diff★ -->
+    <rect x="900" y="696" width="600" height="88" rx="8" fill="#251a0d" stroke="#fb923c" stroke-width="2.5"/>
+    <text x="1490" y="716" font-size="11" fill="#fb923c" text-anchor="end" font-style="italic">★ shifts ★</text>
+    <text x="1200" y="724" font-size="17" fill="#fb923c" text-anchor="middle" font-weight="bold">Incident response goes through a human call</text>
+    <text x="1200" y="750" font-size="13" fill="#cbd5e1" text-anchor="middle">Self-Healing-style auto-merge isn't the model.</text>
+    <text x="1200" y="768" font-size="13" fill="#cbd5e1" text-anchor="middle">AI investigates and proposes; a human decides.</text>
+  </g>
+
+  <!-- Footer -->
+  <text x="800" y="850" font-size="14" fill="#94a3b8" text-anchor="middle" font-family="Inter, Noto Sans, system-ui, sans-serif">Internal → service-side knowledge graph / auto-merge → AI prep + human sign-off / autonomous Self-Healing → human final call -- three shifts, the rest carries over from cortex</text>
+  <text x="800" y="875" font-size="14" fill="#94a3b8" text-anchor="middle" font-family="Inter, Noto Sans, system-ui, sans-serif">Engineer time compresses from implementation / review-handling toward sign-off judgment; combined with the writing side, throughput grows</text>
+</svg>

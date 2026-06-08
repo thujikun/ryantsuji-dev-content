@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="820" viewBox="0 0 1600 820">
+  <rect width="1600" height="820" fill="#0f172a"/>
+
+  <defs>
+    <marker id="a-94a3b8" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#94a3b8"/></marker>
+    <marker id="a-4ade80" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#4ade80"/></marker>
+    <marker id="a-f87171" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#f87171"/></marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="800" y="56" font-size="32" fill="#e2e8f0" text-anchor="middle" font-weight="bold" font-family="Inter, Noto Sans, system-ui, sans-serif">Business need → production: the translation layer and the queue disappear</text>
+  <text x="800" y="92" font-size="19" fill="#94a3b8" text-anchor="middle" font-family="Inter, Noto Sans, system-ui, sans-serif">The harness owns quality, so the person closest to the requirements writes the change directly</text>
+
+  <!-- Center divider -->
+  <line x1="800" y1="140" x2="800" y2="760" stroke="#334155" stroke-width="1" stroke-dasharray="4,4"/>
+
+  <!-- ============= Left column: Before ============= -->
+  <g font-family="Inter, Noto Sans, system-ui, sans-serif">
+    <text x="400" y="160" font-size="22" fill="#94a3b8" text-anchor="middle" font-weight="bold">Before -- translation layer + queue</text>
+    <text x="400" y="184" font-size="14" fill="#64748b" text-anchor="middle">Business need → engineer request → days to a week</text>
+
+    <!-- Stage 1 -->
+    <rect x="100" y="210" width="600" height="64" rx="8" fill="#1e293b" stroke="#94a3b8" stroke-width="1.5"/>
+    <text x="400" y="234" font-size="16" fill="#cbd5e1" text-anchor="middle" font-weight="bold">Business-side need arises</text>
+    <text x="400" y="258" font-size="13" fill="#94a3b8" text-anchor="middle">"I want a new metric" / "aggregation filter doesn't fit the business"</text>
+
+    <line x1="400" y1="280" x2="400" y2="306" stroke="#94a3b8" stroke-width="1.8" marker-end="url(#a-94a3b8)"/>
+
+    <!-- Stage 2 -->
+    <rect x="100" y="310" width="600" height="64" rx="8" fill="#1e293b" stroke="#94a3b8" stroke-width="1.5"/>
+    <text x="400" y="334" font-size="16" fill="#cbd5e1" text-anchor="middle" font-weight="bold">Hand off to an engineer</text>
+    <text x="400" y="358" font-size="13" fill="#94a3b8" text-anchor="middle">Write up requirements in Slack / a ticket -- the translation layer appears here</text>
+
+    <line x1="400" y1="380" x2="400" y2="406" stroke="#f87171" stroke-width="1.8" stroke-dasharray="5,3" marker-end="url(#a-f87171)"/>
+
+    <!-- Stage 3 (red highlighted as bottleneck) -->
+    <rect x="100" y="410" width="600" height="64" rx="8" fill="#1e0a0a" stroke="#f87171" stroke-width="1.8"/>
+    <text x="400" y="434" font-size="16" fill="#f87171" text-anchor="middle" font-weight="bold">Wait in priority queue (days)</text>
+    <text x="400" y="458" font-size="13" fill="#cbd5e1" text-anchor="middle">Sits behind whatever the engineer is in the middle of</text>
+
+    <line x1="400" y1="480" x2="400" y2="506" stroke="#94a3b8" stroke-width="1.8" marker-end="url(#a-94a3b8)"/>
+
+    <!-- Stage 4 -->
+    <rect x="100" y="510" width="600" height="64" rx="8" fill="#1e293b" stroke="#94a3b8" stroke-width="1.5"/>
+    <text x="400" y="534" font-size="16" fill="#cbd5e1" text-anchor="middle" font-weight="bold">Implementation (with re-clarifications)</text>
+    <text x="400" y="558" font-size="13" fill="#94a3b8" text-anchor="middle">Engineer interprets the business context; misreads cause back-and-forth</text>
+
+    <line x1="400" y1="580" x2="400" y2="606" stroke="#94a3b8" stroke-width="1.8" marker-end="url(#a-94a3b8)"/>
+
+    <!-- Stage 5 -->
+    <rect x="100" y="610" width="600" height="64" rx="8" fill="#1e293b" stroke="#94a3b8" stroke-width="1.5"/>
+    <text x="400" y="634" font-size="16" fill="#cbd5e1" text-anchor="middle" font-weight="bold">Review → ship to production</text>
+    <text x="400" y="658" font-size="13" fill="#94a3b8" text-anchor="middle">Human review → fixes → production deploy</text>
+
+    <!-- Total time annotation -->
+    <text x="400" y="710" font-size="20" fill="#f87171" text-anchor="middle" font-weight="bold">Total: days to a week</text>
+  </g>
+
+  <!-- ============= Right column: After ============= -->
+  <g font-family="Inter, Noto Sans, system-ui, sans-serif">
+    <text x="1200" y="160" font-size="22" fill="#4ade80" text-anchor="middle" font-weight="bold">After -- the person closest to the requirements writes</text>
+    <text x="1200" y="184" font-size="14" fill="#94a3b8" text-anchor="middle">Business need → Claude Code → PR → hours</text>
+
+    <!-- Stage 1 -->
+    <rect x="900" y="210" width="600" height="64" rx="8" fill="#0d251a" stroke="#4ade80" stroke-width="1.5"/>
+    <text x="1200" y="234" font-size="16" fill="#4ade80" text-anchor="middle" font-weight="bold">Business-side need arises</text>
+    <text x="1200" y="258" font-size="13" fill="#cbd5e1" text-anchor="middle">"I want a new metric" / "aggregation filter doesn't fit the business"</text>
+
+    <line x1="1200" y1="280" x2="1200" y2="306" stroke="#4ade80" stroke-width="1.8" marker-end="url(#a-4ade80)"/>
+
+    <!-- Stage 2 -->
+    <rect x="900" y="310" width="600" height="64" rx="8" fill="#0d251a" stroke="#4ade80" stroke-width="1.5"/>
+    <text x="1200" y="334" font-size="16" fill="#4ade80" text-anchor="middle" font-weight="bold">Author hands it to Claude Code</text>
+    <text x="1200" y="358" font-size="13" fill="#cbd5e1" text-anchor="middle">Knowledge graph pulls related code (screen / API / DB / docs) → implements</text>
+
+    <line x1="1200" y1="380" x2="1200" y2="406" stroke="#4ade80" stroke-width="1.8" marker-end="url(#a-4ade80)"/>
+
+    <!-- Stage 3 -->
+    <rect x="900" y="410" width="600" height="64" rx="8" fill="#0d251a" stroke="#4ade80" stroke-width="1.5"/>
+    <text x="1200" y="434" font-size="16" fill="#4ade80" text-anchor="middle" font-weight="bold">PR opened</text>
+    <text x="1200" y="458" font-size="13" fill="#cbd5e1" text-anchor="middle">Diff goes straight to the production repo. No engineer queue.</text>
+
+    <line x1="1200" y1="480" x2="1200" y2="506" stroke="#4ade80" stroke-width="1.8" marker-end="url(#a-4ade80)"/>
+
+    <!-- Stage 4 -->
+    <rect x="900" y="510" width="600" height="64" rx="8" fill="#0d251a" stroke="#4ade80" stroke-width="1.5"/>
+    <text x="1200" y="534" font-size="16" fill="#4ade80" text-anchor="middle" font-weight="bold">AI Auto Review ↔ author bot push</text>
+    <text x="1200" y="558" font-size="13" fill="#cbd5e1" text-anchor="middle">9-dimension review-fix loop; the author bot handles feedback</text>
+
+    <line x1="1200" y1="580" x2="1200" y2="606" stroke="#4ade80" stroke-width="1.8" marker-end="url(#a-4ade80)"/>
+
+    <!-- Stage 5 -->
+    <rect x="900" y="610" width="600" height="64" rx="8" fill="#0d251a" stroke="#4ade80" stroke-width="1.5"/>
+    <text x="1200" y="634" font-size="16" fill="#4ade80" text-anchor="middle" font-weight="bold">APPROVE → auto-merge → production</text>
+    <text x="1200" y="658" font-size="13" fill="#cbd5e1" text-anchor="middle">Auto-merge fires the instant CI green + APPROVE both hold</text>
+
+    <!-- Total time annotation -->
+    <text x="1200" y="710" font-size="20" fill="#4ade80" text-anchor="middle" font-weight="bold">Total: hours</text>
+  </g>
+
+  <!-- Footer -->
+  <text x="800" y="770" font-size="14" fill="#94a3b8" text-anchor="middle" font-family="Inter, Noto Sans, system-ui, sans-serif">Translation layer = the extra step of someone else interpreting the requirements into code / Queue = priority competition against the engineer's main work</text>
+  <text x="800" y="795" font-size="14" fill="#94a3b8" text-anchor="middle" font-family="Inter, Noto Sans, system-ui, sans-serif">Both become unnecessary once the harness owns quality</text>
+</svg>
