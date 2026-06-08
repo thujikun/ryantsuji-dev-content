@@ -93,7 +93,7 @@
       <rect x="180" y="0" width="280" height="90" rx="8" fill="#0a1820" stroke="#38bdf8" stroke-width="1.5"/>
       <text x="320" y="28" font-size="16" fill="#38bdf8" text-anchor="middle" font-weight="bold">インフラ</text>
       <text x="320" y="54" font-size="13" fill="#cbd5e1" text-anchor="middle">Pulumi / IaC / Cloud Run /</text>
-      <text x="320" y="72" font-size="13" fill="#cbd5e1" text-anchor="middle">BQ / Pub/Subの構成</text>
+      <text x="320" y="72" font-size="13" fill="#cbd5e1" text-anchor="middle">BigQuery / Pub/Subの構成</text>
 
       <rect x="500" y="0" width="280" height="90" rx="8" fill="#0a1820" stroke="#38bdf8" stroke-width="1.5"/>
       <text x="640" y="28" font-size="16" fill="#38bdf8" text-anchor="middle" font-weight="bold">認証 / Secret管理</text>
