@@ -18,6 +18,7 @@ syndication:
     publishAt: "2026-06-16T08:30:00+09:00"
   devto:
     publishAt: "2026-06-16T08:30:00+09:00"
+cover: /images/posts/cortex-philosophy.ja.cover.png
 ---
 
 
