@@ -86,7 +86,7 @@
     <!-- Stage 4 -->
     <rect x="900" y="510" width="600" height="64" rx="8" fill="#0d251a" stroke="#4ade80" stroke-width="1.5"/>
     <text x="1200" y="534" font-size="16" fill="#4ade80" text-anchor="middle" font-weight="bold">AI Auto Review ↔ 修正push</text>
-    <text x="1200" y="558" font-size="13" fill="#cbd5e1" text-anchor="middle">9 lensのreview-fix loop。author自身が指摘を受けて直す</text>
+    <text x="1200" y="558" font-size="13" fill="#cbd5e1" text-anchor="middle">9観点のreview-fix loop。author botが指摘を受けて直す</text>
 
     <line x1="1200" y1="580" x2="1200" y2="606" stroke="#4ade80" stroke-width="1.8" marker-end="url(#a-4ade80)"/>
 

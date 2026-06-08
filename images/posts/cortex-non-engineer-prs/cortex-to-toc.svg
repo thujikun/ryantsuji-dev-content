@@ -31,7 +31,7 @@
     <!-- Stage 2: Auto Review (common) -->
     <rect x="100" y="344" width="600" height="88" rx="8" fill="#1a1525" stroke="#a78bfa" stroke-width="1.5"/>
     <text x="400" y="372" font-size="17" fill="#cbd5e1" text-anchor="middle" font-weight="bold">PR open → AI Auto Review</text>
-    <text x="400" y="398" font-size="13" fill="#94a3b8" text-anchor="middle">9 lensのreview-fix loop</text>
+    <text x="400" y="398" font-size="13" fill="#94a3b8" text-anchor="middle">9観点のreview-fix loop</text>
     <text x="400" y="416" font-size="13" fill="#64748b" text-anchor="middle">← この層は両方共通 →</text>
 
     <line x1="400" y1="438" x2="400" y2="464" stroke="#a78bfa" stroke-width="1.8" marker-end="url(#a-a78bfa)"/>
@@ -75,7 +75,7 @@
     <!-- Stage 2: Auto Review (common) -->
     <rect x="900" y="344" width="600" height="88" rx="8" fill="#251a0d" stroke="#fb923c" stroke-width="1.5"/>
     <text x="1200" y="372" font-size="17" fill="#cbd5e1" text-anchor="middle" font-weight="bold">PR open → AI Auto Review</text>
-    <text x="1200" y="398" font-size="13" fill="#94a3b8" text-anchor="middle">9 lensのreview-fix loop</text>
+    <text x="1200" y="398" font-size="13" fill="#94a3b8" text-anchor="middle">9観点のreview-fix loop</text>
     <text x="1200" y="416" font-size="13" fill="#64748b" text-anchor="middle">← この層は両方共通 →</text>
 
     <line x1="1200" y1="438" x2="1200" y2="464" stroke="#fb923c" stroke-width="1.8" marker-end="url(#a-fb923c)"/>
