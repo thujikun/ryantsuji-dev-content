@@ -20,9 +20,9 @@
     <text x="400" y="170" font-size="24" fill="#a78bfa" text-anchor="middle" font-weight="bold">cortex (社内AI基盤)</text>
     <text x="400" y="196" font-size="14" fill="#94a3b8" text-anchor="middle">人間レビュアー無しでauto-mergeまで成立</text>
 
-    <!-- Stage 1: cpg -->
+    <!-- Stage 1: 社内ナレッジグラフ -->
     <rect x="100" y="220" width="600" height="88" rx="8" fill="#1a1525" stroke="#a78bfa" stroke-width="2"/>
-    <text x="400" y="248" font-size="17" fill="#a78bfa" text-anchor="middle" font-weight="bold">cpg ── 1リポジトリで完結</text>
+    <text x="400" y="248" font-size="17" fill="#a78bfa" text-anchor="middle" font-weight="bold">社内ナレッジグラフ ── 1リポジトリで完結</text>
     <text x="400" y="274" font-size="13" fill="#cbd5e1" text-anchor="middle">コードとdocsとDBスキーマとインフラ定義を</text>
     <text x="400" y="292" font-size="13" fill="#cbd5e1" text-anchor="middle">1グラフに統合した知識基盤</text>
 
@@ -63,10 +63,10 @@
     <text x="1200" y="170" font-size="24" fill="#fb923c" text-anchor="middle" font-weight="bold">toC (本番サービス)</text>
     <text x="1200" y="196" font-size="14" fill="#94a3b8" text-anchor="middle">最後にもう一段「人間sign-off」を挟む</text>
 
-    <!-- Stage 1: SPG ★差分★ -->
+    <!-- Stage 1: サービス側ナレッジグラフ ★差分★ -->
     <rect x="900" y="220" width="600" height="88" rx="8" fill="#251a0d" stroke="#fb923c" stroke-width="2.5"/>
     <text x="1490" y="240" font-size="11" fill="#fb923c" text-anchor="end" font-style="italic">★差分★</text>
-    <text x="1200" y="248" font-size="17" fill="#fb923c" text-anchor="middle" font-weight="bold">SPG ── 40+リポジトリ横断</text>
+    <text x="1200" y="248" font-size="17" fill="#fb923c" text-anchor="middle" font-weight="bold">サービス側ナレッジグラフ ── 40+リポジトリ横断</text>
     <text x="1200" y="274" font-size="13" fill="#cbd5e1" text-anchor="middle">フロント / バックエンド / バッチ / 管理画面 etc.</text>
     <text x="1200" y="292" font-size="13" fill="#cbd5e1" text-anchor="middle">複数リポジトリを横断するナレッジグラフ</text>
 
@@ -105,6 +105,6 @@
   </g>
 
   <!-- Footer -->
-  <text x="800" y="850" font-size="14" fill="#94a3b8" text-anchor="middle" font-family="Noto Sans JP, sans-serif">cpg → SPG / auto-merge → AI下準備+人間sign-off / Self-Healing自動 → 人間最終判断 ── 3点が変わるだけで、それ以外はcortexの型を流用できる</text>
+  <text x="800" y="850" font-size="14" fill="#94a3b8" text-anchor="middle" font-family="Noto Sans JP, sans-serif">社内 → サービス側ナレッジグラフ / auto-merge → AI下準備+人間sign-off / Self-Healing自動 → 人間最終判断 ── 3点が変わるだけで、それ以外はcortexの型を流用できる</text>
   <text x="800" y="875" font-size="14" fill="#94a3b8" text-anchor="middle" font-family="Noto Sans JP, sans-serif">エンジニア時間は実装/レビュー対応からsign-off専念に圧縮、書く側 (= 業務要件を把握している人) と合わせて処理可能量は増える</text>
 </svg>

@@ -72,7 +72,7 @@
     <!-- Stage 2 -->
     <rect x="900" y="310" width="600" height="64" rx="8" fill="#0d251a" stroke="#4ade80" stroke-width="1.5"/>
     <text x="1200" y="334" font-size="16" fill="#4ade80" text-anchor="middle" font-weight="bold">本人がClaude Codeに投げる</text>
-    <text x="1200" y="358" font-size="13" fill="#cbd5e1" text-anchor="middle">cpgで関連コード (画面 / API / DB / docs) を取得 → 実装</text>
+    <text x="1200" y="358" font-size="13" fill="#cbd5e1" text-anchor="middle">ナレッジグラフで関連コード (画面 / API / DB / docs) を取得 → 実装</text>
 
     <line x1="1200" y1="380" x2="1200" y2="406" stroke="#4ade80" stroke-width="1.8" marker-end="url(#a-4ade80)"/>
 
