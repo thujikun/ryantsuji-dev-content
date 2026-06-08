@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="980" viewBox="0 0 1600 980">
+  <rect width="1600" height="980" fill="#0f172a"/>
+
+  <defs>
+    <marker id="a-94a3b8" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#94a3b8"/></marker>
+    <marker id="a-f87171" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#f87171"/></marker>
+    <marker id="a-4ade80" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#4ade80"/></marker>
+    <marker id="a-a78bfa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#a78bfa"/></marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="800" y="56" font-size="34" fill="#e2e8f0" text-anchor="middle" font-weight="bold" font-family="Noto Sans JP, system-ui, sans-serif">2025年 ── 起点となった思考の流れ</text>
+  <text x="800" y="92" font-size="20" fill="#94a3b8" text-anchor="middle" font-family="Noto Sans JP, system-ui, sans-serif">2つの素直なアプローチに未来が見えず、GraphRAG + MCP に辿り着いた</text>
+
+  <!-- Starting question -->
+  <g font-family="Noto Sans JP, system-ui, sans-serif">
+    <rect x="450" y="120" width="700" height="80" rx="10" fill="#1e293b" stroke="#94a3b8" stroke-width="2"/>
+    <text x="800" y="152" font-size="20" fill="#e2e8f0" text-anchor="middle" font-weight="bold">出発点の問い</text>
+    <text x="800" y="180" font-size="16" fill="#cbd5e1" text-anchor="middle">どうやってAIにシステムを正確に理解してもらうか</text>
+  </g>
+
+  <!-- Down arrow to two walls -->
+  <line x1="800" y1="200" x2="800" y2="230" stroke="#94a3b8" stroke-width="2" marker-end="url(#a-94a3b8)"/>
+  <line x1="800" y1="230" x2="420" y2="230" stroke="#94a3b8" stroke-width="2"/>
+  <line x1="800" y1="230" x2="1180" y2="230" stroke="#94a3b8" stroke-width="2"/>
+  <line x1="420" y1="230" x2="420" y2="260" stroke="#94a3b8" stroke-width="2" marker-end="url(#a-94a3b8)"/>
+  <line x1="1180" y1="230" x2="1180" y2="260" stroke="#94a3b8" stroke-width="2" marker-end="url(#a-94a3b8)"/>
+
+  <!-- ============= Wall 1: Context Window (left) ============= -->
+  <g font-family="Noto Sans JP, system-ui, sans-serif">
+    <rect x="80" y="270" width="680" height="270" rx="12" fill="#1e0a0a" stroke="#f87171" stroke-width="2"/>
+    <text x="420" y="310" font-size="22" fill="#f87171" text-anchor="middle" font-weight="bold">壁1: コンテキストウィンドウを大きくする</text>
+
+    <g transform="translate(120, 340)">
+      <text x="0" y="20" font-size="16" fill="#f87171" font-weight="bold">✗</text>
+      <text x="30" y="20" font-size="15" fill="#cbd5e1">大きさの限界 ── 社内のコード + docs + DB + インフラは入りきらない</text>
+
+      <text x="0" y="56" font-size="16" fill="#f87171" font-weight="bold">✗</text>
+      <text x="30" y="56" font-size="15" fill="#cbd5e1">lost in the middle ── 長い入力の中盤がモデルから無視される</text>
+
+      <text x="0" y="92" font-size="16" fill="#f87171" font-weight="bold">✗</text>
+      <text x="30" y="92" font-size="15" fill="#cbd5e1">attention比率の分散 ── 関係ないトークンほど混じると</text>
+      <text x="30" y="112" font-size="15" fill="#cbd5e1">    関係あるトークンへのattentionが機械的に下がる</text>
+
+      <text x="0" y="148" font-size="16" fill="#f87171" font-weight="bold">✗</text>
+      <text x="30" y="148" font-size="15" fill="#cbd5e1">LLMはサイレントに間違う ── 人間と違って</text>
+      <text x="30" y="168" font-size="15" fill="#cbd5e1">    「分からない」と気づかないまま自信を持って答える</text>
+    </g>
+  </g>
+
+  <!-- ============= Wall 2: Learning (right) ============= -->
+  <g font-family="Noto Sans JP, system-ui, sans-serif">
+    <rect x="840" y="270" width="680" height="270" rx="12" fill="#1e0a0a" stroke="#f87171" stroke-width="2"/>
+    <text x="1180" y="310" font-size="22" fill="#f87171" text-anchor="middle" font-weight="bold">壁2: LLM自体に学習させる</text>
+
+    <g transform="translate(880, 340)">
+      <text x="0" y="20" font-size="16" fill="#f87171" font-weight="bold">✗</text>
+      <text x="30" y="20" font-size="15" fill="#cbd5e1">実用段階に届かない ── 本番運用に乗せるには時間がかかる</text>
+
+      <text x="0" y="56" font-size="16" fill="#f87171" font-weight="bold">✗</text>
+      <text x="30" y="56" font-size="15" fill="#cbd5e1">machine unlearning が難問</text>
+      <text x="30" y="76" font-size="15" fill="#cbd5e1">    ── 特定のものだけピンポイントで消すことが極めて難しい</text>
+
+      <text x="0" y="112" font-size="16" fill="#f87171" font-weight="bold">✗</text>
+      <text x="30" y="112" font-size="15" fill="#cbd5e1">destructive interference</text>
+      <text x="30" y="132" font-size="15" fill="#cbd5e1">    ── 新しく学ばせると無関係な既存の知識まで壊れる</text>
+
+      <text x="0" y="168" font-size="16" fill="#f87171" font-weight="bold">✗</text>
+      <text x="30" y="168" font-size="15" fill="#cbd5e1">整合性管理のコストが青天井 ── 古い真実を消し続ける負債</text>
+    </g>
+  </g>
+
+  <!-- Both walls converge with "未来なし" -->
+  <text x="420" y="565" font-size="16" fill="#f87171" text-anchor="middle" font-style="italic" font-family="Noto Sans JP, system-ui, sans-serif">未来が見えない</text>
+  <text x="1180" y="565" font-size="16" fill="#f87171" text-anchor="middle" font-style="italic" font-family="Noto Sans JP, system-ui, sans-serif">未来が見えない</text>
+
+  <!-- Down arrows converging -->
+  <line x1="420" y1="580" x2="420" y2="610" stroke="#94a3b8" stroke-width="2"/>
+  <line x1="1180" y1="580" x2="1180" y2="610" stroke="#94a3b8" stroke-width="2"/>
+  <line x1="420" y1="610" x2="1180" y2="610" stroke="#94a3b8" stroke-width="2"/>
+  <line x1="800" y1="610" x2="800" y2="650" stroke="#94a3b8" stroke-width="2" marker-end="url(#a-94a3b8)"/>
+
+  <!-- ============= Escape: GraphRAG + MCP ============= -->
+  <g font-family="Noto Sans JP, system-ui, sans-serif">
+    <rect x="280" y="660" width="1040" height="180" rx="12" fill="#0d251a" stroke="#4ade80" stroke-width="2.5"/>
+    <text x="800" y="700" font-size="24" fill="#4ade80" text-anchor="middle" font-weight="bold">抜け道 ── GraphRAG + MCPに辿り着く</text>
+
+    <g transform="translate(320, 720)">
+      <text x="0" y="28" font-size="16" fill="#4ade80" font-weight="bold">✓</text>
+      <text x="30" y="28" font-size="16" fill="#cbd5e1">必要なタイミングで、必要なコンテキストだけ供給する</text>
+
+      <text x="0" y="60" font-size="16" fill="#4ade80" font-weight="bold">✓</text>
+      <text x="30" y="60" font-size="16" fill="#cbd5e1">agentic(AI主導)にグラフを辿れる構造を持つ</text>
+
+      <text x="0" y="92" font-size="16" fill="#4ade80" font-weight="bold">✓</text>
+      <text x="30" y="92" font-size="16" fill="#cbd5e1" font-weight="bold">AIに推論をさせるのではなく、事実をコンテキストとして供給する</text>
+    </g>
+  </g>
+
+  <!-- Arrow to code-graph / product-graph -->
+  <line x1="800" y1="840" x2="800" y2="880" stroke="#a78bfa" stroke-width="2" marker-end="url(#a-a78bfa)"/>
+
+  <!-- Result: code-graph → product-graph -->
+  <g font-family="Noto Sans JP, system-ui, sans-serif">
+    <rect x="280" y="885" width="500" height="60" rx="8" fill="#1a1525" stroke="#a78bfa" stroke-width="1.5"/>
+    <text x="530" y="920" font-size="18" fill="#a78bfa" text-anchor="middle" font-weight="bold">最初: code-graph (静的解析ベース)</text>
+
+    <text x="800" y="922" font-size="20" fill="#a78bfa" text-anchor="middle">→</text>
+
+    <rect x="820" y="885" width="500" height="60" rx="8" fill="#1a1525" stroke="#a78bfa" stroke-width="2.5"/>
+    <text x="1070" y="920" font-size="18" fill="#a78bfa" text-anchor="middle" font-weight="bold">現在: product-graph (cpg)</text>
+  </g>
+
+  <!-- Footer -->
+  <text x="800" y="970" font-size="14" fill="#94a3b8" text-anchor="middle" font-family="Noto Sans JP, system-ui, sans-serif">この「推論ではなく事実」の発想が、後のcortex全体の設計思想の核になった</text>
+</svg>

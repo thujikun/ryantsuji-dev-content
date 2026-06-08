@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="980" viewBox="0 0 1600 980">
+  <rect width="1600" height="980" fill="#0f172a"/>
+
+  <defs>
+    <marker id="a-94a3b8" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#94a3b8"/></marker>
+    <marker id="a-4ade80" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#4ade80"/></marker>
+    <marker id="a-fb923c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#fb923c"/></marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="800" y="56" font-size="34" fill="#e2e8f0" text-anchor="middle" font-weight="bold" font-family="Noto Sans JP, system-ui, sans-serif">推論させていい場所 / させてはいけない場所</text>
+  <text x="800" y="92" font-size="20" fill="#94a3b8" text-anchor="middle" font-family="Noto Sans JP, system-ui, sans-serif">ハーネスはこの線引きを実装したもの</text>
+
+  <!-- ============= Panel 1: AI may infer (top, green) ============= -->
+  <g font-family="Noto Sans JP, system-ui, sans-serif">
+    <rect x="60" y="130" width="1480" height="290" rx="14" fill="#0d251a" stroke="#4ade80" stroke-width="2.5"/>
+    <text x="100" y="172" font-size="26" fill="#4ade80" font-weight="bold">AIに推論させていい (= 変動が許容される領域)</text>
+    <text x="100" y="200" font-size="16" fill="#94a3b8">レール上の自由度。ここでAIが思考する余地を奪うとそもそも仕事にならない</text>
+
+    <!-- 3 cards at y=230, each 440w x 160h -->
+    <g transform="translate(0, 230)">
+      <rect x="120" y="0" width="440" height="160" rx="8" fill="#0a1820" stroke="#4ade80" stroke-width="1.5"/>
+      <text x="340" y="38" font-size="20" fill="#4ade80" text-anchor="middle" font-weight="bold">コード生成</text>
+      <text x="340" y="76" font-size="14" fill="#cbd5e1" text-anchor="middle">要件 → 実装の翻訳。</text>
+      <text x="340" y="98" font-size="14" fill="#cbd5e1" text-anchor="middle">どう書くかはAIに任せる。</text>
+      <text x="340" y="130" font-size="13" fill="#94a3b8" text-anchor="middle">(Claude Code, Auto-Review</text>
+      <text x="340" y="148" font-size="13" fill="#94a3b8" text-anchor="middle">の修正パッチ生成 など)</text>
+
+      <rect x="580" y="0" width="440" height="160" rx="8" fill="#0a1820" stroke="#4ade80" stroke-width="1.5"/>
+      <text x="800" y="38" font-size="20" fill="#4ade80" text-anchor="middle" font-weight="bold">レビュー指摘の判断</text>
+      <text x="800" y="76" font-size="14" fill="#cbd5e1" text-anchor="middle">固定された観点ごとに、</text>
+      <text x="800" y="98" font-size="14" fill="#cbd5e1" text-anchor="middle">問題があるかをAIが判定する。</text>
+      <text x="800" y="130" font-size="13" fill="#94a3b8" text-anchor="middle">(severity / responsibility</text>
+      <text x="800" y="148" font-size="13" fill="#94a3b8" text-anchor="middle">の中での評価 など)</text>
+
+      <rect x="1040" y="0" width="440" height="160" rx="8" fill="#0a1820" stroke="#4ade80" stroke-width="1.5"/>
+      <text x="1260" y="38" font-size="20" fill="#4ade80" text-anchor="middle" font-weight="bold">エラーログからの原因推定</text>
+      <text x="1260" y="76" font-size="14" fill="#cbd5e1" text-anchor="middle">障害時にスタックとログから</text>
+      <text x="1260" y="98" font-size="14" fill="#cbd5e1" text-anchor="middle">原因仮説を立てる。</text>
+      <text x="1260" y="130" font-size="13" fill="#94a3b8" text-anchor="middle">(Self-Healing の調査フェーズ</text>
+      <text x="1260" y="148" font-size="13" fill="#94a3b8" text-anchor="middle"> など)</text>
+    </g>
+  </g>
+
+  <!-- Boundary line + label -->
+  <line x1="60" y1="445" x2="1540" y2="445" stroke="#fb923c" stroke-width="2" stroke-dasharray="8,4"/>
+  <text x="800" y="475" font-size="18" fill="#fb923c" text-anchor="middle" font-weight="bold" font-family="Noto Sans JP, system-ui, sans-serif">↑ レール上は自由 / ↓ レールそのものは決定論で固定 ── ハーネスが引いた境界線</text>
+
+  <!-- ============= Panel 2: AI must NOT infer (bottom, orange) ============= -->
+  <g font-family="Noto Sans JP, system-ui, sans-serif">
+    <rect x="60" y="500" width="1480" height="430" rx="14" fill="#251a0d" stroke="#fb923c" stroke-width="2.5"/>
+    <text x="100" y="542" font-size="26" fill="#fb923c" font-weight="bold">AIに推論させない (= 決定論に寄せる領域)</text>
+    <text x="100" y="570" font-size="16" fill="#94a3b8">変動を許してはいけない場所。ハーネス側で事実として確定させる</text>
+
+    <!-- 4 cards in 2x2 grid -->
+    <g transform="translate(0, 600)">
+      <!-- Row 1 -->
+      <rect x="120" y="0" width="680" height="140" rx="8" fill="#1a0d05" stroke="#fb923c" stroke-width="1.5"/>
+      <text x="150" y="34" font-size="20" fill="#fb923c" font-weight="bold">どのコードベースを見るか</text>
+      <text x="150" y="68" font-size="14" fill="#cbd5e1">AIにgrep + 推論で関連箇所を探させない。</text>
+      <text x="150" y="92" font-size="14" fill="#cbd5e1">ナレッジグラフから事実として確定的に取り出す。</text>
+      <text x="150" y="120" font-size="13" fill="#94a3b8">→ Part 2 (Product Graph / cpg)</text>
+
+      <rect x="820" y="0" width="660" height="140" rx="8" fill="#1a0d05" stroke="#fb923c" stroke-width="1.5"/>
+      <text x="850" y="34" font-size="20" fill="#fb923c" font-weight="bold">何の観点でレビューするか</text>
+      <text x="850" y="68" font-size="14" fill="#cbd5e1">「重要そうな観点」をAIに選ばせない。</text>
+      <text x="850" y="92" font-size="14" fill="#cbd5e1">観点リストを事前に固定し、各観点を独立に評価。</text>
+      <text x="850" y="120" font-size="13" fill="#94a3b8">→ Part 3 (Auto Review 9観点)</text>
+
+      <!-- Row 2 -->
+      <rect x="120" y="160" width="680" height="140" rx="8" fill="#1a0d05" stroke="#fb923c" stroke-width="1.5"/>
+      <text x="150" y="194" font-size="20" fill="#fb923c" font-weight="bold">障害対応のフロー</text>
+      <text x="150" y="228" font-size="14" fill="#cbd5e1">「どう対応するか」を毎回AIに考えさせない。</text>
+      <text x="150" y="252" font-size="14" fill="#cbd5e1">アラート → 調査 → 修正PR → 再デプロイの経路を固定。</text>
+      <text x="150" y="280" font-size="13" fill="#94a3b8">→ Part 4 (Self-Healing)</text>
+
+      <rect x="820" y="160" width="660" height="140" rx="8" fill="#1a0d05" stroke="#fb923c" stroke-width="1.5"/>
+      <text x="850" y="194" font-size="20" fill="#fb923c" font-weight="bold">同じ罠を二度踏まないこと</text>
+      <text x="850" y="228" font-size="14" fill="#cbd5e1">「気をつけよう」とAIに思わせない。</text>
+      <text x="850" y="252" font-size="14" fill="#cbd5e1">lint / CI gate を追加して機械的に拒否する。</text>
+      <text x="850" y="280" font-size="13" fill="#94a3b8">→ Part 4 (Recurrence Prevention)</text>
+    </g>
+  </g>
+
+  <!-- Footer -->
+  <text x="800" y="965" font-size="14" fill="#94a3b8" text-anchor="middle" font-family="Noto Sans JP, system-ui, sans-serif">ハーネス = この線引きを実装したもの。レール (下半分) は決定論で引かれ、レールの上 (上半分) ではAIが自由に推論する。</text>
+</svg>
