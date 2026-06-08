@@ -38,7 +38,7 @@ This post is about **the automated PR review pipeline** -- AI reviews the PR, a 
 | 2 | Product Graph (cpg) | Code / docs / DB / infra unified into one graph | [cortex-product-graph](/posts/cortex-product-graph) |
 | 3 | Auto PR review | webhook -> AI review -> auto-fix -> squash merge | This article ← you are here |
 | 4 | Self-Healing + observability + auto-added guardrails | Alert -> AI investigates -> fix PR + new lint/type gate -> auto redeploy + same-pattern writes get auto-rejected | [cortex-self-healing](/posts/cortex-self-healing) |
-| 5 | Scaling the harness from cortex to toC services | Non-engineer contributions in practice + scaling cortex's harness to the whole product org | Coming soon |
+| 5 | Democratizing the maintenance phase | Domain experts open PRs to production; the harness owns the quality gate | [cortex-non-engineer-prs](/posts/cortex-non-engineer-prs) |
 | 6 | Series wrap-up | The underlying philosophy (what was given up, what was kept, why this design) plus a retrospective on the failures and lessons | Coming soon |
 
 ## Start with last month's numbers
