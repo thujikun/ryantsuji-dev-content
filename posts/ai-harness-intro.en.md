@@ -32,7 +32,7 @@ All of those run on top of an internal AI development platform we call **cortex*
 |---|---|---|---|
 | 1 | Series intro: cortex's harness | PRs auto-merge / incidents self-heal before you notice | this post ← you are here |
 | 2 | Product Graph (cpg) | Code, docs, DB, infra unified into one graph | [cortex-product-graph](/posts/cortex-product-graph) |
-| 3 | AI PR review | webhook → AI review → auto-fix → squash merge | coming |
+| 3 | AI PR review | webhook → AI review → auto-fix → squash merge | [cortex-auto-review](/posts/cortex-auto-review) |
 | 4 | Self-Healing + observability + auto-added guardrails | Alert → AI investigates → fix PR + new lint/type gate → auto redeploy + same-pattern writes get auto-rejected | [cortex-self-healing](/posts/cortex-self-healing) |
 | 5 | Democratizing the maintenance phase | Domain experts open PRs to production; the harness owns the quality gate | [cortex-non-engineer-prs](/posts/cortex-non-engineer-prs) |
 | 6 | Series wrap-up | The underlying philosophy (what was given up, what was kept, why this design) plus a retrospective on the failures and lessons | coming |

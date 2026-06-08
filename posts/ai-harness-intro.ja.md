@@ -35,7 +35,7 @@ cover: /images/posts/ai-harness-intro.ja.cover.png
 |---|---|---|---|
 | 1 | 総論：cortexのハーネス | PRが無人マージ / 障害が気づく前に治っている | 本記事 ←現在地 |
 | 2 | Product Graph (cpg) | コード・ドキュメント・DB・インフラを1グラフに統合 | [cortex-product-graph](/posts/cortex-product-graph) |
-| 3 | AI PRレビュー | webhook → AIレビュー → 自動修正 → squash merge | 準備中 |
+| 3 | AI PRレビュー | webhook → AIレビュー → 自動修正 → squash merge | [cortex-auto-review](/posts/cortex-auto-review) |
 | 4 | Self-Healing + Observability + 自動lint追加 | アラート → AI調査 → 修正PR + 新規lint/型gate → 自動再デプロイで同じ書き方を機械的に弾く | [cortex-self-healing](/posts/cortex-self-healing) |
 | 5 | 改修フェーズの民主化 | 業務要件を把握している人が本番に直接PR、ハーネスが品質を担保 | [cortex-non-engineer-prs](/posts/cortex-non-engineer-prs) |
 | 6 | 連載総括 | 根底にある思想（何を捨てて何を取ったか / なぜこの設計か）を中心に、失敗と学びも振り返る | 準備中 |
