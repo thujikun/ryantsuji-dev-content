@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="980" viewBox="0 0 1600 980">
+  <rect width="1600" height="980" fill="#0f172a"/>
+
+  <defs>
+    <marker id="a-94a3b8" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#94a3b8"/></marker>
+    <marker id="a-4ade80" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#4ade80"/></marker>
+    <marker id="a-fb923c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#fb923c"/></marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="800" y="56" font-size="34" fill="#e2e8f0" text-anchor="middle" font-weight="bold" font-family="Inter, Noto Sans, system-ui, sans-serif">Where AI may infer / Where it must not</text>
+  <text x="800" y="92" font-size="20" fill="#94a3b8" text-anchor="middle" font-family="Inter, Noto Sans, system-ui, sans-serif">The harness implements this boundary</text>
+
+  <!-- ============= Panel 1: AI may infer (top, green) ============= -->
+  <g font-family="Inter, Noto Sans, system-ui, sans-serif">
+    <rect x="60" y="130" width="1480" height="290" rx="14" fill="#0d251a" stroke="#4ade80" stroke-width="2.5"/>
+    <text x="100" y="172" font-size="26" fill="#4ade80" font-weight="bold">Where AI may infer (= variance is allowed)</text>
+    <text x="100" y="200" font-size="16" fill="#94a3b8">Freedom on the rails. Strip AI of room to think here and there&#8217;s no work to do</text>
+
+    <!-- 3 cards at y=230, each 440w x 160h -->
+    <g transform="translate(0, 230)">
+      <rect x="120" y="0" width="440" height="160" rx="8" fill="#0a1820" stroke="#4ade80" stroke-width="1.5"/>
+      <text x="340" y="38" font-size="20" fill="#4ade80" text-anchor="middle" font-weight="bold">Code generation</text>
+      <text x="340" y="76" font-size="14" fill="#cbd5e1" text-anchor="middle">Requirement &#8594; implementation.</text>
+      <text x="340" y="98" font-size="14" fill="#cbd5e1" text-anchor="middle">AI decides how to write it.</text>
+      <text x="340" y="130" font-size="13" fill="#94a3b8" text-anchor="middle">(Claude Code, Auto-Review</text>
+      <text x="340" y="148" font-size="13" fill="#94a3b8" text-anchor="middle">fix patches, etc.)</text>
+
+      <rect x="580" y="0" width="440" height="160" rx="8" fill="#0a1820" stroke="#4ade80" stroke-width="1.5"/>
+      <text x="800" y="38" font-size="20" fill="#4ade80" text-anchor="middle" font-weight="bold">Judging review findings</text>
+      <text x="800" y="76" font-size="14" fill="#cbd5e1" text-anchor="middle">Per fixed dimension,</text>
+      <text x="800" y="98" font-size="14" fill="#cbd5e1" text-anchor="middle">AI judges whether there is an issue.</text>
+      <text x="800" y="130" font-size="13" fill="#94a3b8" text-anchor="middle">(evaluation within severity /</text>
+      <text x="800" y="148" font-size="13" fill="#94a3b8" text-anchor="middle">responsibility, etc.)</text>
+
+      <rect x="1040" y="0" width="440" height="160" rx="8" fill="#0a1820" stroke="#4ade80" stroke-width="1.5"/>
+      <text x="1260" y="38" font-size="20" fill="#4ade80" text-anchor="middle" font-weight="bold">Root-cause hypothesis from logs</text>
+      <text x="1260" y="76" font-size="14" fill="#cbd5e1" text-anchor="middle">Hypothesizes the root cause</text>
+      <text x="1260" y="98" font-size="14" fill="#cbd5e1" text-anchor="middle">from stack traces and logs.</text>
+      <text x="1260" y="130" font-size="13" fill="#94a3b8" text-anchor="middle">(Self-Healing investigation</text>
+      <text x="1260" y="148" font-size="13" fill="#94a3b8" text-anchor="middle">phase, etc.)</text>
+    </g>
+  </g>
+
+  <!-- Boundary line + label -->
+  <line x1="60" y1="445" x2="1540" y2="445" stroke="#fb923c" stroke-width="2" stroke-dasharray="8,4"/>
+  <text x="800" y="475" font-size="18" fill="#fb923c" text-anchor="middle" font-weight="bold" font-family="Inter, Noto Sans, system-ui, sans-serif">&#8593; Free on top of the rails / &#8595; The rails themselves are deterministic &#8212; the boundary the harness draws</text>
+
+  <!-- ============= Panel 2: AI must NOT infer (bottom, orange) ============= -->
+  <g font-family="Inter, Noto Sans, system-ui, sans-serif">
+    <rect x="60" y="500" width="1480" height="430" rx="14" fill="#251a0d" stroke="#fb923c" stroke-width="2.5"/>
+    <text x="100" y="542" font-size="26" fill="#fb923c" font-weight="bold">Where AI must not infer (= lean on determinism)</text>
+    <text x="100" y="570" font-size="16" fill="#94a3b8">Where variance is not allowed. The harness pins these down as facts</text>
+
+    <!-- 4 cards in 2x2 grid -->
+    <g transform="translate(0, 600)">
+      <!-- Row 1 -->
+      <rect x="120" y="0" width="680" height="140" rx="8" fill="#1a0d05" stroke="#fb923c" stroke-width="1.5"/>
+      <text x="150" y="34" font-size="20" fill="#fb923c" font-weight="bold">Which part of the codebase to look at</text>
+      <text x="150" y="68" font-size="14" fill="#cbd5e1">Don&#8217;t have AI grep + infer to find related parts.</text>
+      <text x="150" y="92" font-size="14" fill="#cbd5e1">Pull it deterministically from the knowledge graph as fact.</text>
+      <text x="150" y="120" font-size="13" fill="#94a3b8">&#8594; Part 2 (Product Graph / cpg)</text>
+
+      <rect x="820" y="0" width="660" height="140" rx="8" fill="#1a0d05" stroke="#fb923c" stroke-width="1.5"/>
+      <text x="850" y="34" font-size="20" fill="#fb923c" font-weight="bold">Which review dimensions to apply</text>
+      <text x="850" y="68" font-size="14" fill="#cbd5e1">Don&#8217;t let AI pick &#8220;the important-looking dimensions&#8221;.</text>
+      <text x="850" y="92" font-size="14" fill="#cbd5e1">Lock the dimension list in advance; judge each independently.</text>
+      <text x="850" y="120" font-size="13" fill="#94a3b8">&#8594; Part 3 (Auto Review&#8217;s 9 dimensions)</text>
+
+      <!-- Row 2 -->
+      <rect x="120" y="160" width="680" height="140" rx="8" fill="#1a0d05" stroke="#fb923c" stroke-width="1.5"/>
+      <text x="150" y="194" font-size="20" fill="#fb923c" font-weight="bold">How to respond to incidents</text>
+      <text x="150" y="228" font-size="14" fill="#cbd5e1">Don&#8217;t make AI think through &#8220;how to respond&#8221; each time.</text>
+      <text x="150" y="252" font-size="14" fill="#cbd5e1">Fix the alert &#8594; investigate &#8594; fix PR &#8594; redeploy path.</text>
+      <text x="150" y="280" font-size="13" fill="#94a3b8">&#8594; Part 4 (Self-Healing)</text>
+
+      <rect x="820" y="160" width="660" height="140" rx="8" fill="#1a0d05" stroke="#fb923c" stroke-width="1.5"/>
+      <text x="850" y="194" font-size="20" fill="#fb923c" font-weight="bold">Not stepping on the same trap twice</text>
+      <text x="850" y="228" font-size="14" fill="#cbd5e1">Don&#8217;t ask AI to &#8220;try to be careful&#8221;.</text>
+      <text x="850" y="252" font-size="14" fill="#cbd5e1">Add lint / CI gates and refuse mechanically.</text>
+      <text x="850" y="280" font-size="13" fill="#94a3b8">&#8594; Part 4 (Recurrence Prevention)</text>
+    </g>
+  </g>
+
+  <!-- Footer -->
+  <text x="800" y="965" font-size="14" fill="#94a3b8" text-anchor="middle" font-family="Inter, Noto Sans, system-ui, sans-serif">The harness implements this boundary. The rails (bottom) are deterministic; on top of the rails (top), AI infers freely.</text>
+</svg>

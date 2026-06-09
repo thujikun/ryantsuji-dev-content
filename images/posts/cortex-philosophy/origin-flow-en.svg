@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="980" viewBox="0 0 1600 980">
+  <rect width="1600" height="980" fill="#0f172a"/>
+
+  <defs>
+    <marker id="a-94a3b8" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#94a3b8"/></marker>
+    <marker id="a-f87171" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#f87171"/></marker>
+    <marker id="a-4ade80" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#4ade80"/></marker>
+    <marker id="a-a78bfa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#a78bfa"/></marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="800" y="56" font-size="34" fill="#e2e8f0" text-anchor="middle" font-weight="bold" font-family="Inter, Noto Sans, system-ui, sans-serif">2025 &#8212; The Thinking That Led to cortex</text>
+  <text x="800" y="92" font-size="20" fill="#94a3b8" text-anchor="middle" font-family="Inter, Noto Sans, system-ui, sans-serif">Neither growing the context window nor relying on learning had a future; GraphRAG + MCP became the way through</text>
+
+  <!-- Starting question -->
+  <g font-family="Inter, Noto Sans, system-ui, sans-serif">
+    <rect x="450" y="120" width="700" height="80" rx="10" fill="#1e293b" stroke="#94a3b8" stroke-width="2"/>
+    <text x="800" y="152" font-size="20" fill="#e2e8f0" text-anchor="middle" font-weight="bold">Starting question</text>
+    <text x="800" y="180" font-size="16" fill="#cbd5e1" text-anchor="middle">How do I get AI to understand the system accurately?</text>
+  </g>
+
+  <!-- Down arrow to two walls -->
+  <line x1="800" y1="200" x2="800" y2="230" stroke="#94a3b8" stroke-width="2" marker-end="url(#a-94a3b8)"/>
+  <line x1="800" y1="230" x2="420" y2="230" stroke="#94a3b8" stroke-width="2"/>
+  <line x1="800" y1="230" x2="1180" y2="230" stroke="#94a3b8" stroke-width="2"/>
+  <line x1="420" y1="230" x2="420" y2="260" stroke="#94a3b8" stroke-width="2" marker-end="url(#a-94a3b8)"/>
+  <line x1="1180" y1="230" x2="1180" y2="260" stroke="#94a3b8" stroke-width="2" marker-end="url(#a-94a3b8)"/>
+
+  <!-- ============= Wall 1: Context Window (left) ============= -->
+  <g font-family="Inter, Noto Sans, system-ui, sans-serif">
+    <rect x="80" y="270" width="680" height="270" rx="12" fill="#1e0a0a" stroke="#f87171" stroke-width="2"/>
+    <text x="420" y="310" font-size="22" fill="#f87171" text-anchor="middle" font-weight="bold">Wall 1: Grow the context window</text>
+
+    <g transform="translate(120, 340)">
+      <text x="0" y="20" font-size="16" fill="#f87171" font-weight="bold">&#10007;</text>
+      <text x="30" y="20" font-size="15" fill="#cbd5e1">Size limit &#8212; codebase + docs + DB + infra don&#8217;t fit</text>
+
+      <text x="0" y="56" font-size="16" fill="#f87171" font-weight="bold">&#10007;</text>
+      <text x="30" y="56" font-size="15" fill="#cbd5e1">lost in the middle &#8212; middle of long inputs gets dropped</text>
+
+      <text x="0" y="92" font-size="16" fill="#f87171" font-weight="bold">&#10007;</text>
+      <text x="30" y="92" font-size="15" fill="#cbd5e1">Attention dilution &#8212; more unrelated tokens drops</text>
+      <text x="30" y="112" font-size="15" fill="#cbd5e1">    the attention ratio toward relevant tokens</text>
+
+      <text x="0" y="148" font-size="16" fill="#f87171" font-weight="bold">&#10007;</text>
+      <text x="30" y="148" font-size="15" fill="#cbd5e1">LLMs are silently wrong &#8212; they don&#8217;t notice they</text>
+      <text x="30" y="168" font-size="15" fill="#cbd5e1">    don&#8217;t know, and answer with confidence anyway</text>
+    </g>
+  </g>
+
+  <!-- ============= Wall 2: Learning (right) ============= -->
+  <g font-family="Inter, Noto Sans, system-ui, sans-serif">
+    <rect x="840" y="270" width="680" height="270" rx="12" fill="#1e0a0a" stroke="#f87171" stroke-width="2"/>
+    <text x="1180" y="310" font-size="22" fill="#f87171" text-anchor="middle" font-weight="bold">Wall 2: Make the LLM itself learn</text>
+
+    <g transform="translate(880, 340)">
+      <text x="0" y="20" font-size="16" fill="#f87171" font-weight="bold">&#10007;</text>
+      <text x="30" y="20" font-size="15" fill="#cbd5e1">Not ready for production &#8212; high latency to deployment</text>
+
+      <text x="0" y="56" font-size="16" fill="#f87171" font-weight="bold">&#10007;</text>
+      <text x="30" y="56" font-size="15" fill="#cbd5e1">machine unlearning is unsolved</text>
+      <text x="30" y="76" font-size="15" fill="#cbd5e1">    &#8212; can&#8217;t pinpoint-delete specific knowledge</text>
+
+      <text x="0" y="112" font-size="16" fill="#f87171" font-weight="bold">&#10007;</text>
+      <text x="30" y="112" font-size="15" fill="#cbd5e1">destructive interference</text>
+      <text x="30" y="132" font-size="15" fill="#cbd5e1">    &#8212; new learning destroys unrelated old knowledge</text>
+
+      <text x="0" y="168" font-size="16" fill="#f87171" font-weight="bold">&#10007;</text>
+      <text x="30" y="168" font-size="15" fill="#cbd5e1">Consistency cost explodes &#8212; endless debt erasing old truths</text>
+    </g>
+  </g>
+
+  <!-- Both walls converge with "No future visible" -->
+  <text x="420" y="565" font-size="16" fill="#f87171" text-anchor="middle" font-style="italic" font-family="Inter, Noto Sans, system-ui, sans-serif">No future visible</text>
+  <text x="1180" y="565" font-size="16" fill="#f87171" text-anchor="middle" font-style="italic" font-family="Inter, Noto Sans, system-ui, sans-serif">No future visible</text>
+
+  <!-- Down arrows converging -->
+  <line x1="420" y1="580" x2="420" y2="610" stroke="#94a3b8" stroke-width="2"/>
+  <line x1="1180" y1="580" x2="1180" y2="610" stroke="#94a3b8" stroke-width="2"/>
+  <line x1="420" y1="610" x2="1180" y2="610" stroke="#94a3b8" stroke-width="2"/>
+  <line x1="800" y1="610" x2="800" y2="650" stroke="#94a3b8" stroke-width="2" marker-end="url(#a-94a3b8)"/>
+
+  <!-- ============= Escape: GraphRAG + MCP ============= -->
+  <g font-family="Inter, Noto Sans, system-ui, sans-serif">
+    <rect x="280" y="660" width="1040" height="180" rx="12" fill="#0d251a" stroke="#4ade80" stroke-width="2.5"/>
+    <text x="800" y="700" font-size="24" fill="#4ade80" text-anchor="middle" font-weight="bold">The way out &#8212; GraphRAG + MCP</text>
+
+    <g transform="translate(320, 720)">
+      <text x="0" y="28" font-size="16" fill="#4ade80" font-weight="bold">&#10003;</text>
+      <text x="30" y="28" font-size="16" fill="#cbd5e1">Supply only the context that&#8217;s needed, when it&#8217;s needed</text>
+
+      <text x="0" y="60" font-size="16" fill="#4ade80" font-weight="bold">&#10003;</text>
+      <text x="30" y="60" font-size="16" fill="#cbd5e1">Structure traversable agentically (AI-led)</text>
+
+      <text x="0" y="92" font-size="16" fill="#4ade80" font-weight="bold">&#10003;</text>
+      <text x="30" y="92" font-size="16" fill="#cbd5e1" font-weight="bold">Instead of making AI infer, supply facts as context</text>
+    </g>
+  </g>
+
+  <!-- Arrow to code-graph / product-graph -->
+  <line x1="800" y1="840" x2="800" y2="880" stroke="#a78bfa" stroke-width="2" marker-end="url(#a-a78bfa)"/>
+
+  <!-- Result: code-graph → product-graph -->
+  <g font-family="Inter, Noto Sans, system-ui, sans-serif">
+    <rect x="280" y="885" width="500" height="60" rx="8" fill="#1a1525" stroke="#a78bfa" stroke-width="1.5"/>
+    <text x="530" y="920" font-size="18" fill="#a78bfa" text-anchor="middle" font-weight="bold">First: code-graph (static analysis)</text>
+
+    <text x="800" y="922" font-size="20" fill="#a78bfa" text-anchor="middle">&#8594;</text>
+
+    <rect x="820" y="885" width="500" height="60" rx="8" fill="#1a1525" stroke="#a78bfa" stroke-width="2.5"/>
+    <text x="1070" y="920" font-size="18" fill="#a78bfa" text-anchor="middle" font-weight="bold">Now: product-graph (cpg)</text>
+  </g>
+
+  <!-- Footer -->
+  <text x="800" y="970" font-size="14" fill="#94a3b8" text-anchor="middle" font-family="Inter, Noto Sans, system-ui, sans-serif">This &#8220;facts, not inference&#8221; framing became the core of cortex&#8217;s whole design philosophy</text>
+</svg>
