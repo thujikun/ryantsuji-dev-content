@@ -114,11 +114,11 @@ The mechanism for confining it is the harness this series has been describing.
 
 ## So I Build Harnesses to Hold AI to Determinism
 
-Reading each mechanism through the lens of "**don't make AI infer; lean on determinism**" surfaces that the five posts in this series are all the same conviction showing up in different layers.
+Reading each mechanism through the lens of "don't make AI infer; lean on determinism" surfaces that the five posts in this series are all the same conviction showing up in different layers.
 
-**Part 2 — Knowledge Graph**: Instead of making AI search the codebase, this mechanism tilts toward **making the codebase legible**. With `@graph-*` annotations, code / docs / DB / infra are unified into one graph, so AI doesn't have to grep + infer to find related parts. This is the direct implementation of "supply facts as context" from the origin section. → [cortex-product-graph](/posts/cortex-product-graph)
+**Part 2 — Knowledge Graph**: Instead of making AI search the codebase, this mechanism tilts toward making the codebase legible. With `@graph-*` annotations, code / docs / DB / infra are unified into one graph, so AI doesn't have to grep + infer to find related parts. This is the direct implementation of "supply facts as context" from the origin section. → [cortex-product-graph](/posts/cortex-product-graph)
 
-**Part 3 — Auto Review Dimensions**: Nine review dimensions (responsibility / severity / type SSoT / etc.) are fixed in advance. When AI does the review, **what to check** isn't something it gets to infer. "Looking at the PR as a whole" gives AI too much room for inference, so dimensions are split and each is judged independently. **Dimensions = locked by the harness, evaluation = AI's job.** → [cortex-auto-review](/posts/cortex-auto-review)
+**Part 3 — Auto Review Dimensions**: Nine review dimensions (responsibility / severity / type SSoT / etc.) are fixed in advance. When AI does the review, what to check isn't something it gets to infer. "Looking at the PR as a whole" gives AI too much room for inference, so dimensions are split and each is judged independently. **Dimensions = locked by the harness, evaluation = AI's job.** → [cortex-auto-review](/posts/cortex-auto-review)
 
 **Part 4 — Self-Healing + Recurrence Prevention**: Alert → investigation → fix PR → redeploy. The flow itself is fixed. AI doesn't get to think through "how should we respond to incidents" each time. And Recurrence Prevention — adding lint / CI gates so the same trap can't be stepped on twice — is **mechanical refusal at the gate, not trust-AI-not-to-do-it-again**. Or put differently: I don't expect AI never to repeat a mistake. → [cortex-self-healing](/posts/cortex-self-healing)
 
@@ -139,17 +139,17 @@ Where I want to lean on determinism is in domains where **variance isn't allowed
 - **How to respond to incidents** — don't make AI think through the workflow each time; fix the alert → fix PR path
 - **Not stepping on the same trap twice** — don't ask AI to "try to be careful"; let lint / CI mechanically refuse it
 
-What implements this line — "**where inference is allowed vs. where it isn't**" — is the harness. To borrow the metaphor from Part 5, the harness lays down **rails you can't fall off**. On top of the rails, AI runs free (inference works as inference); but it can't fall off the rails sideways.
+What implements this line — where inference is allowed vs. where it isn't — is the harness. To borrow the metaphor from Part 5, the harness lays down **rails you can't fall off**. On top of the rails, AI runs free (inference works as inference); but it can't fall off the rails sideways.
 
-Put differently, this is equivalent to the framing in [Part 2 (cortex-product-graph)](/posts/cortex-product-graph): "**where hallucination gets confined**." Saying "no inference allowed" is strictly speaking off — the harness isn't a thing that makes hallucination go to zero. It's a thing that confines hallucination to **places where it's OK for hallucination to happen (i.e., the inference-allowed zone)**. The structure and facts about the codebase are pulled deterministically, so hallucination has no opening there; hallucinations on the judgment side get filtered downstream by tests / lint / dimension-by-dimension reviews. The places where hallucination is allowed and the places where it isn't are **physically split by the harness**. That's the continuation of the Part 2 framing.
+Put differently, this is equivalent to the framing in [Part 2 (cortex-product-graph)](/posts/cortex-product-graph): "where hallucination gets confined." Saying "no inference allowed" isn't quite right — the harness isn't a thing that makes hallucination go to zero. It's a thing that confines hallucination to places where hallucination is OK (i.e., the inference-allowed zone). The structure and facts about the codebase are pulled deterministically, so hallucination has no opening there; hallucinations on the judgment side get filtered downstream by tests / lint / dimension-by-dimension reviews. The places where hallucination is allowed and the places where it isn't are **physically split by the harness**. That's the continuation of the Part 2 framing.
 
 ![Inference-allowed zone (top, green) and inference-forbidden zone (bottom, orange). The harness implements this boundary — i.e., decides where hallucination gets confined.](/images/posts/cortex-philosophy/decision-boundary-en.png)
 
 This is also the underlying basis for [Part 1 (Series Intro)](/posts/ai-harness-intro)'s claim "models commoditize; harnesses differentiate." Model-side quality is converging across Claude / GPT / Gemini, but the harness is **codebase-specific and business-specific**, so this is where org-level differentiation actually comes from.
 
-A note: this framing — **deliver appropriate context deterministically; don't make AI infer** — isn't confined to cortex's harness. The same stance shapes [db-graph MCP](/posts/db-graph-mcp), the natural-language interface over internal DB schemas, and [Sandbox MCP](/posts/sandbox-mcp), which lets non-engineers safely publish AI-built apps. **It's the through-line in any platform we build that's based on AI doing meaningful work.**
+A note: this framing isn't confined to cortex's harness. The same stance shapes [db-graph MCP](/posts/db-graph-mcp), the natural-language interface over internal DB schemas, and [Sandbox MCP](/posts/sandbox-mcp), which lets non-engineers safely publish AI-built apps. **It's the through-line in any platform we build that's based on AI doing meaningful work.**
 
-One level more abstract: **the individual features aren't where the value is.** The value is in the conviction "deliver appropriate context deterministically; don't make AI infer." cortex / db-graph / Sandbox MCP are all that one conviction translated into our own use cases.
+One level more abstract: **the individual features aren't where the value is.** The value sits in the conviction itself. cortex / db-graph / Sandbox MCP are all that one conviction translated into our own use cases.
 
 The way I think about "design":
 
@@ -257,7 +257,7 @@ One direction is **value creation from problem identification and business desig
 
 The other direction is **building the foundation that lets all of that happen safely and quickly**. Non-engineers can open PRs to the production repo only because the harness underneath holds quality — knowledge graph, Auto Review, Self-Healing, Recurrence Prevention, lint, CI, tests, observability stack, all interlocked. Designing / maintaining / evolving that gets *harder*, not easier. As the **house-builder side, rail-layer side**, this demands deep infra understanding / security instinct / observability design / a feel for AI's architectural quirks.
 
-I'm building cortex, so I'm spending more time on the latter; building "a foundation where the business can run its own changes" is honest fun for me. **That said, I'm not the type who fully commits to one side** — I move between listening to business questions and assembling the foundation, and the satisfaction from each is its own thing. This isn't a "which is more important?" question — the harness exists precisely so the former is possible, and the former being alive is what gives the latter meaning. They're mutually dependent.
+I'm building cortex, so I'm spending more time on the latter; building "a foundation where the business can run its own changes" is genuinely fun for me. **That said, I'm not the type who fully commits to one side** — I move between listening to business questions and assembling the foundation, and the satisfaction from each is its own kind. This isn't a "which is more important?" question — the harness exists precisely so the former is possible, and the former being alive is what gives the latter meaning. They're mutually dependent.
 
 Maybe the era of polishing **just** "coding ability" is shifting slightly. Where to put your value — or whether to move between both directions — becomes a question more engineers will need to choose into intentionally.
 
