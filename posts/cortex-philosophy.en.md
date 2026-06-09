@@ -15,6 +15,7 @@ seriesOrder: 6
 syndication:
   devto:
     publishAt: "2026-06-16T08:30:00+09:00"
+cover: /images/posts/cortex-philosophy.en.cover.png
 ---
 
 
