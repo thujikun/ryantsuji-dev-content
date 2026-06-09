@@ -95,7 +95,7 @@ The first thing I built was a static-analysis-based **code-graph**, which I then
 
 The origin section in one line:
 
-> **I don't trust AI.**
+> **I don't trust AI to fill in the blanks for me.**
 
 "Don't trust" here is not the same as "have no faith in." This isn't doubting Claude / GPT / Gemini's generation quality. What I mean is:
 
@@ -106,7 +106,7 @@ The first one is a truth no amount of model progress will change. Architecturall
 
 The second one is about responsibility, and humans owning it. AI can't decide on its own what "ideal" means. When it tries, it lands on a generic best-practice answer slightly off from the actual situation. Ideal depends on the business, the organization, the moment in time — none of which is visible to AI unless a human verbalizes it and hands it over.
 
-So "I don't trust AI" is **not underestimating its capability; it's a design decision to not let AI auto-complete the prerequisites**.
+So that conviction is **not underestimating AI's capability; it's a design decision to not let AI auto-complete the prerequisites**.
 
 > **Mastering AI is not about giving it freedom — it's about confining its output to a predictable range.**
 
