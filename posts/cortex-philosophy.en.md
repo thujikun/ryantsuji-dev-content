@@ -14,6 +14,9 @@ series: "building-ai-harness"
 seriesOrder: 6
 syndication:
   devto:
+    id: 3853525
+    slug: "i-built-an-ai-harness-because-i-want-to-trust-ai-series-final-5dae-temp-slug-6834417"
+    contentHash: "275d4c9d47be525d"
     publishAt: "2026-06-16T08:30:00+09:00"
 cover: /images/posts/cortex-philosophy.en.cover.png
 ---
