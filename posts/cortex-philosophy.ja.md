@@ -1,5 +1,5 @@
 ---
-title: "AIを信用しないからこそハーネスを整える ── 連載総括（連載Part 6）"
+title: "AIを信用していないからこそハーネスを整える ── 連載総括（連載Part 6）"
 publishedAt: "2026-06-16T08:30:00+09:00"
 updatedAt: "2026-06-16T08:30:00+09:00"
 slug: "cortex-philosophy"
