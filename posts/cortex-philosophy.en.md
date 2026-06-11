@@ -213,7 +213,7 @@ Third: an internal-structure call about Auto Review. **Distribute the 9 dimensio
 What actually happened: **time, cost, and accuracy all got worse**.
 
 - **Time got worse**: each sub-agent has its own startup, its own context load, its own result aggregation overhead. "9-way parallel = 9x faster" didn't hold; there were even cases where sequential evaluation in one session ended up faster
-- **Cost got worse**: each sub-agent loads PR diff + guidelines + related code independently — common context loads ran 9 times. Token consumption measured at **9x → just under 4x** (the context other than diff is shared across many dimensions, which is what kept it from blowing up to a full 9x)
+- **Cost got worse**: each sub-agent loads PR diff + guidelines + related code independently — common context loads ran 9 times. Token consumption measured at **just under 4x — not the naive 9x** (the context other than diff is shared across many dimensions, which is what kept it from blowing up to a full 9x)
 - **Accuracy didn't hold**: parallel sub-agents don't see each other's verdicts, so the same problem comes back as "APPROVE" from one and "REQUEST_CHANGES" from another. Duplicate findings show up too. Without a "what kind of PR is this as a whole?" pass to anchor on, dimensional findings drift toward local optima and the overall picture gets worse
 
 Switching to sequential evaluation: same session goes through 9 dimensions in sequence, so context loads once, and each dimension's call has the previous dimension's verdict in front of it. **All three — time, cost, accuracy — improve simultaneously.**
