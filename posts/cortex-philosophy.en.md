@@ -3,7 +3,7 @@ title: "AI Isn't Something to Trust — It's Something to Design (Series Final)"
 publishedAt: "2026-06-16T08:30:00+09:00"
 updatedAt: "2026-06-16T08:30:00+09:00"
 slug: "cortex-philosophy"
-summary: "Series Final. The six mechanisms covered across this series — knowledge graph, Auto Review, Self-Healing, Recurrence Prevention, non-engineer PRs — all hang off a single conviction: AI isn't something to trust; it's something to design. The 'I don't trust AI to fill in the blanks for me' framing this lives inside isn't doubt about generation quality, but the clear-eyed acceptance that AI has no idea what context wasn't handed to it, and that 'ideal behavior with no spec given' is a fantasy. The starting point goes back to 2025, when I was trying to figure out how to make AI actually understand a large codebase — and ran into walls on both context window scaling (lost in the middle, attention dilution) and learning-based approaches (machine unlearning, destructive interference). GraphRAG + MCP became the way out: hand AI only the facts it needs, when it needs them, so it doesn't have to infer. From code-graph (which I burned two months on and threw away) to the current product-graph (cpg). This piece is the philosophy and the trial-and-error behind the whole series: harnesses confine where hallucinations are allowed to happen, design is translating principles into your own use cases, and Coverage 90% as a solo target breaks the implementation."
+summary: "Series Final. The four mechanisms covered across this series — knowledge graph, Auto Review, Self-Healing, Recurrence Prevention — plus the non-engineer-PR application that sits on top of them, all hang off a single conviction: AI isn't something to trust; it's something to design. The 'I don't trust AI to fill in the blanks for me' framing this lives inside isn't doubt about generation quality, but the clear-eyed acceptance that AI has no idea what context wasn't handed to it, and that 'ideal behavior with no spec given' is a fantasy. The starting point goes back to 2025, when I was trying to figure out how to make AI actually understand a large codebase — and ran into walls on both context window scaling (lost in the middle, attention dilution) and learning-based approaches (machine unlearning, destructive interference). GraphRAG + MCP became the way out: hand AI only the facts it needs, when it needs them, so it doesn't have to infer. From code-graph (which I burned two months on and threw away) to the current product-graph (cpg). This piece is the philosophy and the trial-and-error behind the whole series: harnesses confine where hallucinations are allowed to happen, design is translating principles into your own use cases, and Coverage 90% as a solo target breaks the implementation."
 tags:
   - "ai"
   - "engineering"
@@ -26,9 +26,9 @@ Hi, I'm [Ryan](https://x.com/ryantsuji), CTO at airCloset.
 
 > **Disclaimer**: "cortex" in this article is the internal codename for an AI platform built in-house at airCloset. It is unrelated to existing commercial services like Snowflake Cortex or Palo Alto Networks Cortex.
 
-Across the six posts of this series I've worked through how cortex's harness is put together, mechanism by mechanism: the overall picture, the knowledge graph, Auto Review, Self-Healing + Recurrence Prevention, and non-engineer PRs. Having walked through all of them, I want to step one level down for the wrap-up. **Why am I building this thing in the first place?** That's what this post is about.
+Across the five posts of this series I've worked through how cortex's harness is put together, one piece at a time: the overall picture, the knowledge graph, Auto Review, Self-Healing + Recurrence Prevention, and non-engineer PRs. Having walked through all of them, I want to step one level down for the wrap-up. **Why am I building this thing in the first place?** That's what this post is about.
 
-The five mechanisms might look independent, but the root is one thing, and the series doesn't close cleanly without that one thing being put into words. Together with the philosophy, I want to look back at the failures that don't show up when you only write about what worked — what I threw away, where I tripped — as a reference point for anyone trying something similar.
+The five posts might look independent, but the root is one thing, and the series doesn't close cleanly without that one thing being put into words. Together with the philosophy, I want to look back at the failures that don't show up when you only write about what worked — what I threw away, where I tripped — as a reference point for anyone trying something similar.
 
 ## Series Index
 
@@ -69,7 +69,7 @@ The keep-growing-context-windows path didn't have a real resolution in sight.
 
 The other obvious move is to make AI itself learn. Fine-tune per organization, teach it our codebase, our docs, our business. I considered it. Currently not doing it.
 
-Two reasons. One: getting learning into actual production was still research-phase (in 2025 then; still in 2026 as I write this) and the path to real deployment had high latency. The other is thornier: **even if you could learn it, "forgetting" is extremely hard**.
+Two reasons. One: getting learning into actual production was still research-phase (in 2025 then; still in 2026 as I write this) and the road to real deployment is still long. The other is thornier: **even if you could learn it, "forgetting" is extremely hard**.
 
 A business system has to reflect "the current truth." When the design changes, the DB schema changes, the business rules change, **you want to actively erase old knowledge**. But "delete just this piece of what's baked into the LLM weights" is unsolved at the research level — there's even a field name for it, **machine unlearning**, which tells you how hard it is. And on top of that, teaching the model new things also **destroys unrelated existing knowledge** (called **destructive interference** / catastrophic forgetting). Lean on learning and both hit at once: the cost of keeping things consistent explodes.
 
@@ -114,17 +114,17 @@ The mechanism for confining it is the harness this series has been describing.
 
 ## So I Build Harnesses to Hold AI to Determinism
 
-Reading each mechanism through the lens of "don't make AI infer; lean on determinism" surfaces that the five posts in this series are all the same conviction showing up in different layers.
+Reading each post through the lens of "don't make AI infer; lean on determinism" surfaces that the five of them are all the same conviction showing up in different layers.
 
 **Part 2 — Knowledge Graph**: Instead of making AI search the codebase, this mechanism tilts toward making the codebase legible. With `@graph-*` annotations, code / docs / DB / infra are unified into one graph, so AI doesn't have to grep + infer to find related parts. This is the direct implementation of "supply facts as context" from the origin section. → [cortex-product-graph](/posts/cortex-product-graph)
 
-**Part 3 — Auto Review Dimensions**: Nine review dimensions (responsibility / severity / type SSoT / etc.) are fixed in advance. When AI does the review, what to check isn't something it gets to infer. "Looking at the PR as a whole" gives AI too much room for inference, so dimensions are split and each is judged independently. **Dimensions = locked by the harness, evaluation = AI's job.** → [cortex-auto-review](/posts/cortex-auto-review)
+**Part 3 — Auto Review Dimensions**: Nine review dimensions (responsibility / severity / type SSoT / etc.) are fixed in advance. When AI does the review, what to check isn't something it gets to infer. "Looking at the PR as a whole" gives AI too much room for inference, so dimensions are split and **each is judged as its own question**. **Dimensions = locked by the harness, evaluation = AI's job.** → [cortex-auto-review](/posts/cortex-auto-review)
 
 **Part 4 — Self-Healing + Recurrence Prevention**: Alert → investigation → fix PR → redeploy. The flow itself is fixed. AI doesn't get to think through "how should we respond to incidents" each time. And Recurrence Prevention — adding lint / CI gates so the same trap can't be stepped on twice — is **mechanical refusal at the gate, not trust-AI-not-to-do-it-again**. Or put differently: I don't expect AI never to repeat a mistake. → [cortex-self-healing](/posts/cortex-self-healing)
 
 **Part 5 — Non-Engineer PRs**: If the harness weren't holding quality, business-side folks opening PRs directly to production wouldn't survive a single day. Conversely, with the three mechanisms above stacked up (context locked, dimensions locked, traps locked out mechanically), the person closest to the requirements can ship the change directly. The translation layer and the engineering priority queue disappeared as a downstream consequence of the determinism push. → [cortex-non-engineer-prs](/posts/cortex-non-engineer-prs)
 
-So the five mechanisms are "don't make AI infer; lean on determinism" implemented at different layers. The root is one conviction.
+So what's covered across the five posts is "don't make AI infer; lean on determinism" implemented at different layers. The root is one conviction.
 
 ## What "Don't Make AI Infer, Lean on Determinism" Actually Means
 
@@ -141,7 +141,7 @@ Where I want to lean on determinism is in domains where **variance isn't allowed
 
 What implements this line — where inference is allowed vs. where it isn't — is the harness. To borrow the metaphor from Part 5, the harness lays down **rails you can't fall off**. On top of the rails, AI runs free (inference works as inference); but it can't fall off the rails sideways.
 
-Put differently, this is equivalent to the framing in [Part 2 (cortex-product-graph)](/posts/cortex-product-graph): "where hallucination gets confined." Saying "no inference allowed" isn't quite right — the harness isn't a thing that makes hallucination go to zero. It's a thing that confines hallucination to places where hallucination is OK (i.e., the inference-allowed zone). The structure and facts about the codebase are pulled deterministically, so hallucination has no opening there; hallucinations on the judgment side get filtered downstream by tests / lint / dimension-by-dimension reviews. The places where hallucination is allowed and the places where it isn't are **physically split by the harness**. That's the continuation of the Part 2 framing.
+Put differently, this is equivalent to the framing in [Part 2 (cortex-product-graph)](/posts/cortex-product-graph): "where hallucination gets confined." Saying "no inference allowed" isn't quite right — the harness isn't a thing that makes hallucination go to zero. It's a thing that confines hallucination to places where hallucination is OK (i.e., the inference-allowed zone). The structure and facts about the codebase are pulled deterministically, so **the retrieval process itself has no opening for hallucination**; hallucinations on the judgment side get filtered downstream by tests / lint / dimension-by-dimension reviews. The places where hallucination is allowed and the places where it isn't are **physically split by the harness**. That's the continuation of the Part 2 framing.
 
 ![Inference-allowed zone (top, green) and inference-forbidden zone (bottom, orange). The harness implements this boundary — i.e., decides where hallucination gets confined.](/images/posts/cortex-philosophy/decision-boundary-en.png)
 
@@ -200,7 +200,7 @@ Two lessons:
 Then, as the follow-up: I added linting that **mechanically closes off the routes that let you weaken implementations to satisfy Coverage**. Two specific examples:
 
 - **`no-silent-catch`**: AST-level ban on empty catch and silent-handler patterns like `.catch(() => null)`. Catch bodies have to have a **function call (logger included) / re-throw / new / await** — otherwise it's an error. Catches the "weaken throws to satisfy Coverage but lose observability in production" pattern structurally. The violation message routes you to `@cortex/otel/logger` for structured logging, so the chain through Cloud Run OTel → Loki / Grafana stays intact
-- **`vitest-strong-matchers`**: bans weak matchers like `toBeTruthy` / `toBeDefined` / `toContain` / `toBe(true|false)` / `expect.any` / `expect.objectContaining`. Stops "any assertion that passes" inflation at the AST level, and points you instead toward `toStrictEqual` / `toMatchInlineSnapshot` that pin down the full output. This is one notch above Coverage — a **test quality** concern — but it lines up because the same reflection applies: **don't let a number become the goal**
+- **`vitest-strong-matchers`**: bans weak matchers like `toBeTruthy` / `toBeDefined` / `toContain` / `toBe(true|false)` / `expect.any` / `expect.objectContaining`. Catches "any assertion that passes" patterns at the AST level, and points you instead toward `toStrictEqual` / `toMatchInlineSnapshot` that pin down the full output. This is one notch above Coverage — a **test quality** concern — but it lines up because the same reflection applies: **don't let a number become the goal**
 
 On top of that, cortex's [testing guideline](https://github.com/air-closet/cortex/blob/main/docs/guidelines/testing.md) opens with "**Coverage is not the goal, just a supporting indicator**," and threshold-lowering / `istanbul ignore` workarounds get bounced as Critical in Auto Review. So even when Coverage is satisfied, "this is intentionally deleting a branch" / "this is swallowing the exception" comes back as a Major finding.
 
@@ -213,7 +213,7 @@ Third: an internal-structure call about Auto Review. **Distribute the 9 dimensio
 What actually happened: **time, cost, and accuracy all got worse**.
 
 - **Time got worse**: each sub-agent has its own startup, its own context load, its own result aggregation overhead. "9-way parallel = 9x faster" didn't hold; there were even cases where sequential evaluation in one session ended up faster
-- **Cost got worse**: each sub-agent loads PR diff + guidelines + related code independently — common context loads ran 9 times. Token consumption measured at **about 4x** (the context other than diff is shared across many dimensions, so it lands at 4x rather than 9x)
+- **Cost got worse**: each sub-agent loads PR diff + guidelines + related code independently — common context loads ran 9 times. Token consumption measured at **9x → just under 4x** (the context other than diff is shared across many dimensions, which is what kept it from blowing up to a full 9x)
 - **Accuracy didn't hold**: parallel sub-agents don't see each other's verdicts, so the same problem comes back as "APPROVE" from one and "REQUEST_CHANGES" from another. Duplicate findings show up too. Without a "what kind of PR is this as a whole?" pass to anchor on, dimensional findings drift toward local optima and the overall picture gets worse
 
 Switching to sequential evaluation: same session goes through 9 dimensions in sequence, so context loads once, and each dimension's call has the previous dimension's verdict in front of it. **All three — time, cost, accuracy — improve simultaneously.**
@@ -238,14 +238,14 @@ Or, put another way:
 
 **Assuming a large codebase**: prompt engineering / model selection / tool selection — each matters individually, but polishing them alone doesn't get you to auto-merging PRs, auto-healing incidents, or non-engineer development. Getting there requires building **a codebase / business flow / observability / repair cycle where AI doesn't need to infer**. That's not an individual AI skill — that's **an environment-design problem** (conversely, for a small project of a few dozen files, today's AI models work fine standalone. **Harnesses become essential when scale exceeds what one person can hold in their head.**).
 
-And the conviction at the root of environment design is, repeating myself, "**I don't trust AI**" — looking the reality in the face that context that wasn't handed over isn't known, and the ideal state doesn't happen without being told. Once you accept that premise, **what to build clarifies naturally**.
+And the conviction at the root of environment design is, repeating myself, "**I don't trust AI to fill in the blanks for me**" — looking the reality in the face that context that wasn't handed over isn't known, and the ideal state doesn't happen without being told. Once you accept that premise, **what to build clarifies naturally**.
 
 Looking back, four decisions ended up being the ones that mattered:
 
-- **Locked the conviction first**: putting words to the root ("I don't trust AI") gave priority order to every mechanism. If I'd started from technique, I don't think I'd have made it to the current form
+- **Locked the conviction first**: putting words to the root ("AI isn't something to trust") gave priority order to every mechanism. If I'd started from technique, I don't think I'd have made it to the current form
 - **Invested with throwing-out as the default**: like I did with code-graph at the two-month mark, I went into things with "throwing this out is OK." Drag sunk cost forward and you can't move forward
-- **No standalone numerical targets**: the moment a metric like Coverage 90% becomes the goal on its own, implementations warp. Designed the system so it gets evaluated alongside other dimensions
-- **Made "don't make AI infer" the design center**: instead of relying on AI's capability, I prioritized building structure where AI doesn't have to infer. That's what made the system stable end-to-end, I think
+- **Refused standalone numerical targets**: the moment a metric like Coverage 90% becomes the goal on its own, implementations warp. Designed the system so it gets evaluated alongside other dimensions
+- **Designed for "no inference," not around AI's capability**: I prioritized building structure where AI doesn't have to infer, instead of relying on what AI can do. That's what made the system stable end-to-end, I think
 
 If even one of these is useful to someone starting on something similar, that would be great.
 
@@ -278,4 +278,4 @@ Six posts in, thanks for sticking with me to the end.
 | 3 | AI PR review | webhook → AI review → auto-fix → squash merge | [cortex-auto-review](/posts/cortex-auto-review) |
 | 4 | Self-Healing + observability + auto-added guardrails | Alert → AI investigates → fix PR + new lint/type gate → auto redeploy | [cortex-self-healing](/posts/cortex-self-healing) |
 | 5 | Democratizing the maintenance phase | Domain experts open PRs to production; the harness owns the quality gate | [cortex-non-engineer-prs](/posts/cortex-non-engineer-prs) |
-| 6 | Series Final — the underlying philosophy plus a retrospective | This post |
+| 6 | Series Final | The underlying philosophy plus a retrospective on the failures and lessons | This post |
