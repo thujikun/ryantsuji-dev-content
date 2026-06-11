@@ -16,7 +16,7 @@ syndication:
   devto:
     id: 3869620
     slug: "ai-isnt-something-to-trust-its-something-to-design-series-final-526d-temp-slug-4461911"
-    contentHash: "c212a7a997f2adc2"
+    contentHash: "a816e775a390942f"
     publishAt: "2026-06-16T08:30:00+09:00"
 cover: /images/posts/cortex-philosophy.en.cover.png
 ---
