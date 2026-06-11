@@ -1,9 +1,9 @@
 ---
-title: "I Built an AI Harness Because I Want to Trust AI (Series Final)"
+title: "AI Isn't Something to Trust — It's Something to Design (Series Final)"
 publishedAt: "2026-06-16T08:30:00+09:00"
 updatedAt: "2026-06-16T08:30:00+09:00"
 slug: "cortex-philosophy"
-summary: "Series Final. The six mechanisms covered across this series — knowledge graph, Auto Review, Self-Healing, Recurrence Prevention, non-engineer PRs — all hang off a single conviction: I don't trust AI to fill in the blanks for me. Not distrust of generation quality, but the clear-eyed acceptance that AI has no idea what context wasn't handed to it, and that 'ideal behavior with no spec given' is a fantasy. The starting point goes back to 2025, when I was trying to figure out how to make AI actually understand a large codebase — and ran into walls on both context window scaling (lost in the middle, attention dilution) and learning-based approaches (machine unlearning, destructive interference). GraphRAG + MCP became the way out: hand AI only the facts it needs, when it needs them, so it doesn't have to infer. From code-graph (which I burned two months on and threw away) to the current product-graph (cpg). This piece is the philosophy and the trial-and-error behind the whole series: harnesses confine where hallucinations are allowed to happen, design is translating principles into your own use cases, and Coverage 90% as a solo target breaks the implementation."
+summary: "Series Final. The six mechanisms covered across this series — knowledge graph, Auto Review, Self-Healing, Recurrence Prevention, non-engineer PRs — all hang off a single conviction: AI isn't something to trust; it's something to design. The 'I don't trust AI to fill in the blanks for me' framing this lives inside isn't doubt about generation quality, but the clear-eyed acceptance that AI has no idea what context wasn't handed to it, and that 'ideal behavior with no spec given' is a fantasy. The starting point goes back to 2025, when I was trying to figure out how to make AI actually understand a large codebase — and ran into walls on both context window scaling (lost in the middle, attention dilution) and learning-based approaches (machine unlearning, destructive interference). GraphRAG + MCP became the way out: hand AI only the facts it needs, when it needs them, so it doesn't have to infer. From code-graph (which I burned two months on and threw away) to the current product-graph (cpg). This piece is the philosophy and the trial-and-error behind the whole series: harnesses confine where hallucinations are allowed to happen, design is translating principles into your own use cases, and Coverage 90% as a solo target breaks the implementation."
 tags:
   - "ai"
   - "engineering"
@@ -14,9 +14,6 @@ series: "building-ai-harness"
 seriesOrder: 6
 syndication:
   devto:
-    id: 3853525
-    slug: "i-built-an-ai-harness-because-i-want-to-trust-ai-series-final-5dae-temp-slug-6834417"
-    contentHash: "b89d982e410da3f7"
     publishAt: "2026-06-16T08:30:00+09:00"
 cover: /images/posts/cortex-philosophy.en.cover.png
 ---
@@ -231,6 +228,10 @@ Not easy. I don't pretend it was. But **if you do walk through it, real results 
 What I most wanted to communicate across these six posts comes down to one thing:
 
 > **AI coding is not about "how to use AI" — it's about designing the environment AI runs in.**
+
+Or, put another way:
+
+> **AI isn't something to trust. It's something to design.**
 
 **Assuming a large codebase**: prompt engineering / model selection / tool selection — each matters individually, but polishing them alone doesn't get you to auto-merging PRs, auto-healing incidents, or non-engineer development. Getting there requires building **a codebase / business flow / observability / repair cycle where AI doesn't need to infer**. That's not an individual AI skill — that's **an environment-design problem** (conversely, for a small project of a few dozen files, today's AI models work fine standalone. **Harnesses become essential when scale exceeds what one person can hold in their head.**).
 
