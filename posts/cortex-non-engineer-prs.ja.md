@@ -53,7 +53,7 @@ Part 5では、
 | 3 | AI PRレビュー | webhook → AIレビュー → 自動修正 → squash merge | [cortex-auto-review](/posts/cortex-auto-review) |
 | 4 | Self-Healing + Observability + 自動lint追加 | アラート → AI調査 → 修正PR + 新規lint/型gate → 自動再デプロイで同じ書き方を機械的に弾く | [cortex-self-healing](/posts/cortex-self-healing) |
 | 5 | 改修フェーズの民主化 | 業務要件を把握している人が本番に直接PR、ハーネスが品質を担保 | 本記事 ←現在地 |
-| 6 | 連載総括 | 根底にある思想（何を捨てて何を取ったか / なぜこの設計か）を中心に、失敗と学びも振り返る | 準備中 |
+| 6 | 連載総括・最終章 | 根底にある思想（何を捨てて何を取ったか / なぜこの設計か）と失敗の振り返り | [cortex-philosophy](/posts/cortex-philosophy) |
 
 ## いきなり1つのシーンから
 

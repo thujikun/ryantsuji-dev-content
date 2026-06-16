@@ -50,7 +50,7 @@ The deeper toC implementation story will live in a separate post; here you'll ge
 | 3 | Auto PR review | webhook -> AI review -> auto-fix -> squash merge | [cortex-auto-review](/posts/cortex-auto-review) |
 | 4 | Self-Healing + observability + auto-added guardrails | Alert -> AI investigates -> fix PR + new lint/type gate -> auto redeploy + same pattern auto-rejected from then on | [cortex-self-healing](/posts/cortex-self-healing) |
 | 5 | Democratizing the maintenance phase | Domain experts open PRs to production; the harness owns the quality gate | This article ← you are here |
-| 6 | Series wrap-up | The underlying philosophy (what was given up, what was kept, why this design) plus a retrospective on the failures and lessons | Coming soon |
+| 6 | Series Final | The underlying philosophy plus a retrospective on the failures and lessons | [cortex-philosophy](/posts/cortex-philosophy) |
 
 ## Start with one scene
 
