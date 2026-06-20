@@ -118,7 +118,7 @@ AIは「分からないこと」を「分からない」と返すより、見え
 - `WRITES_TO` / `READS_FROM` ── DB境界
 - などなど
 
-**通常のコード関係（CALLS / EXTENDS / IMPLEMENTSなど）は、ここまでで一度終わり**。問題はこの先、境界エッジ（`CALLS_API` / `HANDLES_API` / `EMITS_TO` / `SUBSCRIBES_TO` / `WRITES_TO` / `READS_FROM`）を取りに行く、ここからが本当の戦いです。
+本当の戦いは、境界エッジ（`CALLS_API` / `HANDLES_API` / `EMITS_TO` / `SUBSCRIBES_TO` / `WRITES_TO` / `READS_FROM`）を取りに行くところからです。
 
 ## 境界ノード抽出の苦労: 1月〜3月の試行錯誤
 
