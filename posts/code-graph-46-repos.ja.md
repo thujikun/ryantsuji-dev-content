@@ -108,7 +108,7 @@ AIは「分からないこと」を「分からない」と返すより、見え
 
 ただ、tree-sitterは構文木を作るのは得意ですが、**型情報やスコープ解析は弱い**。フィールドアクセス（`user.preferences.theme`のようなチェーン）を正確に追うには、変数`user`がどの型でどう定義されているかを解決する必要があります。これはtree-sitter単体だと手が届かない。
 
-そこで、ここだけTypeScript Compiler APIを併用しています。構造抽出はtree-sitter、変数解決はTypeScript Compiler、と役割を分けて精度を上げています。
+そこで、フィールドアクセスの解決には**TypeScript Compiler API**と**Gemini**を併用しています。tree-sitterで構造を抽出 → TypeScript Compilerで変数や型を解決 → それでも解決しきれない動的なケースはGeminiで推定、という役割分担で精度を上げています。
 
 エッジは21種類定義してあります。
 
