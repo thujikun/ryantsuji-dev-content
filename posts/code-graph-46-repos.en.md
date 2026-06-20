@@ -161,7 +161,7 @@ Looking back at the actual git history from that period, you see new parsers and
 ### March: Concept Cleanup and Precision
 
 - **2026-03-08** ─ `refactor(code-graph): rename __external__ to __boundary__` — **concept cleanup**: standardize on "boundary node" rather than "external resource"
-- **2026-03-16** ─ `refactor: remove db-dictionary from code-graph stack` — split the DB-schema-side layer off into its own graph to evolve independently
+- **2026-03-16** ─ `refactor: remove db-dictionary from code-graph stack` — split the DB schema dictionary (the layer that lets you look up table / column definitions) off into its own graph to evolve independently
 - **2026-03-24** ─ `fix(code-graph): infer table names from dynamic variable names` — table-name inference from dynamic variable names
 - **2026-03-24** ─ `feat(code-graph): add orphan boundary node cleanup script` — cleanup script for orphan boundary nodes
 

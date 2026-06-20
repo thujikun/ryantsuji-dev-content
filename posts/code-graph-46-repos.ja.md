@@ -162,7 +162,7 @@ AIは「分からないこと」を「分からない」と返すより、見え
 ### 3月: 概念整理と細かな精度向上
 
 - **2026-03-08** ─ `refactor(code-graph): rename __external__ to __boundary__` ── **概念整理**: 「外部リソース」ではなく「境界ノード」という呼び方に統一
-- **2026-03-16** ─ `refactor: remove db-dictionary from code-graph stack` ── DBスキーマ側を扱うレイヤーを別graphとして独立進化
+- **2026-03-16** ─ `refactor: remove db-dictionary from code-graph stack` ── DBスキーマ辞書 (テーブル・カラム定義を引けるレイヤー) を別graphとして独立進化
 - **2026-03-24** ─ `fix(code-graph): infer table names from dynamic variable names` ── 動的変数名からのテーブル名推定
 - **2026-03-24** ─ `feat(code-graph): add orphan boundary node cleanup script` ── 孤立した境界ノードのクリーンアップスクリプト
 
