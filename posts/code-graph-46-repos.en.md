@@ -43,9 +43,9 @@ A long-running production codebase usually looks something like this:
 - Dependencies via API, DB, and Event are **tangled** — not clean 1:1 front-to-back relationships:
     - The same API gets called from multiple repositories (= n:1 callers)
     - The same DB table is written to and read from across multiple repositories (= n:n)
-    - For Events, just looking at the emit side doesn't tell you how completely the subscribe side is covered — it's genuinely untraceable
+    - For Events, just looking at the emit side doesn't tell you how completely the subscribe side is covered — it's practically untraceable
 
-The starting point was wanting to ask AI: "show me the impact radius," "tell me what breaks if I change this," — across this entire codebase.
+The starting point was wanting to ask AI: "show me the blast radius," "tell me what breaks if I change this," — across this entire codebase.
 
 The naive answer is: **"just hand all 46 repositories worth of code to AI and let it analyze."**
 
@@ -88,7 +88,7 @@ The thing that humans and AI alike get stuck on, in practice, is exactly that �
     - Looking at just one of the repos, AI has no way of knowing
 - **The same DB table is being read or written by some batch process you don't know about**
     - When you're modifying service-side code, some batch in a different location might be reading and writing the same table
-    - Misjudge the impact radius and you get data inconsistency
+    - Misjudge the blast radius and you get data inconsistency
 - **The subscribers for this event might not be fully accounted for**
     - With distributed pub/sub, looking only at the emit side doesn't let you cover the subscribe side
     - Something runs somewhere you don't know about
@@ -97,9 +97,11 @@ In short: getting AI to understand **the code on the other side of a boundary**,
 
 ![Boundary nodes bridge code across repository walls](/images/posts/code-graph-46-repos/boundary-cross-repos-en.png)
 
-If you have boundary nodes, AI can answer "this API is also called from repo X" **as a fact**. Instead of asking AI to infer, you can hand it **a fact that's already been resolved** (yes, there's inference during the extraction phase — TypeScript Compiler and Gemini both contribute — but the results are persisted as confirmed values in the graph, and a daily boundary-analysis cron, which I'll cover below, lets us notice drift the next morning. By the time AI consumes the graph, what flows to it is only the verified facts).
+If you have boundary nodes, AI can answer "this API is also called from repo X" **as a fact**. Instead of asking AI to infer, you hand it **a fact that's already been resolved**.
 
-AI has a tendency to answer "with whatever it can see" rather than saying "I don't know." That's where silent hallucinations come from — wrong answers that neither AI nor the human catches. Boundary nodes are what physically prevents that. They give AI a verified place to stand.
+Yes, there is inference during the extraction phase — TypeScript Compiler and Gemini both contribute. But the results are persisted as confirmed values in the graph, and a daily boundary-analysis cron (covered below) lets us notice drift the next morning. By the time AI consumes the graph, only verified facts flow to it.
+
+AI has a tendency to answer "with whatever it can see" rather than saying "I don't know." That's where silent hallucinations creep in — wrong answers that neither AI nor the human catches. Boundary nodes are what physically prevents that. They give AI a verified place to stand.
 
 ## Construction: tree-sitter Base, With TypeScript Compiler and Gemini Where Needed
 
@@ -107,7 +109,7 @@ Normal code structure (function calls, class inheritance, imports) is **relative
 
 The catch is that while tree-sitter is great at building syntax trees, it's **weak on type information and scope resolution**. To accurately follow a field access chain like `user.preferences.theme`, you need to resolve what type the variable `user` is and where it's defined. tree-sitter alone can't reach that.
 
-So for field-access resolution we use **TypeScript Compiler API** and **Gemini** in combination. tree-sitter extracts the structure → TypeScript Compiler resolves variables and types → for the dynamic cases that even that can't reach, Gemini infers. Three stages with distinct responsibilities, which is how we push the precision up.
+So for field-access resolution we use **TypeScript Compiler API** and **Gemini** in combination. tree-sitter extracts the structure → TypeScript Compiler resolves variables and types → for the dynamic cases that even that can't reach, Gemini infers. Three stages with distinct responsibilities, which is how we push field-access accuracy up.
 
 ![3-stage field access resolution: tree-sitter, TypeScript Compiler, Gemini](/images/posts/code-graph-46-repos/parser-stack-en.png)
 
@@ -137,7 +139,7 @@ And it's not just extraction that's hard. **Joining the extracted boundaries on 
 
 And this had to happen across all 46 repositories × the framework zoo.
 
-Looking back at the actual git history from that period, you see new parsers and detectors being added almost every week, noise filters going in, and concept renames landing. Here are the main commits from January through March, in order (the commit prefix starts as `graph-rag` — the stack was originally named after the "knowledge graph + RAG for LLM consumption" framing — and is renamed to `code-graph` on February 15):
+Looking back at the actual git history from that period, you see new parsers and detectors being added almost every week, noise filters going in, and concept renames landing. Here are the main commits from January through March, in order (the commit prefix starts as `graph-rag` — the stack was originally named after the "knowledge graph + RAG for LLM consumption" framing — and is renamed to `code-graph` on February 15; a few late-February commits still carry a short-lived `graph` prefix from that transition):
 
 ### January: Starting Out, and Realizing tree-sitter Alone Isn't Enough
 
@@ -182,15 +184,15 @@ Just listing the frameworks / mechanisms that showed up:
 
 This isn't a "TypeScript / JavaScript / Go / Dart static analysis" story you can wrap up in one sentence. The air-closet codebase is a collection of long-running production systems where every era's framework still coexists. We had to pick up, from the AST, the era-specific meaning of "here's an API endpoint," "here's a DB call," "here's an Event subscription."
 
-### Why I Was So Particular About Precision
+### Why I Was So Particular About Accuracy
 
-> **90% precision is completely unusable.**
+> **90% is completely unusable.**
 
-Take "list every piece of code that calls this API." If your precision is 90%, then 10% of the relevant code is invisible to AI. When you're using code-graph for impact-radius investigation, **that invisible 10% is what causes the incident**.
+Take "list every piece of code that calls this API." If you recall only 90% of the callers, then 10% of the relevant code is invisible to AI. When you're using code-graph for blast-radius investigation, **that invisible 10% is what causes the incident**. That's single-hop recall.
 
-And it gets worse the further you walk. For graph-traversal use cases, precision compounds with each hop. At 0.9 per hop: 0.81 at 2 hops, 0.729 at 3, ~0.59 at 5, ~0.35 at 10 — after just a handful of hops you're at less than half. Push it to 0.99: 0.98 at 2 hops, 0.95 at 5, ~0.90 at 10. **Whether the system is usable in practice or not is decided by that one-digit gap.**
+And it gets worse the further you walk. For multi-hop graph traversal, every hop multiplies in: at 0.9 per hop you get 0.81 at 2 hops, 0.729 at 3, ~0.59 at 5, ~0.35 at 10 — after just a handful of hops you're at less than half. Push it to 0.99 and you get 0.98 at 2 hops, 0.95 at 5, ~0.90 at 10. **Whether the system is usable in practice is decided by that single-digit difference between 90% and 99%** — and it bites you on both axes: single-hop recall when you're enumerating, multi-hop confidence when you're traversing.
 
-So every time a new boundary pattern showed up, we'd add a new custom parser, **aiming to keep the boundary connection rate above 99%**. We can't really measure extraction recall directly — there's no ground-truth "every boundary that should exist" denominator — so the indicator we actually measure daily is "what fraction of callers / handlers are correctly connected on the graph" = the connection rate. The next section is about how that's monitored.
+So every time a new boundary pattern showed up, we'd add a new custom parser, **aiming to keep the boundary connection rate above 99%**. We can't measure extraction recall directly — there's no ground-truth "every boundary that should exist" denominator — so the indicator we actually measure daily is "what fraction of callers / handlers are correctly connected on the graph" = the connection rate. The next section is about how that's monitored.
 
 ## Boundary Analysis Is Running Today
 
@@ -204,7 +206,7 @@ Concretely, a **boundary-analysis cron** runs at JST 7:00 every morning. What it
 
 The day-over-day numbers get compared, and if the connection rate drops by more than 5%, we get a Grafana alert.
 
-This whole thing only makes sense **because we have boundary nodes to compare against**. We're monitoring the **quality of the extracted boundaries themselves** on a daily cadence. "A parser couldn't handle a new pattern and now boundaries are invisible," "the repository layout changed and path aliases stopped resolving" — that kind of drift gets detected by the next morning.
+This whole thing only makes sense **because we have boundary nodes to compare against**. We're monitoring the **quality of the extracted boundaries themselves** on a daily cadence. The kind of drift the connection rate catches by the next morning: "a parser fell behind a new pattern and a class of boundaries went invisible," "the repository layout changed and path aliases stopped resolving." There are failure modes the connection rate alone can't see — a caller-side parser regression that drops callers entirely will leave the surviving handlers still looking "connected" to whatever callers remain, and the missing ones slip out silently. That's a separate axis we cover with day-over-day absolute node counts per repo / pattern.
 
 ## What Still Doesn't Work
 

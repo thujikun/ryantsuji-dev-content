@@ -90,6 +90,6 @@
     <rect x="200" y="760" width="1200" height="100" rx="10" fill="#0f172a" stroke="#475569" stroke-width="1"/>
     <text x="240" y="795" font-size="14" fill="#94a3b8" font-weight="bold">Why split the work this way:</text>
     <text x="240" y="822" font-size="14" fill="#cbd5e1">Bulk extraction stays on fast tree-sitter → only type-dependent spots hit TypeScript Compiler → only truly dynamic cases reach Gemini</text>
-    <text x="240" y="846" font-size="13" fill="#94a3b8">Combining their distinct strengths is how we push field-access precision past 99%</text>
+    <text x="240" y="846" font-size="13" fill="#94a3b8">Combining their distinct strengths is how we push field-access accuracy past 99%</text>
   </g>
 </svg>
