@@ -168,15 +168,15 @@ AIは「分からないこと」を「分からない」と返すより、見え
 
 具体的に登場したフレームワーク / 仕組みだけ並べても、こうなります。
 
-- tree-sitter（TypeScript / JavaScript）
+- tree-sitter（TypeScript / JavaScript / Go / Dart (Flutter)）
 - TypeScript Compiler（variable resolution）
 - jQuery / Vanilla JS
 - AngularJS
-- TypeORM（DBのJOIN検出）
+- Express / Koa / Fastify
 - NestJS（デコレーターparsing）
+- TypeORM（DBのJOIN検出）
 - Fetcher API
 - Redux Axios（variable resolver）
-- Express
 - path aliasの3通り（tsconfig paths / make-symlink / CommonJS symlink）
 
 単に「TypeScript静的解析」と言って収まる話ではありません。air-closet系のコードベースは長く動いてきた本番システムの集合体で、各時代のフレームワークが共存しています。それぞれの時代の「ここにAPIエンドポイントがある」「ここでDBを叩いている」「ここでEventを購読している」という意味を、ASTから拾い上げる必要がありました。
