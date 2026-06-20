@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <rect width="1600" height="900" fill="#0f172a"/>
+
+  <defs>
+    <marker id="a-sky" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#38bdf8"/></marker>
+    <marker id="a-orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#fb923c"/></marker>
+    <marker id="a-violet" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#a78bfa"/></marker>
+    <marker id="a-muted" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#94a3b8"/></marker>
+  </defs>
+
+  <text x="800" y="60" font-size="34" fill="#e2e8f0" text-anchor="middle" font-weight="bold" font-family="Inter, system-ui, sans-serif">Boundary nodes bridge code across repository walls</text>
+  <text x="800" y="98" font-size="18" fill="#94a3b8" text-anchor="middle" font-family="Inter, system-ui, sans-serif">Shared API endpoints / DB tables / Event topics make code in other repos visible</text>
+
+  <g font-family="Inter, system-ui, sans-serif">
+    <rect x="600" y="160" width="400" height="100" rx="12" fill="#1e293b" stroke="#fbbf24" stroke-width="3"/>
+    <text x="800" y="200" font-size="22" fill="#fbbf24" text-anchor="middle" font-weight="bold">Boundary Node</text>
+    <text x="800" y="230" font-size="16" fill="#e2e8f0" text-anchor="middle">API / DB / Event boundaries surface in the graph</text>
+  </g>
+
+  <g font-family="Inter, system-ui, sans-serif">
+    <rect x="80" y="380" width="420" height="110" rx="10" fill="#0c2540" stroke="#38bdf8" stroke-width="2"/>
+    <text x="290" y="412" font-size="18" fill="#38bdf8" text-anchor="middle" font-weight="bold">Repo A (frontend)</text>
+    <rect x="110" y="430" width="360" height="46" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="290" y="460" font-size="14" fill="#cbd5e1" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">GET /api/v1/users/me</text>
+  </g>
+
+  <g font-family="Inter, system-ui, sans-serif">
+    <rect x="590" y="380" width="420" height="110" rx="10" fill="#1a1009" stroke="#fb923c" stroke-width="2"/>
+    <text x="800" y="412" font-size="18" fill="#fb923c" text-anchor="middle" font-weight="bold">Repo B (backend API)</text>
+    <rect x="620" y="430" width="360" height="46" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="800" y="460" font-size="14" fill="#cbd5e1" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">@Get('/api/v1/users/me')</text>
+  </g>
+
+  <g font-family="Inter, system-ui, sans-serif">
+    <rect x="1100" y="380" width="420" height="110" rx="10" fill="#1a0f1a" stroke="#a78bfa" stroke-width="2"/>
+    <text x="1310" y="412" font-size="18" fill="#a78bfa" text-anchor="middle" font-weight="bold">Repo C (nightly batch)</text>
+    <rect x="1130" y="430" width="360" height="46" rx="6" fill="#0f172a" stroke="#475569"/>
+    <text x="1310" y="460" font-size="14" fill="#cbd5e1" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">fetch('/api/v1/users/me')</text>
+  </g>
+
+  <line x1="600" y1="240" x2="290" y2="380" stroke="#38bdf8" stroke-width="2" marker-end="url(#a-sky)"/>
+  <line x1="800" y1="260" x2="800" y2="380" stroke="#fb923c" stroke-width="2" marker-end="url(#a-orange)"/>
+  <line x1="1000" y1="240" x2="1310" y2="380" stroke="#a78bfa" stroke-width="2" marker-end="url(#a-violet)"/>
+
+  <text x="430" y="305" font-size="14" fill="#38bdf8" font-family="Inter, system-ui, sans-serif" font-weight="bold">caller</text>
+  <text x="820" y="335" font-size="14" fill="#fb923c" font-family="Inter, system-ui, sans-serif" font-weight="bold">handler</text>
+  <text x="1130" y="305" font-size="14" fill="#a78bfa" font-family="Inter, system-ui, sans-serif" font-weight="bold">caller</text>
+
+  <g font-family="Inter, system-ui, sans-serif">
+    <rect x="200" y="600" width="1200" height="240" rx="12" fill="#1e293b" stroke="#4ade80" stroke-width="2"/>
+    <text x="800" y="640" font-size="22" fill="#4ade80" text-anchor="middle" font-weight="bold">What AI can answer as fact</text>
+
+    <text x="240" y="690" font-size="15" fill="#4ade80" font-weight="bold">✓</text>
+    <text x="270" y="690" font-size="16" fill="#e2e8f0">This API is also called from the frontend repo A and the nightly batch repo C</text>
+
+    <text x="240" y="730" font-size="15" fill="#4ade80" font-weight="bold">✓</text>
+    <text x="270" y="730" font-size="16" fill="#e2e8f0">The same DB table is written to by both the service side and a batch process</text>
+
+    <text x="240" y="770" font-size="15" fill="#4ade80" font-weight="bold">✓</text>
+    <text x="270" y="770" font-size="16" fill="#e2e8f0">The subscribers for this Event are 3 separate handlers in 3 different repos</text>
+
+    <text x="240" y="810" font-size="13" fill="#94a3b8">── A verified anchor handed over deterministically — not inferred</text>
+  </g>
+</svg>
