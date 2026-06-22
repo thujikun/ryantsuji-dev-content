@@ -7,8 +7,8 @@ summary: "A static-analysis approach to unifying 46 repositories (37 air-closet-
 emoji: "🛠️"
 tags:
   - "ai"
-  - "knowledge-graph"
-  - "static-analysis"
+  - "knowledgegraph"
+  - "staticanalysis"
   - "typescript"
 lang: "en"
 series: "code-graph-deep-dive"
