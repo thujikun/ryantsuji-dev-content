@@ -16,6 +16,9 @@ seriesOrder: 1
 draft: false
 syndication:
   devto:
+    id: 3965516
+    slug: "building-one-knowledge-graph-across-46-repositories-with-static-analysis-part-1-egm"
+    contentHash: "c58c45269546e275"
     publishAt: "2026-06-23T08:30:00+09:00"
 cover: /images/posts/code-graph-46-repos.en.cover.png
 ---
