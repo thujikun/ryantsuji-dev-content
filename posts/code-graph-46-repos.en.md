@@ -13,7 +13,7 @@ tags:
 lang: "en"
 series: "code-graph-deep-dive"
 seriesOrder: 1
-draft: true
+draft: false
 syndication:
   devto:
     publishAt: "2026-06-23T08:30:00+09:00"
