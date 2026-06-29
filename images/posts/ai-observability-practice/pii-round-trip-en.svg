@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <rect width="1600" height="900" fill="#0f172a"/>
+
+  <defs>
+    <marker id="a-sky" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#38bdf8"/></marker>
+    <marker id="a-violet" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#a78bfa"/></marker>
+  </defs>
+
+  <text x="800" y="60" font-size="32" fill="#e2e8f0" text-anchor="middle" font-weight="bold" font-family="system-ui, sans-serif">Hash on both write and search to keep plain-text PII out, while keeping search</text>
+  <text x="800" y="100" font-size="19" fill="#94a3b8" text-anchor="middle" font-family="system-ui, sans-serif">The same hash function (hashEmail) runs at write time and search time on both sides</text>
+
+  <g font-family="system-ui, sans-serif">
+    <rect x="500" y="140" width="600" height="100" rx="12" fill="#1a0f0f" stroke="#ef4444" stroke-width="2" stroke-dasharray="6,4"/>
+    <text x="800" y="180" font-size="20" fill="#ef4444" text-anchor="middle" font-weight="bold">customer.a@example.com (plain-text PII)</text>
+    <text x="800" y="216" font-size="15" fill="#fca5a5" text-anchor="middle">Plain text must never reach the observability stack</text>
+  </g>
+
+  <line x1="650" y1="250" x2="380" y2="300" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4,4"/>
+  <line x1="950" y1="250" x2="1220" y2="300" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4,4"/>
+
+  <g font-family="system-ui, sans-serif">
+    <rect x="60" y="310" width="640" height="490" rx="14" fill="#0c2540" stroke="#38bdf8" stroke-width="2"/>
+    <text x="380" y="354" font-size="24" fill="#38bdf8" text-anchor="middle" font-weight="bold">Write side (app logs)</text>
+    <text x="380" y="384" font-size="15" fill="#94a3b8" text-anchor="middle">Application code emitting logs</text>
+
+    <rect x="100" y="408" width="560" height="92" rx="8" fill="#0f172a" stroke="#475569"/>
+    <text x="380" y="442" font-size="17" fill="#cbd5e1" text-anchor="middle">1. Application code</text>
+    <text x="380" y="468" font-size="14" fill="#94a3b8" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">logger.info(...)</text>
+    <text x="380" y="488" font-size="14" fill="#94a3b8" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">{ user: hashEmail(user.email) }</text>
+
+    <line x1="380" y1="504" x2="380" y2="540" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#a-sky)"/>
+
+    <rect x="100" y="550" width="560" height="80" rx="8" fill="#0f172a" stroke="#475569"/>
+    <text x="380" y="584" font-size="17" fill="#cbd5e1" text-anchor="middle">2. hashEmail() → 12-char HMAC-SHA256 prefix</text>
+    <text x="380" y="612" font-size="19" fill="#fbbf24" text-anchor="middle" font-weight="bold" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">'7a3f9c2e0b1d'</text>
+
+    <line x1="380" y1="630" x2="380" y2="666" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#a-sky)"/>
+
+    <rect x="100" y="676" width="560" height="110" rx="8" fill="#0f172a" stroke="#38bdf8" stroke-width="2"/>
+    <text x="380" y="708" font-size="17" fill="#e2e8f0" text-anchor="middle" font-weight="bold">3. Stored in Loki</text>
+    <text x="380" y="734" font-size="13" fill="#94a3b8" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">{ "ts": "...", "user": "7a3f9c2e0b1d", ... }</text>
+    <text x="380" y="770" font-size="14" fill="#4ade80" text-anchor="middle" font-weight="bold">✓ No plain-text email ever lands</text>
+  </g>
+
+  <g font-family="system-ui, sans-serif">
+    <rect x="900" y="310" width="640" height="490" rx="14" fill="#1a0f1a" stroke="#a78bfa" stroke-width="2"/>
+    <text x="1220" y="354" font-size="24" fill="#a78bfa" text-anchor="middle" font-weight="bold">Search side (support investigation)</text>
+    <text x="1220" y="384" font-size="15" fill="#94a3b8" text-anchor="middle">"Pull Customer A's recent logs" turned into a query</text>
+
+    <rect x="940" y="408" width="560" height="92" rx="8" fill="#0f172a" stroke="#475569"/>
+    <text x="1220" y="442" font-size="17" fill="#cbd5e1" text-anchor="middle">1. Search tool receives customer identifier</text>
+    <text x="1220" y="468" font-size="14" fill="#94a3b8" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">searchLogs({</text>
+    <text x="1220" y="488" font-size="14" fill="#94a3b8" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">email: "customer.a@example.com" })</text>
+
+    <line x1="1220" y1="504" x2="1220" y2="540" stroke="#a78bfa" stroke-width="2.5" marker-end="url(#a-violet)"/>
+
+    <rect x="940" y="550" width="560" height="80" rx="8" fill="#0f172a" stroke="#475569"/>
+    <text x="1220" y="584" font-size="17" fill="#cbd5e1" text-anchor="middle">2. Same hashEmail() at tool entry</text>
+    <text x="1220" y="612" font-size="19" fill="#fbbf24" text-anchor="middle" font-weight="bold" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">'7a3f9c2e0b1d'</text>
+
+    <line x1="1220" y1="630" x2="1220" y2="666" stroke="#a78bfa" stroke-width="2.5" marker-end="url(#a-violet)"/>
+
+    <rect x="940" y="676" width="560" height="110" rx="8" fill="#0f172a" stroke="#a78bfa" stroke-width="2"/>
+    <text x="1220" y="708" font-size="17" fill="#e2e8f0" text-anchor="middle" font-weight="bold">3. Query Loki with the hash</text>
+    <text x="1220" y="734" font-size="13" fill="#94a3b8" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">{app="subscription"} |~ "7a3f9c2e0b1d"</text>
+    <text x="1220" y="770" font-size="14" fill="#4ade80" text-anchor="middle" font-weight="bold">✓ No plain-text email in the query either</text>
+  </g>
+
+  <path d="M 700 730 Q 800 760 900 730" stroke="#4ade80" stroke-width="2" stroke-dasharray="6,4" fill="none"/>
+  <text x="800" y="755" font-size="14" fill="#4ade80" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-weight="bold">Same hash connects both ends</text>
+
+  <g font-family="system-ui, sans-serif">
+    <rect x="160" y="828" width="1280" height="58" rx="10" fill="#0f172a" stroke="#4ade80" stroke-width="1"/>
+    <text x="800" y="854" font-size="17" fill="#4ade80" text-anchor="middle" font-weight="bold">Same hash function on both ends — search works without plain-text PII entering the stack</text>
+    <text x="800" y="878" font-size="14" fill="#cbd5e1" text-anchor="middle">Enumeration resistance comes from keeping the HMAC key outside the stack (a log leak alone can't match)</text>
+  </g>
+</svg>

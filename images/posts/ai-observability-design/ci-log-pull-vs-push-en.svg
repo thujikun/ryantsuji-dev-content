@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <rect width="1600" height="900" fill="#0f172a"/>
+
+  <defs>
+    <marker id="a-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#ef4444"/></marker>
+    <marker id="a-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#4ade80"/></marker>
+  </defs>
+
+  <text x="800" y="60" font-size="34" fill="#e2e8f0" text-anchor="middle" font-weight="bold" font-family="system-ui, sans-serif">Ship CI logs via post-hoc pull, not webhook push</text>
+  <text x="800" y="100" font-size="20" fill="#94a3b8" text-anchor="middle" font-family="system-ui, sans-serif">Decouple CI execution and observability — retry/replay possible, API key leak risk shut down structurally</text>
+
+  <g font-family="system-ui, sans-serif">
+    <rect x="40" y="150" width="740" height="700" rx="14" fill="#1a0f0f" stroke="#ef4444" stroke-width="2" stroke-dasharray="8,4"/>
+    <text x="410" y="200" font-size="26" fill="#ef4444" text-anchor="middle" font-weight="bold">Common pattern: webhook push</text>
+    <text x="410" y="232" font-size="16" fill="#94a3b8" text-anchor="middle">Push logs directly to Grafana from inside the CI run</text>
+
+    <rect x="100" y="270" width="580" height="120" rx="10" fill="#0f172a" stroke="#475569" stroke-width="1.5"/>
+    <text x="390" y="310" font-size="20" fill="#e2e8f0" text-anchor="middle" font-weight="bold">CI run (GitHub Actions)</text>
+    <rect x="140" y="332" width="500" height="48" rx="6" fill="#1a0f0f" stroke="#475569"/>
+    <text x="390" y="362" font-size="15" fill="#cbd5e1" text-anchor="middle">build → test → logger.push() inside the same run</text>
+
+    <line x1="390" y1="400" x2="390" y2="450" stroke="#ef4444" stroke-width="2.5" marker-end="url(#a-red)"/>
+    <text x="410" y="432" font-size="15" fill="#ef4444" text-anchor="start">All in one run</text>
+
+    <rect x="100" y="460" width="580" height="90" rx="10" fill="#0f172a" stroke="#475569" stroke-width="1.5"/>
+    <text x="390" y="498" font-size="20" fill="#e2e8f0" text-anchor="middle" font-weight="bold">Grafana Loki</text>
+    <text x="390" y="525" font-size="15" fill="#94a3b8" text-anchor="middle">Receives via OTLP /v1/logs</text>
+
+    <text x="410" y="598" font-size="18" fill="#ef4444" text-anchor="middle" font-weight="bold">Weaknesses</text>
+
+    <rect x="80" y="618" width="660" height="40" rx="6" fill="#0f172a" stroke="#374151"/>
+    <text x="410" y="644" font-size="14" fill="#fca5a5" text-anchor="middle">✗ Shipping failure can drag the test run down (timeouts etc.)</text>
+
+    <rect x="80" y="666" width="660" height="40" rx="6" fill="#0f172a" stroke="#374151"/>
+    <text x="410" y="692" font-size="14" fill="#fca5a5" text-anchor="middle">✗ Grafana API key has to live inside the CI runtime (leak risk)</text>
+
+    <rect x="80" y="714" width="660" height="40" rx="6" fill="#0f172a" stroke="#374151"/>
+    <text x="410" y="740" font-size="14" fill="#fca5a5" text-anchor="middle">✗ If shipping alone breaks, the observability stack goes silent</text>
+
+    <rect x="80" y="762" width="660" height="40" rx="6" fill="#0f172a" stroke="#374151"/>
+    <text x="410" y="788" font-size="14" fill="#fca5a5" text-anchor="middle">✗ No retry/replay — re-running tests is the only way to ship again</text>
+  </g>
+
+  <g font-family="system-ui, sans-serif">
+    <rect x="820" y="150" width="740" height="700" rx="14" fill="#0a1f0a" stroke="#4ade80" stroke-width="3"/>
+    <text x="1190" y="200" font-size="26" fill="#4ade80" text-anchor="middle" font-weight="bold">cortex: post-hoc pull</text>
+    <text x="1190" y="232" font-size="16" fill="#94a3b8" text-anchor="middle">After CI completes, a separate workflow pulls logs from GitHub API and ships them</text>
+
+    <rect x="880" y="270" width="580" height="72" rx="8" fill="#0f172a" stroke="#475569"/>
+    <text x="1170" y="302" font-size="18" fill="#e2e8f0" text-anchor="middle" font-weight="bold">1. CI run (build / test)</text>
+    <text x="1170" y="328" font-size="14" fill="#94a3b8" text-anchor="middle">Test workflow only — no shipping logic at all</text>
+
+    <line x1="1170" y1="342" x2="1170" y2="372" stroke="#4ade80" stroke-width="2.5" marker-end="url(#a-green)"/>
+    <text x="1190" y="362" font-size="13" fill="#94a3b8" text-anchor="start">workflow_run fires</text>
+
+    <rect x="880" y="382" width="580" height="72" rx="8" fill="#0f172a" stroke="#475569"/>
+    <text x="1170" y="414" font-size="18" fill="#e2e8f0" text-anchor="middle" font-weight="bold">2. Separate workflow (ci-log.yml) triggers</text>
+    <text x="1170" y="440" font-size="14" fill="#94a3b8" text-anchor="middle">Outside the CI run — entirely different layer</text>
+
+    <line x1="1170" y1="454" x2="1170" y2="484" stroke="#4ade80" stroke-width="2.5" marker-end="url(#a-green)"/>
+
+    <rect x="880" y="494" width="580" height="72" rx="8" fill="#0f172a" stroke="#475569"/>
+    <text x="1170" y="526" font-size="18" fill="#e2e8f0" text-anchor="middle" font-weight="bold">3. Pull logs from GitHub API</text>
+    <text x="1170" y="552" font-size="14" fill="#94a3b8" text-anchor="middle">/repos/.../actions/jobs/&#123;id&#125;/logs</text>
+
+    <line x1="1170" y1="566" x2="1170" y2="596" stroke="#4ade80" stroke-width="2.5" marker-end="url(#a-green)"/>
+
+    <rect x="880" y="606" width="580" height="72" rx="8" fill="#0f172a" stroke="#475569"/>
+    <text x="1170" y="638" font-size="18" fill="#e2e8f0" text-anchor="middle" font-weight="bold">4. Ship to Grafana Loki via OTLP /v1/logs</text>
+    <text x="1170" y="664" font-size="14" fill="#94a3b8" text-anchor="middle">{service_name="ci", ref, status, job, output, ...}</text>
+
+    <text x="1190" y="722" font-size="18" fill="#4ade80" text-anchor="middle" font-weight="bold">Strengths</text>
+
+    <rect x="860" y="740" width="660" height="40" rx="6" fill="#0f172a" stroke="#374151"/>
+    <text x="1190" y="766" font-size="14" fill="#86efac" text-anchor="middle">✓ CI and observability decouple (shipping failure doesn't drag tests)</text>
+
+    <rect x="860" y="788" width="660" height="40" rx="6" fill="#0f172a" stroke="#374151"/>
+    <text x="1190" y="814" font-size="14" fill="#86efac" text-anchor="middle">✓ API key only in the separate workflow — PR code has no path to it</text>
+  </g>
+</svg>

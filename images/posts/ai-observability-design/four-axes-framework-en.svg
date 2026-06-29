@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <rect width="1600" height="900" fill="#0f172a"/>
+
+  <text x="800" y="60" font-size="34" fill="#e2e8f0" text-anchor="middle" font-weight="bold" font-family="system-ui, sans-serif">Four monitoring axes, each shaped to its question's nature</text>
+  <text x="800" y="100" font-size="20" fill="#94a3b8" text-anchor="middle" font-family="system-ui, sans-serif">Not "everything through OTel and into Loki" — separate shapes and backends by purpose</text>
+
+  <g font-family="system-ui, sans-serif">
+    <rect x="40" y="150" width="360" height="660" rx="14" fill="#0c2540" stroke="#38bdf8" stroke-width="2"/>
+    <text x="220" y="200" font-size="28" fill="#38bdf8" text-anchor="middle" font-weight="bold">Application</text>
+    <line x1="80" y1="222" x2="360" y2="222" stroke="#1e293b" stroke-width="1"/>
+    <text x="220" y="262" font-size="16" fill="#94a3b8" text-anchor="middle">Question for AI</text>
+    <text x="220" y="298" font-size="18" fill="#e2e8f0" text-anchor="middle" font-weight="bold">"What's happening</text>
+    <text x="220" y="320" font-size="18" fill="#e2e8f0" text-anchor="middle" font-weight="bold">in production right now?"</text>
+    <text x="220" y="346" font-size="15" fill="#cbd5e1" text-anchor="middle">(exploration / cross-search)</text>
+
+    <line x1="80" y1="378" x2="360" y2="378" stroke="#1e293b" stroke-width="1"/>
+    <text x="220" y="416" font-size="16" fill="#94a3b8" text-anchor="middle">Shape</text>
+    <text x="220" y="454" font-size="22" fill="#e2e8f0" text-anchor="middle" font-weight="bold">log + trace</text>
+
+    <line x1="80" y1="496" x2="360" y2="496" stroke="#1e293b" stroke-width="1"/>
+    <text x="220" y="534" font-size="16" fill="#94a3b8" text-anchor="middle">Backend</text>
+    <text x="220" y="572" font-size="22" fill="#38bdf8" text-anchor="middle" font-weight="bold">Loki + Tempo</text>
+
+    <line x1="80" y1="614" x2="360" y2="614" stroke="#1e293b" stroke-width="1"/>
+    <text x="220" y="654" font-size="16" fill="#94a3b8" text-anchor="middle">Notes</text>
+    <text x="220" y="694" font-size="15" fill="#cbd5e1" text-anchor="middle">Instrumented with OpenTelemetry</text>
+    <text x="220" y="718" font-size="15" fill="#cbd5e1" text-anchor="middle">Standard Grafana Cloud stack</text>
+    <text x="220" y="770" font-size="14" fill="#64748b" text-anchor="middle" font-style="italic">Foundation — uniformity over cleverness</text>
+  </g>
+
+  <g font-family="system-ui, sans-serif">
+    <rect x="420" y="150" width="360" height="660" rx="14" fill="#0a1f0a" stroke="#10b981" stroke-width="2"/>
+    <text x="600" y="200" font-size="28" fill="#10b981" text-anchor="middle" font-weight="bold">Infrastructure</text>
+    <line x1="460" y1="222" x2="740" y2="222" stroke="#1e293b" stroke-width="1"/>
+    <text x="600" y="262" font-size="16" fill="#94a3b8" text-anchor="middle">Question for AI</text>
+    <text x="600" y="298" font-size="18" fill="#e2e8f0" text-anchor="middle" font-weight="bold">"Enough resources?</text>
+    <text x="600" y="320" font-size="18" fill="#e2e8f0" text-anchor="middle" font-weight="bold">Anything down?"</text>
+    <text x="600" y="346" font-size="15" fill="#cbd5e1" text-anchor="middle">(time series / real-time)</text>
+
+    <line x1="460" y1="378" x2="740" y2="378" stroke="#1e293b" stroke-width="1"/>
+    <text x="600" y="416" font-size="16" fill="#94a3b8" text-anchor="middle">Shape</text>
+    <text x="600" y="454" font-size="22" fill="#e2e8f0" text-anchor="middle" font-weight="bold">metric</text>
+
+    <line x1="460" y1="496" x2="740" y2="496" stroke="#1e293b" stroke-width="1"/>
+    <text x="600" y="534" font-size="16" fill="#94a3b8" text-anchor="middle">Backend</text>
+    <text x="600" y="572" font-size="22" fill="#10b981" text-anchor="middle" font-weight="bold">Mimir</text>
+
+    <line x1="460" y1="614" x2="740" y2="614" stroke="#1e293b" stroke-width="1"/>
+    <text x="600" y="654" font-size="16" fill="#94a3b8" text-anchor="middle">Notes</text>
+    <text x="600" y="694" font-size="15" fill="#cbd5e1" text-anchor="middle">Cloud Run / BQ / Pub/Sub</text>
+    <text x="600" y="718" font-size="15" fill="#cbd5e1" text-anchor="middle">GCP metrics aggregated</text>
+    <text x="600" y="770" font-size="14" fill="#64748b" text-anchor="middle" font-style="italic">Foundation — standard GCP observability</text>
+  </g>
+
+  <g font-family="system-ui, sans-serif">
+    <rect x="800" y="150" width="360" height="660" rx="14" fill="#1a1408" stroke="#fb923c" stroke-width="3"/>
+    <text x="980" y="200" font-size="28" fill="#fb923c" text-anchor="middle" font-weight="bold">CI</text>
+    <line x1="840" y1="222" x2="1120" y2="222" stroke="#1e293b" stroke-width="1"/>
+    <text x="980" y="262" font-size="16" fill="#94a3b8" text-anchor="middle">Question for AI</text>
+    <text x="980" y="298" font-size="18" fill="#e2e8f0" text-anchor="middle" font-weight="bold">"What broke?</text>
+    <text x="980" y="320" font-size="18" fill="#e2e8f0" text-anchor="middle" font-weight="bold">Since when?"</text>
+    <text x="980" y="346" font-size="15" fill="#cbd5e1" text-anchor="middle">(alert + history)</text>
+
+    <line x1="840" y1="378" x2="1120" y2="378" stroke="#1e293b" stroke-width="1"/>
+    <text x="980" y="416" font-size="16" fill="#94a3b8" text-anchor="middle">Shape</text>
+    <text x="980" y="454" font-size="22" fill="#e2e8f0" text-anchor="middle" font-weight="bold">log + alert</text>
+
+    <line x1="840" y1="496" x2="1120" y2="496" stroke="#1e293b" stroke-width="1"/>
+    <text x="980" y="534" font-size="16" fill="#94a3b8" text-anchor="middle">Backend</text>
+    <text x="980" y="572" font-size="22" fill="#fb923c" text-anchor="middle" font-weight="bold">Loki</text>
+
+    <line x1="840" y1="614" x2="1120" y2="614" stroke="#1e293b" stroke-width="1"/>
+    <text x="980" y="654" font-size="16" fill="#94a3b8" text-anchor="middle">Notes</text>
+    <text x="980" y="694" font-size="15" fill="#cbd5e1" text-anchor="middle">GitHub Actions logs</text>
+    <text x="980" y="718" font-size="15" fill="#cbd5e1" text-anchor="middle">ingested via post-hoc pull</text>
+    <text x="980" y="770" font-size="15" fill="#fb923c" text-anchor="middle" font-weight="bold" font-style="italic">★ Design judgment</text>
+  </g>
+
+  <g font-family="system-ui, sans-serif">
+    <rect x="1180" y="150" width="380" height="660" rx="14" fill="#1a0f1a" stroke="#a78bfa" stroke-width="3"/>
+    <text x="1370" y="200" font-size="28" fill="#a78bfa" text-anchor="middle" font-weight="bold">LLM</text>
+    <line x1="1220" y1="222" x2="1520" y2="222" stroke="#1e293b" stroke-width="1"/>
+    <text x="1370" y="262" font-size="16" fill="#94a3b8" text-anchor="middle">Question for AI</text>
+    <text x="1370" y="298" font-size="18" fill="#e2e8f0" text-anchor="middle" font-weight="bold">"How much</text>
+    <text x="1370" y="320" font-size="18" fill="#e2e8f0" text-anchor="middle" font-weight="bold">are we spending?"</text>
+    <text x="1370" y="346" font-size="15" fill="#cbd5e1" text-anchor="middle">(real-time + structured aggregation)</text>
+
+    <line x1="1220" y1="378" x2="1520" y2="378" stroke="#1e293b" stroke-width="1"/>
+    <text x="1370" y="416" font-size="16" fill="#94a3b8" text-anchor="middle">Shape</text>
+    <text x="1370" y="442" font-size="18" fill="#e2e8f0" text-anchor="middle" font-weight="bold">metric (real-time)</text>
+    <text x="1370" y="470" font-size="18" fill="#e2e8f0" text-anchor="middle" font-weight="bold">+ structured records (aggregation)</text>
+
+    <line x1="1220" y1="496" x2="1520" y2="496" stroke="#1e293b" stroke-width="1"/>
+    <text x="1370" y="534" font-size="16" fill="#94a3b8" text-anchor="middle">Backend</text>
+    <text x="1370" y="558" font-size="19" fill="#a78bfa" text-anchor="middle" font-weight="bold">Prometheus (Gemini)</text>
+    <text x="1370" y="586" font-size="19" fill="#a78bfa" text-anchor="middle" font-weight="bold">+ BigQuery (Claude Code)</text>
+
+    <line x1="1220" y1="614" x2="1520" y2="614" stroke="#1e293b" stroke-width="1"/>
+    <text x="1370" y="654" font-size="16" fill="#94a3b8" text-anchor="middle">Notes</text>
+    <text x="1370" y="694" font-size="15" fill="#cbd5e1" text-anchor="middle">Gemini cost computed client-side</text>
+    <text x="1370" y="718" font-size="15" fill="#cbd5e1" text-anchor="middle">Claude Code straight to BQ</text>
+    <text x="1370" y="770" font-size="15" fill="#a78bfa" text-anchor="middle" font-weight="bold" font-style="italic">★ Design judgment</text>
+  </g>
+
+  <g font-family="system-ui, sans-serif">
+    <rect x="100" y="830" width="1400" height="56" rx="10" fill="#0f172a" stroke="#475569" stroke-width="1"/>
+    <text x="800" y="858" font-size="16" fill="#cbd5e1" text-anchor="middle">Left two (Application / Infrastructure): standard OTel/GCP observability — foundation</text>
+    <text x="800" y="880" font-size="16" fill="#fbbf24" text-anchor="middle" font-weight="bold">Right two (CI / LLM): where AI-era design judgments surface — the focus of this post</text>
+  </g>
+</svg>

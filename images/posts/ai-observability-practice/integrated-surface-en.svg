@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <rect width="1600" height="900" fill="#0f172a"/>
+
+  <defs>
+    <marker id="a-sky" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#38bdf8"/></marker>
+    <marker id="a-yellow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#fbbf24"/></marker>
+    <marker id="a-muted" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#94a3b8"/></marker>
+  </defs>
+
+  <text x="800" y="60" font-size="34" fill="#e2e8f0" text-anchor="middle" font-weight="bold" font-family="system-ui, sans-serif">"Humans = Web, AI = MCP" sharing the same backend</text>
+  <text x="800" y="100" font-size="20" fill="#94a3b8" text-anchor="middle" font-family="system-ui, sans-serif">Don't split human and AI aggregations — avoid the double-maintenance trap</text>
+
+  <g font-family="system-ui, sans-serif">
+    <rect x="80" y="150" width="620" height="110" rx="14" fill="#0c2540" stroke="#38bdf8" stroke-width="2"/>
+    <text x="390" y="194" font-size="26" fill="#38bdf8" text-anchor="middle" font-weight="bold">Humans (CTO / dev / non-eng)</text>
+    <text x="390" y="226" font-size="15" fill="#cbd5e1" text-anchor="middle">"What was Claude Code spend by team last month?"</text>
+    <text x="390" y="248" font-size="15" fill="#cbd5e1" text-anchor="middle">"How much Gemini are we burning right now?"</text>
+  </g>
+
+  <g font-family="system-ui, sans-serif">
+    <rect x="900" y="150" width="620" height="110" rx="14" fill="#1e1a09" stroke="#fbbf24" stroke-width="2"/>
+    <text x="1210" y="194" font-size="26" fill="#fbbf24" text-anchor="middle" font-weight="bold">AI agents</text>
+    <text x="1210" y="226" font-size="15" fill="#cbd5e1" text-anchor="middle">"What hour had the most errors on Service X last week?"</text>
+    <text x="1210" y="248" font-size="15" fill="#cbd5e1" text-anchor="middle">"How heavily is this MCP being used?"</text>
+  </g>
+
+  <line x1="390" y1="260" x2="390" y2="310" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#a-sky)"/>
+  <line x1="1210" y1="260" x2="1210" y2="310" stroke="#fbbf24" stroke-width="2.5" marker-end="url(#a-yellow)"/>
+
+  <g font-family="system-ui, sans-serif">
+    <rect x="80" y="320" width="620" height="180" rx="14" fill="#0f172a" stroke="#38bdf8" stroke-width="2"/>
+    <text x="390" y="362" font-size="24" fill="#38bdf8" text-anchor="middle" font-weight="bold">Web dashboard (PI Lab)</text>
+    <text x="390" y="392" font-size="15" fill="#94a3b8" text-anchor="middle">React → internal API → each backend</text>
+
+    <rect x="120" y="412" width="180" height="68" rx="6" fill="#0c2540" stroke="#475569"/>
+    <text x="210" y="442" font-size="15" fill="#cbd5e1" text-anchor="middle">/cc-usage</text>
+    <text x="210" y="466" font-size="12" fill="#94a3b8" text-anchor="middle">Claude Code usage</text>
+
+    <rect x="310" y="412" width="180" height="68" rx="6" fill="#0c2540" stroke="#475569"/>
+    <text x="400" y="442" font-size="15" fill="#cbd5e1" text-anchor="middle">/mcp-usage</text>
+    <text x="400" y="466" font-size="12" fill="#94a3b8" text-anchor="middle">MCP usage</text>
+
+    <rect x="500" y="412" width="180" height="68" rx="6" fill="#0c2540" stroke="#475569"/>
+    <text x="590" y="442" font-size="15" fill="#cbd5e1" text-anchor="middle">/infra-cost</text>
+    <text x="590" y="466" font-size="12" fill="#94a3b8" text-anchor="middle">Infrastructure cost</text>
+  </g>
+
+  <g font-family="system-ui, sans-serif">
+    <rect x="900" y="320" width="620" height="180" rx="14" fill="#0f172a" stroke="#fbbf24" stroke-width="2"/>
+    <text x="1210" y="362" font-size="24" fill="#fbbf24" text-anchor="middle" font-weight="bold">MCP servers</text>
+    <text x="1210" y="392" font-size="15" fill="#94a3b8" text-anchor="middle">Natural-language / SQL queries via MCP</text>
+
+    <rect x="940" y="412" width="280" height="68" rx="6" fill="#1e1a09" stroke="#475569"/>
+    <text x="1080" y="442" font-size="15" fill="#cbd5e1" text-anchor="middle">Grafana MCP</text>
+    <text x="1080" y="466" font-size="12" fill="#94a3b8" text-anchor="middle">Loki / Mimir / Prometheus / Tempo</text>
+
+    <rect x="1230" y="412" width="260" height="68" rx="6" fill="#1e1a09" stroke="#475569"/>
+    <text x="1360" y="442" font-size="15" fill="#cbd5e1" text-anchor="middle">BQ MCP</text>
+    <text x="1360" y="466" font-size="12" fill="#94a3b8" text-anchor="middle">claude_usage / mcp_tool_calls</text>
+  </g>
+
+  <line x1="390" y1="500" x2="390" y2="560" stroke="#94a3b8" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#a-muted)"/>
+  <line x1="1210" y1="500" x2="1210" y2="560" stroke="#94a3b8" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#a-muted)"/>
+
+  <g font-family="system-ui, sans-serif">
+    <rect x="80" y="570" width="1440" height="220" rx="14" fill="#0a1f0a" stroke="#4ade80" stroke-width="3"/>
+    <text x="800" y="612" font-size="26" fill="#4ade80" text-anchor="middle" font-weight="bold">Shared backend (three shapes)</text>
+    <text x="800" y="640" font-size="15" fill="#cbd5e1" text-anchor="middle">Humans and AI both see the same backend — aggregation logic exists once</text>
+
+    <rect x="150" y="664" width="400" height="110" rx="10" fill="#1a0f1a" stroke="#a78bfa" stroke-width="2"/>
+    <text x="350" y="700" font-size="22" fill="#a78bfa" text-anchor="middle" font-weight="bold">Prometheus</text>
+    <text x="350" y="726" font-size="14" fill="#cbd5e1" text-anchor="middle">Time-series metrics</text>
+    <text x="350" y="750" font-size="13" fill="#94a3b8" text-anchor="middle">Gemini cost / Infrastructure metrics</text>
+
+    <rect x="600" y="664" width="400" height="110" rx="10" fill="#0a1f0a" stroke="#4ade80" stroke-width="2"/>
+    <text x="800" y="700" font-size="22" fill="#4ade80" text-anchor="middle" font-weight="bold">BigQuery</text>
+    <text x="800" y="726" font-size="14" fill="#cbd5e1" text-anchor="middle">Structured records (SQL aggregation)</text>
+    <text x="800" y="750" font-size="13" fill="#94a3b8" text-anchor="middle">Claude Code usage / MCP usage logs</text>
+
+    <rect x="1050" y="664" width="400" height="110" rx="10" fill="#0c2540" stroke="#38bdf8" stroke-width="2"/>
+    <text x="1250" y="700" font-size="22" fill="#38bdf8" text-anchor="middle" font-weight="bold">Loki</text>
+    <text x="1250" y="726" font-size="14" fill="#cbd5e1" text-anchor="middle">Log / alert (exploration)</text>
+    <text x="1250" y="750" font-size="13" fill="#94a3b8" text-anchor="middle">App + CI logs</text>
+  </g>
+
+  <g font-family="system-ui, sans-serif">
+    <text x="800" y="826" font-size="16" fill="#fbbf24" text-anchor="middle" font-weight="bold">Design pivot: build the backend once, split only the consumer-facing interface (Web / MCP)</text>
+    <text x="800" y="852" font-size="14" fill="#cbd5e1" text-anchor="middle">Separate "AI aggregation table" and "human aggregation table" and numbers drift — double maintenance starts</text>
+    <text x="800" y="876" font-size="13" fill="#94a3b8" text-anchor="middle">MCP is the piece that makes "make the observability stack queryable by AI" actually work</text>
+  </g>
+</svg>
