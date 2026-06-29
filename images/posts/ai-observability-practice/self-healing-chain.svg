@@ -8,89 +8,89 @@
     <marker id="a-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#4ade80"/></marker>
   </defs>
 
-  <text x="800" y="58" font-size="30" fill="#e2e8f0" text-anchor="middle" font-weight="bold" font-family="Noto Sans JP, system-ui, sans-serif">CI失敗 / 本番アラートから自動で修正PRが起票されるまでの連鎖</text>
-  <text x="800" y="94" font-size="17" fill="#94a3b8" text-anchor="middle" font-family="Noto Sans JP, system-ui, sans-serif">観測スタックが正しい形で「何が壊れたか」 を渡せるから、 AI が自力で因果まで辿れる</text>
+  <text x="800" y="60" font-size="36" fill="#e2e8f0" text-anchor="middle" font-weight="bold" font-family="Noto Sans JP, system-ui, sans-serif">CI失敗 / 本番アラートから自動で修正PRが起票されるまでの連鎖</text>
+  <text x="800" y="100" font-size="21" fill="#94a3b8" text-anchor="middle" font-family="Noto Sans JP, system-ui, sans-serif">観測スタックが正しい形で「何が壊れたか」を渡せるから、AIが自力で因果まで辿れる</text>
 
   <g font-family="Noto Sans JP, system-ui, sans-serif">
-    <rect x="60" y="140" width="320" height="180" rx="12" fill="#1a0f0f" stroke="#ef4444" stroke-width="2"/>
-    <text x="220" y="174" font-size="17" fill="#ef4444" text-anchor="middle" font-weight="bold">① 検知</text>
-    <text x="220" y="200" font-size="13" fill="#cbd5e1" text-anchor="middle">CI 失敗 / 本番アラート</text>
-    <line x1="100" y1="216" x2="340" y2="216" stroke="#1e293b"/>
-    <text x="220" y="246" font-size="13" fill="#94a3b8" text-anchor="middle">Loki LogQL alert 発火</text>
-    <text x="220" y="268" font-size="11" fill="#94a3b8" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">{service_name="ci",</text>
-    <text x="220" y="284" font-size="11" fill="#94a3b8" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">ref="main", status="failure"}</text>
-    <text x="220" y="306" font-size="11" fill="#fb923c" text-anchor="middle" font-style="italic">観測スタックが起点</text>
+    <rect x="40" y="150" width="340" height="220" rx="12" fill="#1a0f0f" stroke="#ef4444" stroke-width="2"/>
+    <text x="210" y="190" font-size="22" fill="#ef4444" text-anchor="middle" font-weight="bold">① 検知</text>
+    <text x="210" y="220" font-size="16" fill="#cbd5e1" text-anchor="middle">CI失敗 / 本番アラート</text>
+    <line x1="80" y1="238" x2="340" y2="238" stroke="#1e293b"/>
+    <text x="210" y="274" font-size="15" fill="#94a3b8" text-anchor="middle">Loki LogQL alert発火</text>
+    <text x="210" y="302" font-size="13" fill="#94a3b8" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">{service_name="ci",</text>
+    <text x="210" y="322" font-size="13" fill="#94a3b8" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">ref="main", status="failure"}</text>
+    <text x="210" y="354" font-size="13" fill="#fb923c" text-anchor="middle" font-style="italic">観測スタックが起点</text>
   </g>
 
-  <line x1="380" y1="230" x2="430" y2="230" stroke="#fb923c" stroke-width="2.5" marker-end="url(#a-orange)"/>
+  <line x1="380" y1="260" x2="430" y2="260" stroke="#fb923c" stroke-width="3" marker-end="url(#a-orange)"/>
 
   <g font-family="Noto Sans JP, system-ui, sans-serif">
-    <rect x="440" y="140" width="320" height="180" rx="12" fill="#1a1408" stroke="#fb923c" stroke-width="2"/>
-    <text x="600" y="174" font-size="17" fill="#fb923c" text-anchor="middle" font-weight="bold">② 配送</text>
-    <text x="600" y="200" font-size="13" fill="#cbd5e1" text-anchor="middle">event-relay (社内 webhook ハブ)</text>
-    <line x1="480" y1="216" x2="720" y2="216" stroke="#1e293b"/>
-    <text x="600" y="246" font-size="13" fill="#94a3b8" text-anchor="middle">アラート → webhook POST</text>
-    <text x="600" y="270" font-size="12" fill="#94a3b8" text-anchor="middle">配送先を1ヶ所に集約</text>
-    <text x="600" y="294" font-size="11" fill="#fb923c" text-anchor="middle" font-style="italic">配送先ルーティングのハブ</text>
+    <rect x="440" y="150" width="340" height="220" rx="12" fill="#1a1408" stroke="#fb923c" stroke-width="2"/>
+    <text x="610" y="190" font-size="22" fill="#fb923c" text-anchor="middle" font-weight="bold">② 配送</text>
+    <text x="610" y="220" font-size="16" fill="#cbd5e1" text-anchor="middle">event-relay（社内webhookハブ）</text>
+    <line x1="480" y1="238" x2="740" y2="238" stroke="#1e293b"/>
+    <text x="610" y="278" font-size="15" fill="#94a3b8" text-anchor="middle">アラート → webhook POST</text>
+    <text x="610" y="306" font-size="14" fill="#94a3b8" text-anchor="middle">配送先を1ヶ所に集約</text>
+    <text x="610" y="346" font-size="13" fill="#fb923c" text-anchor="middle" font-style="italic">配送先ルーティングのハブ</text>
   </g>
 
-  <line x1="760" y1="230" x2="810" y2="230" stroke="#fb923c" stroke-width="2.5" marker-end="url(#a-orange)"/>
+  <line x1="780" y1="260" x2="830" y2="260" stroke="#fb923c" stroke-width="3" marker-end="url(#a-orange)"/>
 
   <g font-family="Noto Sans JP, system-ui, sans-serif">
-    <rect x="820" y="140" width="320" height="180" rx="12" fill="#1a0f1a" stroke="#a78bfa" stroke-width="2"/>
-    <text x="980" y="174" font-size="17" fill="#a78bfa" text-anchor="middle" font-weight="bold">③ 起動</text>
-    <text x="980" y="200" font-size="13" fill="#cbd5e1" text-anchor="middle">auto-review bot</text>
-    <line x1="860" y1="216" x2="1100" y2="216" stroke="#1e293b"/>
-    <text x="980" y="246" font-size="13" fill="#94a3b8" text-anchor="middle">Claude Code を背負った</text>
-    <text x="980" y="266" font-size="13" fill="#94a3b8" text-anchor="middle">AI エージェント</text>
-    <text x="980" y="294" font-size="11" fill="#a78bfa" text-anchor="middle" font-style="italic">行動レイヤーへ</text>
+    <rect x="840" y="150" width="340" height="220" rx="12" fill="#1a0f1a" stroke="#a78bfa" stroke-width="2"/>
+    <text x="1010" y="190" font-size="22" fill="#a78bfa" text-anchor="middle" font-weight="bold">③ 起動</text>
+    <text x="1010" y="220" font-size="16" fill="#cbd5e1" text-anchor="middle">auto-review bot</text>
+    <line x1="880" y1="238" x2="1140" y2="238" stroke="#1e293b"/>
+    <text x="1010" y="278" font-size="15" fill="#94a3b8" text-anchor="middle">Claude Codeを背負った</text>
+    <text x="1010" y="302" font-size="15" fill="#94a3b8" text-anchor="middle">AIエージェント</text>
+    <text x="1010" y="346" font-size="13" fill="#a78bfa" text-anchor="middle" font-style="italic">行動レイヤーへ</text>
   </g>
 
-  <line x1="1140" y1="230" x2="1190" y2="230" stroke="#a78bfa" stroke-width="2.5" marker-end="url(#a-violet)"/>
+  <line x1="1180" y1="260" x2="1230" y2="260" stroke="#a78bfa" stroke-width="3" marker-end="url(#a-violet)"/>
 
   <g font-family="Noto Sans JP, system-ui, sans-serif">
-    <rect x="1200" y="140" width="340" height="180" rx="12" fill="#1a0f1a" stroke="#a78bfa" stroke-width="2"/>
-    <text x="1370" y="174" font-size="17" fill="#a78bfa" text-anchor="middle" font-weight="bold">④ コンテキスト収集</text>
-    <line x1="1240" y1="190" x2="1500" y2="190" stroke="#1e293b"/>
-    <text x="1370" y="216" font-size="13" fill="#cbd5e1" text-anchor="middle" font-weight="bold">Grafana MCP</text>
-    <text x="1370" y="236" font-size="12" fill="#94a3b8" text-anchor="middle">→ full ログ取得</text>
-    <text x="1370" y="262" font-size="13" fill="#cbd5e1" text-anchor="middle" font-weight="bold">Product Graph MCP</text>
-    <text x="1370" y="282" font-size="12" fill="#94a3b8" text-anchor="middle">→ 関連 PR / commit / コード</text>
-    <text x="1370" y="306" font-size="11" fill="#a78bfa" text-anchor="middle" font-style="italic">観測 + 構造を統合</text>
+    <rect x="1240" y="150" width="320" height="220" rx="12" fill="#1a0f1a" stroke="#a78bfa" stroke-width="2"/>
+    <text x="1400" y="190" font-size="22" fill="#a78bfa" text-anchor="middle" font-weight="bold">④ コンテキスト収集</text>
+    <line x1="1280" y1="208" x2="1520" y2="208" stroke="#1e293b"/>
+    <text x="1400" y="236" font-size="15" fill="#cbd5e1" text-anchor="middle" font-weight="bold">Grafana MCP</text>
+    <text x="1400" y="258" font-size="14" fill="#94a3b8" text-anchor="middle">→ full ログ取得</text>
+    <text x="1400" y="290" font-size="15" fill="#cbd5e1" text-anchor="middle" font-weight="bold">Product Graph MCP</text>
+    <text x="1400" y="312" font-size="14" fill="#94a3b8" text-anchor="middle">→ 関連PR / commit / コード</text>
+    <text x="1400" y="346" font-size="13" fill="#a78bfa" text-anchor="middle" font-style="italic">観測 + 構造を統合</text>
   </g>
 
-  <line x1="1370" y1="330" x2="1370" y2="430" stroke="#a78bfa" stroke-width="2.5" marker-end="url(#a-violet)"/>
-  <text x="1390" y="380" font-size="13" fill="#a78bfa" text-anchor="start">分析・修正案生成</text>
+  <line x1="1400" y1="380" x2="1400" y2="480" stroke="#a78bfa" stroke-width="3" marker-end="url(#a-violet)"/>
+  <text x="1420" y="434" font-size="16" fill="#a78bfa" text-anchor="start">分析・修正案生成</text>
 
   <g font-family="Noto Sans JP, system-ui, sans-serif">
-    <rect x="1100" y="440" width="440" height="180" rx="12" fill="#0a1f0a" stroke="#4ade80" stroke-width="3"/>
-    <text x="1320" y="478" font-size="17" fill="#4ade80" text-anchor="middle" font-weight="bold">⑤ 修正提案</text>
-    <text x="1320" y="504" font-size="14" fill="#cbd5e1" text-anchor="middle">修正 PR を起票</text>
-    <line x1="1140" y1="520" x2="1500" y2="520" stroke="#1e293b"/>
-    <text x="1320" y="548" font-size="13" fill="#94a3b8" text-anchor="middle">commit メッセージ / 差分 /</text>
-    <text x="1320" y="568" font-size="13" fill="#94a3b8" text-anchor="middle">原因コードへのリンクを含む</text>
-    <text x="1320" y="596" font-size="12" fill="#4ade80" text-anchor="middle" font-weight="bold">人間レビュアー不在でもOK</text>
+    <rect x="1080" y="490" width="480" height="200" rx="12" fill="#0a1f0a" stroke="#4ade80" stroke-width="3"/>
+    <text x="1320" y="534" font-size="22" fill="#4ade80" text-anchor="middle" font-weight="bold">⑤ 修正提案</text>
+    <text x="1320" y="562" font-size="17" fill="#cbd5e1" text-anchor="middle">修正PRを起票</text>
+    <line x1="1120" y1="580" x2="1520" y2="580" stroke="#1e293b"/>
+    <text x="1320" y="612" font-size="15" fill="#94a3b8" text-anchor="middle">commitメッセージ / 差分 /</text>
+    <text x="1320" y="634" font-size="15" fill="#94a3b8" text-anchor="middle">原因コードへのリンクを含む</text>
+    <text x="1320" y="668" font-size="14" fill="#4ade80" text-anchor="middle" font-weight="bold">人間レビュアー不在でもOK</text>
   </g>
 
-  <line x1="1100" y1="530" x2="980" y2="530" stroke="#4ade80" stroke-width="2.5" marker-end="url(#a-green)"/>
+  <line x1="1080" y1="590" x2="900" y2="590" stroke="#4ade80" stroke-width="3" marker-end="url(#a-green)"/>
 
   <g font-family="Noto Sans JP, system-ui, sans-serif">
-    <rect x="660" y="440" width="320" height="180" rx="12" fill="#0a1f0a" stroke="#4ade80" stroke-width="2"/>
-    <text x="820" y="478" font-size="17" fill="#4ade80" text-anchor="middle" font-weight="bold">⑥ 検証</text>
-    <text x="820" y="504" font-size="14" fill="#cbd5e1" text-anchor="middle">CI が再走</text>
-    <line x1="700" y1="520" x2="940" y2="520" stroke="#1e293b"/>
-    <text x="820" y="548" font-size="13" fill="#94a3b8" text-anchor="middle">CI 通れば bot 自身が</text>
-    <text x="820" y="568" font-size="13" fill="#94a3b8" text-anchor="middle">auto-merge</text>
-    <text x="820" y="596" font-size="12" fill="#94a3b8" text-anchor="middle">通らなければ別のbotがレビュー</text>
+    <rect x="540" y="490" width="340" height="200" rx="12" fill="#0a1f0a" stroke="#4ade80" stroke-width="2"/>
+    <text x="710" y="534" font-size="22" fill="#4ade80" text-anchor="middle" font-weight="bold">⑥ 検証</text>
+    <text x="710" y="562" font-size="17" fill="#cbd5e1" text-anchor="middle">CIが再走</text>
+    <line x1="580" y1="580" x2="840" y2="580" stroke="#1e293b"/>
+    <text x="710" y="612" font-size="15" fill="#94a3b8" text-anchor="middle">CI通ればbot自身が</text>
+    <text x="710" y="634" font-size="15" fill="#94a3b8" text-anchor="middle">auto-merge</text>
+    <text x="710" y="668" font-size="14" fill="#94a3b8" text-anchor="middle">通らなければ別botがレビュー</text>
   </g>
 
   <g font-family="Noto Sans JP, system-ui, sans-serif">
-    <rect x="100" y="690" width="1400" height="180" rx="14" fill="#0f172a" stroke="#fb923c" stroke-width="1"/>
-    <text x="800" y="724" font-size="20" fill="#fb923c" text-anchor="middle" font-weight="bold">観測の質が AI 自律運用の天井になる</text>
-    <text x="800" y="754" font-size="13" fill="#cbd5e1" text-anchor="middle">この連鎖が成立するには、 ①〜④の観測スタック側が以下を満たしている必要がある:</text>
+    <rect x="80" y="730" width="1440" height="160" rx="14" fill="#0f172a" stroke="#fb923c" stroke-width="1"/>
+    <text x="800" y="766" font-size="22" fill="#fb923c" text-anchor="middle" font-weight="bold">観測の質がAI自律運用の天井になる</text>
+    <text x="800" y="794" font-size="15" fill="#cbd5e1" text-anchor="middle">この連鎖が成立するには、①〜④の観測スタック側が以下を満たしている必要がある:</text>
 
-    <text x="180" y="794" font-size="13" fill="#fca5a5" text-anchor="start">✗ error として認識されない壊れ方があると → AI は気付けない</text>
-    <text x="180" y="820" font-size="13" fill="#fca5a5" text-anchor="start">✗ ログはあるが stacktrace が落ちている → AI は原因に辿り着けない</text>
-    <text x="180" y="846" font-size="13" fill="#fca5a5" text-anchor="start">✗ 関連 PR / commit / コードが graph に乗っていない → AI は文脈を持てない</text>
+    <text x="200" y="828" font-size="15" fill="#fca5a5" text-anchor="start">✗ errorとして認識されない壊れ方があると → AIは気付けない</text>
+    <text x="200" y="852" font-size="15" fill="#fca5a5" text-anchor="start">✗ ログはあるがstacktraceが落ちている → AIは原因に辿り着けない</text>
+    <text x="200" y="876" font-size="15" fill="#fca5a5" text-anchor="start">✗ 関連PR / commit / コードがgraphに乗っていない → AIは文脈を持てない</text>
   </g>
 </svg>

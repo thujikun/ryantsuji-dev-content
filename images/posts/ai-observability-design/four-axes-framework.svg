@@ -2,106 +2,106 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
   <rect width="1600" height="900" fill="#0f172a"/>
 
-  <text x="800" y="58" font-size="30" fill="#e2e8f0" text-anchor="middle" font-weight="bold" font-family="Noto Sans JP, system-ui, sans-serif">4つの監視対象を、 問いの質に合わせて別の形でAIに渡す</text>
-  <text x="800" y="94" font-size="17" fill="#94a3b8" text-anchor="middle" font-family="Noto Sans JP, system-ui, sans-serif">「全部 OTel に乗せて全部 Loki に流せばいい」 ではない、 目的別に shape + backend を分ける設計</text>
+  <text x="800" y="60" font-size="38" fill="#e2e8f0" text-anchor="middle" font-weight="bold" font-family="Noto Sans JP, system-ui, sans-serif">4つの監視対象を、問いの質に合わせて別の形でAIに渡す</text>
+  <text x="800" y="100" font-size="22" fill="#94a3b8" text-anchor="middle" font-family="Noto Sans JP, system-ui, sans-serif">「全部OTelに乗せて全部Lokiに流せばいい」ではない、目的別に形+backendを分ける設計</text>
 
   <g font-family="Noto Sans JP, system-ui, sans-serif">
-    <rect x="40" y="140" width="360" height="660" rx="14" fill="#0c2540" stroke="#38bdf8" stroke-width="2"/>
-    <text x="220" y="186" font-size="24" fill="#38bdf8" text-anchor="middle" font-weight="bold">アプリケーション</text>
-    <line x1="80" y1="208" x2="360" y2="208" stroke="#1e293b" stroke-width="1"/>
-    <text x="220" y="246" font-size="13" fill="#94a3b8" text-anchor="middle">AIに答えさせたい問い</text>
-    <text x="220" y="280" font-size="16" fill="#e2e8f0" text-anchor="middle" font-weight="bold">「いま本番で何が起きてる？」</text>
-    <text x="220" y="306" font-size="13" fill="#cbd5e1" text-anchor="middle">(探索 / 横断検索)</text>
+    <rect x="40" y="150" width="360" height="660" rx="14" fill="#0c2540" stroke="#38bdf8" stroke-width="2"/>
+    <text x="220" y="200" font-size="30" fill="#38bdf8" text-anchor="middle" font-weight="bold">アプリケーション</text>
+    <line x1="80" y1="222" x2="360" y2="222" stroke="#1e293b" stroke-width="1"/>
+    <text x="220" y="262" font-size="17" fill="#94a3b8" text-anchor="middle">AIに答えさせたい問い</text>
+    <text x="220" y="300" font-size="20" fill="#e2e8f0" text-anchor="middle" font-weight="bold">「いま本番で何が起きてる？」</text>
+    <text x="220" y="328" font-size="17" fill="#cbd5e1" text-anchor="middle">(探索 / 横断検索)</text>
 
-    <line x1="80" y1="350" x2="360" y2="350" stroke="#1e293b" stroke-width="1"/>
-    <text x="220" y="388" font-size="13" fill="#94a3b8" text-anchor="middle">shape</text>
-    <text x="220" y="424" font-size="18" fill="#e2e8f0" text-anchor="middle" font-weight="bold">log + trace</text>
+    <line x1="80" y1="370" x2="360" y2="370" stroke="#1e293b" stroke-width="1"/>
+    <text x="220" y="410" font-size="17" fill="#94a3b8" text-anchor="middle">形</text>
+    <text x="220" y="450" font-size="24" fill="#e2e8f0" text-anchor="middle" font-weight="bold">log + trace</text>
 
-    <line x1="80" y1="470" x2="360" y2="470" stroke="#1e293b" stroke-width="1"/>
-    <text x="220" y="508" font-size="13" fill="#94a3b8" text-anchor="middle">backend</text>
-    <text x="220" y="546" font-size="18" fill="#38bdf8" text-anchor="middle" font-weight="bold">Loki + Tempo</text>
+    <line x1="80" y1="492" x2="360" y2="492" stroke="#1e293b" stroke-width="1"/>
+    <text x="220" y="532" font-size="17" fill="#94a3b8" text-anchor="middle">backend</text>
+    <text x="220" y="572" font-size="24" fill="#38bdf8" text-anchor="middle" font-weight="bold">Loki + Tempo</text>
 
-    <line x1="80" y1="600" x2="360" y2="600" stroke="#1e293b" stroke-width="1"/>
-    <text x="220" y="638" font-size="13" fill="#94a3b8" text-anchor="middle">特徴</text>
-    <text x="220" y="678" font-size="13" fill="#cbd5e1" text-anchor="middle">OpenTelemetryで計装</text>
-    <text x="220" y="702" font-size="13" fill="#cbd5e1" text-anchor="middle">標準的なGrafanaスタック</text>
-    <text x="220" y="752" font-size="11" fill="#475569" text-anchor="middle" font-style="italic">土台 — 工夫より統一を優先</text>
+    <line x1="80" y1="614" x2="360" y2="614" stroke="#1e293b" stroke-width="1"/>
+    <text x="220" y="654" font-size="17" fill="#94a3b8" text-anchor="middle">特徴</text>
+    <text x="220" y="694" font-size="17" fill="#cbd5e1" text-anchor="middle">OpenTelemetryで計装</text>
+    <text x="220" y="720" font-size="17" fill="#cbd5e1" text-anchor="middle">標準的なGrafanaスタック</text>
+    <text x="220" y="772" font-size="15" fill="#64748b" text-anchor="middle" font-style="italic">土台 ── 工夫より統一を優先</text>
   </g>
 
   <g font-family="Noto Sans JP, system-ui, sans-serif">
-    <rect x="420" y="140" width="360" height="660" rx="14" fill="#0a1f0a" stroke="#10b981" stroke-width="2"/>
-    <text x="600" y="186" font-size="24" fill="#10b981" text-anchor="middle" font-weight="bold">インフラ</text>
-    <line x1="460" y1="208" x2="740" y2="208" stroke="#1e293b" stroke-width="1"/>
-    <text x="600" y="246" font-size="13" fill="#94a3b8" text-anchor="middle">AIに答えさせたい問い</text>
-    <text x="600" y="280" font-size="16" fill="#e2e8f0" text-anchor="middle" font-weight="bold">「リソース足りてる？」</text>
-    <text x="600" y="306" font-size="13" fill="#cbd5e1" text-anchor="middle">(時系列 / リアルタイム)</text>
+    <rect x="420" y="150" width="360" height="660" rx="14" fill="#0a1f0a" stroke="#10b981" stroke-width="2"/>
+    <text x="600" y="200" font-size="30" fill="#10b981" text-anchor="middle" font-weight="bold">インフラ</text>
+    <line x1="460" y1="222" x2="740" y2="222" stroke="#1e293b" stroke-width="1"/>
+    <text x="600" y="262" font-size="17" fill="#94a3b8" text-anchor="middle">AIに答えさせたい問い</text>
+    <text x="600" y="300" font-size="20" fill="#e2e8f0" text-anchor="middle" font-weight="bold">「リソース足りてる？」</text>
+    <text x="600" y="328" font-size="17" fill="#cbd5e1" text-anchor="middle">(時系列 / リアルタイム)</text>
 
-    <line x1="460" y1="350" x2="740" y2="350" stroke="#1e293b" stroke-width="1"/>
-    <text x="600" y="388" font-size="13" fill="#94a3b8" text-anchor="middle">shape</text>
-    <text x="600" y="424" font-size="18" fill="#e2e8f0" text-anchor="middle" font-weight="bold">metric</text>
+    <line x1="460" y1="370" x2="740" y2="370" stroke="#1e293b" stroke-width="1"/>
+    <text x="600" y="410" font-size="17" fill="#94a3b8" text-anchor="middle">形</text>
+    <text x="600" y="450" font-size="24" fill="#e2e8f0" text-anchor="middle" font-weight="bold">metric</text>
 
-    <line x1="460" y1="470" x2="740" y2="470" stroke="#1e293b" stroke-width="1"/>
-    <text x="600" y="508" font-size="13" fill="#94a3b8" text-anchor="middle">backend</text>
-    <text x="600" y="546" font-size="18" fill="#10b981" text-anchor="middle" font-weight="bold">Mimir</text>
+    <line x1="460" y1="492" x2="740" y2="492" stroke="#1e293b" stroke-width="1"/>
+    <text x="600" y="532" font-size="17" fill="#94a3b8" text-anchor="middle">backend</text>
+    <text x="600" y="572" font-size="24" fill="#10b981" text-anchor="middle" font-weight="bold">Mimir</text>
 
-    <line x1="460" y1="600" x2="740" y2="600" stroke="#1e293b" stroke-width="1"/>
-    <text x="600" y="638" font-size="13" fill="#94a3b8" text-anchor="middle">特徴</text>
-    <text x="600" y="678" font-size="13" fill="#cbd5e1" text-anchor="middle">Cloud Run / BQ / Pub/Sub</text>
-    <text x="600" y="702" font-size="13" fill="#cbd5e1" text-anchor="middle">GCPメトリクスを集約</text>
-    <text x="600" y="752" font-size="11" fill="#475569" text-anchor="middle" font-style="italic">土台 — 標準的なGCP観測</text>
+    <line x1="460" y1="614" x2="740" y2="614" stroke="#1e293b" stroke-width="1"/>
+    <text x="600" y="654" font-size="17" fill="#94a3b8" text-anchor="middle">特徴</text>
+    <text x="600" y="694" font-size="17" fill="#cbd5e1" text-anchor="middle">Cloud Run / BQ / Pub/Sub</text>
+    <text x="600" y="720" font-size="17" fill="#cbd5e1" text-anchor="middle">GCPメトリクスを集約</text>
+    <text x="600" y="772" font-size="15" fill="#64748b" text-anchor="middle" font-style="italic">土台 ── 標準的なGCP観測</text>
   </g>
 
   <g font-family="Noto Sans JP, system-ui, sans-serif">
-    <rect x="800" y="140" width="360" height="660" rx="14" fill="#1a1408" stroke="#fb923c" stroke-width="3"/>
-    <text x="980" y="186" font-size="24" fill="#fb923c" text-anchor="middle" font-weight="bold">CI</text>
-    <line x1="840" y1="208" x2="1120" y2="208" stroke="#1e293b" stroke-width="1"/>
-    <text x="980" y="246" font-size="13" fill="#94a3b8" text-anchor="middle">AIに答えさせたい問い</text>
-    <text x="980" y="280" font-size="16" fill="#e2e8f0" text-anchor="middle" font-weight="bold">「何が壊れた？」</text>
-    <text x="980" y="306" font-size="13" fill="#cbd5e1" text-anchor="middle">(alert + 履歴探索)</text>
+    <rect x="800" y="150" width="360" height="660" rx="14" fill="#1a1408" stroke="#fb923c" stroke-width="3"/>
+    <text x="980" y="200" font-size="30" fill="#fb923c" text-anchor="middle" font-weight="bold">CI</text>
+    <line x1="840" y1="222" x2="1120" y2="222" stroke="#1e293b" stroke-width="1"/>
+    <text x="980" y="262" font-size="17" fill="#94a3b8" text-anchor="middle">AIに答えさせたい問い</text>
+    <text x="980" y="300" font-size="20" fill="#e2e8f0" text-anchor="middle" font-weight="bold">「何が壊れた？」</text>
+    <text x="980" y="328" font-size="17" fill="#cbd5e1" text-anchor="middle">(alert + 履歴探索)</text>
 
-    <line x1="840" y1="350" x2="1120" y2="350" stroke="#1e293b" stroke-width="1"/>
-    <text x="980" y="388" font-size="13" fill="#94a3b8" text-anchor="middle">shape</text>
-    <text x="980" y="424" font-size="18" fill="#e2e8f0" text-anchor="middle" font-weight="bold">log + alert</text>
+    <line x1="840" y1="370" x2="1120" y2="370" stroke="#1e293b" stroke-width="1"/>
+    <text x="980" y="410" font-size="17" fill="#94a3b8" text-anchor="middle">形</text>
+    <text x="980" y="450" font-size="24" fill="#e2e8f0" text-anchor="middle" font-weight="bold">log + alert</text>
 
-    <line x1="840" y1="470" x2="1120" y2="470" stroke="#1e293b" stroke-width="1"/>
-    <text x="980" y="508" font-size="13" fill="#94a3b8" text-anchor="middle">backend</text>
-    <text x="980" y="546" font-size="18" fill="#fb923c" text-anchor="middle" font-weight="bold">Loki</text>
+    <line x1="840" y1="492" x2="1120" y2="492" stroke="#1e293b" stroke-width="1"/>
+    <text x="980" y="532" font-size="17" fill="#94a3b8" text-anchor="middle">backend</text>
+    <text x="980" y="572" font-size="24" fill="#fb923c" text-anchor="middle" font-weight="bold">Loki</text>
 
-    <line x1="840" y1="600" x2="1120" y2="600" stroke="#1e293b" stroke-width="1"/>
-    <text x="980" y="638" font-size="13" fill="#94a3b8" text-anchor="middle">特徴</text>
-    <text x="980" y="678" font-size="13" fill="#cbd5e1" text-anchor="middle">GitHub Actions ログを</text>
-    <text x="980" y="702" font-size="13" fill="#cbd5e1" text-anchor="middle">post-hoc pullで取込</text>
-    <text x="980" y="752" font-size="11" fill="#fb923c" text-anchor="middle" font-weight="bold" font-style="italic">★ 設計判断あり</text>
+    <line x1="840" y1="614" x2="1120" y2="614" stroke="#1e293b" stroke-width="1"/>
+    <text x="980" y="654" font-size="17" fill="#94a3b8" text-anchor="middle">特徴</text>
+    <text x="980" y="694" font-size="17" fill="#cbd5e1" text-anchor="middle">GitHub Actionsログを</text>
+    <text x="980" y="720" font-size="17" fill="#cbd5e1" text-anchor="middle">post-hoc pullで取込</text>
+    <text x="980" y="772" font-size="16" fill="#fb923c" text-anchor="middle" font-weight="bold" font-style="italic">★ 設計判断あり</text>
   </g>
 
   <g font-family="Noto Sans JP, system-ui, sans-serif">
-    <rect x="1180" y="140" width="380" height="660" rx="14" fill="#1a0f1a" stroke="#a78bfa" stroke-width="3"/>
-    <text x="1370" y="186" font-size="24" fill="#a78bfa" text-anchor="middle" font-weight="bold">LLM</text>
-    <line x1="1220" y1="208" x2="1520" y2="208" stroke="#1e293b" stroke-width="1"/>
-    <text x="1370" y="246" font-size="13" fill="#94a3b8" text-anchor="middle">AIに答えさせたい問い</text>
-    <text x="1370" y="280" font-size="16" fill="#e2e8f0" text-anchor="middle" font-weight="bold">「いくらかかってる？」</text>
-    <text x="1370" y="306" font-size="13" fill="#cbd5e1" text-anchor="middle">(リアルタイム + 構造化集計)</text>
+    <rect x="1180" y="150" width="380" height="660" rx="14" fill="#1a0f1a" stroke="#a78bfa" stroke-width="3"/>
+    <text x="1370" y="200" font-size="30" fill="#a78bfa" text-anchor="middle" font-weight="bold">LLM</text>
+    <line x1="1220" y1="222" x2="1520" y2="222" stroke="#1e293b" stroke-width="1"/>
+    <text x="1370" y="262" font-size="17" fill="#94a3b8" text-anchor="middle">AIに答えさせたい問い</text>
+    <text x="1370" y="300" font-size="20" fill="#e2e8f0" text-anchor="middle" font-weight="bold">「いくらかかってる？」</text>
+    <text x="1370" y="328" font-size="17" fill="#cbd5e1" text-anchor="middle">(リアルタイム + 構造化集計)</text>
 
-    <line x1="1220" y1="350" x2="1520" y2="350" stroke="#1e293b" stroke-width="1"/>
-    <text x="1370" y="388" font-size="13" fill="#94a3b8" text-anchor="middle">shape</text>
-    <text x="1370" y="416" font-size="16" fill="#e2e8f0" text-anchor="middle" font-weight="bold">metric (即時)</text>
-    <text x="1370" y="440" font-size="16" fill="#e2e8f0" text-anchor="middle" font-weight="bold">+ 構造化レコード (集計)</text>
+    <line x1="1220" y1="370" x2="1520" y2="370" stroke="#1e293b" stroke-width="1"/>
+    <text x="1370" y="410" font-size="17" fill="#94a3b8" text-anchor="middle">形</text>
+    <text x="1370" y="436" font-size="20" fill="#e2e8f0" text-anchor="middle" font-weight="bold">metric (即時)</text>
+    <text x="1370" y="464" font-size="20" fill="#e2e8f0" text-anchor="middle" font-weight="bold">+ 構造化レコード (集計)</text>
 
-    <line x1="1220" y1="470" x2="1520" y2="470" stroke="#1e293b" stroke-width="1"/>
-    <text x="1370" y="508" font-size="13" fill="#94a3b8" text-anchor="middle">backend</text>
-    <text x="1370" y="536" font-size="17" fill="#a78bfa" text-anchor="middle" font-weight="bold">Prometheus (Gemini)</text>
-    <text x="1370" y="562" font-size="17" fill="#a78bfa" text-anchor="middle" font-weight="bold">+ BigQuery (Claude Code)</text>
+    <line x1="1220" y1="492" x2="1520" y2="492" stroke="#1e293b" stroke-width="1"/>
+    <text x="1370" y="532" font-size="17" fill="#94a3b8" text-anchor="middle">backend</text>
+    <text x="1370" y="558" font-size="21" fill="#a78bfa" text-anchor="middle" font-weight="bold">Prometheus (Gemini)</text>
+    <text x="1370" y="586" font-size="21" fill="#a78bfa" text-anchor="middle" font-weight="bold">+ BigQuery (Claude Code)</text>
 
-    <line x1="1220" y1="600" x2="1520" y2="600" stroke="#1e293b" stroke-width="1"/>
-    <text x="1370" y="638" font-size="13" fill="#94a3b8" text-anchor="middle">特徴</text>
-    <text x="1370" y="678" font-size="13" fill="#cbd5e1" text-anchor="middle">Geminiコストはclient-side計算</text>
-    <text x="1370" y="702" font-size="13" fill="#cbd5e1" text-anchor="middle">Claude CodeはBQ直行</text>
-    <text x="1370" y="752" font-size="11" fill="#a78bfa" text-anchor="middle" font-weight="bold" font-style="italic">★ 設計判断あり</text>
+    <line x1="1220" y1="614" x2="1520" y2="614" stroke="#1e293b" stroke-width="1"/>
+    <text x="1370" y="654" font-size="17" fill="#94a3b8" text-anchor="middle">特徴</text>
+    <text x="1370" y="694" font-size="17" fill="#cbd5e1" text-anchor="middle">Geminiコストはクライアントサイド計算</text>
+    <text x="1370" y="720" font-size="17" fill="#cbd5e1" text-anchor="middle">Claude CodeはBQ直行</text>
+    <text x="1370" y="772" font-size="16" fill="#a78bfa" text-anchor="middle" font-weight="bold" font-style="italic">★ 設計判断あり</text>
   </g>
 
   <g font-family="Noto Sans JP, system-ui, sans-serif">
-    <rect x="200" y="826" width="1200" height="54" rx="10" fill="#0f172a" stroke="#475569" stroke-width="1"/>
-    <text x="800" y="850" font-size="14" fill="#cbd5e1" text-anchor="middle">左 2 つ (アプリ・インフラ) は標準的なOTel/GCP観測スタックの土台。</text>
-    <text x="800" y="870" font-size="14" fill="#cbd5e1" text-anchor="middle">右 2 つ (CI・LLM) はAI時代特有の設計判断が出る部分 — 本記事の主役</text>
+    <rect x="100" y="830" width="1400" height="56" rx="10" fill="#0f172a" stroke="#475569" stroke-width="1"/>
+    <text x="800" y="858" font-size="17" fill="#cbd5e1" text-anchor="middle">左2つ（アプリ・インフラ）は標準的なOTel/GCP観測スタックの土台</text>
+    <text x="800" y="880" font-size="17" fill="#fbbf24" text-anchor="middle" font-weight="bold">右2つ（CI・LLM）はAI時代特有の設計判断が出る部分 ── 本記事の主役</text>
   </g>
 </svg>

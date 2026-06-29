@@ -8,86 +8,85 @@
     <marker id="a-muted" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#94a3b8"/></marker>
   </defs>
 
-  <text x="800" y="58" font-size="30" fill="#e2e8f0" text-anchor="middle" font-weight="bold" font-family="Noto Sans JP, system-ui, sans-serif">同じ shape を「人間 = Web」 と「AI = MCP」 が共有する統合面</text>
-  <text x="800" y="94" font-size="17" fill="#94a3b8" text-anchor="middle" font-family="Noto Sans JP, system-ui, sans-serif">人間向け集計と AI 向け集計を分けない、 二重メンテを避ける設計</text>
+  <text x="800" y="60" font-size="38" fill="#e2e8f0" text-anchor="middle" font-weight="bold" font-family="Noto Sans JP, system-ui, sans-serif">同じObservable基盤を「人間=Web」と「AI=MCP」が共有する統合面</text>
+  <text x="800" y="100" font-size="22" fill="#94a3b8" text-anchor="middle" font-family="Noto Sans JP, system-ui, sans-serif">人間向け集計とAI向け集計を分けない、二重メンテを避ける設計</text>
 
   <g font-family="Noto Sans JP, system-ui, sans-serif">
-    <rect x="100" y="140" width="600" height="100" rx="14" fill="#0c2540" stroke="#38bdf8" stroke-width="2"/>
-    <text x="400" y="178" font-size="22" fill="#38bdf8" text-anchor="middle" font-weight="bold">人間 (CTO / 開発者 / 非エンジニア)</text>
-    <text x="400" y="208" font-size="13" fill="#cbd5e1" text-anchor="middle">「先月のチーム別 Claude Code 利用は？」</text>
-    <text x="400" y="228" font-size="13" fill="#cbd5e1" text-anchor="middle">「今 Gemini いくら使ってる？」</text>
+    <rect x="80" y="150" width="620" height="110" rx="14" fill="#0c2540" stroke="#38bdf8" stroke-width="2"/>
+    <text x="390" y="194" font-size="28" fill="#38bdf8" text-anchor="middle" font-weight="bold">人間（CTO / 開発者 / 非エンジニア）</text>
+    <text x="390" y="226" font-size="16" fill="#cbd5e1" text-anchor="middle">「先月のチーム別Claude Code利用は？」</text>
+    <text x="390" y="248" font-size="16" fill="#cbd5e1" text-anchor="middle">「今Geminiいくら使ってる？」</text>
   </g>
 
   <g font-family="Noto Sans JP, system-ui, sans-serif">
-    <rect x="900" y="140" width="600" height="100" rx="14" fill="#1e1a09" stroke="#fbbf24" stroke-width="2"/>
-    <text x="1200" y="178" font-size="22" fill="#fbbf24" text-anchor="middle" font-weight="bold">AI エージェント</text>
-    <text x="1200" y="208" font-size="13" fill="#cbd5e1" text-anchor="middle">「サービス X で先週 error 一番多かった時間帯は？」</text>
-    <text x="1200" y="228" font-size="13" fill="#cbd5e1" text-anchor="middle">「この MCP どれくらい使われてる？」</text>
+    <rect x="900" y="150" width="620" height="110" rx="14" fill="#1e1a09" stroke="#fbbf24" stroke-width="2"/>
+    <text x="1210" y="194" font-size="28" fill="#fbbf24" text-anchor="middle" font-weight="bold">AIエージェント</text>
+    <text x="1210" y="226" font-size="16" fill="#cbd5e1" text-anchor="middle">「サービスXで先週errorが一番多かった時間帯は？」</text>
+    <text x="1210" y="248" font-size="16" fill="#cbd5e1" text-anchor="middle">「このMCPどれくらい使われてる？」</text>
   </g>
 
-  <line x1="400" y1="240" x2="400" y2="290" stroke="#38bdf8" stroke-width="2" marker-end="url(#a-sky)"/>
-  <line x1="1200" y1="240" x2="1200" y2="290" stroke="#fbbf24" stroke-width="2" marker-end="url(#a-yellow)"/>
+  <line x1="390" y1="260" x2="390" y2="310" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#a-sky)"/>
+  <line x1="1210" y1="260" x2="1210" y2="310" stroke="#fbbf24" stroke-width="2.5" marker-end="url(#a-yellow)"/>
 
   <g font-family="Noto Sans JP, system-ui, sans-serif">
-    <rect x="100" y="300" width="600" height="160" rx="14" fill="#0f172a" stroke="#38bdf8" stroke-width="2"/>
-    <text x="400" y="334" font-size="20" fill="#38bdf8" text-anchor="middle" font-weight="bold">Web ダッシュボード (PI Lab)</text>
-    <text x="400" y="362" font-size="13" fill="#94a3b8" text-anchor="middle">React ページ → 内部 API → 各 backend</text>
+    <rect x="80" y="320" width="620" height="180" rx="14" fill="#0f172a" stroke="#38bdf8" stroke-width="2"/>
+    <text x="390" y="362" font-size="26" fill="#38bdf8" text-anchor="middle" font-weight="bold">Webダッシュボード（PI Lab）</text>
+    <text x="390" y="392" font-size="16" fill="#94a3b8" text-anchor="middle">Reactページ → 内部API → 各backend</text>
 
-    <rect x="140" y="380" width="180" height="60" rx="6" fill="#0c2540" stroke="#475569"/>
-    <text x="230" y="404" font-size="13" fill="#cbd5e1" text-anchor="middle">/cc-usage</text>
-    <text x="230" y="424" font-size="11" fill="#94a3b8" text-anchor="middle">Claude Code利用</text>
+    <rect x="120" y="412" width="180" height="68" rx="6" fill="#0c2540" stroke="#475569"/>
+    <text x="210" y="442" font-size="16" fill="#cbd5e1" text-anchor="middle">/cc-usage</text>
+    <text x="210" y="466" font-size="13" fill="#94a3b8" text-anchor="middle">Claude Code利用</text>
 
-    <rect x="330" y="380" width="180" height="60" rx="6" fill="#0c2540" stroke="#475569"/>
-    <text x="420" y="404" font-size="13" fill="#cbd5e1" text-anchor="middle">/mcp-usage</text>
-    <text x="420" y="424" font-size="11" fill="#94a3b8" text-anchor="middle">MCP ツール利用量</text>
+    <rect x="310" y="412" width="180" height="68" rx="6" fill="#0c2540" stroke="#475569"/>
+    <text x="400" y="442" font-size="16" fill="#cbd5e1" text-anchor="middle">/mcp-usage</text>
+    <text x="400" y="466" font-size="13" fill="#94a3b8" text-anchor="middle">MCP利用量</text>
 
-    <rect x="520" y="380" width="160" height="60" rx="6" fill="#0c2540" stroke="#475569"/>
-    <text x="600" y="404" font-size="13" fill="#cbd5e1" text-anchor="middle">/infra-cost</text>
-    <text x="600" y="424" font-size="11" fill="#94a3b8" text-anchor="middle">インフラコスト</text>
-  </g>
-
-  <g font-family="Noto Sans JP, system-ui, sans-serif">
-    <rect x="900" y="300" width="600" height="160" rx="14" fill="#0f172a" stroke="#fbbf24" stroke-width="2"/>
-    <text x="1200" y="334" font-size="20" fill="#fbbf24" text-anchor="middle" font-weight="bold">MCP サーバー群</text>
-    <text x="1200" y="362" font-size="13" fill="#94a3b8" text-anchor="middle">自然言語クエリ / SQL を MCP 経由で叩く</text>
-
-    <rect x="940" y="380" width="260" height="60" rx="6" fill="#1e1a09" stroke="#475569"/>
-    <text x="1070" y="404" font-size="13" fill="#cbd5e1" text-anchor="middle">Grafana MCP</text>
-    <text x="1070" y="424" font-size="11" fill="#94a3b8" text-anchor="middle">Loki / Mimir / Prometheus / Tempo</text>
-
-    <rect x="1220" y="380" width="240" height="60" rx="6" fill="#1e1a09" stroke="#475569"/>
-    <text x="1340" y="404" font-size="13" fill="#cbd5e1" text-anchor="middle">BQ MCP</text>
-    <text x="1340" y="424" font-size="11" fill="#94a3b8" text-anchor="middle">claude_usage / mcp_tool_calls</text>
-  </g>
-
-  <line x1="400" y1="460" x2="400" y2="530" stroke="#94a3b8" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#a-muted)"/>
-  <line x1="1200" y1="460" x2="1200" y2="530" stroke="#94a3b8" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#a-muted)"/>
-
-  <g font-family="Noto Sans JP, system-ui, sans-serif">
-    <rect x="100" y="540" width="1400" height="210" rx="14" fill="#0a1f0a" stroke="#4ade80" stroke-width="3"/>
-    <text x="800" y="578" font-size="22" fill="#4ade80" text-anchor="middle" font-weight="bold">共有 backend (3つの shape)</text>
-    <text x="800" y="604" font-size="13" fill="#cbd5e1" text-anchor="middle">人間も AI も同じ backend を見ている — 集計ロジックは1つだけ</text>
-
-    <rect x="160" y="630" width="380" height="100" rx="10" fill="#1a0f1a" stroke="#a78bfa" stroke-width="2"/>
-    <text x="350" y="664" font-size="17" fill="#a78bfa" text-anchor="middle" font-weight="bold">Prometheus</text>
-    <text x="350" y="688" font-size="12" fill="#cbd5e1" text-anchor="middle">時系列メトリクス</text>
-    <text x="350" y="710" font-size="11" fill="#94a3b8" text-anchor="middle">Gemini コスト / インフラ metric</text>
-
-    <rect x="610" y="630" width="380" height="100" rx="10" fill="#0a1f0a" stroke="#4ade80" stroke-width="2"/>
-    <text x="800" y="664" font-size="17" fill="#4ade80" text-anchor="middle" font-weight="bold">BigQuery</text>
-    <text x="800" y="688" font-size="12" fill="#cbd5e1" text-anchor="middle">構造化レコード (SQL集計向き)</text>
-    <text x="800" y="710" font-size="11" fill="#94a3b8" text-anchor="middle">Claude Code 利用 / MCP 利用ログ</text>
-
-    <rect x="1060" y="630" width="380" height="100" rx="10" fill="#0c2540" stroke="#38bdf8" stroke-width="2"/>
-    <text x="1250" y="664" font-size="17" fill="#38bdf8" text-anchor="middle" font-weight="bold">Loki</text>
-    <text x="1250" y="688" font-size="12" fill="#cbd5e1" text-anchor="middle">log / alert (探索向き)</text>
-    <text x="1250" y="710" font-size="11" fill="#94a3b8" text-anchor="middle">アプリ + CI ログ</text>
+    <rect x="500" y="412" width="180" height="68" rx="6" fill="#0c2540" stroke="#475569"/>
+    <text x="590" y="442" font-size="16" fill="#cbd5e1" text-anchor="middle">/infra-cost</text>
+    <text x="590" y="466" font-size="13" fill="#94a3b8" text-anchor="middle">インフラコスト</text>
   </g>
 
   <g font-family="Noto Sans JP, system-ui, sans-serif">
-    <rect x="200" y="780" width="1200" height="76" rx="10" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
-    <text x="800" y="806" font-size="14" fill="#fbbf24" text-anchor="middle" font-weight="bold">設計のミソ: shape は1つだけ作って、 消費者向けインターフェース層 (Web / MCP) を分ける</text>
-    <text x="800" y="828" font-size="13" fill="#cbd5e1" text-anchor="middle">「人間用集計テーブル」 と「AI用集計テーブル」 を分けると数字がズレ始め、 二重メンテになる</text>
-    <text x="800" y="848" font-size="12" fill="#94a3b8" text-anchor="middle">MCP こそが「観測スタックを AI に渡せる形にする」 最後のピース</text>
+    <rect x="900" y="320" width="620" height="180" rx="14" fill="#0f172a" stroke="#fbbf24" stroke-width="2"/>
+    <text x="1210" y="362" font-size="26" fill="#fbbf24" text-anchor="middle" font-weight="bold">MCPサーバー群</text>
+    <text x="1210" y="392" font-size="16" fill="#94a3b8" text-anchor="middle">自然言語クエリ / SQLをMCP経由で叩く</text>
+
+    <rect x="940" y="412" width="280" height="68" rx="6" fill="#1e1a09" stroke="#475569"/>
+    <text x="1080" y="442" font-size="16" fill="#cbd5e1" text-anchor="middle">Grafana MCP</text>
+    <text x="1080" y="466" font-size="13" fill="#94a3b8" text-anchor="middle">Loki / Mimir / Prometheus / Tempo</text>
+
+    <rect x="1230" y="412" width="260" height="68" rx="6" fill="#1e1a09" stroke="#475569"/>
+    <text x="1360" y="442" font-size="16" fill="#cbd5e1" text-anchor="middle">BQ MCP</text>
+    <text x="1360" y="466" font-size="13" fill="#94a3b8" text-anchor="middle">claude_usage / mcp_tool_calls</text>
+  </g>
+
+  <line x1="390" y1="500" x2="390" y2="560" stroke="#94a3b8" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#a-muted)"/>
+  <line x1="1210" y1="500" x2="1210" y2="560" stroke="#94a3b8" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#a-muted)"/>
+
+  <g font-family="Noto Sans JP, system-ui, sans-serif">
+    <rect x="80" y="570" width="1440" height="220" rx="14" fill="#0a1f0a" stroke="#4ade80" stroke-width="3"/>
+    <text x="800" y="612" font-size="28" fill="#4ade80" text-anchor="middle" font-weight="bold">共有backend（3つの形）</text>
+    <text x="800" y="640" font-size="16" fill="#cbd5e1" text-anchor="middle">人間もAIも同じbackendを見ている ── 集計ロジックは1つだけ</text>
+
+    <rect x="150" y="664" width="400" height="110" rx="10" fill="#1a0f1a" stroke="#a78bfa" stroke-width="2"/>
+    <text x="350" y="700" font-size="22" fill="#a78bfa" text-anchor="middle" font-weight="bold">Prometheus</text>
+    <text x="350" y="726" font-size="15" fill="#cbd5e1" text-anchor="middle">時系列メトリクス</text>
+    <text x="350" y="750" font-size="14" fill="#94a3b8" text-anchor="middle">Geminiコスト / インフラmetric</text>
+
+    <rect x="600" y="664" width="400" height="110" rx="10" fill="#0a1f0a" stroke="#4ade80" stroke-width="2"/>
+    <text x="800" y="700" font-size="22" fill="#4ade80" text-anchor="middle" font-weight="bold">BigQuery</text>
+    <text x="800" y="726" font-size="15" fill="#cbd5e1" text-anchor="middle">構造化レコード（SQL集計向き）</text>
+    <text x="800" y="750" font-size="14" fill="#94a3b8" text-anchor="middle">Claude Code利用 / MCP利用ログ</text>
+
+    <rect x="1050" y="664" width="400" height="110" rx="10" fill="#0c2540" stroke="#38bdf8" stroke-width="2"/>
+    <text x="1250" y="700" font-size="22" fill="#38bdf8" text-anchor="middle" font-weight="bold">Loki</text>
+    <text x="1250" y="726" font-size="15" fill="#cbd5e1" text-anchor="middle">log / alert（探索向き）</text>
+    <text x="1250" y="750" font-size="14" fill="#94a3b8" text-anchor="middle">アプリ + CIログ</text>
+  </g>
+
+  <g font-family="Noto Sans JP, system-ui, sans-serif">
+    <text x="800" y="826" font-size="17" fill="#fbbf24" text-anchor="middle" font-weight="bold">設計のミソ: backendは1つだけ、消費者向けインターフェース層（Web / MCP）を分ける</text>
+    <text x="800" y="852" font-size="15" fill="#cbd5e1" text-anchor="middle">「人間用集計テーブル」と「AI用集計テーブル」を分けると数字がズレ始め、二重メンテになる</text>
+    <text x="800" y="876" font-size="14" fill="#94a3b8" text-anchor="middle">MCPこそが「観測スタックをAIに渡せる形にする」最後のピース</text>
   </g>
 </svg>
