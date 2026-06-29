@@ -16,6 +16,7 @@ seriesOrder: 2
 draft: false
 syndication:
   zenn:
+    id: "9b63579545582d"
     publishAt: "2026-06-30T08:30:00+09:00"
   devto:
     publishAt: "2026-06-30T08:30:00+09:00"
