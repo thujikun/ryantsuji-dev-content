@@ -3,59 +3,85 @@
   <rect width="1600" height="900" fill="#0f172a"/>
 
   <defs>
-    <marker id="a-orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#fb923c"/></marker>
-    <marker id="a-violet" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#a78bfa"/></marker>
-    <marker id="a-sky" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#38bdf8"/></marker>
-    <marker id="a-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#4ade80"/></marker>
     <marker id="a-muted" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#94a3b8"/></marker>
+    <marker id="a-yellow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#fbbf24"/></marker>
   </defs>
 
-  <text x="800" y="56" font-size="34" fill="#e2e8f0" text-anchor="middle" font-weight="bold" font-family="Noto Sans JP, system-ui, sans-serif">三層構造で意味のあるgraphをつくる</text>
-  <text x="800" y="94" font-size="18" fill="#94a3b8" text-anchor="middle" font-family="Noto Sans JP, system-ui, sans-serif">code-graph（構造）＋ db-graph（DBの意味）＋ annotation層（意図）をSAME_ENTITYで接合</text>
+  <text x="800" y="56" font-size="32" fill="#e2e8f0" text-anchor="middle" font-weight="bold" font-family="Noto Sans JP, system-ui, sans-serif">3つのgraphを並列接続して意味のあるナレッジグラフをつくる</text>
+  <text x="800" y="94" font-size="18" fill="#94a3b8" text-anchor="middle" font-family="Noto Sans JP, system-ui, sans-serif">code-graph（構造）／ db-graph（DBの意味）／ annotation graph（意図）がSAME_ENTITYで互いに接続、 どこからでも辿れる</text>
 
   <g font-family="Noto Sans JP, system-ui, sans-serif">
-    <rect x="1220" y="160" width="320" height="80" rx="10" fill="#1e293b" stroke="#94a3b8" stroke-width="2"/>
-    <text x="1380" y="195" font-size="20" fill="#e2e8f0" text-anchor="middle" font-weight="bold">AIエージェント</text>
-    <text x="1380" y="222" font-size="14" fill="#94a3b8" text-anchor="middle">自然言語クエリで叩く</text>
+    <rect x="600" y="140" width="400" height="76" rx="10" fill="#1e293b" stroke="#94a3b8" stroke-width="2"/>
+    <text x="800" y="172" font-size="20" fill="#e2e8f0" text-anchor="middle" font-weight="bold">AIエージェント</text>
+    <text x="800" y="198" font-size="14" fill="#94a3b8" text-anchor="middle">自然言語クエリで叩く</text>
   </g>
 
-  <line x1="1220" y1="200" x2="1100" y2="200" stroke="#94a3b8" stroke-width="2" marker-end="url(#a-muted)"/>
+  <line x1="800" y1="216" x2="800" y2="256" stroke="#94a3b8" stroke-width="2" marker-end="url(#a-muted)"/>
 
   <g font-family="Noto Sans JP, system-ui, sans-serif">
-    <rect x="500" y="160" width="600" height="100" rx="12" fill="#1e293b" stroke="#fbbf24" stroke-width="3"/>
-    <text x="800" y="198" font-size="22" fill="#fbbf24" text-anchor="middle" font-weight="bold">上位フロントドア（MCPサーバー）</text>
-    <text x="800" y="230" font-size="15" fill="#e2e8f0" text-anchor="middle">3つのgraphを横断する唯一の入口、 db-graphにも直接接続せずプロキシ</text>
+    <rect x="540" y="266" width="520" height="100" rx="12" fill="#1e293b" stroke="#fbbf24" stroke-width="3"/>
+    <text x="800" y="302" font-size="22" fill="#fbbf24" text-anchor="middle" font-weight="bold">MCPサーバー</text>
+    <text x="800" y="328" font-size="14" fill="#e2e8f0" text-anchor="middle">3つのgraphを横断する唯一の入口</text>
+    <text x="800" y="350" font-size="13" fill="#94a3b8" text-anchor="middle">db-graphにも直接接続させず annotation graph側がプロキシ</text>
   </g>
 
-  <line x1="800" y1="260" x2="800" y2="330" stroke="#a78bfa" stroke-width="2" marker-end="url(#a-violet)"/>
+  <line x1="700" y1="366" x2="290" y2="490" stroke="#fbbf24" stroke-width="2" marker-end="url(#a-yellow)"/>
+  <line x1="800" y1="366" x2="800" y2="490" stroke="#fbbf24" stroke-width="2" marker-end="url(#a-yellow)"/>
+  <line x1="900" y1="366" x2="1310" y2="490" stroke="#fbbf24" stroke-width="2" marker-end="url(#a-yellow)"/>
 
   <g font-family="Noto Sans JP, system-ui, sans-serif">
-    <rect x="200" y="340" width="1200" height="130" rx="12" fill="#1a0f1a" stroke="#a78bfa" stroke-width="2"/>
-    <text x="800" y="378" font-size="22" fill="#a78bfa" text-anchor="middle" font-weight="bold">annotation層 ── 意図</text>
-    <text x="800" y="408" font-size="15" fill="#e2e8f0" text-anchor="middle">境界周辺だけに @graph-* で「この処理は何のためか」 を書き込む</text>
-    <text x="800" y="436" font-size="14" fill="#cbd5e1" text-anchor="middle">Page / Section / Dialog / Field / Action / Api / Task ノードに意図テキストを格納 → ベクトル化</text>
-    <text x="800" y="458" font-size="13" fill="#94a3b8" text-anchor="middle">全関数に振らない。 boundary だけ振る最小限戦略</text>
+    <rect x="60" y="500" width="440" height="240" rx="12" fill="#1a0f1a" stroke="#a78bfa" stroke-width="2"/>
+    <text x="280" y="540" font-size="20" fill="#a78bfa" text-anchor="middle" font-weight="bold">annotation graph</text>
+    <text x="280" y="566" font-size="14" fill="#cbd5e1" text-anchor="middle">意図</text>
+
+    <text x="280" y="604" font-size="13" fill="#e2e8f0" text-anchor="middle">境界周辺だけに @graph-* で</text>
+    <text x="280" y="626" font-size="13" fill="#e2e8f0" text-anchor="middle">「この処理は何のためか」 を書き込む</text>
+
+    <text x="280" y="660" font-size="12" fill="#cbd5e1" text-anchor="middle">Page / Section / Dialog / Field</text>
+    <text x="280" y="680" font-size="12" fill="#cbd5e1" text-anchor="middle">Action / Api / Task ノード</text>
+
+    <text x="280" y="712" font-size="11" fill="#94a3b8" text-anchor="middle">意図テキストをベクトル化 → semantic検索の本体</text>
   </g>
 
-  <text x="830" y="500" font-size="13" fill="#94a3b8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">[SAME_ENTITY]</text>
-  <line x1="800" y1="470" x2="800" y2="520" stroke="#a78bfa" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#a-sky)"/>
-
   <g font-family="Noto Sans JP, system-ui, sans-serif">
-    <rect x="200" y="530" width="1200" height="130" rx="12" fill="#0c2540" stroke="#38bdf8" stroke-width="2"/>
-    <text x="800" y="568" font-size="22" fill="#38bdf8" text-anchor="middle" font-weight="bold">code-graph ── 構造</text>
-    <text x="800" y="598" font-size="15" fill="#e2e8f0" text-anchor="middle">46リポジトリを静的解析、 関数 / クラス / 境界ノード（API / Event / DB）を抽出</text>
-    <text x="800" y="626" font-size="14" fill="#cbd5e1" text-anchor="middle">境界ノードにDBテーブルが含まれているので、 そのまま下層に接合できる</text>
-    <text x="800" y="648" font-size="13" fill="#94a3b8" text-anchor="middle">前編で構築した graph</text>
+    <rect x="580" y="500" width="440" height="240" rx="12" fill="#0c2540" stroke="#38bdf8" stroke-width="2"/>
+    <text x="800" y="540" font-size="20" fill="#38bdf8" text-anchor="middle" font-weight="bold">code-graph</text>
+    <text x="800" y="566" font-size="14" fill="#cbd5e1" text-anchor="middle">構造</text>
+
+    <text x="800" y="604" font-size="13" fill="#e2e8f0" text-anchor="middle">静的解析で抽出した</text>
+    <text x="800" y="626" font-size="13" fill="#e2e8f0" text-anchor="middle">関数 / クラス / 境界ノード</text>
+
+    <text x="800" y="660" font-size="12" fill="#cbd5e1" text-anchor="middle">46リポジトリの全コード</text>
+    <text x="800" y="680" font-size="12" fill="#cbd5e1" text-anchor="middle">境界（API / Event / DB）が他graphへの接続点</text>
+
+    <text x="800" y="712" font-size="11" fill="#94a3b8" text-anchor="middle">前編で構築した graph</text>
   </g>
 
-  <text x="830" y="690" font-size="13" fill="#94a3b8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">[SAME_ENTITY: DBアクセス → カラム]</text>
-  <line x1="800" y1="660" x2="800" y2="710" stroke="#38bdf8" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#a-green)"/>
+  <g font-family="Noto Sans JP, system-ui, sans-serif">
+    <rect x="1100" y="500" width="440" height="240" rx="12" fill="#0a1f0a" stroke="#4ade80" stroke-width="2"/>
+    <text x="1320" y="540" font-size="20" fill="#4ade80" text-anchor="middle" font-weight="bold">db-graph</text>
+    <text x="1320" y="566" font-size="14" fill="#cbd5e1" text-anchor="middle">DBコンテキスト</text>
+
+    <text x="1320" y="604" font-size="13" fill="#e2e8f0" text-anchor="middle">21スキーマ / 1,133テーブル</text>
+    <text x="1320" y="626" font-size="13" fill="#e2e8f0" text-anchor="middle">10,815カラムを静的解析 + AI説明文</text>
+
+    <text x="1320" y="660" font-size="12" fill="#cbd5e1" text-anchor="middle">自然言語でテーブルが引ける</text>
+    <text x="1320" y="680" font-size="12" fill="#cbd5e1" text-anchor="middle">成功体験を再利用</text>
+
+    <text x="1320" y="712" font-size="11" fill="#94a3b8" text-anchor="middle">前回連載した db-graph をそのまま使う</text>
+  </g>
+
+  <line x1="500" y1="620" x2="580" y2="620" stroke="#94a3b8" stroke-width="2" stroke-dasharray="6,4"/>
+  <line x1="1020" y1="620" x2="1100" y2="620" stroke="#94a3b8" stroke-width="2" stroke-dasharray="6,4"/>
+  <text x="540" y="610" font-size="11" fill="#94a3b8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" text-anchor="middle">SAME_ENTITY</text>
+  <text x="1060" y="610" font-size="11" fill="#94a3b8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" text-anchor="middle">SAME_ENTITY</text>
+
+  <path d="M 280 740 Q 800 810 1320 740" stroke="#94a3b8" stroke-width="2" stroke-dasharray="6,4" fill="none"/>
+  <text x="800" y="795" font-size="11" fill="#94a3b8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" text-anchor="middle">SAME_ENTITY</text>
 
   <g font-family="Noto Sans JP, system-ui, sans-serif">
-    <rect x="200" y="720" width="1200" height="130" rx="12" fill="#0a1f0a" stroke="#4ade80" stroke-width="2"/>
-    <text x="800" y="758" font-size="22" fill="#4ade80" text-anchor="middle" font-weight="bold">db-graph ── DBコンテキスト</text>
-    <text x="800" y="788" font-size="15" fill="#e2e8f0" text-anchor="middle">21スキーマ / 1,133テーブル / 10,815カラムを静的解析 + AI生成説明文 + 埋め込み</text>
-    <text x="800" y="816" font-size="14" fill="#cbd5e1" text-anchor="middle">既に「テーブル名を知らなくても自然言語で辿れる」 が成立している成功体験</text>
-    <text x="800" y="838" font-size="13" fill="#94a3b8" text-anchor="middle">前回連載した db-graph をそのまま使う</text>
+    <rect x="200" y="820" width="1200" height="64" rx="10" fill="#0f172a" stroke="#4ade80" stroke-width="1"/>
+    <text x="800" y="846" font-size="15" fill="#4ade80" text-anchor="middle" font-weight="bold">階層関係ではなく並列接続</text>
+    <text x="800" y="870" font-size="13" fill="#cbd5e1" text-anchor="middle">どのgraphを起点にしても他のgraphに辿れる（自然言語 / コード / DBテーブル、 どこからでも入れる）</text>
   </g>
 </svg>
