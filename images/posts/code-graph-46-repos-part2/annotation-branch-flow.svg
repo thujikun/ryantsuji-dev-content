@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <rect width="1600" height="900" fill="#0f172a"/>
+
+  <defs>
+    <marker id="a-sky" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#38bdf8"/></marker>
+    <marker id="a-violet" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#a78bfa"/></marker>
+    <marker id="a-orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#fb923c"/></marker>
+    <marker id="a-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#4ade80"/></marker>
+  </defs>
+
+  <text x="800" y="56" font-size="32" fill="#e2e8f0" text-anchor="middle" font-weight="bold" font-family="Noto Sans JP, system-ui, sans-serif">annotationを現場開発フローに干渉させない別ブランチ運用</text>
+  <text x="800" y="92" font-size="18" fill="#94a3b8" text-anchor="middle" font-family="Noto Sans JP, system-ui, sans-serif">mainは現場エンジニア（人）、 annotation branchはAIが全自動。 物理的に分離する</text>
+
+  <g font-family="Noto Sans JP, system-ui, sans-serif">
+    <rect x="80" y="140" width="640" height="580" rx="12" fill="#0c2540" stroke="#38bdf8" stroke-width="2"/>
+    <text x="400" y="184" font-size="24" fill="#38bdf8" text-anchor="middle" font-weight="bold">main branch</text>
+    <text x="400" y="214" font-size="15" fill="#cbd5e1" text-anchor="middle">現場エンジニア（人）が触る、 通常の開発フロー</text>
+
+    <rect x="140" y="260" width="520" height="80" rx="8" fill="#0f172a" stroke="#475569"/>
+    <text x="400" y="290" font-size="16" fill="#e2e8f0" text-anchor="middle" font-weight="bold">1. コード変更（PR作成）</text>
+    <text x="400" y="318" font-size="13" fill="#94a3b8" text-anchor="middle">機能追加 / バグ修正 / リファクタ</text>
+
+    <line x1="400" y1="340" x2="400" y2="370" stroke="#38bdf8" stroke-width="2" marker-end="url(#a-sky)"/>
+
+    <rect x="140" y="380" width="520" height="80" rx="8" fill="#0f172a" stroke="#475569"/>
+    <text x="400" y="410" font-size="16" fill="#e2e8f0" text-anchor="middle" font-weight="bold">2. 人によるレビュー</text>
+    <text x="400" y="438" font-size="13" fill="#94a3b8" text-anchor="middle">通常のコードレビュー、 annotationは見えない</text>
+
+    <line x1="400" y1="460" x2="400" y2="490" stroke="#38bdf8" stroke-width="2" marker-end="url(#a-sky)"/>
+
+    <rect x="140" y="500" width="520" height="80" rx="8" fill="#0f172a" stroke="#475569"/>
+    <text x="400" y="530" font-size="16" fill="#e2e8f0" text-anchor="middle" font-weight="bold">3. mainにマージ</text>
+    <text x="400" y="558" font-size="13" fill="#94a3b8" text-anchor="middle">現場エンジニアにとっては「いつも通り」</text>
+
+    <text x="400" y="640" font-size="14" fill="#38bdf8" text-anchor="middle" font-weight="bold">既存の開発フローはまったく変えない</text>
+    <text x="400" y="666" font-size="13" fill="#94a3b8" text-anchor="middle">annotation の存在を意識する必要なし</text>
+  </g>
+
+  <line x1="720" y1="540" x2="880" y2="540" stroke="#fb923c" stroke-width="3" marker-end="url(#a-orange)"/>
+  <text x="800" y="525" font-size="14" fill="#fb923c" text-anchor="middle" font-weight="bold" font-family="Noto Sans JP, system-ui, sans-serif">webhook</text>
+  <text x="800" y="565" font-size="12" fill="#fb923c" text-anchor="middle" font-family="Noto Sans JP, system-ui, sans-serif">main差分検知</text>
+
+  <g font-family="Noto Sans JP, system-ui, sans-serif">
+    <rect x="880" y="140" width="640" height="580" rx="12" fill="#1a0f1a" stroke="#a78bfa" stroke-width="2"/>
+    <text x="1200" y="184" font-size="24" fill="#a78bfa" text-anchor="middle" font-weight="bold">annotation branch</text>
+    <text x="1200" y="214" font-size="15" fill="#cbd5e1" text-anchor="middle">AIが全自動で回す、 mainとは独立</text>
+
+    <rect x="940" y="260" width="520" height="80" rx="8" fill="#0f172a" stroke="#475569"/>
+    <text x="1200" y="290" font-size="16" fill="#e2e8f0" text-anchor="middle" font-weight="bold">1. 差分annotation生成（AI）</text>
+    <text x="1200" y="318" font-size="13" fill="#94a3b8" text-anchor="middle">main差分から境界周辺の @graph-* を生成</text>
+
+    <line x1="1200" y1="340" x2="1200" y2="370" stroke="#a78bfa" stroke-width="2" marker-end="url(#a-violet)"/>
+
+    <rect x="940" y="380" width="520" height="80" rx="8" fill="#0f172a" stroke="#475569"/>
+    <text x="1200" y="410" font-size="16" fill="#e2e8f0" text-anchor="middle" font-weight="bold">2. 差分annotationレビュー（AI）</text>
+    <text x="1200" y="438" font-size="13" fill="#94a3b8" text-anchor="middle">annotation pipelineが整合性を検査</text>
+
+    <line x1="1200" y1="460" x2="1200" y2="490" stroke="#a78bfa" stroke-width="2" marker-end="url(#a-violet)"/>
+
+    <rect x="940" y="500" width="520" height="80" rx="8" fill="#0f172a" stroke="#475569"/>
+    <text x="1200" y="530" font-size="16" fill="#e2e8f0" text-anchor="middle" font-weight="bold">3. annotation branchにコミット</text>
+    <text x="1200" y="558" font-size="13" fill="#94a3b8" text-anchor="middle">graph再indexまで自動で連鎖</text>
+
+    <text x="1200" y="640" font-size="14" fill="#a78bfa" text-anchor="middle" font-weight="bold">人 + AIの分業ではない。 人 vs AI の物理分離</text>
+    <text x="1200" y="666" font-size="13" fill="#94a3b8" text-anchor="middle">1 PR に2系統のレビューを混ぜない</text>
+  </g>
+
+  <g font-family="Noto Sans JP, system-ui, sans-serif">
+    <rect x="200" y="760" width="1200" height="100" rx="12" fill="#1e293b" stroke="#4ade80" stroke-width="2"/>
+    <text x="800" y="798" font-size="20" fill="#4ade80" text-anchor="middle" font-weight="bold">この分離設計が成立する理由</text>
+    <text x="800" y="826" font-size="14" fill="#cbd5e1" text-anchor="middle">既存組織の46リポジトリには全リポAIレビューがまだ浸透していない</text>
+    <text x="800" y="848" font-size="13" fill="#94a3b8" text-anchor="middle">理想を捨てるのではなく、 条件に合わせて「人の開発フロー」と「AIのannotation運用」を物理的に分けるという設計選択</text>
+  </g>
+</svg>
