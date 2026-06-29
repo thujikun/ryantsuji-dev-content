@@ -16,6 +16,9 @@ seriesOrder: 2
 draft: false
 syndication:
   devto:
+    id: 4016621
+    slug: "making-the-context-across-46-repositories-semantically-searchable-for-ai-part-2-2l30-temp-slug-2169982"
+    contentHash: "f4f9263e23b1dcf2"
     publishAt: "2026-06-30T08:30:00+09:00"
 cover: /images/posts/code-graph-46-repos-part2.en.cover.png
 ---
