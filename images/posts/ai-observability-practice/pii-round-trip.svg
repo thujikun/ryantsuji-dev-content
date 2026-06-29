@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <rect width="1600" height="900" fill="#0f172a"/>
+
+  <defs>
+    <marker id="a-sky" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#38bdf8"/></marker>
+    <marker id="a-violet" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#a78bfa"/></marker>
+    <marker id="a-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#ef4444"/></marker>
+    <marker id="a-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#4ade80"/></marker>
+  </defs>
+
+  <text x="800" y="58" font-size="30" fill="#e2e8f0" text-anchor="middle" font-weight="bold" font-family="Noto Sans JP, system-ui, sans-serif">ハッシュ化を書き込みと検索の両端で通せば、 平文PIIを観測スタックに入れずに検索が成立する</text>
+  <text x="800" y="94" font-size="17" fill="#94a3b8" text-anchor="middle" font-family="Noto Sans JP, system-ui, sans-serif">同じ deterministic hash 関数 (hashEmail) を、 アプリログ書き込み時とサポート検索時の両側で通す</text>
+
+  <g font-family="Noto Sans JP, system-ui, sans-serif">
+    <rect x="540" y="130" width="520" height="80" rx="12" fill="#1a0f0f" stroke="#ef4444" stroke-width="2" stroke-dasharray="6,4"/>
+    <text x="800" y="162" font-size="17" fill="#ef4444" text-anchor="middle" font-weight="bold">customer.a@example.com (平文PII)</text>
+    <text x="800" y="190" font-size="13" fill="#fca5a5" text-anchor="middle">この平文は観測スタックに一度も入ってはいけない</text>
+  </g>
+
+  <line x1="690" y1="220" x2="380" y2="280" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4,4"/>
+  <line x1="910" y1="220" x2="1220" y2="280" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4,4"/>
+
+  <g font-family="Noto Sans JP, system-ui, sans-serif">
+    <rect x="60" y="290" width="640" height="500" rx="14" fill="#0c2540" stroke="#38bdf8" stroke-width="2"/>
+    <text x="380" y="332" font-size="22" fill="#38bdf8" text-anchor="middle" font-weight="bold">書き込み側 (アプリログ)</text>
+    <text x="380" y="358" font-size="14" fill="#94a3b8" text-anchor="middle">アプリケーションコードがログを出力する流れ</text>
+
+    <rect x="100" y="386" width="560" height="84" rx="8" fill="#0f172a" stroke="#475569"/>
+    <text x="380" y="416" font-size="15" fill="#cbd5e1" text-anchor="middle">1. アプリケーションコード</text>
+    <text x="380" y="442" font-size="13" fill="#94a3b8" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">logger.info(...)</text>
+    <text x="380" y="460" font-size="13" fill="#94a3b8" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">{ user: hashEmail(user.email) }</text>
+
+    <line x1="380" y1="476" x2="380" y2="510" stroke="#38bdf8" stroke-width="2" marker-end="url(#a-sky)"/>
+
+    <rect x="100" y="520" width="560" height="68" rx="8" fill="#0f172a" stroke="#475569"/>
+    <text x="380" y="552" font-size="15" fill="#cbd5e1" text-anchor="middle">2. hashEmail() → 12-char SHA256 prefix</text>
+    <text x="380" y="576" font-size="15" fill="#fbbf24" text-anchor="middle" font-weight="bold" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">'7a3f9c2e0b1d'</text>
+
+    <line x1="380" y1="594" x2="380" y2="628" stroke="#38bdf8" stroke-width="2" marker-end="url(#a-sky)"/>
+
+    <rect x="100" y="638" width="560" height="120" rx="8" fill="#0f172a" stroke="#38bdf8" stroke-width="2"/>
+    <text x="380" y="668" font-size="15" fill="#e2e8f0" text-anchor="middle" font-weight="bold">3. Loki に格納</text>
+    <text x="380" y="694" font-size="12" fill="#94a3b8" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">{ "ts": "...", "user": "7a3f9c2e0b1d",</text>
+    <text x="380" y="712" font-size="12" fill="#94a3b8" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">"event": "subscription_updated", "plan": "monthly" }</text>
+    <text x="380" y="742" font-size="12" fill="#4ade80" text-anchor="middle" font-weight="bold">✓ 平文 email は一切残らない</text>
+  </g>
+
+  <g font-family="Noto Sans JP, system-ui, sans-serif">
+    <rect x="900" y="290" width="640" height="500" rx="14" fill="#1a0f1a" stroke="#a78bfa" stroke-width="2"/>
+    <text x="1220" y="332" font-size="22" fill="#a78bfa" text-anchor="middle" font-weight="bold">検索側 (サポート問い合わせ調査)</text>
+    <text x="1220" y="358" font-size="14" fill="#94a3b8" text-anchor="middle">「お客様 A のログを見たい」 をクエリに落とす流れ</text>
+
+    <rect x="940" y="386" width="560" height="84" rx="8" fill="#0f172a" stroke="#475569"/>
+    <text x="1220" y="416" font-size="15" fill="#cbd5e1" text-anchor="middle">1. CS engineer が email を MCP に渡す</text>
+    <text x="1220" y="442" font-size="13" fill="#94a3b8" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">searchLogs({</text>
+    <text x="1220" y="460" font-size="13" fill="#94a3b8" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">email: "customer.a@example.com" })</text>
+
+    <line x1="1220" y1="476" x2="1220" y2="510" stroke="#a78bfa" stroke-width="2" marker-end="url(#a-violet)"/>
+
+    <rect x="940" y="520" width="560" height="68" rx="8" fill="#0f172a" stroke="#475569"/>
+    <text x="1220" y="552" font-size="15" fill="#cbd5e1" text-anchor="middle">2. MCP内部で同じ hashEmail() を通す</text>
+    <text x="1220" y="576" font-size="15" fill="#fbbf24" text-anchor="middle" font-weight="bold" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">'7a3f9c2e0b1d'</text>
+
+    <line x1="1220" y1="594" x2="1220" y2="628" stroke="#a78bfa" stroke-width="2" marker-end="url(#a-violet)"/>
+
+    <rect x="940" y="638" width="560" height="120" rx="8" fill="#0f172a" stroke="#a78bfa" stroke-width="2"/>
+    <text x="1220" y="668" font-size="15" fill="#e2e8f0" text-anchor="middle" font-weight="bold">3. Loki に hash で検索</text>
+    <text x="1220" y="694" font-size="12" fill="#94a3b8" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">{app="subscription"} |~ "7a3f9c2e0b1d"</text>
+    <text x="1220" y="722" font-size="12" fill="#94a3b8" text-anchor="middle">→ 該当ログが hit (書き込み側と同じ hash)</text>
+    <text x="1220" y="746" font-size="12" fill="#4ade80" text-anchor="middle" font-weight="bold">✓ 検索クエリにも平文 email は残らない</text>
+  </g>
+
+  <path d="M 660 690 Q 800 720 940 690" stroke="#4ade80" stroke-width="2" stroke-dasharray="6,4" fill="none"/>
+  <text x="800" y="708" font-size="13" fill="#4ade80" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-weight="bold">同じ hash でつながる</text>
+
+  <g font-family="Noto Sans JP, system-ui, sans-serif">
+    <rect x="200" y="820" width="1200" height="60" rx="10" fill="#0f172a" stroke="#4ade80" stroke-width="1"/>
+    <text x="800" y="846" font-size="15" fill="#4ade80" text-anchor="middle" font-weight="bold">deterministic hash を両端で通す ── 平文 PII を観測スタックに入れずに検索が成立</text>
+    <text x="800" y="868" font-size="13" fill="#cbd5e1" text-anchor="middle">ログ漏洩しても逆引きが構造的に難しい (内部利用前提なので salt は最小限)</text>
+  </g>
+</svg>
