@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <rect width="1600" height="900" fill="#0f172a"/>
+
+  <defs>
+    <marker id="a-muted" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#94a3b8"/></marker>
+    <marker id="a-yellow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#fbbf24"/></marker>
+  </defs>
+
+  <text x="800" y="56" font-size="30" fill="#e2e8f0" text-anchor="middle" font-weight="bold" font-family="system-ui, sans-serif">Three graphs joined as peers form a knowledge graph that carries meaning</text>
+  <text x="800" y="94" font-size="17" fill="#94a3b8" text-anchor="middle" font-family="system-ui, sans-serif">code-graph (structure) / db-graph (DB meaning) / annotation graph (intent), joined via SAME_ENTITY — traversable from any starting point</text>
+
+  <g font-family="system-ui, sans-serif">
+    <rect x="600" y="140" width="400" height="76" rx="10" fill="#1e293b" stroke="#94a3b8" stroke-width="2"/>
+    <text x="800" y="172" font-size="20" fill="#e2e8f0" text-anchor="middle" font-weight="bold">AI Agent</text>
+    <text x="800" y="198" font-size="14" fill="#94a3b8" text-anchor="middle">Queries in natural language</text>
+  </g>
+
+  <line x1="800" y1="216" x2="800" y2="256" stroke="#94a3b8" stroke-width="2" marker-end="url(#a-muted)"/>
+
+  <g font-family="system-ui, sans-serif">
+    <rect x="540" y="266" width="520" height="100" rx="12" fill="#1e293b" stroke="#fbbf24" stroke-width="3"/>
+    <text x="800" y="302" font-size="22" fill="#fbbf24" text-anchor="middle" font-weight="bold">MCP Server</text>
+    <text x="800" y="328" font-size="14" fill="#e2e8f0" text-anchor="middle">The only entry point that traverses all three graphs</text>
+    <text x="800" y="350" font-size="13" fill="#94a3b8" text-anchor="middle">db-graph is proxied via annotation graph, never accessed directly</text>
+  </g>
+
+  <line x1="700" y1="366" x2="290" y2="490" stroke="#fbbf24" stroke-width="2" marker-end="url(#a-yellow)"/>
+  <line x1="800" y1="366" x2="800" y2="490" stroke="#fbbf24" stroke-width="2" marker-end="url(#a-yellow)"/>
+  <line x1="900" y1="366" x2="1310" y2="490" stroke="#fbbf24" stroke-width="2" marker-end="url(#a-yellow)"/>
+
+  <g font-family="system-ui, sans-serif">
+    <rect x="60" y="500" width="440" height="240" rx="12" fill="#1a0f1a" stroke="#a78bfa" stroke-width="2"/>
+    <text x="280" y="540" font-size="20" fill="#a78bfa" text-anchor="middle" font-weight="bold">annotation graph</text>
+    <text x="280" y="566" font-size="14" fill="#cbd5e1" text-anchor="middle">Intent</text>
+
+    <text x="280" y="604" font-size="13" fill="#e2e8f0" text-anchor="middle">Write "what this is for" via @graph-*</text>
+    <text x="280" y="626" font-size="13" fill="#e2e8f0" text-anchor="middle">only around the boundary nodes</text>
+
+    <text x="280" y="660" font-size="12" fill="#cbd5e1" text-anchor="middle">Page / Section / Dialog / Field</text>
+    <text x="280" y="680" font-size="12" fill="#cbd5e1" text-anchor="middle">Action / Api / Task nodes</text>
+
+    <text x="280" y="712" font-size="11" fill="#94a3b8" text-anchor="middle">Intent text is vectorized — this is the body of semantic search</text>
+  </g>
+
+  <g font-family="system-ui, sans-serif">
+    <rect x="580" y="500" width="440" height="240" rx="12" fill="#0c2540" stroke="#38bdf8" stroke-width="2"/>
+    <text x="800" y="540" font-size="20" fill="#38bdf8" text-anchor="middle" font-weight="bold">code-graph</text>
+    <text x="800" y="566" font-size="14" fill="#cbd5e1" text-anchor="middle">Structure</text>
+
+    <text x="800" y="604" font-size="13" fill="#e2e8f0" text-anchor="middle">Functions / classes / boundary nodes</text>
+    <text x="800" y="626" font-size="13" fill="#e2e8f0" text-anchor="middle">extracted via static analysis</text>
+
+    <text x="800" y="660" font-size="12" fill="#cbd5e1" text-anchor="middle">All code across 46 repositories</text>
+    <text x="800" y="680" font-size="12" fill="#cbd5e1" text-anchor="middle">Boundaries (API / Event / DB) connect to peers</text>
+
+    <text x="800" y="712" font-size="11" fill="#94a3b8" text-anchor="middle">The graph built in Part 1</text>
+  </g>
+
+  <g font-family="system-ui, sans-serif">
+    <rect x="1100" y="500" width="440" height="240" rx="12" fill="#0a1f0a" stroke="#4ade80" stroke-width="2"/>
+    <text x="1320" y="540" font-size="20" fill="#4ade80" text-anchor="middle" font-weight="bold">db-graph</text>
+    <text x="1320" y="566" font-size="14" fill="#cbd5e1" text-anchor="middle">DB Context</text>
+
+    <text x="1320" y="604" font-size="13" fill="#e2e8f0" text-anchor="middle">21 schemas / 1,133 tables</text>
+    <text x="1320" y="626" font-size="13" fill="#e2e8f0" text-anchor="middle">10,815 columns + AI-generated descriptions</text>
+
+    <text x="1320" y="660" font-size="12" fill="#cbd5e1" text-anchor="middle">Find tables by natural language</text>
+    <text x="1320" y="680" font-size="12" fill="#cbd5e1" text-anchor="middle">Reuse a proven pattern</text>
+
+    <text x="1320" y="712" font-size="11" fill="#94a3b8" text-anchor="middle">Carries over from the earlier db-graph project</text>
+  </g>
+
+  <line x1="500" y1="620" x2="580" y2="620" stroke="#94a3b8" stroke-width="2" stroke-dasharray="6,4"/>
+  <line x1="1020" y1="620" x2="1100" y2="620" stroke="#94a3b8" stroke-width="2" stroke-dasharray="6,4"/>
+  <text x="540" y="610" font-size="11" fill="#94a3b8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" text-anchor="middle">SAME_ENTITY</text>
+  <text x="1060" y="610" font-size="11" fill="#94a3b8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" text-anchor="middle">SAME_ENTITY</text>
+
+  <path d="M 280 740 Q 800 810 1320 740" stroke="#94a3b8" stroke-width="2" stroke-dasharray="6,4" fill="none"/>
+  <text x="800" y="795" font-size="11" fill="#94a3b8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" text-anchor="middle">SAME_ENTITY</text>
+
+  <g font-family="system-ui, sans-serif">
+    <rect x="200" y="820" width="1200" height="64" rx="10" fill="#0f172a" stroke="#4ade80" stroke-width="1"/>
+    <text x="800" y="846" font-size="15" fill="#4ade80" text-anchor="middle" font-weight="bold">Peer graphs, not a hierarchy</text>
+    <text x="800" y="870" font-size="13" fill="#cbd5e1" text-anchor="middle">Start from any graph and reach the others — natural language, code, or DB table, you can enter from anywhere</text>
+  </g>
+</svg>

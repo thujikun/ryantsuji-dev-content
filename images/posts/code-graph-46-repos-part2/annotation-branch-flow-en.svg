@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <rect width="1600" height="900" fill="#0f172a"/>
+
+  <defs>
+    <marker id="a-sky" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#38bdf8"/></marker>
+    <marker id="a-violet" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#a78bfa"/></marker>
+    <marker id="a-orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#fb923c"/></marker>
+    <marker id="a-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#4ade80"/></marker>
+  </defs>
+
+  <text x="800" y="56" font-size="30" fill="#e2e8f0" text-anchor="middle" font-weight="bold" font-family="system-ui, sans-serif">Separate the AI-managed annotation branch from the human-managed main branch</text>
+  <text x="800" y="92" font-size="17" fill="#94a3b8" text-anchor="middle" font-family="system-ui, sans-serif">main is for engineers (humans); annotation branch is fully automated by AI — physically separated</text>
+
+  <g font-family="system-ui, sans-serif">
+    <rect x="80" y="140" width="640" height="580" rx="12" fill="#0c2540" stroke="#38bdf8" stroke-width="2"/>
+    <text x="400" y="184" font-size="24" fill="#38bdf8" text-anchor="middle" font-weight="bold">main branch</text>
+    <text x="400" y="214" font-size="15" fill="#cbd5e1" text-anchor="middle">Engineers (humans) work here — the normal dev workflow</text>
+
+    <rect x="140" y="260" width="520" height="80" rx="8" fill="#0f172a" stroke="#475569"/>
+    <text x="400" y="290" font-size="16" fill="#e2e8f0" text-anchor="middle" font-weight="bold">1. Code change (open a PR)</text>
+    <text x="400" y="318" font-size="13" fill="#94a3b8" text-anchor="middle">Feature work / bug fix / refactor</text>
+
+    <line x1="400" y1="340" x2="400" y2="370" stroke="#38bdf8" stroke-width="2" marker-end="url(#a-sky)"/>
+
+    <rect x="140" y="380" width="520" height="80" rx="8" fill="#0f172a" stroke="#475569"/>
+    <text x="400" y="410" font-size="16" fill="#e2e8f0" text-anchor="middle" font-weight="bold">2. Human code review</text>
+    <text x="400" y="438" font-size="13" fill="#94a3b8" text-anchor="middle">Standard review — annotations are invisible here</text>
+
+    <line x1="400" y1="460" x2="400" y2="490" stroke="#38bdf8" stroke-width="2" marker-end="url(#a-sky)"/>
+
+    <rect x="140" y="500" width="520" height="80" rx="8" fill="#0f172a" stroke="#475569"/>
+    <text x="400" y="530" font-size="16" fill="#e2e8f0" text-anchor="middle" font-weight="bold">3. Merge to main</text>
+    <text x="400" y="558" font-size="13" fill="#94a3b8" text-anchor="middle">For engineers, this is "business as usual"</text>
+
+    <text x="400" y="640" font-size="14" fill="#38bdf8" text-anchor="middle" font-weight="bold">The existing dev workflow is untouched</text>
+    <text x="400" y="666" font-size="13" fill="#94a3b8" text-anchor="middle">No awareness of annotations needed</text>
+  </g>
+
+  <line x1="720" y1="540" x2="880" y2="540" stroke="#fb923c" stroke-width="3" marker-end="url(#a-orange)"/>
+  <text x="800" y="525" font-size="14" fill="#fb923c" text-anchor="middle" font-weight="bold" font-family="system-ui, sans-serif">webhook</text>
+  <text x="800" y="565" font-size="12" fill="#fb923c" text-anchor="middle" font-family="system-ui, sans-serif">detects main diff</text>
+
+  <g font-family="system-ui, sans-serif">
+    <rect x="880" y="140" width="640" height="580" rx="12" fill="#1a0f1a" stroke="#a78bfa" stroke-width="2"/>
+    <text x="1200" y="184" font-size="24" fill="#a78bfa" text-anchor="middle" font-weight="bold">annotation branch</text>
+    <text x="1200" y="214" font-size="15" fill="#cbd5e1" text-anchor="middle">Fully automated by AI — independent of main</text>
+
+    <rect x="940" y="260" width="520" height="80" rx="8" fill="#0f172a" stroke="#475569"/>
+    <text x="1200" y="290" font-size="16" fill="#e2e8f0" text-anchor="middle" font-weight="bold">1. Generate diff annotations (AI)</text>
+    <text x="1200" y="318" font-size="13" fill="#94a3b8" text-anchor="middle">Produce @graph-* around boundaries from the main diff</text>
+
+    <line x1="1200" y1="340" x2="1200" y2="370" stroke="#a78bfa" stroke-width="2" marker-end="url(#a-violet)"/>
+
+    <rect x="940" y="380" width="520" height="80" rx="8" fill="#0f172a" stroke="#475569"/>
+    <text x="1200" y="410" font-size="16" fill="#e2e8f0" text-anchor="middle" font-weight="bold">2. Review diff annotations (AI)</text>
+    <text x="1200" y="438" font-size="13" fill="#94a3b8" text-anchor="middle">Annotation pipeline checks consistency</text>
+
+    <line x1="1200" y1="460" x2="1200" y2="490" stroke="#a78bfa" stroke-width="2" marker-end="url(#a-violet)"/>
+
+    <rect x="940" y="500" width="520" height="80" rx="8" fill="#0f172a" stroke="#475569"/>
+    <text x="1200" y="530" font-size="16" fill="#e2e8f0" text-anchor="middle" font-weight="bold">3. Commit to annotation branch</text>
+    <text x="1200" y="558" font-size="13" fill="#94a3b8" text-anchor="middle">Graph re-indexing kicks off automatically</text>
+
+    <text x="1200" y="640" font-size="14" fill="#a78bfa" text-anchor="middle" font-weight="bold">Not a human + AI split — humans vs AI, physically separated</text>
+    <text x="1200" y="666" font-size="13" fill="#94a3b8" text-anchor="middle">No mixing two review streams inside one PR</text>
+  </g>
+
+  <g font-family="system-ui, sans-serif">
+    <rect x="200" y="760" width="1200" height="100" rx="12" fill="#1e293b" stroke="#4ade80" stroke-width="2"/>
+    <text x="800" y="798" font-size="20" fill="#4ade80" text-anchor="middle" font-weight="bold">Why this separation works for an existing organization</text>
+    <text x="800" y="826" font-size="14" fill="#cbd5e1" text-anchor="middle">AI review hasn't reached every one of the 46 repos yet</text>
+    <text x="800" y="848" font-size="13" fill="#94a3b8" text-anchor="middle">Rather than abandoning the ideal, split "human dev workflow" and "AI annotation operation" physically — a design decision matched to the conditions</text>
+  </g>
+</svg>
