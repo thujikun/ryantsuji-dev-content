@@ -13,7 +13,7 @@ tags:
 lang: "en"
 series: "ai-observability"
 seriesOrder: 2
-draft: true
+draft: false
 syndication:
   devto:
     publishAt: "2026-07-14T08:30:00+09:00"

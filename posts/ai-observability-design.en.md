@@ -13,7 +13,7 @@ tags:
 lang: "en"
 series: "ai-observability"
 seriesOrder: 1
-draft: true
+draft: false
 syndication:
   devto:
     publishAt: "2026-07-07T08:30:00+09:00"
@@ -28,7 +28,7 @@ In the previous series, [code-graph deep dive (Part 2)](/posts/code-graph-46-rep
 
 A graph that gives you static facts is one thing. Telling AI **what's actually happening in production right now** is a separate problem. So the same shaping discipline I applied to the static graph needs to apply to the observability stack too.
 
-This post is the first half of that story. I split it into two: Part 1 (this post) covers **how I shape four different monitoring surfaces** (application / infrastructure / CI / LLM), and [Part 2](/posts/ai-observability-practice) covers PII handling, the integration surface, and Self-Healing.
+This post is the first half of that story. I split it into two: Part 1 (this post) covers **how I shape four different monitoring surfaces** (application / infrastructure / CI / LLM). Part 2 covers PII handling, the integration surface, and Self-Healing — published a week later.
 
 ## What Does "Observable to AI" Even Mean?
 
