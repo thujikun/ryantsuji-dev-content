@@ -7,6 +7,10 @@ published: false
 publication_name: "aircloset"
 ---
 
+:::message
+[English Version is here](https://ryantsuji.dev/posts/ai-observability-practice?lang=en)
+:::
+
 みなさまこんにちは！エアークローゼットでCTOをしている[辻](https://x.com/RyanAircloset)です。
 
 [設計編](https://zenn.dev/aircloset/articles/d4c32cff8cb230)では、アプリケーション / インフラ / CI / LLMの4軸を、それぞれの問いの性質に合わせて別々の形でObservableにする話を書きました。ここまでで観測スタックの**書き込み側**は一旦区切ったところです。
