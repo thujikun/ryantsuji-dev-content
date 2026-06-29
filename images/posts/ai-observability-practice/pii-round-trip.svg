@@ -32,7 +32,7 @@
     <line x1="380" y1="504" x2="380" y2="540" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#a-sky)"/>
 
     <rect x="100" y="550" width="560" height="80" rx="8" fill="#0f172a" stroke="#475569"/>
-    <text x="380" y="584" font-size="18" fill="#cbd5e1" text-anchor="middle">2. hashEmail() → 12-char SHA256 prefix</text>
+    <text x="380" y="584" font-size="18" fill="#cbd5e1" text-anchor="middle">2. hashEmail() → 12-char HMAC-SHA256 prefix</text>
     <text x="380" y="612" font-size="20" fill="#fbbf24" text-anchor="middle" font-weight="bold" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">'7a3f9c2e0b1d'</text>
 
     <line x1="380" y1="630" x2="380" y2="666" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#a-sky)"/>
@@ -73,6 +73,6 @@
   <g font-family="Noto Sans JP, system-ui, sans-serif">
     <rect x="160" y="828" width="1280" height="58" rx="10" fill="#0f172a" stroke="#4ade80" stroke-width="1"/>
     <text x="800" y="854" font-size="18" fill="#4ade80" text-anchor="middle" font-weight="bold">同じハッシュ関数を両端で通す ── 平文PIIを観測スタックに入れずに検索が成立</text>
-    <text x="800" y="878" font-size="15" fill="#cbd5e1" text-anchor="middle">ログ漏洩しても逆引きが構造的に難しい（内部利用前提なのでsaltは最小限）</text>
+    <text x="800" y="878" font-size="15" fill="#cbd5e1" text-anchor="middle">列挙耐性は HMAC の鍵を観測スタック外に置くことで担保 (ログだけ漏れても突合不可)</text>
   </g>
 </svg>
