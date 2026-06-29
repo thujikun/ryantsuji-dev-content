@@ -8,7 +8,7 @@
   </defs>
 
   <text x="800" y="60" font-size="36" fill="#e2e8f0" text-anchor="middle" font-weight="bold" font-family="Noto Sans JP, system-ui, sans-serif">ハッシュ化を書き込みと検索の両端で通せば、平文PIIを観測スタックに入れずに検索成立</text>
-  <text x="800" y="100" font-size="21" fill="#94a3b8" text-anchor="middle" font-family="Noto Sans JP, system-ui, sans-serif">同じdeterministic hash関数（hashEmail）を、書き込み時と検索時の両側で通す</text>
+  <text x="800" y="100" font-size="21" fill="#94a3b8" text-anchor="middle" font-family="Noto Sans JP, system-ui, sans-serif">同じハッシュ関数（hashEmail）を、書き込み時と検索時の両側で通す</text>
 
   <g font-family="Noto Sans JP, system-ui, sans-serif">
     <rect x="500" y="140" width="600" height="100" rx="12" fill="#1a0f0f" stroke="#ef4444" stroke-width="2" stroke-dasharray="6,4"/>
@@ -49,14 +49,14 @@
     <text x="1220" y="384" font-size="16" fill="#94a3b8" text-anchor="middle">「お客様Aのログを見たい」をクエリに落とす流れ</text>
 
     <rect x="940" y="408" width="560" height="92" rx="8" fill="#0f172a" stroke="#475569"/>
-    <text x="1220" y="442" font-size="18" fill="#cbd5e1" text-anchor="middle">1. CS engineerがemailをMCPに渡す</text>
+    <text x="1220" y="442" font-size="18" fill="#cbd5e1" text-anchor="middle">1. 検索ツールが顧客識別子を受け取る</text>
     <text x="1220" y="468" font-size="15" fill="#94a3b8" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">searchLogs({</text>
     <text x="1220" y="488" font-size="15" fill="#94a3b8" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">email: "customer.a@example.com" })</text>
 
     <line x1="1220" y1="504" x2="1220" y2="540" stroke="#a78bfa" stroke-width="2.5" marker-end="url(#a-violet)"/>
 
     <rect x="940" y="550" width="560" height="80" rx="8" fill="#0f172a" stroke="#475569"/>
-    <text x="1220" y="584" font-size="18" fill="#cbd5e1" text-anchor="middle">2. MCP内部で同じhashEmail()を通す</text>
+    <text x="1220" y="584" font-size="18" fill="#cbd5e1" text-anchor="middle">2. 検索ツール入口で同じhashEmail()を通す</text>
     <text x="1220" y="612" font-size="20" fill="#fbbf24" text-anchor="middle" font-weight="bold" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">'7a3f9c2e0b1d'</text>
 
     <line x1="1220" y1="630" x2="1220" y2="666" stroke="#a78bfa" stroke-width="2.5" marker-end="url(#a-violet)"/>
@@ -72,7 +72,7 @@
 
   <g font-family="Noto Sans JP, system-ui, sans-serif">
     <rect x="160" y="828" width="1280" height="58" rx="10" fill="#0f172a" stroke="#4ade80" stroke-width="1"/>
-    <text x="800" y="854" font-size="18" fill="#4ade80" text-anchor="middle" font-weight="bold">deterministic hashを両端で通す ── 平文PIIを観測スタックに入れずに検索が成立</text>
+    <text x="800" y="854" font-size="18" fill="#4ade80" text-anchor="middle" font-weight="bold">同じハッシュ関数を両端で通す ── 平文PIIを観測スタックに入れずに検索が成立</text>
     <text x="800" y="878" font-size="15" fill="#cbd5e1" text-anchor="middle">ログ漏洩しても逆引きが構造的に難しい（内部利用前提なのでsaltは最小限）</text>
   </g>
 </svg>
