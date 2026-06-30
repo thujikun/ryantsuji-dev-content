@@ -16,7 +16,7 @@ syndication:
   devto:
     id: 3404451
     slug: "democratizing-internal-data-building-an-mcp-server-that-lets-you-search-991-tables-in-natural-1da5"
-    contentHash: "2a4a5e4a566b906a"
+    contentHash: "93ac368ce30c3ad1"
 cover: /images/posts/db-graph-mcp.en.cover.png
 ---
 
