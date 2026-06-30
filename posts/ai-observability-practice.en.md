@@ -13,7 +13,6 @@ tags:
 lang: "en"
 series: "ai-observability"
 seriesOrder: 2
-draft: true
 syndication:
   devto:
     id: 4022945

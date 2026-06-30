@@ -13,7 +13,6 @@ tags:
 lang: "en"
 series: "code-graph-deep-dive"
 seriesOrder: 2
-draft: false
 syndication:
   devto:
     id: 4016621

@@ -13,7 +13,6 @@ tags:
 lang: "ja"
 series: "ai-observability"
 seriesOrder: 2
-draft: true
 syndication:
   zenn:
     id: "3b8e60fcaab4b7"

@@ -13,7 +13,6 @@ tags:
 lang: "ja"
 series: "code-graph-deep-dive"
 seriesOrder: 1
-draft: false
 syndication:
   zenn:
     id: "a7cf65cc035572"
