@@ -34,7 +34,7 @@ cover: /images/posts/code-graph-46-repos.ja.cover.png
 - 46リポジトリに散らばる多種多様なフレームワーク（jQuery / AngularJS / Express / NestJS / TypeORM / Redux Axios ...）の境界をどう抽出していったか
 - 3ヶ月の試行錯誤の結果、何が解けて何が解けなかったか
 
-本記事は前編で、code-graph自体の構築と苦労、そして残った課題までを書きます。後編では、code-graphをbaseにしつつ別レイヤーで補強した**service-product-graph**（SPG）の話を予定しています。
+本記事は前編で、code-graph自体の構築と苦労、そして残った課題までを書きます。[後編](/posts/code-graph-46-repos-part2)では、code-graphをbaseにしつつ別レイヤーで補強した**service-product-graph**（SPG）について書いています。
 
 ## 何のために作ったか
 
@@ -268,11 +268,11 @@ graph単体では時間がかかります。後に作ったコードベース調
 
 だから、code-graph（静的解析ベース）をbaseにしつつ、**別レイヤーで補強する方向に進化させる**、という選択を取りました。
 
-この課題をどう解決しようとしているかは、後編で別途説明します。
+この課題をどう解決しようとしているかは、[後編](/posts/code-graph-46-repos-part2)で説明しています。
 
 ## つづく
 
-前編はここまでです。後編では、上記の課題をどう乗り越えようとしているかについて書く予定です。
+前編はここまでです。[後編](/posts/code-graph-46-repos-part2)では、上記の課題をどう乗り越えようとしているかについて書いています。
 
 「捨てた」のではなく「**進化させた**」、というのが本当のストーリーです。
 

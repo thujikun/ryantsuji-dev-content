@@ -34,7 +34,7 @@ Three things I want to write down:
 - How I extracted boundaries across 46 repos and a zoo of frameworks (jQuery / AngularJS / Express / NestJS / TypeORM / Redux Axios ...)
 - What 3 months of trial and error solved, and what it didn't
 
-This is Part 1, covering the construction of code-graph itself, the painful parts, and the issues that remained. Part 2 will be about **service-product-graph (SPG)** — a layer I built on top of code-graph to compensate for what static analysis couldn't do alone.
+This is Part 1, covering the construction of code-graph itself, the painful parts, and the issues that remained. [Part 2](/posts/code-graph-46-repos-part2) is about **service-product-graph (SPG)** — a layer I built on top of code-graph to compensate for what static analysis couldn't do alone.
 
 ## What Was This For?
 
@@ -268,11 +268,11 @@ And no, you can't take the same approach for the production-side codebase that c
 
 So the choice was: **keep code-graph (static analysis) as the base, and evolve by layering on additional graph layers** to compensate.
 
-How we're trying to solve the issues above, I'll cover separately in Part 2.
+How we're trying to solve the issues above, I cover in [Part 2](/posts/code-graph-46-repos-part2).
 
 ## To Be Continued
 
-That's it for Part 1. Part 2 will be about how we try to get past the issues above.
+That's it for Part 1. [Part 2](/posts/code-graph-46-repos-part2) covers how we try to get past the issues above.
 
 The real story is less "thrown away" and more "**evolved**."
 
