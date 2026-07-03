@@ -28,7 +28,9 @@ In [Part 1](/posts/ai-observability-design), I walked through the four monitorin
 
 But shaping the write side isn't the end of the story. The moment **production data flows through the stack**, you have to block the path PII can take to slip in — and that's true with or without AI. It's the kind of classic observability problem where, if you cut corners, you walk straight into a leak incident.
 
-Add AI to the picture and the weight of that risk jumps. Log search used to be the domain of SREs and a handful of developers; even if PII slipped in, **the population doing the searching was small**. Once AI agents start querying logs broadly via MCP, both the range and the frequency of who searches explode. PII handling that was previously "we got lucky, nothing happened" turns into structural risk that surfaces all at once.
+Honest reason nobody obsessed over log PII before AI: the ROI was thin. In threat-model terms, **the set of people who could read logs was almost entirely contained in the set who could read the DB**. In a world where engineers with DB access could already see everything, hardening logs alone didn't move total risk much. Most organizations deferring this was economic realism more than negligence.
+
+AI broke the containment. Non-engineers pulling logs over MCP don't have DB access — **logs became the first privilege-escalation path for people without DB permissions to reach PII**. It's not a headcount problem, it's a **trust-boundary reconfiguration**. On top of that, AI opens several new input-side paths: transmission to external model providers, prompt injection actively extracting data, AI summary output re-surfacing PII to viewers other than the query author, and AI's own observability logs (tool-call arguments) capturing PII in transit. The structural risk that used to sit dormant as "**we got lucky, nothing happened**" now has the conditions to surface all at once.
 
 And on top of that, if **the observability stack isn't queryable by AI**, the whole "AI-consumable observability" goal from Part 1 falls apart.
 
