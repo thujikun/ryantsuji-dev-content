@@ -56,12 +56,12 @@ cortex's PII handling is six layers, each with a different role:
 
 | Layer | Purpose | Mechanism |
 |---|---|---|
-| **Write: BQ Policy Tag** | Column-level access control | `pii_high` / `pii_medium` / `pii_low` three-tier taxonomy. Without fine-grained reader on the column, SELECT errors out with `Access Denied` (pure CLS — no dynamic masking) |
+| **Write: BQ Policy Tag** | Column-level access control | `pii_high` / `pii_medium` / `pii_low` three-tier taxonomy. Without fine-grained reader on the column, SELECT errors out with `Access Denied` (pure CLS (Column-Level Security) — no dynamic masking) |
 | **Write: ETL DLP** | Strip plain-text PII from derived tables | Cloud DLP redacts during transforms (customer support data, etc.). Placeholders like `[EMAIL_ADDRESS]` / `[PHONE_NUMBER]` preserve the structure |
 | **Write: log hashing** | Plain text never reaches Loki | App-side hash via `hashEmail` (HMAC-SHA256 → 12-char prefix; key lives outside the observability stack) before log emit |
 | **Search: same function on both sides** | Look up a specific customer's logs without ever touching plain text | Query-side runs the same `hashEmail` before sending to Loki |
 | **Output: MCP masking** | Mask when AI consumes | Column-name detection replaces values with placeholders like `***@***.com` |
-| **Identity separation** | Internal staff email isn't customer PII | Edge Router HMAC-signs auth emails; used as attribution identifier |
+| **Identity separation** | Internal staff email is handled in a separate track from customer PII | HMAC-signed by Edge Router as auth attribution; not part of the masking pipeline |
 
 The fourth row — **search with the same function on both sides** — is where the security / usability tradeoff gets really tight.
 
@@ -92,7 +92,7 @@ The search tool's entry point puts the same `hashEmail` in front of every query.
 // Search tool entry: hash first, then query Loki
 const hash = hashEmail(input);
 // → '7a3f9c2e0b1d'
-const logs = await loki.query(`{app="subscription"} |~ "${hash}"`);
+const logs = await loki.query(`{service_name="subscription"} |~ "${hash}"`);
 // → Returns logs containing the matching hash
 ```
 
@@ -101,6 +101,7 @@ Both sides run **the same `hashEmail`**, so logs from the same customer collapse
 - **Plain-text email never enters Loki**
 - **The query string Loki sees doesn't contain plain-text email either** (only the hashed value reaches it)
 - **Enumeration resistance comes from keeping the HMAC key outside the stack**. Email is a low-entropy, enumerable input space, so a bare one-way hash would let an attacker hash candidate emails forward and match. With HMAC plus a key held only at the write side and the search tool, a log leak alone isn't enough to enumerate
+- 12-char prefix (48 bits) collision probability is negligible at customer-base scale (birthday bound: ~16M records before one expected collision)
 
 This reuses the property "same input → same hash" of hash functions in the form "**the same function on both sides makes search work**." The security / debug usability tradeoff compresses cleanly.
 
@@ -110,7 +111,7 @@ One more thing worth noting: search tool input arguments (including MCP servers)
 
 ## Integration Surface — "Humans = Web, AI = MCP" on the Same Backend
 
-Three observable shapes built, PII handled. The next question is **who queries them, and how**. The common trap is to build "human dashboard aggregations" and "AI data feeds" separately. The moment you do:
+Three backends (Prometheus / BigQuery / Loki) now carry the observable data, and PII is handled. The next question is **who queries them, and how**. The common trap is to build "human dashboard aggregations" and "AI data feeds" separately. The moment you do:
 
 - Two implementations chasing the same question
 - Numbers drift between them
@@ -142,7 +143,7 @@ These pages on the React side pull from BQ / Prometheus / Loki through an intern
 
 When AI agents need the same data, they go through purpose-specific MCPs:
 
-- **Grafana MCP** — natural-language queries against Loki / Mimir / Prometheus / Tempo. "What time window had the most errors on Service X last week?" goes in as-is
+- **Grafana MCP** — LogQL / PromQL queries against Loki / Mimir / Prometheus / Tempo. Natural-language questions like "What time window had the most errors on Service X last week?" are the agent's job to translate into LogQL / PromQL before they go over MCP
 - **BQ MCP** (via cortex-product-graph) — SQL queries against `claude_usage.claude_usage` / `cortex.mcp_tool_calls`
 
 The design pivot: **the human dashboard and the AI MCP share the same backend.** No separate "AI aggregation table" and "human aggregation table." Build the observability backend once, then provide **a consumer-specific interface layer** (web dashboard / MCP) on top.

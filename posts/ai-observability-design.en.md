@@ -66,7 +66,7 @@ Let me walk through each of the four axes. Application and infrastructure are th
 
 The foundation is unremarkable. Every cortex application is instrumented with [OpenTelemetry](https://opentelemetry.io/), with traces going to Tempo, logs to Loki, and metrics to Mimir — the standard Grafana Cloud setup.
 
-There's no special trick here. What matters is the discipline: **every app emits logs and traces in the same shape**. That uniformity is what lets AI later run something like `{app="<service>"} |~ "error"` through MCP and investigate across services.
+There's no special trick here. What matters is the discipline: **every app emits logs and traces in the same shape**. That uniformity is what lets AI later run something like `{service_name="<service>"} |~ "error"` through MCP and investigate across services.
 
 I covered the actual instrumentation in [AI Harness Series Part 4 (Self-Healing)](/posts/cortex-self-healing), so I'll leave the details there. The point worth repeating is: **a standard OTel stack, properly laid down, is the precondition for everything AI-driven that comes later**.
 
@@ -86,7 +86,7 @@ cortex runs CI on GitHub Actions, and I ship every CI log into Grafana Loki.
 
 "Why? GitHub Actions has a perfectly good UI for that" is a reasonable question. The reasons are concrete:
 
-- GitHub's Actions API is awkward for AI to query
+- Having AI hit the GitHub Actions API on every investigation is slow and auth-heavy. Ingesting into Loki once means AI can **cross-query it ad-hoc**
 - One Loki instance holds CI logs and application logs together, so you can **cross-query** them
 - LogQL alerts turn CI failure into a structured signal
 - AI can ask "any tests that have been broken since last week?" in natural language
@@ -143,7 +143,7 @@ I picked B. The price table lives in a constant called `GEMINI_PRICING` and gets
 
 The real reason for B is **per-task granularity**, not just speed:
 
-- **You can't tune what you can't attribute.** Cloud Billing tells you "Vertex AI was $X total this month." But what you actually want to trim is "the db-graph table description generation cost $X," "the code-graph field type inference cost $Y," "that one prompt cost $Z" — sub-units. With client-side wrapping you attach `service` / `model` / call-site context as labels, and you can later slice by any of them in PromQL.
+- **You can't tune what you can't attribute.** Cloud Billing (with BQ export) will slice by SKU, project, and resource label, but not by call-site context. What you actually want to trim is "the db-graph table description generation cost $X," "the code-graph field type inference cost $Y," "that one prompt cost $Z" — call-site-context granularity, which billing simply doesn't carry. With client-side wrapping you attach `service` / `model` / call-site context as labels, and you can later slice by any of them in PromQL.
 - Real-time visibility is a bonus — runaway prompts and batches don't wait for tomorrow's billing.
 - Price table maintenance is light (Google doesn't change prices often), so the upkeep cost is trivial.
 - Cloud Billing API authentication, fetching, normalization, fan-out is its own pipeline of weight you'd have to maintain.

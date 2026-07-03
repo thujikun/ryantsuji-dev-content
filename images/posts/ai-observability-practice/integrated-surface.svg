@@ -65,7 +65,7 @@
 
   <g font-family="Noto Sans JP, system-ui, sans-serif">
     <rect x="80" y="570" width="1440" height="220" rx="14" fill="#0a1f0a" stroke="#4ade80" stroke-width="3"/>
-    <text x="800" y="612" font-size="28" fill="#4ade80" text-anchor="middle" font-weight="bold">共有backend（3つの形）</text>
+    <text x="800" y="612" font-size="28" fill="#4ade80" text-anchor="middle" font-weight="bold">共有backend</text>
     <text x="800" y="640" font-size="16" fill="#cbd5e1" text-anchor="middle">人間もAIも同じbackendを見ている ── 集計ロジックは1つだけ</text>
 
     <rect x="150" y="664" width="400" height="110" rx="10" fill="#1a0f1a" stroke="#a78bfa" stroke-width="2"/>

@@ -65,7 +65,7 @@
 
   <g font-family="system-ui, sans-serif">
     <rect x="80" y="570" width="1440" height="220" rx="14" fill="#0a1f0a" stroke="#4ade80" stroke-width="3"/>
-    <text x="800" y="612" font-size="26" fill="#4ade80" text-anchor="middle" font-weight="bold">Shared backend (three shapes)</text>
+    <text x="800" y="612" font-size="26" fill="#4ade80" text-anchor="middle" font-weight="bold">Shared backend</text>
     <text x="800" y="640" font-size="15" fill="#cbd5e1" text-anchor="middle">Humans and AI both see the same backend — aggregation logic exists once</text>
 
     <rect x="150" y="664" width="400" height="110" rx="10" fill="#1a0f1a" stroke="#a78bfa" stroke-width="2"/>
