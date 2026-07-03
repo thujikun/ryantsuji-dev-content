@@ -22,9 +22,9 @@ cover: /images/posts/ai-native-redesign.en.cover.png
 
 Hi, I'm [Ryan](https://x.com/ryantsuji), CTO at airCloset (a fashion-rental subscription service based in Japan).
 
-I've been writing about individual application designs and about cortex[^cortex] — the AI platform we're building internally at airCloset. Each post has been centered on one piece of it: [code-graph](/posts/code-graph-46-repos), [product-graph](/posts/cortex-product-graph), [db-graph](/posts/db-graph-mcp), [biz-graph](/posts/initiative-graph-rag), [AI-Observability](/posts/ai-observability-design), the [auto-review harness](/posts/cortex-auto-review), and [Self-Healing](/posts/cortex-self-healing).
+> **Disclaimer**: "cortex" in this article is the internal codename for the AI platform built in-house at airCloset. It is unrelated to existing commercial services like Snowflake Cortex or Palo Alto Networks Cortex.
 
-[^cortex]: "cortex" here refers to airCloset's internal AI platform codename. Unrelated to Snowflake Cortex, Palo Alto Networks Cortex, etc.
+I've been writing about individual application designs and about cortex — the AI platform we're building internally at airCloset. Each post has been centered on one piece of it: [code-graph](/posts/code-graph-46-repos), [product-graph](/posts/cortex-product-graph), [db-graph](/posts/db-graph-mcp), [biz-graph](/posts/initiative-graph-rag), [AI-Observability](/posts/ai-observability-design), the [auto-review harness](/posts/cortex-auto-review), and [Self-Healing](/posts/cortex-self-healing).
 
 This post isn't about any of those implementations. It's about the design principle sitting behind all of them — one abstraction level up from any individual system, so more essay than build log.
 
@@ -56,10 +56,8 @@ What makes AI different is that it dramatically widens the range where creation 
 
 But deterministic automation has a ceiling. There's a class of work it can't touch: qualitative judgment, articulating design context, updating documentation to follow a code change, adding annotations — anything that needs interpretation and context. AI is the first thing that reaches into that zone. And it can even sit on the consumption side (in the APM example, this means AI running the "look at the dashboards, close the improvement loop" work that humans used to do). Once the human requirement drops structurally, many domains can start running a positive spiral for the first time. But *how* to wire this expanded capability into your own organization's loops is still a human design call. That's what this post — **AI-Native Redesign** — is about.
 
-:::message
-**Where this post lands**
-AI isn't a replacement for deterministic automation. It's a new capability that brings the zones deterministic tools never reached into the automation envelope — but redesigning your organization's loops around that expanded capability is what turns it into a change on the ground.
-:::
+> **Where this post lands**
+> AI isn't a replacement for deterministic automation. It's a new capability that brings the zones deterministic tools never reached into the automation envelope — but redesigning your organization's loops around that expanded capability is what turns it into a change on the ground.
 
 ### A Closer Look at Each Node
 
@@ -81,10 +79,8 @@ Concretely, the interdependence looks like this:
 
 As long as all three sides believe "my part is worth doing," the loop keeps turning. But if any one of them gets too expensive, the other two lose their incentive too. "Nobody's going to read it, and it'll rot anyway," "I updated it but no one cared," "when I search it's stale or wrong" — three separate excuses that reinforce each other, and the negative spiral picks up speed.
 
-:::message alert
-**How this collapses in most places**
-If any one of the three nodes gets too expensive, the other two lose their reason to invest. The reason documentation cultures don't stick, monitoring stacks go stale, and knowledge bases quietly hollow out isn't a tool problem — it's structural. The balance between the three nodes has to hold, or the whole thing decays in silence.
-:::
+> **How this collapses in most places**
+> If any one of the three nodes gets too expensive, the other two lose their reason to invest. The reason documentation cultures don't stick, monitoring stacks go stale, and knowledge bases quietly hollow out isn't a tool problem — it's structural. The balance between the three nodes has to hold, or the whole thing decays in silence.
 
 That's why patching a single node never fixes it. Many people have seen the "our Confluence has 100k pages and no one reads or updates them" version of this. Not a Confluence problem — what happens when at least two of the three nodes (creation and maintenance) stay expensive, and the fix that gets applied is a search feature on the consumption side. The loop never closes.
 
@@ -222,10 +218,8 @@ This one dissolves Type 2's "even if we build it, no one can use it." A graph a 
 
 ### Deterministic-First
 
-:::message
-**Design principle: deterministic-first**
-If a thing can be written deterministically, write it deterministically. Keep the surface where AI does inference as narrow as necessary — this is what "containing hallucinations" actually means in practice.
-:::
+> **Design principle: deterministic-first**
+> If a thing can be written deterministically, write it deterministically. Keep the surface where AI does inference as narrow as necessary — this is what "containing hallucinations" actually means in practice.
 
 Let AI touch parts that deterministic logic could have handled, and you widen the hallucination surface for nothing. The "containing hallucinations" phrase I've used across earlier posts is really this call — where to draw the line between deterministic and AI.
 
