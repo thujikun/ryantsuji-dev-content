@@ -15,7 +15,7 @@ syndication:
   devto:
     id: 4056809
     slug: "ai-native-redesign-re-solving-how-do-we-make-accurate-information-accessible-with-ai-as-a-given-3e22-temp-slug-1100473"
-    contentHash: "277d90cc6cf72eaf"
+    contentHash: "f7866bc88fe1828a"
     publishAt: "2026-07-21T08:00:00+09:00"
 cover: /images/posts/ai-native-redesign.en.cover.png
 ---
