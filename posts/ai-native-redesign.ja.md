@@ -16,6 +16,7 @@ syndication:
     publishAt: "2026-07-21T08:00:00+09:00"
   devto:
     publishAt: "2026-07-21T08:00:00+09:00"
+cover: /images/posts/ai-native-redesign.ja.cover.png
 ---
 
 みなさまこんにちは！エアークローゼットでCTOをしている[辻](https://x.com/RyanAircloset)です。
