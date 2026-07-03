@@ -14,6 +14,7 @@ lang: "en"
 syndication:
   devto:
     publishAt: "2026-07-21T08:00:00+09:00"
+cover: /images/posts/ai-native-redesign.en.cover.png
 ---
 
 Hi, I'm [Ryan](https://x.com/ryantsuji), CTO at airCloset (a fashion-rental subscription service based in Japan).
