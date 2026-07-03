@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <defs>
+    <marker id="arrowNeg" viewBox="0 0 6 6" refX="5" refY="3" markerWidth="5" markerHeight="4" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#475569"/>
+    </marker>
+    <marker id="arrowPos" viewBox="0 0 6 6" refX="5" refY="3" markerWidth="5" markerHeight="4" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#38bdf8"/>
+    </marker>
+  </defs>
+
+  <rect width="1600" height="900" fill="#0f172a"/>
+
+  <text x="800" y="60" font-size="38" fill="#e2e8f0" text-anchor="middle" font-weight="bold" font-family="system-ui, -apple-system, sans-serif">Three-Node Loop — Negative vs. Positive Spiral</text>
+  <text x="800" y="100" font-size="22" fill="#94a3b8" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif">AI-Native Redesign turns a stalling system into a self-sustaining one</text>
+
+  <g font-family="system-ui, -apple-system, sans-serif">
+    <!-- LEFT PANEL: Negative Spiral -->
+    <rect x="60" y="160" width="700" height="660" rx="14" fill="#1e293b" stroke="#475569" stroke-width="2"/>
+    <text x="410" y="215" font-size="30" fill="#94a3b8" text-anchor="middle" font-weight="bold">Negative Spiral</text>
+    <text x="410" y="245" font-size="17" fill="#64748b" text-anchor="middle">Built on humans handling every node</text>
+
+    <!-- Nodes (dashed borders, muted fills) -->
+    <circle cx="220" cy="410" r="70" fill="#0f172a" stroke="#475569" stroke-width="2" stroke-dasharray="6,4"/>
+    <text x="220" y="418" font-size="22" fill="#94a3b8" text-anchor="middle" font-weight="600">Creation</text>
+
+    <circle cx="600" cy="410" r="70" fill="#0f172a" stroke="#475569" stroke-width="2" stroke-dasharray="6,4"/>
+    <text x="600" y="418" font-size="20" fill="#94a3b8" text-anchor="middle" font-weight="600">Maintenance</text>
+
+    <circle cx="410" cy="620" r="70" fill="#0f172a" stroke="#475569" stroke-width="2" stroke-dasharray="6,4"/>
+    <text x="410" y="628" font-size="20" fill="#94a3b8" text-anchor="middle" font-weight="600">Consumption</text>
+
+    <!-- Failure captions below nodes -->
+    <text x="220" y="522" font-size="14" fill="#64748b" text-anchor="middle" font-style="italic">No one reads it,</text>
+    <text x="220" y="540" font-size="14" fill="#64748b" text-anchor="middle" font-style="italic">so no one writes it</text>
+
+    <text x="600" y="522" font-size="14" fill="#64748b" text-anchor="middle" font-style="italic">Updated,</text>
+    <text x="600" y="540" font-size="14" fill="#64748b" text-anchor="middle" font-style="italic">but no one cares</text>
+
+    <text x="410" y="732" font-size="14" fill="#64748b" text-anchor="middle" font-style="italic">Stale or wrong</text>
+
+    <!-- Arrows (dashed, curved, muted) -->
+    <path d="M 290 410 Q 410 380 530 410" fill="none" stroke="#475569" stroke-width="1.5" stroke-dasharray="6,4" marker-end="url(#arrowNeg)"/>
+    <path d="M 570 470 Q 530 570 460 580" fill="none" stroke="#475569" stroke-width="1.5" stroke-dasharray="6,4" marker-end="url(#arrowNeg)"/>
+    <path d="M 360 580 Q 280 570 250 470" fill="none" stroke="#475569" stroke-width="1.5" stroke-dasharray="6,4" marker-end="url(#arrowNeg)"/>
+
+    <!-- Bottom summary -->
+    <text x="410" y="790" font-size="16" fill="#64748b" text-anchor="middle">Each side reinforces the others' reasons not to invest,</text>
+    <text x="410" y="810" font-size="16" fill="#64748b" text-anchor="middle">and the system quietly hollows out</text>
+
+    <!-- RIGHT PANEL: Positive Spiral -->
+    <rect x="840" y="160" width="700" height="660" rx="14" fill="#0c2540" stroke="#38bdf8" stroke-width="2"/>
+    <text x="1190" y="215" font-size="30" fill="#38bdf8" text-anchor="middle" font-weight="bold">Positive Spiral</text>
+    <text x="1190" y="245" font-size="17" fill="#7dd3fc" text-anchor="middle">Three nodes rebuilt with AI as a given</text>
+
+    <!-- Nodes (solid bright borders) -->
+    <circle cx="1000" cy="410" r="70" fill="#0f172a" stroke="#38bdf8" stroke-width="3"/>
+    <text x="1000" y="418" font-size="22" fill="#e2e8f0" text-anchor="middle" font-weight="600">Creation</text>
+    <rect x="990" y="336" width="140" height="26" rx="6" fill="#fb923c"/>
+    <text x="1060" y="354" font-size="12" fill="#0f172a" text-anchor="middle" font-weight="700">AI × Deterministic</text>
+
+    <circle cx="1380" cy="410" r="70" fill="#0f172a" stroke="#38bdf8" stroke-width="3"/>
+    <text x="1380" y="418" font-size="20" fill="#e2e8f0" text-anchor="middle" font-weight="600">Maintenance</text>
+    <rect x="1370" y="336" width="140" height="26" rx="6" fill="#fb923c"/>
+    <text x="1440" y="354" font-size="12" fill="#0f172a" text-anchor="middle" font-weight="700">AI × Deterministic</text>
+
+    <circle cx="1190" cy="620" r="70" fill="#0f172a" stroke="#38bdf8" stroke-width="3"/>
+    <text x="1190" y="628" font-size="20" fill="#e2e8f0" text-anchor="middle" font-weight="600">Consumption</text>
+    <rect x="1180" y="546" width="140" height="26" rx="6" fill="#fb923c"/>
+    <text x="1250" y="564" font-size="12" fill="#0f172a" text-anchor="middle" font-weight="700">AI × Deterministic</text>
+
+    <!-- Feature captions below nodes -->
+    <text x="1000" y="522" font-size="14" fill="#7dd3fc" text-anchor="middle">Structured and preserved</text>
+
+    <text x="1380" y="522" font-size="14" fill="#7dd3fc" text-anchor="middle">Detect drift,</text>
+    <text x="1380" y="540" font-size="14" fill="#7dd3fc" text-anchor="middle">sync with source</text>
+
+    <text x="1190" y="732" font-size="14" fill="#7dd3fc" text-anchor="middle">Pulled semantically</text>
+
+    <!-- Arrows (solid, thick, bright) -->
+    <path d="M 1070 410 Q 1190 380 1310 410" fill="none" stroke="#38bdf8" stroke-width="3" marker-end="url(#arrowPos)"/>
+    <path d="M 1350 470 Q 1310 570 1240 580" fill="none" stroke="#38bdf8" stroke-width="3" marker-end="url(#arrowPos)"/>
+    <path d="M 1140 580 Q 1060 570 1030 470" fill="none" stroke="#38bdf8" stroke-width="3" marker-end="url(#arrowPos)"/>
+
+    <!-- Bottom summary -->
+    <text x="1190" y="782" font-size="16" fill="#7dd3fc" text-anchor="middle">Three nodes hold themselves up, positive feedback raises quality</text>
+    <text x="1190" y="808" font-size="13" fill="#94a3b8" text-anchor="middle" font-style="italic">* The AI / deterministic split at each node is a design call (deterministic preferred)</text>
+  </g>
+</svg>
