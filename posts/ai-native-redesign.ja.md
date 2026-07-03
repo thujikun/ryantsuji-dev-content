@@ -13,7 +13,11 @@ tags:
 lang: "ja"
 syndication:
   zenn:
+<<<<<<< Updated upstream
     id: "c93e730ea6e5c3"
+=======
+    id: "89da562d3026d5"
+>>>>>>> Stashed changes
     publishAt: "2026-07-21T08:00:00+09:00"
   devto:
     publishAt: "2026-07-21T08:00:00+09:00"
