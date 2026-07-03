@@ -28,7 +28,7 @@ In [Part 1](/posts/ai-observability-design), I walked through the four monitorin
 
 But shaping the write side isn't the end of the story. The moment **production data flows through the stack**, you have to block the path PII can take to slip in — and that's true with or without AI. It's the kind of classic observability problem where, if you cut corners, you walk straight into a leak incident.
 
-Add AI to the picture and the weight of that risk jumps. Log search used to be the domain of SREs and a handful of developers; even if PII slipped in, **the population doing the searching was small**. Once AI agents start querying logs broadly via MCP, both the range and the frequency of who searches explode. PII handling that was previously "we got lucky, nothing happened" turns into structural risk that surfaces hard.
+Add AI to the picture and the weight of that risk jumps. Log search used to be the domain of SREs and a handful of developers; even if PII slipped in, **the population doing the searching was small**. Once AI agents start querying logs broadly via MCP, both the range and the frequency of who searches explode. PII handling that was previously "we got lucky, nothing happened" turns into structural risk that surfaces all at once.
 
 And on top of that, if **the observability stack isn't queryable by AI**, the whole "AI-consumable observability" goal from Part 1 falls apart.
 
@@ -44,11 +44,9 @@ App emits a log → it lands in Loki → AI queries it through MCP. Stand up thi
 
 Plain-text PII pooling in the observability stack means **AI can search it directly**. This isn't really an AI problem, it's an observability problem: the stack itself becomes a PII conduit. At the same time, if you scrub PII completely, you lose **"I want to investigate Customer A's support ticket"** as a query, which is a normal support workflow.
 
-cortex (the internal AI platform[^cortex]) had to reconcile both. The key principle was: **don't make "block the PII path" and "search by PII" mutually exclusive**.
+cortex (the internal AI platform) had to reconcile both. The key principle was: **don't make "block the PII path" and "search by PII" mutually exclusive**.
 
-:::message
-**Note**: "cortex" here refers to airCloset's internal AI platform codename. Unrelated to Snowflake Cortex, Palo Alto Networks Cortex, etc.
-:::
+> **Note**: "cortex" here refers to airCloset's internal AI platform codename. Unrelated to Snowflake Cortex, Palo Alto Networks Cortex, etc.
 
 ## Multi-Layer PII Design — Six Layers
 
@@ -207,7 +205,7 @@ In other words: **"There's a guideline, lint catches some, AI review catches som
 | Static edition (code-graph + db-graph + annotation graph) | 3-graph parallel + SAME_ENTITY | Code and meaning |
 | Dynamic edition (Part 1 + this post) | Prometheus / BQ / Loki + MCP | Production behavior and cost |
 
-The honest part: these two **still sit side by side**, not joined. For cortex's stated principle of "**don't let AI infer — hand it facts**" to truly reach completion, the next step is to **pour dynamic data into the static graph and merge them**. This is the exact same gap I flagged as the "absence of dynamic analysis" residual at the end of code-graph Part 2: putting "how often is this edge actually used in production?" on the static graph's nodes. That's when "hand it as fact" reaches its final form.
+The honest part: these two **still sit side by side**, not joined. For cortex's stated principle of "**don't let AI infer — hand it facts**" to truly reach completion, the next step is to **pour dynamic data into the static graph and merge them**. This is the exact same gap I flagged as the "absence of dynamic analysis" open issue at the end of code-graph Part 2: putting "how often is this edge actually used in production?" on the static graph's nodes. That's when "hand it as fact" reaches its final form.
 
 Layer Self-Healing on top of static + dynamic and you get "AI autonomously operates," which works today. But **merging the two editions into one graph is still ahead — that's the next series.**
 

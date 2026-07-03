@@ -30,7 +30,7 @@ In the previous series, [code-graph deep dive (Part 2)](/posts/code-graph-46-rep
 
 A graph that gives you static facts is one thing. Telling AI **what's actually happening in production right now** is a separate problem. So the same shaping discipline I applied to the static graph needs to apply to the observability stack too.
 
-This post is the first half of that story. I split it into two: Part 1 (this post) covers **how I shape four different monitoring surfaces** (application / infrastructure / CI / LLM). Part 2 covers PII handling, the integration surface, and Self-Healing — published a week later.
+This post is the first half of that story. I split it into two: Part 1 (this post) covers **how I shape four different monitoring surfaces** (application / infrastructure / CI / LLM). Part 2 covers PII handling, the integration surface, and Self-Healing — coming a week later.
 
 ## What Does "Observable to AI" Even Mean?
 
@@ -45,9 +45,9 @@ The observability stack has the exact same problem. Throw raw production logs at
 
 In other words, **logs have to be reshaped before AI can use them.** Same problem, different domain.
 
-The catch is that the *right* shape depends on **what you want AI to answer**. At cortex (the internal AI platform[^cortex]), I split the monitoring surface into four axes and let each one settle into its own form:
+The catch is that the *right* shape depends on **what you want AI to answer**. At cortex (the internal AI platform), I split the monitoring surface into four axes and let each one settle into its own form:
 
-[^cortex]: "cortex" here refers to airCloset's internal AI platform codename. Unrelated to Snowflake Cortex, Palo Alto Networks Cortex, etc.
+> **Note**: "cortex" here refers to airCloset's internal AI platform codename. Unrelated to Snowflake Cortex, Palo Alto Networks Cortex, etc.
 
 ![Four monitoring axes, each shaped to the question's nature, then handed to AI](/images/posts/ai-observability-design/four-axes-framework-en.png)
 
@@ -86,7 +86,7 @@ cortex runs CI on GitHub Actions, and I ship every CI log into Grafana Loki.
 
 "Why? GitHub Actions has a perfectly good UI for that" is a reasonable question. The reasons are concrete:
 
-- Having AI hit the GitHub Actions API on every investigation is slow and auth-heavy. Ingesting into Loki once means AI can **cross-query it ad-hoc**
+- Having AI hit the GitHub Actions API on every investigation is slow and auth-heavy. Ingesting into Loki once means AI can **query it ad-hoc**
 - One Loki instance holds CI logs and application logs together, so you can **cross-query** them
 - LogQL alerts turn CI failure into a structured signal
 - AI can ask "any tests that have been broken since last week?" in natural language
@@ -116,7 +116,7 @@ The moment a main-branch failure shows up, a LogQL alert fires and Slack gets pi
 
 ## LLM — Gemini and Claude Code, Two Different Shapes
 
-The last axis is LLM observability. cortex uses both Gemini API and Claude Code (Anthropic's official CLI) heavily, and **both cost money**. The reason I shape them differently isn't really about "what kind of question" — it's about **where you can instrument**:
+The last axis is LLM observability. cortex uses both Gemini API and Claude Code (Anthropic's official CLI) heavily, and **both cost money**. The reason I shape them differently isn't really about "what kind of question" — it's about **where you can instrument — the instrumentation locus**:
 
 - **Gemini** — I own the calling code, so I can wrap every call with a common helper and emit metrics inline. Prometheus is the natural fit.
 - **Claude Code** — It's an external CLI; I can't wrap its calls from the inside. Usage shows up as records after the fact. A structured store (BigQuery) is the natural fit.
@@ -200,7 +200,7 @@ The core point of this layer is: **don't dogmatically force everything through O
 
 ## To Be Continued
 
-That's the four axes (Prometheus / BigQuery / Loki) and the design judgments behind each. The **write-side** of the observability stack is wrapped up.
+That's the four axes (application / infrastructure / CI / LLM) and the design judgments behind each. The **write-side** of the observability stack is wrapped up.
 
 But shaping the write side isn't the whole story. The moment production data flows through the stack, **PII** becomes a constraint you have to design around. And the data has to actually be **consumable by AI** through MCP, with a thoughtful integration surface for both humans (web dashboards) and AI (MCP). Connect all of that, and **the real driver of Self-Healing** comes into focus from the observability side. That's the Part 2 story.
 
