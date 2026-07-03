@@ -382,7 +382,7 @@ Some things I couldn't see back when we were just deploying individual AI tools 
 - Fix PRs now ride straight into AI review and auto-merge with no human in the path — 115 of them via Self-Healing alone in the last 30 days ([details in the Self-Healing post](/posts/cortex-self-healing)).
 - Drift between docs, annotations, and code gets repaired automatically in places that used to sit uncorrected.
 - The cost of chasing "how was this actually built again?" through past decisions has dropped.
-- Individual writing speed hasn't changed much. What did change: the quality bar for what actually ships, and the fact that people other than me can now contribute. Monthly merged PRs going from 23 in March to 518 in April 2026 came from the workflow switch (main push → PR + AI review + auto-merge), not from writing more. The number is really the shape of "the ceiling of 'reviewed manually by me' came off, so this scale and this quality bar can now be sustained by more people than just me" ([data in the harness intro post](/posts/ai-harness-intro)).
+- Individual writing speed hasn't changed much. What did change: the quality bar for what actually ships, and the fact that people other than me can now contribute. Monthly merged PRs going from the 10–23 range through March to 518 in April 2026 came from the workflow switch (main push → PR + AI review + auto-merge), not from writing more. The number is really the shape of "the ceiling of 'reviewed manually by me' came off, so this scale and this quality bar can now be sustained by more people than just me" ([data in the harness intro post](/posts/ai-harness-intro)).
 
 This isn't "add an AI tool, get 1.x." It's what happens when multiple self-sustaining loops start turning across layers. Qualitatively a different kind of change from a one-off productivity bump.
 
@@ -410,6 +410,8 @@ The defenses split three ways. The reason db-graph puts human review at the fina
 ### How I Read the Evolution-Speed Gap
 
 The rest is my read. I don't know how much of this generalizes to other organizations.
+
+One objection I want to head off: "this sounds like something you need a dedicated platform team for." airCloset doesn't have one. I built cortex solo, alongside my CTO duties, and now people from the business side, not just engineering, are shipping on top of that harness. The fact that this was reachable at all is itself Direction 2 (AI cutting the cost of building structuring systems) in action.
 
 Between organizations running AI as individual tools and organizations that have assembled multiple self-sustaining loops across layers, my sense is the evolution-speed gap widens over time.
 
