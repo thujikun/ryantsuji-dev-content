@@ -63,7 +63,7 @@
 
     <rect x="940" y="676" width="560" height="110" rx="8" fill="#0f172a" stroke="#a78bfa" stroke-width="2"/>
     <text x="1220" y="708" font-size="17" fill="#e2e8f0" text-anchor="middle" font-weight="bold">3. Query Loki with the hash</text>
-    <text x="1220" y="734" font-size="13" fill="#94a3b8" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">{app="subscription"} |~ "7a3f9c2e0b1d"</text>
+    <text x="1220" y="734" font-size="13" fill="#94a3b8" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">{service_name="subscription"} |~ "7a3f9c2e0b1d"</text>
     <text x="1220" y="770" font-size="14" fill="#4ade80" text-anchor="middle" font-weight="bold">✓ No plain-text email in the query either</text>
   </g>
 
