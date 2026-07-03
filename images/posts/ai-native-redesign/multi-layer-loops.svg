@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <defs>
+    <marker id="arrSky" viewBox="0 0 6 6" refX="5" refY="3" markerWidth="5" markerHeight="4" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#38bdf8"/>
+    </marker>
+    <marker id="arrPink" viewBox="0 0 6 6" refX="5" refY="3" markerWidth="5" markerHeight="4" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#f472b6"/>
+    </marker>
+    <marker id="arrOrange" viewBox="0 0 6 6" refX="5" refY="3" markerWidth="5" markerHeight="4" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#fb923c"/>
+    </marker>
+    <marker id="arrGreen" viewBox="0 0 6 6" refX="5" refY="3" markerWidth="5" markerHeight="4" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#4ade80"/>
+    </marker>
+  </defs>
+
+  <rect width="1600" height="900" fill="#0f172a"/>
+
+  <text x="800" y="60" font-size="38" fill="#e2e8f0" text-anchor="middle" font-weight="bold" font-family="Noto Sans JP, system-ui, sans-serif">多層の自己維持するループ ── cortex のエコシステム</text>
+  <text x="800" y="100" font-size="22" fill="#94a3b8" text-anchor="middle" font-family="Noto Sans JP, system-ui, sans-serif">cortex-product-graph を共通の文脈基盤に、 各ループが互いを支え合う</text>
+
+  <g font-family="Noto Sans JP, system-ui, sans-serif">
+    <!-- LEFT PANEL: Ecosystem structure -->
+    <rect x="60" y="160" width="900" height="660" rx="14" fill="#0c2540" stroke="#38bdf8" stroke-width="2"/>
+    <text x="510" y="210" font-size="24" fill="#38bdf8" text-anchor="middle" font-weight="bold">共通の文脈基盤とサテライトループ</text>
+
+    <!-- Connection lines (behind boxes) -->
+    <line x1="510" y1="490" x2="270" y2="330" stroke="#a78bfa" stroke-width="2.5" stroke-dasharray="8,4" opacity="0.8"/>
+    <line x1="510" y1="490" x2="770" y2="330" stroke="#4ade80" stroke-width="2.5" stroke-dasharray="8,4" opacity="0.8"/>
+    <line x1="510" y1="510" x2="270" y2="670" stroke="#fb923c" stroke-width="2.5" stroke-dasharray="8,4" opacity="0.8"/>
+    <line x1="510" y1="510" x2="770" y2="670" stroke="#f472b6" stroke-width="2.5" stroke-dasharray="8,4" opacity="0.8"/>
+
+    <!-- Central hub: cortex-product-graph -->
+    <rect x="380" y="430" width="260" height="140" rx="14" fill="#0f172a" stroke="#38bdf8" stroke-width="3"/>
+    <text x="510" y="470" font-size="22" fill="#e2e8f0" text-anchor="middle" font-weight="bold">cortex-product-graph</text>
+    <text x="510" y="498" font-size="14" fill="#7dd3fc" text-anchor="middle">共通の文脈基盤 (SSoT)</text>
+    <line x1="420" y1="515" x2="600" y2="515" stroke="#1e293b" stroke-width="1"/>
+    <text x="510" y="537" font-size="13" fill="#94a3b8" text-anchor="middle">コード + DB + docs + IaC</text>
+    <text x="510" y="555" font-size="13" fill="#94a3b8" text-anchor="middle">を統合したナレッジグラフ</text>
+
+    <!-- Satellite: code-graph (top-left) -->
+    <rect x="140" y="280" width="240" height="100" rx="12" fill="#1e293b" stroke="#a78bfa" stroke-width="2"/>
+    <text x="260" y="315" font-size="20" fill="#e0e7ff" text-anchor="middle" font-weight="bold">code-graph</text>
+    <text x="260" y="341" font-size="13" fill="#c4b5fd" text-anchor="middle">46 リポジトリの</text>
+    <text x="260" y="360" font-size="13" fill="#c4b5fd" text-anchor="middle">コード接続関係</text>
+
+    <!-- Satellite: db-graph (top-right) -->
+    <rect x="640" y="280" width="240" height="100" rx="12" fill="#1e293b" stroke="#4ade80" stroke-width="2"/>
+    <text x="760" y="315" font-size="20" fill="#dcfce7" text-anchor="middle" font-weight="bold">db-graph</text>
+    <text x="760" y="341" font-size="13" fill="#86efac" text-anchor="middle">テーブル間の</text>
+    <text x="760" y="360" font-size="13" fill="#86efac" text-anchor="middle">意味的関係</text>
+
+    <!-- Satellite: biz-graph (bottom-left) -->
+    <rect x="140" y="620" width="240" height="100" rx="12" fill="#1e293b" stroke="#fb923c" stroke-width="2"/>
+    <text x="260" y="655" font-size="20" fill="#fed7aa" text-anchor="middle" font-weight="bold">biz-graph</text>
+    <text x="260" y="681" font-size="13" fill="#fdba74" text-anchor="middle">施策と KPI の</text>
+    <text x="260" y="700" font-size="13" fill="#fdba74" text-anchor="middle">因果関係</text>
+
+    <!-- Satellite: Observability + Self-Healing (bottom-right) -->
+    <rect x="640" y="620" width="240" height="100" rx="12" fill="#1e293b" stroke="#f472b6" stroke-width="2"/>
+    <text x="760" y="653" font-size="18" fill="#fbcfe8" text-anchor="middle" font-weight="bold">Observability</text>
+    <text x="760" y="675" font-size="16" fill="#fbcfe8" text-anchor="middle" font-weight="bold">+ Self-Healing</text>
+    <text x="760" y="700" font-size="13" fill="#f9a8d4" text-anchor="middle">監視 → 自動修復 (右パネル)</text>
+
+    <!-- Bottom caption -->
+    <text x="510" y="775" font-size="14" fill="#94a3b8" text-anchor="middle" font-style="italic">各ループの出力が文脈基盤を養い、 文脈基盤が各ループの判断を支える</text>
+    <text x="510" y="796" font-size="14" fill="#94a3b8" text-anchor="middle" font-style="italic">あるループの出力が別のループの入力になる、 という繋がり方</text>
+
+    <!-- RIGHT PANEL: Self-Healing Chain -->
+    <rect x="990" y="160" width="550" height="660" rx="14" fill="#2d1b3d" stroke="#f472b6" stroke-width="2"/>
+    <text x="1265" y="210" font-size="24" fill="#f472b6" text-anchor="middle" font-weight="bold">Self-Healing のループ</text>
+    <text x="1265" y="238" font-size="14" fill="#fbcfe8" text-anchor="middle">人間を介さずに閉じる自動修復ループ</text>
+
+    <!-- Step 1: 監視 -->
+    <rect x="1130" y="275" width="270" height="60" rx="8" fill="#0f172a" stroke="#f472b6" stroke-width="2"/>
+    <text x="1265" y="313" font-size="17" fill="#e2e8f0" text-anchor="middle" font-weight="600">1. 監視 (metrics/logs/traces)</text>
+
+    <path d="M 1265 335 L 1265 373" fill="none" stroke="#f472b6" stroke-width="2" marker-end="url(#arrPink)"/>
+
+    <!-- Step 2: 検知 -->
+    <rect x="1130" y="378" width="270" height="60" rx="8" fill="#0f172a" stroke="#f472b6" stroke-width="2"/>
+    <text x="1265" y="416" font-size="17" fill="#e2e8f0" text-anchor="middle" font-weight="600">2. インシデント検知</text>
+
+    <path d="M 1265 438 L 1265 476" fill="none" stroke="#f472b6" stroke-width="2" marker-end="url(#arrPink)"/>
+
+    <!-- Step 3: AI 推論 (references CPG) -->
+    <rect x="1130" y="475" width="270" height="98" rx="8" fill="#0f172a" stroke="#fb923c" stroke-width="2"/>
+    <text x="1265" y="502" font-size="17" fill="#fed7aa" text-anchor="middle" font-weight="600">3. AI 推論 (root cause 推定)</text>
+    <text x="1265" y="527" font-size="13" fill="#fdba74" text-anchor="middle">Grafana MCP のログ + cortex-product-graph</text>
+    <text x="1265" y="545" font-size="13" fill="#fdba74" text-anchor="middle">で関連ソースを探索 → fix PR 生成</text>
+
+    <path d="M 1265 573 L 1265 608" fill="none" stroke="#fb923c" stroke-width="2" marker-end="url(#arrOrange)"/>
+
+    <!-- Step 4: AI レビュー (references CPG) -->
+    <rect x="1130" y="613" width="270" height="88" rx="8" fill="#0f172a" stroke="#fb923c" stroke-width="2"/>
+    <text x="1265" y="640" font-size="17" fill="#fed7aa" text-anchor="middle" font-weight="600">4. AI レビュー</text>
+    <text x="1265" y="666" font-size="13" fill="#fdba74" text-anchor="middle">cortex-product-graph を</text>
+    <text x="1265" y="684" font-size="13" fill="#fdba74" text-anchor="middle">文脈として参照</text>
+
+    <path d="M 1265 701 L 1265 736" fill="none" stroke="#fb923c" stroke-width="2" marker-end="url(#arrOrange)"/>
+
+    <!-- Step 5: 自動マージ → デプロイ -->
+    <rect x="1130" y="741" width="270" height="60" rx="8" fill="#0f172a" stroke="#4ade80" stroke-width="2"/>
+    <text x="1265" y="779" font-size="17" fill="#dcfce7" text-anchor="middle" font-weight="600">5. 自動マージ → デプロイ</text>
+
+    <!-- Loop back arrow -->
+    <path d="M 1400 771 Q 1490 771 1490 550 Q 1490 305 1400 305" fill="none" stroke="#f472b6" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrPink)"/>
+    <text x="1512" y="540" font-size="12" fill="#f9a8d4" text-anchor="middle" transform="rotate(90, 1512, 540)">ループが閉じる</text>
+  </g>
+</svg>
