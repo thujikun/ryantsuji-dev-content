@@ -190,15 +190,9 @@ The previous chapter split "zones deterministic automation couldn't reach" into 
 
 Every automation technology before AI stayed inside the region where **you can write deterministic logic**. Enumerate rules, put in branches, match patterns. It's a very powerful stack, and as I said earlier, it's threaded through nearly everything in modern life.
 
-But there were zones it couldn't reach:
+But it hit a class of work it couldn't touch — the same class the previous chapter arrived at from a different angle: **qualitative judgment, contextual interpretation, semantic connection**. A judgment that a human "kind of understands" explodes into an unmanageable condition tree the moment you try to write it as code. What Type 1's leftover human-only nodes and Type 2's un-built structuring systems had in common was that neither survived rule-based encoding.
 
-- **Qualitative judgment.** "Is this dashboard anomaly a real incident, or a known false positive?"
-- **Contextual interpretation.** "What documentation updates should follow from this code change, at what granularity, saying what?"
-- **Semantic connection.** "Is there a causal relationship between last month's social campaign and this week's KPI shift?"
-
-The common thread: **none of these fit rule-based encoding**. A judgment that a human "kind of understands" explodes into an unmanageable condition tree the moment you try to write it as code.
-
-What AI brings for the first time is **making that class — qualitative judgment, contextual interpretation, semantic connection — machine-processable**. An LLM handles judgments that don't survive being turned into code by treating them as statistical patterns. This isn't an extension of the deterministic stack. It's a new capability, orthogonal to it.
+What AI brings for the first time is **making that whole class machine-processable**. An LLM handles judgments that don't survive being turned into code by treating them as statistical patterns. This isn't an extension of the deterministic stack. It's a new capability, orthogonal to it.
 
 ### Three Directions of Change
 
@@ -355,6 +349,8 @@ As the earlier examples showed, AI review works comprehensively only when there'
 
 The feeling "AI is shallow" is usually not about the AI. It's about the missing context foundation the AI was supposed to reason over.
 
+This is adjacent to what's now being called context engineering. I've written about the retrieval-side design in [an earlier agentic Graph RAG post](/posts/agentic-graph-rag-mcp), but in the three-node frame, retrieval quality is only the consumption node. The failure here is upstream — the creation side never produced a form that could be pulled as context.
+
 ### Failure Mode 3: The Creation Side Doesn't Shift into a Form AI Can Consume
 
 Of the three directions I laid out earlier, Direction 1 (automate the leftover qualitative-judgment nodes from Type 1) can be reached by adding AI to an existing system. But Direction 2 (cut the cost of building structuring systems) and Direction 3 (consume structured data semantically) both require the creation side to change into a form AI can consume.
@@ -383,10 +379,10 @@ This is the underlying reason the evolution-speed gap I sketch in the next chapt
 
 Some things I couldn't see back when we were just deploying individual AI tools have come into view while building and running cortex.
 
-- Fix PRs now ride straight into AI review and auto-merge, no human in the path, noticeably more often than before.
+- Fix PRs now ride straight into AI review and auto-merge with no human in the path — 115 of them via Self-Healing alone in the last 30 days ([details in the Self-Healing post](/posts/cortex-self-healing)).
 - Drift between docs, annotations, and code gets repaired automatically in places that used to sit uncorrected.
 - The cost of chasing "how was this actually built again?" through past decisions has dropped.
-- Decision speed has shifted enough compared to the individual-AI-tool era to be obvious.
+- Individual writing speed hasn't changed much. What did change: the quality bar for what actually ships, and the fact that people other than me can now contribute. Monthly merged PRs going from 23 in March to 518 in April 2026 came from the workflow switch (main push → PR + AI review + auto-merge), not from writing more. The number is really the shape of "the ceiling of 'reviewed manually by me' came off, so this scale and this quality bar can now be sustained by more people than just me" ([data in the harness intro post](/posts/ai-harness-intro)).
 
 This isn't "add an AI tool, get 1.x." It's what happens when multiple self-sustaining loops start turning across layers. Qualitatively a different kind of change from a one-off productivity bump.
 
@@ -404,6 +400,12 @@ These loops run independently, but they're connected through cortex-product-grap
 Once this kind of multi-layer loop starts running inside the organization, it changes how time gets spent at a fundamental level. Not "AI helps" — closer to "a substantial share of daily work completes inside the loops."
 
 ![Multi-layered self-sustaining loops — code-graph, db-graph, biz-graph, and Observability + Self-Healing each turn as satellite loops around cortex-product-graph as the shared context foundation. In Self-Healing, both AI inference (Grafana MCP logs + cortex-product-graph) and AI review (cortex-product-graph as context) reference the shared foundation, and the loop closes without a human in the path](/images/posts/ai-native-redesign/multi-layer-loops-en.png)
+
+### Where This Structure Could Rot
+
+If the three-node symmetry is the axis, then AI-Native systems' own negative spiral is a question that has to be asked too. The circular dependency I presented as a virtuous cycle (AI review maintains cortex-product-graph, cortex-product-graph supports AI review) turns into a self-amplifying error loop the moment errors get into the foundation. AI reasoning confidently and consistently wrong on top of a contaminated context foundation is a real, symmetric failure mode of this design, not a hypothetical.
+
+The defenses split three ways. The reason db-graph puts human review at the final gate is entry-side containment — narrowing the flow of contamination into the foundation wherever the downside of being wrong is large. Materializing boundary nodes explicitly through static analysis is inference-range containment — narrowing where AI is allowed to reason. And keeping cortex-product-graph in a form that can always be regenerated from deterministic extraction + annotations + docs is recoverability — a way back once contamination is detected. All three are held together by "the foundation is never something AI alone writes into." The signal that this failure mode is starting to show is drift in AI review's own accuracy metrics (REQUEST_CHANGES rate, false positive / negative rate) that no one can explain — which is the symmetric-side extension of what I meant in the [AI-Observability post](/posts/ai-observability-design) when I argued LLMs should be the fourth monitoring axis.
 
 ### How I Read the Evolution-Speed Gap
 
