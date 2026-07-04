@@ -4,7 +4,7 @@ publishedAt: "2026-07-21T08:00:00+09:00"
 updatedAt: "2026-07-21T08:00:00+09:00"
 slug: "ai-native-redesign"
 summary: "Every organization eventually faces the same design problem: keeping important information stored, current, and reachable at scale. This post frames that as a three-node loop (creation / maintenance / consumption) and works through what redesigning it with AI as a given looks like, as opposed to bolting AI onto a human-first setup. Along the way it recasts earlier posts on cortex — code-graph, product-graph, AI-Observability, auto-review harness — as different applications of the same underlying principle."
-emoji: "🧭"
+emoji: "🌀"
 tags:
   - "ai"
   - "architecture"

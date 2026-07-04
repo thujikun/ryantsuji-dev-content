@@ -4,7 +4,7 @@ publishedAt: "2026-07-21T08:00:00+09:00"
 updatedAt: "2026-07-21T08:00:00+09:00"
 slug: "ai-native-redesign"
 summary: "組織にとって重要な情報を、参照可能な形で保存し、作成 / 維持 / 消費の3ノードループとして設計・運用する。この普遍の原理をAIという能力面の質的転換の中で全体再設計する視点、AI-Native Redesignについて書いた思想記事。code-graph、product-graph、AI-Observability、auto-review harnessなど、これまで個別記事として書いてきた設計は、実はこの原理の異なる適用例だった、という整理も含む。"
-emoji: "🧭"
+emoji: "🌀"
 tags:
   - "ai"
   - "architecture"
