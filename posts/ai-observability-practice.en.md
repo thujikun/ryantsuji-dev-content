@@ -100,7 +100,7 @@ Both sides run **the same `hashEmail`**, so logs from the same customer collapse
 
 - **Plain-text email never enters Loki**
 - **The query string Loki sees doesn't contain plain-text email either** (only the hashed value reaches it)
-- **Enumeration resistance comes from keeping the HMAC key outside the stack**. Email is a low-entropy, enumerable input space, so a bare one-way hash would let an attacker hash candidate emails forward and match. With HMAC plus a key held only at the write side and the search tool, a log leak alone isn't enough to enumerate
+- **Enumeration resistance comes from keeping the HMAC key outside the stack**. Email is a low-entropy, enumerable input space, so **a bare one-way hash (plain SHA-256, etc.) is breakable**. The hash function is public, so once logs leak, an attacker just hashes a list of likely emails on their own machine and matches against the leaked values, no key required. **HMAC folds a secret key into the hash computation itself**, so an attacker who doesn't have the key can't even turn a candidate email into "the same shape as the leaked hash." They never get onto the brute-force field. Keep the key only at the write side and the search tool, never in Loki itself, and you get "a log leak alone doesn't expose the plaintext unless the key leaks too", one more condition an attacker has to satisfy
 - 12-char prefix (48 bits) collision probability is negligible at customer-base scale (birthday bound: ~16M records before one expected collision)
 
 This reuses the property "same input → same hash" of hash functions in the form "**the same function on both sides makes search work**." The security / debug usability tradeoff compresses cleanly.
