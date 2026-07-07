@@ -60,7 +60,7 @@ cortex's PII handling is six layers, each with a different role:
 | **Write: ETL DLP** | Strip plain-text PII from derived tables | Cloud DLP redacts during transforms (customer support data, etc.). Placeholders like `[EMAIL_ADDRESS]` / `[PHONE_NUMBER]` preserve the structure |
 | **Write: log hashing** | Plain text never reaches Loki | App-side hash via `hashEmail` (HMAC-SHA256 → 12-char prefix; key lives outside the observability stack) before log emit |
 | **Search: same function on both sides** | Look up a specific customer's logs without ever touching plain text | Query-side runs the same `hashEmail` before sending to Loki |
-| **Output: MCP masking** | Mask when AI consumes | Column-name detection replaces values with placeholders like `***@***.com` |
+| **Output: MCP masking** | Mask when AI consumes | Column-name detection masks the local part (e.g. `r***@air-closet.com`), keeping `@domain` so first-response triage can still tell which domain the account belonged to |
 | **Identity separation** | Internal staff email is handled in a separate track from customer PII | HMAC-signed by Edge Router as auth attribution; not part of the masking pipeline |
 
 The fourth row — **search with the same function on both sides** — is where the security / usability tradeoff gets really tight.
