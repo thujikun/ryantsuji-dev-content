@@ -141,14 +141,15 @@ The design choice that splits opinions is: **who computes the cost?** Two option
 
 I picked B. The price table lives in a constant called `GEMINI_PRICING` and gets manually bumped whenever Google moves prices. Just `gemini-3-flash` / `gemini-3-pro` with input/output unit prices each. Nothing fancy.
 
-The real reason for B is **per-task granularity**, not just speed:
+The real reason for B is **real-time visibility**:
 
-- **You can't tune what you can't attribute.** Cloud Billing (with BQ export) will slice by SKU, project, and resource label, but not by call-site context. What you actually want to trim is "the db-graph table description generation cost $X," "the code-graph field type inference cost $Y," "that one prompt cost $Z" — call-site-context granularity, which billing simply doesn't carry. With client-side wrapping you attach `service` / `model` / call-site context as labels, and you can later slice by any of them in PromQL.
-- Real-time visibility is a bonus — runaway prompts and batches don't wait for tomorrow's billing.
+- **Billing lags by hours to a day.** A runaway prompt or batch bleeds cost all night before tomorrow's billing surfaces it. Computing client-side, tokens times price right after the call, lets you see "what's expensive right now" at the `service` level (`code-graph` / `gcs-transformer` / `db-dictionary` and so on, app/pipeline-grained) within minutes. That's a speed billing can never match.
 - Price table maintenance is light (Google doesn't change prices often), so the upkeep cost is trivial.
 - Cloud Billing API authentication, fetching, normalization, fan-out is its own pipeline of weight you'd have to maintain.
 
-Then I emit `gemini_cost_usd_USD_total` as a cumulative Prometheus counter (the doubled `usd_USD` comes from OTel meter name `gemini.cost.usd` combined with the unit `USD` during Prometheus exporter conversion) and PromQL can answer "how much did we spend in the last hour" directly: `sum(increase(gemini_cost_usd_USD_total[1h]))`. Alert fires at $1/hour, info severity, into Slack. Simple as that.
+Then I emit `gemini_cost_usd_USD_total` as a cumulative Prometheus counter (the doubled `usd_USD` comes from OTel meter name `gemini.cost.usd` combined with the unit `USD` during Prometheus exporter conversion) and PromQL can answer "how much did we spend in the last hour" directly: `sum(increase(gemini_cost_usd_USD_total[1h]))`. Alert fires at $1/hour, info severity, into Slack. In practice this is less an aggregation surface I query after the fact and more a tripwire: the threshold-crossing Slack alert is how a runaway gets caught.
+
+One line worth drawing here: the `gemini.cost.usd` counter carries exactly two labels, `model` and `service`, and `service` is **coarse** (a bounded set of app/pipeline names). Try to push call-site-level identity onto the label, "what did that one prompt cost," and the label combinations blow up across many repos and inference types until the time-series DB can't absorb them. So the Prometheus side stays a tripwire: coarse `service` granularity, immediate alerting, nothing finer. The per-prompt attribution question, "which prompt burned the most this week," isn't a time-series question at all, it's a **SQL** one. That wants the token records in BigQuery with as much call-site context as you care to attach, which is the same reason Claude Code goes to BQ below. "I can instrument this call" and "this should live as a time series" are separate claims, and the fine-grained aggregation is where Gemini and Claude Code converge back onto the same backend.
 
 Prometheus is what you want when the question is "right now."
 
