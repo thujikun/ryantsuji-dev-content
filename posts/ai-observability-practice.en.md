@@ -86,20 +86,23 @@ logger.info("Subscription updated", {
 
 **Search side (when you want to pull a specific customer's logs):**
 
-The search tool's entry point puts the same `hashEmail` in front of every query. After passing through, only the hashed value reaches Loki:
+Here's the awkward part. "Pull up Customer A's logs" — the naive way to build it hands the raw email to the AI, which then passes it to an MCP tool to search. But that means **handing plain-text PII to the AI (the model, and the vendor behind it)**. Guard the inside of Loki with hashes all you want; it leaks at the search input, one step earlier.
+
+So in cortex the search tool takes a **non-PII ID, resolves it to an email inside the MCP server, hashes it there, and returns only the hash**. The email exists only inside the MCP server and never reaches the model:
 
 ```ts
-// Search tool entry: hash first, then query Loki
-const hash = hashEmail(input);
-// → '7a3f9c2e0b1d'
-const logs = await loki.query(`{service_name="subscription"} |~ "${hash}"`);
-// → Returns logs containing the matching hash
+// MCP tool resolve_email_hash (runs server-side)
+// Input is an ID (non-PII). The email is never returned to the caller = the AI.
+const email = await resolveEmailById(userId); // resolved from the DB, server-side
+const hash = hashEmail(email, secret);        // same function, same key as the write side
+// → the AI gets back only the hash, never the email
 ```
 
-Both sides run **the same `hashEmail`**, so logs from the same customer collapse to the same hash on lookup. Meanwhile:
+The AI takes that `hash` and searches Loki via Grafana MCP as `{service_name="subscription"} |~ "${hash}"`. Both the write side and the search side run **the same `hashEmail` with the same key**, so logs from the same customer collapse to the same hash. Meanwhile:
 
 - **Plain-text email never enters Loki**
 - **The query string Loki sees doesn't contain plain-text email either** (only the hashed value reaches it)
+- And **the AI (the model) never receives plain-text email either**. All it touches is a non-PII ID and hashes that already live in Loki. The plain-text email never leaves the trust boundary of the MCP server.
 - **Enumeration resistance comes from keeping the HMAC key outside the stack**. Email is a low-entropy, enumerable input space, so **a bare one-way hash (plain SHA-256, etc.) is breakable**. The hash function is public, so once logs leak, an attacker just hashes a list of likely emails on their own machine and matches against the leaked values, no key required. **HMAC folds a secret key into the hash computation itself**, so an attacker who doesn't have the key can't even turn a candidate email into "the same shape as the leaked hash." They never get onto the brute-force field. Keep the key only at the write side and the search tool, never in Loki itself, and you get "a log leak alone doesn't expose the plaintext unless the key leaks too", one more condition an attacker has to satisfy
 - Truncating to a 12-char prefix (48 bits) means collisions are possible in theory, but negligible at customer-base scale. By the birthday problem, the 50% collision point sits around 20M records (≈ 2^24.5), and below that the expected collision count stays tiny. More to the point, a collision **wouldn't leak plaintext anyway**: this hash is a correlation key for identifying a customer's logs, not a security boundary, so the worst case is "another customer's logs occasionally land on the same hash", a degradation of correlation accuracy, not a disclosure
 
@@ -107,7 +110,9 @@ This reuses the property "same input → same hash" of hash functions in the for
 
 And of course, this is all just the **app log layer**. The BQ side is protected by Policy Tag-based column-level access control as its own layer (rows 1–2 of the table above). The whole thing is multi-layered.
 
-One more thing worth noting: search tool input arguments (including MCP servers) carry plain-text **only at the moment of arrival**. The tool runs `hashEmail` immediately, so neither Loki nor the MCP tool-call log retains plain text. **How the search tool handles its arguments is itself part of the multi-layer PII design.**
+What makes the "take an ID, resolve and hash inside" shape work is that **plain-text email never crosses the trust boundary of the MCP server**. The easy implementation (hand the AI a raw email, let the tool search) leaks the plaintext to the model at the search input, no matter how well you guard the inside of Loki. You could argue "the vendor's terms say it won't leave," but that's a dependency on terms, and it's weak under audit. Take an ID and hash inside, and you keep plaintext away from the model **structurally**, not contractually. When I said up top that PII protection has become "a trust-boundary redesign," this is the kind of design call I meant.
+
+An aside: when I was working this out, I asked an AI for help, and it suggested building an admin screen where a human manually turns emails into hashes. That's one way to keep PII away from the model, sure, but it **doesn't fit autonomous operation** — a human has to step in before any investigation can start. cortex is built to run all the way through to "fixed before anyone notices" self-healing, so a solution that inserts a human isn't on the table. "Take an ID, hash inside the MCP server" came out of that constraint. What counts as an acceptable solution was, in the end, a design judgment on my side.
 
 ## Integration Surface — "Humans = Web, AI = MCP" on the Same Backend
 

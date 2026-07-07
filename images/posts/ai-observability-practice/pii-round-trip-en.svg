@@ -49,15 +49,16 @@
     <text x="1220" y="384" font-size="15" fill="#94a3b8" text-anchor="middle">"Pull Customer A's recent logs" turned into a query</text>
 
     <rect x="940" y="408" width="560" height="92" rx="8" fill="#0f172a" stroke="#475569"/>
-    <text x="1220" y="442" font-size="17" fill="#cbd5e1" text-anchor="middle">1. Search tool receives customer identifier</text>
-    <text x="1220" y="468" font-size="14" fill="#94a3b8" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">searchLogs({</text>
-    <text x="1220" y="488" font-size="14" fill="#94a3b8" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">email: "customer.a@example.com" })</text>
+    <text x="1220" y="442" font-size="17" fill="#cbd5e1" text-anchor="middle">1. AI passes only a non-PII ID to the MCP tool</text>
+    <text x="1220" y="468" font-size="14" fill="#94a3b8" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">resolve_email_hash({</text>
+    <text x="1220" y="488" font-size="14" fill="#94a3b8" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">id: "user-123" }) ← no plain-text email</text>
 
     <line x1="1220" y1="504" x2="1220" y2="540" stroke="#a78bfa" stroke-width="2.5" marker-end="url(#a-violet)"/>
 
     <rect x="940" y="550" width="560" height="80" rx="8" fill="#0f172a" stroke="#475569"/>
-    <text x="1220" y="584" font-size="17" fill="#cbd5e1" text-anchor="middle">2. Same hashEmail() at tool entry</text>
-    <text x="1220" y="612" font-size="19" fill="#fbbf24" text-anchor="middle" font-weight="bold" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">'7a3f9c2e0b1d'</text>
+    <text x="1220" y="578" font-size="16" fill="#cbd5e1" text-anchor="middle">2. Resolve email + hashEmail() inside the MCP server</text>
+    <text x="1220" y="600" font-size="13" fill="#94a3b8" text-anchor="middle">email stays server-side; only the hash returns to the AI</text>
+    <text x="1220" y="620" font-size="18" fill="#fbbf24" text-anchor="middle" font-weight="bold" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">'7a3f9c2e0b1d'</text>
 
     <line x1="1220" y1="630" x2="1220" y2="666" stroke="#a78bfa" stroke-width="2.5" marker-end="url(#a-violet)"/>
 
