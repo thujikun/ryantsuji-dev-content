@@ -116,7 +116,7 @@ The moment a main-branch failure shows up, a LogQL alert fires and Slack gets pi
 
 ## LLM — Gemini and Claude Code, Two Different Shapes
 
-The last axis is LLM observability. cortex uses both Gemini API and Claude Code (Anthropic's official CLI) heavily, and **both cost money**. The reason I shape them differently isn't really about "what kind of question" — it's about **where you can instrument — the instrumentation locus**:
+The last axis is LLM observability. cortex uses both Gemini API and Claude Code (Anthropic's official CLI) heavily, and **since both cost money, I want visibility into how they're used** (though the billing models differ — Gemini is pay-per-use, Claude Code is a subscription, and that difference matters later). The reason I shape them differently isn't really about "what kind of question" — it's about **where you can instrument — the instrumentation locus**:
 
 - **Gemini** — I own the calling code, so I can wrap every call with a common helper and emit metrics inline. Prometheus is the natural fit.
 - **Claude Code** — It's an external CLI; I can't wrap its calls from the inside. Usage shows up as records after the fact. A structured store (BigQuery) is the natural fit.
@@ -154,7 +154,7 @@ Prometheus is what you want when the question is "right now."
 
 ### Claude Code — Send to BigQuery, Built for SQL Aggregation
 
-Every developer at the company uses Claude Code. It costs money too. I want to know **who used how much, in which repo, with how many tokens**.
+Every developer at the company uses Claude Code. But the economics differ from Gemini: it's a subscription, so token usage doesn't translate straight into a dollar figure. What I'm after here is less the cost itself and more the **usage picture** — **who's using how much, how many tokens per repo, how well the cache is landing** — so I can turn it into better usage.
 
 The question that split opinion: "Should Claude Code usage go to Loki too?"
 
@@ -192,7 +192,7 @@ What sits in BigQuery is visible day-by-day through the internal portal I'll cov
 
 ![Claude Code usage dashboard — 78.0B tokens over the past 30 days, 96% of which is cache read](/images/posts/ai-observability-design/cc-usage-dashboard-en.png)
 
-The numbers are interesting enough to mention briefly: in the last 30 days, **78.0B tokens / 384K messages / 47 users / 79 repositories**. The one to focus on is **Cache Read Input at 75.1B (96% of total)** — prompt-cache is dramatically effective. Cache read tokens cost roughly 1/10 of standard input pricing, so against the cache-less counterfactual, the input effective cost works out to roughly **7× cheaper at the blended level**. "Aggregation-shaped backend matched to the question" is the design choice; what it buys you is that this kind of operationally important metric **falls out of SQL naturally and shows up daily**. Doing the same thing in LogQL would be a battle.
+The numbers are interesting enough to mention briefly: in the last 30 days, **78.0B tokens / 384K messages / 47 users / 79 repositories**. The one to focus on is **Cache Read Input at 75.1B (96% of total)** — prompt-cache is dramatically effective. On a subscription this doesn't show up as a dollar figure, but cache read tokens carry roughly 1/10 the effective input rate, so if you were paying per-token API pricing for the same usage, this works out to roughly **7× more efficient at the blended input level** versus the cache-less counterfactual. Being able to see usage efficiency as a concrete number like this is the point of the visualization; "aggregation-shaped backend matched to the question" is the design choice that makes this kind of metric **fall out of SQL naturally and show up daily**. Doing the same thing in LogQL would be a battle.
 
 As a side note: **MCP tool-call logs** end up in BigQuery too (`cortex.mcp_tool_calls`), but via a simpler path — each MCP server just writes records directly, no OTel in the loop. The "annotation graph MCP used ~50,000 times by ~73 people" figure from the previous series came from this exact table.
 
