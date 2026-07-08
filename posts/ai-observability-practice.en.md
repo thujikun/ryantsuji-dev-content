@@ -65,6 +65,10 @@ cortex's PII handling is six layers, each with a different role:
 
 The fourth row — **search with the same function on both sides** — is where the security / usability tradeoff gets really tight.
 
+I'll use email as the running example, but the six layers guard more than email. PII spans **names (including phonetic readings), phone numbers, addresses, postal codes, dates of birth, card and bank details, external-service IDs**, and more. The anonymization technique varies by the nature of the field — same-function hashing to preserve correlation (email, phone), partial masking (names, addresses), full redaction (card numbers, tokens) — and that call is made per field. What stays constant is **the structure: which of the six layers guards it, and how**. That's the reusable part of the design.
+
+And this anonymization isn't confined to observability logs (Loki) either. An MCP tool that queries a service DB, for instance, pulls customer names, addresses, and phone numbers into its result set, so the same PII anonymization rules run before anything is handed back to the AI. The consistent rule is **"anonymize PII on every data path that reaches the AI,"** applied across data-source types, not just one.
+
 ## Hash on Both the Write and Search Sides
 
 Naively "remove PII from logs" and you can no longer answer "let me look up Customer A's logs." But if you **hash at write time and store that hash in the log**, the search side can run **the same hash function over the input** and find the matching record. Plain-text email never touches either end.
