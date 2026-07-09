@@ -1,5 +1,5 @@
 ---
-title: 'AI-Native Redesign: Re-solving "How Do We Make Accurate Information Accessible?" with AI as a Given'
+title: "AI-Native Redesign: Break the Human-First Assumptions, Rebuild with AI as a Given"
 publishedAt: "2026-07-21T08:00:00+09:00"
 updatedAt: "2026-07-21T08:00:00+09:00"
 slug: "ai-native-redesign"
@@ -13,9 +13,6 @@ tags:
 lang: "en"
 syndication:
   devto:
-    id: 4056809
-    slug: "ai-native-redesign-re-solving-how-do-we-make-accurate-information-accessible-with-ai-as-a-given-3e22-temp-slug-1100473"
-    contentHash: "94f5a8cd83b919eb"
     publishAt: "2026-07-21T08:00:00+09:00"
 cover: /images/posts/ai-native-redesign.en.cover.png
 ---
@@ -24,9 +21,9 @@ Hi, I'm [Ryan](https://x.com/ryantsuji), CTO at airCloset (a fashion-rental subs
 
 > **Disclaimer**: "cortex" in this article is the internal codename for the AI platform built in-house at airCloset. It is unrelated to existing commercial services like Snowflake Cortex or Palo Alto Networks Cortex.
 
-I've been writing about individual application designs and about cortex — the AI platform we're building internally at airCloset. Each post has been centered on one piece of it: [code-graph](/posts/code-graph-46-repos), [product-graph](/posts/cortex-product-graph), [db-graph](/posts/db-graph-mcp), [biz-graph](/posts/initiative-graph-rag), [AI-Observability](/posts/ai-observability-design), the [auto-review harness](/posts/cortex-auto-review), and [Self-Healing](/posts/cortex-self-healing).
+"Everything changes with AI" is the prevailing mood. My experience building and then running an internal AI platform (cortex) points the other way. The principles don't change at all. Only the machinery does. This post is about what I've come to treat as principle, what I've concluded should be broken, and the thinking behind that split.
 
-This post isn't about any of those implementations. It's about the design principle sitting behind all of them — one abstraction level up from any individual system, so more essay than build log.
+I've written about the individual pieces before: [code-graph](/posts/code-graph-46-repos), [product-graph](/posts/cortex-product-graph), [db-graph](/posts/db-graph-mcp), [biz-graph](/posts/initiative-graph-rag), [AI-Observability](/posts/ai-observability-design), the [auto-review harness](/posts/cortex-auto-review), and [Self-Healing](/posts/cortex-self-healing). This post isn't about any of them. It's about the design principle sitting behind all of them, one abstraction level up, more essay than build log.
 
 The principle, in one sentence: **how do we make accurate information accessible?** It's an old question. Libraries, legal case books, encyclopedias, search engines — every era has had its own answer using whatever tools that era gave it. Even the technology revolutions people call "paradigm shifts" mostly just changed the *means*. The underlying question didn't move.
 

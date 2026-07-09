@@ -1,5 +1,5 @@
 ---
-title: "AI-Native Redesign:「正確な情報に、適切にアクセスできるようにするには？」をAI前提で解き直す"
+title: "AI-Native Redesign: 原理は変えず、仕組みを壊す"
 publishedAt: "2026-07-21T08:00:00+09:00"
 updatedAt: "2026-07-21T08:00:00+09:00"
 slug: "ai-native-redesign"
@@ -22,9 +22,9 @@ cover: /images/posts/ai-native-redesign.ja.cover.png
 
 みなさまこんにちは！エアークローゼットでCTOをしている[辻](https://x.com/RyanAircloset)です。
 
-これまで個別のアプリケーション設計や、社内で組み立てているAI活用基盤(cortex)の実装・設計思想について書いてきました。[code-graph](/posts/code-graph-46-repos)の話、[product-graph](/posts/cortex-product-graph)の話、[db-graph](/posts/db-graph-mcp)の話、[biz-graph](/posts/initiative-graph-rag)の話、[AI-Observability](/posts/ai-observability-design)の話、[auto-review harness](/posts/cortex-auto-review)の話、[Self-Healing](/posts/cortex-self-healing)の話などが、それぞれの記事の中心でした。
+「AIで全部変わる」という風潮がありますが、私が社内でAI活用基盤(cortex)を組み立て、そして運用してきた実感はむしろ逆です。原理は何も変わらない。ただ仕組みだけが変わる。この記事では、私が何を原理ととらえ、何を壊すべきと考えてきたのか、その思想について紹介します。
 
-今回はそれらの実装の話ではなく、その背後にある設計原理そのものについて書きます。個別実装から一段抽象度を上げた、思想寄りの話です。
+これまで[code-graph](/posts/code-graph-46-repos)、[product-graph](/posts/cortex-product-graph)、[db-graph](/posts/db-graph-mcp)、[biz-graph](/posts/initiative-graph-rag)、[AI-Observability](/posts/ai-observability-design)、[auto-review harness](/posts/cortex-auto-review)、[Self-Healing](/posts/cortex-self-healing)と、個別の実装について書いてきました。今回はそれらの話ではなく、全部の背後にある設計原理そのもの。個別実装から一段抽象度を上げた、思想寄りの話です。
 
 その原理とは、一言で言えば「正確な情報に、適切にアクセスできるようにするには？」という設計問題です。これは実は人類が長らく抱えてきた根本的な問いで、図書館から検索エンジンまで、時代や対象等によって手段は違えど本質は同じ問いを解こうとしてきました。過去に何度も起きた革命的な技術革新でさえ、手段を刷新しただけで根本にある問いは変えていません。
 
