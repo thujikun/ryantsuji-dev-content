@@ -13,6 +13,9 @@ tags:
 lang: "en"
 syndication:
   devto:
+    id: 4100660
+    slug: "ai-native-redesign-break-the-human-first-assumptions-rebuild-with-ai-as-a-given-j2k-temp-slug-1600901"
+    contentHash: "bb173d64752d91f9"
     publishAt: "2026-07-21T08:00:00+09:00"
 cover: /images/posts/ai-native-redesign.en.cover.png
 ---
