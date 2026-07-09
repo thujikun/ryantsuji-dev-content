@@ -1,5 +1,5 @@
 ---
-title: "AI-Native Redesign: Break the Human-First Assumptions, Rebuild with AI as a Given"
+title: "AI-Native Redesign: The Principles Don't Change — Only the Machinery Does"
 publishedAt: "2026-07-21T08:00:00+09:00"
 updatedAt: "2026-07-21T08:00:00+09:00"
 slug: "ai-native-redesign"
@@ -13,18 +13,15 @@ tags:
 lang: "en"
 syndication:
   devto:
-    id: 4100660
-    slug: "ai-native-redesign-break-the-human-first-assumptions-rebuild-with-ai-as-a-given-j2k-temp-slug-1600901"
-    contentHash: "bb173d64752d91f9"
     publishAt: "2026-07-21T08:00:00+09:00"
 cover: /images/posts/ai-native-redesign.en.cover.png
 ---
 
 Hi, I'm [Ryan](https://x.com/ryantsuji), CTO at airCloset (a fashion-rental subscription service based in Japan).
 
-> **Disclaimer**: "cortex" in this article is the internal codename for the AI platform built in-house at airCloset. It is unrelated to existing commercial services like Snowflake Cortex or Palo Alto Networks Cortex.
-
 "Everything changes with AI" is the prevailing mood. My experience building and then running an internal AI platform (cortex) points the other way. The principles don't change at all. Only the machinery does. This post is about what I've come to treat as principle, what I've concluded should be broken, and the thinking behind that split.
+
+> **Disclaimer**: "cortex" in this article is the internal codename for the AI platform built in-house at airCloset. It is unrelated to existing commercial services like Snowflake Cortex or Palo Alto Networks Cortex.
 
 I've written about the individual pieces before: [code-graph](/posts/code-graph-46-repos), [product-graph](/posts/cortex-product-graph), [db-graph](/posts/db-graph-mcp), [biz-graph](/posts/initiative-graph-rag), [AI-Observability](/posts/ai-observability-design), the [auto-review harness](/posts/cortex-auto-review), and [Self-Healing](/posts/cortex-self-healing). This post isn't about any of them. It's about the design principle sitting behind all of them, one abstraction level up, more essay than build log.
 
