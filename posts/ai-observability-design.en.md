@@ -30,7 +30,7 @@ In the previous series, [code-graph deep dive (Part 2)](/posts/code-graph-46-rep
 
 A graph that gives you static facts is one thing. Telling AI **what's actually happening in production right now** is a separate problem. So the same shaping discipline I applied to the static graph needs to apply to the observability stack too.
 
-This post is the first half of that story. I split it into two: Part 1 (this post) covers **how I shape four different monitoring surfaces** (application / infrastructure / CI / LLM). Part 2 covers PII handling, the integration surface, and Self-Healing — coming a week later.
+This post is the first half of that story. I split it into two: Part 1 (this post) covers **how I shape four different monitoring surfaces** (application / infrastructure / CI / LLM). [Part 2](/posts/ai-observability-practice) covers PII handling, the integration surface, and Self-Healing.
 
 ## What Does "Observable to AI" Even Mean?
 
@@ -112,7 +112,7 @@ Why pull instead of push:
 - **No path for PR code to touch the API key.** The shipping workflow runs in the default-branch context and uses base-repo secrets, not whatever a fork PR brought. The test workflow itself never touches the Grafana API key — that's a structural guarantee, not a "we trust it won't leak"
 - **Shipping failure becomes observable.** If shipping lives inside CI, a shipping bug means the observability stack goes silent — and you don't notice. Split them, and the shipping workflow's success / failure is itself something you can alert on
 
-The moment a main-branch failure shows up, a LogQL alert fires and Slack gets pinged. That's the trigger for Self-Healing, which I cover in Part 2.
+The moment a main-branch failure shows up, a LogQL alert fires and Slack gets pinged. That's the trigger for Self-Healing, which I cover in [Part 2](/posts/ai-observability-practice).
 
 ## LLM — Gemini and Claude Code, Two Different Shapes
 
@@ -205,4 +205,4 @@ That's the four axes (application / infrastructure / CI / LLM) and the design ju
 
 But shaping the write side isn't the whole story. The moment production data flows through the stack, **PII** becomes a constraint you have to design around. And the data has to actually be **consumable by AI** through MCP, with a thoughtful integration surface for both humans (web dashboards) and AI (MCP). Connect all of that, and **the real driver of Self-Healing** comes into focus from the observability side. That's the Part 2 story.
 
-Thanks for reading. Part 2, "Observability Design for the AI Era — Reconciling PII Protection With AI Searchability, and Driving Self-Healing," follows in a week.
+Thanks for reading. Part 2, "[Observability Design for the AI Era — Reconciling PII Protection With AI Searchability, and Driving Self-Healing](/posts/ai-observability-practice)," is out now. Read on.
