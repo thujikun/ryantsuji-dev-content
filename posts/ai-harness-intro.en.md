@@ -296,14 +296,17 @@ The series is planned as 6 parts.
 **[Part 2: Product Graph — code, docs, DB, infrastructure as one unified graph](/posts/cortex-product-graph)** ★ recommended next
    The implementation side: how the unified graph is built and maintained. What happens when you take the design principles from [the Agentic Graph RAG MCP post](/posts/agentic-graph-rag-mcp) and apply them to the entire cortex codebase.
 
-**Part 3: AI reviews, fixes, merges, and deploys PRs**
+**[Part 3: AI reviews, fixes, merges, and deploys PRs](/posts/cortex-auto-review)**
    GitHub webhook → AI review → on REQUEST_CHANGES, AI fixes via worktree → auto squash merge → changed-stack detection → parallel deploy: the full pipeline.
 
-**Part 4: Incidents self-heal, guardrails self-strengthen**
+**[Part 4: Incidents self-heal, guardrails self-strengthen](/posts/cortex-self-healing)**
    Grafana alert → AI investigation (Loki + Product Graph + git blame) → fix PR + new lint/type gate → auto merge → automatic redeploy: the auto self-healing system. Also covers the full OTel + Loki + Mimir + Tempo + Faro stack, Gemini cost tracking, and how the quality gates are designed to be "non-loweriable, non-bypassable, and self-growing."
 
-**Part 5: Scaling the harness from cortex to toC services**
-   The first half covers how business members can already open PRs directly to cortex -- and where that breaks (additions to existing pipelines work; new pipelines and architectural changes still need humans in the loop). The second half is the roadmap and the thinking behind scaling cortex's harness across the whole product org (multiple services, multiple infra stacks, multiple teams).
+**[Part 5: Non-engineers ship PRs to production — democratizing the modification phase](/posts/cortex-non-engineer-prs)**
+   With AI review and automation acting as the quality gate, members who own the business requirements (business managers, PMOs) now open PRs directly against the production repo without going through an engineer. What works and what doesn't (laying the rails is engineering work; anyone can run on them), plus the plan for scaling this pattern to production toC services.
+
+**[Part 6: AI is something you design for, not something you trust — series wrap-up](/posts/cortex-philosophy)**
+   The single idea underneath every mechanism in the series, and a retrospective on what was thrown away and what failed along the way.
 
 Each post stands on its own, but **Part 2 (Product Graph) is the foundation for the others**, so the recommended reading order is Part 1 → Part 2 → any.
 

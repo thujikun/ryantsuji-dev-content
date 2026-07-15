@@ -32,7 +32,7 @@ The reason to start with the entry-point problem is simple: if the graph exists 
 
 ## The Hint Was in db-graph
 
-Months earlier, I'd already solved the same structural problem in a different domain — the [db-graph project](https://zenn.dev/aircloset/articles/2731787582881a).
+Months earlier, I'd already solved the same structural problem in a different domain — the [db-graph project](/posts/db-graph-mcp).
 
 Internally, we had a large number of DB tables spread across many services, and **no single person had the full picture**. Different people knew different pieces well, but the whole map didn't fit in anyone's head. So I built db-graph: extract schemas statically from ORM definitions, generate per-table descriptions with Gemini, embed them as 768-dimensional vectors in the graph, and make the whole thing semantically searchable in natural language.
 

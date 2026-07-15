@@ -164,7 +164,7 @@ The result: apps built by anyone (with AI) end up with consistent buttons, modal
 Sandbox MCP **inspects the source files and generates a Dockerfile automatically**.
 
 ```typescript
-// apps/mcp/git-server/src/sandbox/tools.ts
+// git-server sandbox tool implementation (excerpt)
 if (hasPy) {
   dockerfile = generatePythonDockerfile(hasRequirements);
   // Auto-create requirements.txt if missing
@@ -296,7 +296,7 @@ DNS is fixed as `*.example.com` **wildcard** + Cloudflare proxy, with Universal 
 The logic is three-tier:
 
 ```typescript
-// apps/worker/edge-router/src/index.ts
+// edge-router Worker implementation (excerpt)
 export async function handleRequest(request, env) {
   const url = new URL(request.url);
 
@@ -463,7 +463,7 @@ We deliberately do **not** use the `K-Service` header (the Cloud Run-injected se
 The clincher: **a dedicated named database for Sandbox**. Instead of the `(default)` DB (which contains data from other systems), we use an independent Firestore database called `sandbox`, and the Cloud Run SA gets an IAM Condition that allows access only to the `sandbox` DB.
 
 ```typescript
-// From infra/mcp/git-server/index.ts
+// From the git-server Pulumi definition
 // IAM Condition on roles/datastore.user:
 //   resource.name == "projects/.../databases/sandbox" ||
 //   resource.name.startsWith("projects/.../databases/sandbox/")
@@ -495,7 +495,7 @@ Sandbox apps eventually want to look at logs too. "How many views did this page 
 We forward Cloud Run request logs to BigQuery via a **Logging Sink**:
 
 ```typescript
-// From infra/mcp/git-server/index.ts
+// From the git-server Pulumi definition
 const sandboxLogSink = new gcp.logging.ProjectSink('sandbox-logs-sink', {
   destination: `bigquery.googleapis.com/projects/${projectId}/datasets/sandbox_logs`,
   filter: [

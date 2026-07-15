@@ -113,12 +113,12 @@ Here are two recent examples of that working.
 
 | PR | Kind | Size | What changed |
 |---|---|---|---|
-| #1573 | Deep bug fix | +348 -177 / 7 files | The dashboard's actuals number was unfairly exceeding the target. Root cause: the "which teams to aggregate" definition was asymmetric between target side and actuals side. Fix lifts the shared "teams to include" list into its own file and points both sides at it. **Tests added too.** |
-| #1557 | Feature build on top of existing stack | +1,742 -227 / 41 files | The PL dashboard v2 from the opening scene. **Entities, repositories, API, UI -- all touched**, but the web app itself (the stack) was already standing; this rides on top. |
+| PR 1 | Deep bug fix | +348 -177 / 7 files | The dashboard's actuals number was unfairly exceeding the target. Root cause: the "which teams to aggregate" definition was asymmetric between target side and actuals side. Fix lifts the shared "teams to include" list into its own file and points both sides at it. **Tests added too.** |
+| PR 2 | Feature build on top of existing stack | +1,742 -227 / 41 files | The PL dashboard v2 from the opening scene. **Entities, repositories, API, UI -- all touched**, but the web app itself (the stack) was already standing; this rides on top. |
 
 Different shapes, but both are non-engineer PRs that made it all the way to merge.
 
-#### #1573 -- a deep root-cause fix
+#### PR 1 -- a deep root-cause fix
 
 This started from "the number looks wrong" on the business side, and the PR went all the way down to a data-integrity issue. The surface symptom: "the actuals number on the dashboard exceeds the monthly target, with the achievement reading 101% even though the team knows that's not real." The lazy fix would be a fudge factor or a clamp on the display. That's not what happened.
 
@@ -128,7 +128,7 @@ The fix is structural, not cosmetic. A single file defines "the teams in scope f
 
 The handling of "what data falls out of an aggregation" and "are the target and actuals sides really symmetric" is the kind of thing engineers miss too. **A non-engineer working through it down to the structural level and fixing it there** is what stands out about this PR.
 
-#### #1557 -- a big feature build on top of an existing stack
+#### PR 2 -- a big feature build on top of an existing stack
 
 This is the PR the opening scene walked through. +1,742 / 41 files spanning entity, repository, API, and UI -- **a scale of change that's well past what people usually mean when they say "modification."**
 
@@ -178,7 +178,7 @@ cortex-product-graph from [Part 2](/posts/cortex-product-graph) -- the unified g
 
 Non-engineers don't need to know function names or repo structure. A natural-language question like "I want to add a metric column to the dashboard" goes to Claude Code, which hits the knowledge graph with a semantic search and gets back the relevant nodes -- the screen, the API, the DB, the docs -- in one or two hops. **You can get started without knowing the technical vocabulary.**
 
-For #1557: the author told Claude Code "I want PL dashboard v2 with division/team scoping for non-PI-Div PMOs and team leads," and the knowledge graph pulled the existing `/projects` route, `project-repository.ts`, `FilterHeaders.tsx`, and `ProjectTable.tsx` as the relevant nodes. The author never needed to know what file to edit. **That's how the translation layer drops out.**
+For PR 2: the author told Claude Code "I want PL dashboard v2 with division/team scoping for non-PI-Div PMOs and team leads," and the knowledge graph pulled the existing `/projects` route, `project-repository.ts`, `FilterHeaders.tsx`, and `ProjectTable.tsx` as the relevant nodes. The author never needed to know what file to edit. **That's how the translation layer drops out.**
 
 ### ② Auto Review enforces quality at the gate
 

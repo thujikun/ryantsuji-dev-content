@@ -192,9 +192,9 @@ Initiative text (title + description) is vectorized to 768 dimensions using Vert
 ```sql
 SELECT base.id, query.id, distance
 FROM VECTOR_SEARCH(
-  TABLE cortex.biz_graph_nodes,
+  TABLE mydataset.biz_graph_nodes,
   'embedding',
-  (SELECT id, embedding FROM cortex.biz_graph_nodes WHERE node_type = 'Initiative'),
+  (SELECT id, embedding FROM mydataset.biz_graph_nodes WHERE node_type = 'Initiative'),
   top_k => 6,
   distance_type => 'COSINE'
 )
@@ -415,14 +415,14 @@ Internal query example (`get_initiative_context`):
 -- Get weeks the initiative was active
 WITH active_weeks AS (
   SELECT target_id AS week_id
-  FROM cortex.biz_graph_edges
+  FROM mydataset.biz_graph_edges
   WHERE source_id = @initiative_id
     AND edge_type = 'ACTIVE_DURING_WEEK'
 ),
 -- Get metrics that have data in those same weeks
 co_occurring_metrics AS (
   SELECT e.source_id AS metric_id, e.edge_type, w.week_id
-  FROM cortex.biz_graph_edges e
+  FROM mydataset.biz_graph_edges e
   JOIN active_weeks w ON e.target_id = w.week_id
   WHERE e.edge_type IN (
     'HAS_DATA_AT', 'HAS_QUALITY_DATA_AT',

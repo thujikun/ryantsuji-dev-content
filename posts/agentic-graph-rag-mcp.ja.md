@@ -22,7 +22,7 @@ cover: /images/posts/agentic-graph-rag-mcp.ja.cover.png
 
 みなさまこんにちは！エアークローゼットでCTOをしている[辻](https://x.com/RyanAircloset)です。
 
-これまでに [DB Graph MCP](https://zenn.dev/aircloset/articles/2731787582881a)、[社内MCP群の全体像](https://zenn.dev/aircloset/articles/d9fc317c1336c2)、[Biz Graph](https://zenn.dev/aircloset/articles/a820ce302ec5e9)、[Sandbox MCP](https://zenn.dev/aircloset/articles/4c5f49f89db19f) と、社内向けに作っているMCPサーバーを順に紹介してきました。
+これまでに[DB Graph MCP](/posts/db-graph-mcp)、[社内MCP群の全体像](/posts/17-mcp-servers)、[Biz Graph](/posts/initiative-graph-rag)、[Sandbox MCP](/posts/sandbox-mcp)と、社内向けに作っているMCPサーバーを順に紹介してきました。
 
 DB GraphはORM解析からのスキーマグラフ、Biz Graphは会議スライドからの施策抽出とWeekノード設計、Sandbox MCPはそもそもアプリ公開基盤 ── 目的も実装も全部違うのですが、自分でも書きながら気づいたのは、**設計の根っこにある考え方は同じ**だということです。
 
@@ -34,7 +34,7 @@ DB GraphはORM解析からのスキーマグラフ、Biz Graphは会議スライ
 
 最初に、用語を整理します。すでにご存じの方は読み飛ばしてください。
 
-**RAG (Retrieval Augmented Generation)**とは、LLMに回答させる前に外部データから関連情報を**検索 (Retrieval)**してプロンプトに混ぜ込む手法の総称です。
+**RAG**（Retrieval Augmented Generation）とは、LLMに回答させる前に外部データから関連情報を**検索**（Retrieval）してプロンプトに混ぜ込む手法の総称です。
 
 なぜこれが必要だったか。生成AIの草創期 ── 2022年末〜2023年頃 ── に、私たちが直面した課題は3つありました。
 
@@ -97,12 +97,12 @@ Graph RAGの基本アイデアは、ドキュメントから**エンティティ
 
 ### 古典的Graph RAG ── 単発検索時代の制約
 
-現在もっとも有名な実装は、Microsoftが2024年に出した [GraphRAG](https://github.com/microsoft/graphrag) です。論文も含めてよく書かれていて、私もリスペクトしています。ただ、**設計思想は完全に「単発検索前提の時代」のもの**です。
+現在もっとも有名な実装は、Microsoftが2024年に出した[GraphRAG](https://github.com/microsoft/graphrag)です。論文も含めてよく書かれていて、私もリスペクトしています。ただ、**設計思想は完全に「単発検索前提の時代」のもの**です。
 
 Microsoft GraphRAGが何をするか、ざっくり言うと:
 
 1. **エンティティ抽出**: コーパスの全テキストをLLMに食わせ、エンティティと関係を抽出
-2. **コミュニティ検出**: グラフ上のクラスタ（コミュニティ）を [Leiden法](https://en.wikipedia.org/wiki/Leiden_algorithm)（コミュニティ検出のアルゴリズム）で検出
+2. **コミュニティ検出**: グラフ上のクラスタ（コミュニティ）を[Leiden法](https://en.wikipedia.org/wiki/Leiden_algorithm)（コミュニティ検出のアルゴリズム）で検出
 3. **階層的要約**: 各コミュニティについてLLMで要約を生成。さらにコミュニティ同士をまとめて上位の要約も作る
 4. **クエリ時**: ユーザーの質問に該当するコミュニティを選び、その要約をプロンプトに突っ込んで一発で答える
 
@@ -131,7 +131,7 @@ Microsoft GraphRAGが何をするか、ざっくり言うと:
 2024年後半から2025年にかけて、状況が変わりました。
 
 - **Claude Code、OpenAI Codexなどのエージェントが実用レベルに**: 長いタスクを自分でツールを呼びながら進められる
-- **MCP (Model Context Protocol) の登場**: ツールの記述がモデルから読みやすい形で標準化された
+- **MCP (Model Context Protocol)の登場**: ツールの記述がモデルから読みやすい形で標準化された
 - **Sonnet / Opusクラスのツール選択精度**: 「20個のツールから最適なものを選ぶ」が安定して回る
 - **長コンテキスト + プロンプトキャッシュ**: 1セッションで何回もツール呼び出しを重ねても、コストとレイテンシが現実的
 - **`stop_reason: tool_use` の自然なループ**: モデル自身が「もう情報足りた」「もう一回検索したい」を判断する
@@ -146,9 +146,9 @@ Microsoft GraphRAGが何をするか、ざっくり言うと:
 
 ![RAGの3つの時代](/images/posts/agentic-graph-rag-mcp/6df79e52319d-20260507.png)
 
-なお、Agentic Graph RAGという呼び方は私が独自に作った言葉ではありません。Neo4jの [NODES AI 2026](https://neo4j.com/videos/nodes-ai-2026-agentic-graphrag-autonomous-knowledge-graph-construction-and-adaptive-retrieval-2/) では「Agentic GraphRAG」のセッションが組まれていますし、O'ReillyからはAnthony Alcaraz / Sam Julien共著の書籍 [Agentic GraphRAG](https://www.oreilly.com/library/view/agentic-graph-rag/9798341623163/) が2026年11月に刊行予定です。業界全体が「単発のGraph RAG」から「エージェント前提のGraph RAG」へ舵を切っている流れの中で、私たちが社内で独自に積み上げてきた設計を改めて言語化したのがこの記事です。
+なお、Agentic Graph RAGという呼び方は私が独自に作った言葉ではありません。Neo4jの[NODES AI 2026](https://neo4j.com/videos/nodes-ai-2026-agentic-graphrag-autonomous-knowledge-graph-construction-and-adaptive-retrieval-2/)では「Agentic GraphRAG」のセッションが組まれていますし、O'ReillyからはAnthony Alcaraz / Sam Julien共著の書籍[Agentic GraphRAG](https://www.oreilly.com/library/view/agentic-graph-rag/9798341623163/)が2026年11月に刊行予定です。業界全体が「単発のGraph RAG」から「エージェント前提のGraph RAG」へ舵を切っている流れの中で、私たちが社内で独自に積み上げてきた設計を改めて言語化したのがこの記事です。
 
-ただし、公の文脈で「Agentic GraphRAG」と呼ばれるとき、その主流は**エージェントがグラフ構築自体を自動化する方向**で語られます（Neo4jのtalkもその系譜です）。本記事が取り込んでいるのは、その中でも**「クエリ側をエージェント化する」概念のほう**に限った話です。グラフ構築の側は、私たちが対象にしているドメイン（社内DBスキーマ、施策 × KPI、コードベース等）が**社内の暗黙知に強く依存**するため、現時点では人間が設計したほうが結果が良い ── という実利的な理由で自分たちでやっているだけで、構築の自動化を原理的に否定しているわけではありません。
+ただし、公の文脈で「Agentic GraphRAG」と呼ばれるとき、その主流は**エージェントがグラフ構築自体を自動化する方向**で語られます（Neo4jのtalkもその系譜です）。本記事が取り込んでいるのは、その中でも、**「クエリ側をエージェント化する」概念のほう**に限った話です。グラフ構築の側は、私たちが対象にしているドメイン（社内DBスキーマ、施策 × KPI、コードベース等）が**社内の暗黙知に強く依存**するため、現時点では人間が設計したほうが結果が良い ── という実利的な理由で自分たちでやっているだけで、構築の自動化を原理的に否定しているわけではありません。
 
 ここから本題です。Agentic Graph RAGの核心は、ひとことで言うとこうです。
 
@@ -215,9 +215,9 @@ DB: POSTGRESQL / ORM: typeorm / リポジトリ: warehouse-api
 
 この返却はAIに対して、暗黙的に次のことを伝えています。
 
-- 「**statusカラムの意味はEnum定義に書いてある**」 → AIは意味を勝手に推測しない
-- 「**参照先がある**」 → 必要なら `trace_relationships` で辿れる
-- 「**app側との直接FKはない**」 → 別経路を探す必要がある
+- 「**statusカラムの意味はEnum定義に書いてある**」→ AIは意味を勝手に推測しない
+- 「**参照先がある**」→ 必要なら `trace_relationships` で辿れる
+- 「**app側との直接FKはない**」→ 別経路を探す必要がある
 
 つまり、**ツール返却値が「AI向けのrunbook」になっている**。AIはこれを読んで自律的に次の手を組み立てられる。
 
@@ -248,7 +248,7 @@ DB: POSTGRESQL / ORM: typeorm / リポジトリ: warehouse-api
 
 ## DB Graphでの実演 ── 4ステップで本番調査が完結する
 
-実際の流れをもう一度通しで見ます（[DB Graph MCPの記事](https://zenn.dev/aircloset/articles/2731787582881a)から再掲）。
+実際の流れをもう一度通しで見ます（[DB Graph MCPの記事](/posts/db-graph-mcp)から再掲）。
 
 CSから「この会員さん、アプリでは返却済みになってるけど、倉庫側で本当に確認できてますか？」と聞かれた、というシナリオです。
 
@@ -296,15 +296,15 @@ sql_query_database(database: "warehouse", sql: "SELECT ... WHERE code='SO-2026-0
 
 このパターン ── **私たちが採用している「人間設計のグラフ + 決定的なretrievalツール + AI向けrunbookな返却値」** ── は、DB GraphとBiz Graphだけのものじゃありません。社内のMCPサーバー群で何度も繰り返し使っています。
 
-[社内MCP群の全体像](https://zenn.dev/aircloset/articles/d9fc317c1336c2) で名前だけ紹介していたものも含めて並べると、こんなラインナップになります。
+[社内MCP群の全体像](/posts/17-mcp-servers)で名前だけ紹介していたものも含めて並べると、こんなラインナップになります。
 
 | グラフ | 対象 |
 |--------|------|
-| **DB Graph** | 社内 991 テーブル × 15 スキーマ |
+| **DB Graph** | 社内991テーブル × 15スキーマ |
 | **Biz Graph** | 5,000+ 施策 × 4,000+ KPI |
 | **Code Graph** | 全社リポジトリのコード関数・API・イベント |
-| **Cortex Product Graph** | cortex リポジトリ内のコード + DB + docs + infra 統合 |
-| **Service Product Graph** | 各サービスの API → DB の依存 |
+| **Cortex Product Graph** | cortexリポジトリ内のコード + DB + docs + infra統合 |
+| **Service Product Graph** | 各サービスのAPI → DBの依存 |
 
 どれも構造が違います。DB GraphはORM解析、Biz Graphは会議スライドからの抽出 + 人間設計のMetricDomain、Code Graphは静的解析、Product Graph系はJSDocアノテーションを起点にした統合グラフ。データソースも作り方もバラバラです。
 
@@ -343,7 +343,7 @@ Agentic Graph RAGを作るときに気にしているポイントを書き出し
 
 ### 4. ツールdescriptionはAI向けのrunbook
 
-ツールのdescriptionは人間ドキュメントではなく**AI向けの実行手順書**として書く。「この返却を見たら次はこのツールを呼べ」「この場合はこのフォーマットで引数を作れ」まで書き込む。冒頭で紹介した [Sandbox MCPの記事](https://zenn.dev/aircloset/articles/4c5f49f89db19f)でも触れた通り、これがエージェントの賢さを左右します。
+ツールのdescriptionは人間ドキュメントではなく**AI向けの実行手順書**として書く。「この返却を見たら次はこのツールを呼べ」「この場合はこのフォーマットで引数を作れ」まで書き込む。冒頭で紹介した[Sandbox MCPの記事](/posts/sandbox-mcp)でも触れた通り、これがエージェントの賢さを左右します。
 
 ### 5. 返却値に「次の手の候補」を埋め込む
 

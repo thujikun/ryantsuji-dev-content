@@ -49,7 +49,7 @@ Don't read "115 = 115 user-impacting incidents" though. Roughly:
 
 So it's less "incident response" than "**production anomalies that monitoring caught, fixed 115 times by AI before anyone woke up**." The number of incidents humans actually have to acknowledge is in the low single digits per month.
 
-There's also a clear pattern of **the same service firing repeatedly** (e.g. `gcs-transformer` is 25 of the 61) -- which is exactly what the `[Recurrence]` loop covered later is supposed to **eliminate by turning into lint or type gates**. That's the back half of this post.
+There's also a clear pattern of **the same service firing repeatedly** (one ETL-ish service alone accounts for 25 of the 61) -- which is exactly what the `[Recurrence]` loop covered later is supposed to **eliminate by turning into lint or type gates**. That's the back half of this post.
 
 One more honest note: **the recent month's number is slightly inflated**. The codebase had a fair number of "silent catch" patterns -- catch blocks that swallow exceptions without logging anything. We added the `no-silent-catch` lint rule and **swept the existing silent catches in batches**, which exposed previously hidden production errors as alerts. So part of the spike is "monitoring caught up to reality." Once the `[Recurrence]` loop converts these into lint over time, the number should converge. **"Things we couldn't see, we can see now" is a quality improvement** -- what we're seeing is the catch-up phase.
 
@@ -171,13 +171,13 @@ Not every alert is fixable by code. The implementation has a rule: "if you judge
 
 Worth clarifying on the numbers side: the headline **115** is "Self-Healing runs that reached PR-created -> merged -> deployed." This "unfixable, exit clean" case is a **separate bucket**, happening several times a month (external transient outages, infra / config issues that aren't code, cases too complex for the AI to judge confidently). **The "humans show up" bucket is this separate one** -- it isn't a "some of the 115 failed" failure rate.
 
-Here's what a real Slack message looks like (a `styling-pattern-watch-transformer` case where the GitHub PAT had expired):
+Here's what a real Slack message looks like (a case where a transformer service's GitHub PAT had expired):
 
 > ℹ️ This alert cannot be addressed in code. Investigation:
 >
 > **Investigation summary**
 >
-> Checked the error logs in Loki for the past hour. The single error source for `styling-pattern-watch-transformer` right now is **expiration / revocation of the GitHub PAT (Personal Access Token)**.
+> Checked the error logs in Loki for the past hour. The single error source for the target service right now is **expiration / revocation of the GitHub PAT (Personal Access Token)**.
 >
 > **What I found**
 >
@@ -222,7 +222,7 @@ This is the often-debated **review-independence** problem in LLM-agent operation
 
 ### A concrete example: meet subscription's 409 ALREADY_EXISTS
 
-Take the alert from the Google Meet recording auto-fetch service I covered in [the Meeting Intelligence post](/posts/meeting-intelligence). On 2026-05-21, Self-Healing opened a fix PR titled `fix(meet-subscription-renewal): auto-fix for Service Error Log Detected`.
+Take the alert from the Google Meet recording auto-fetch service I covered in [the Meeting Intelligence post](/posts/meeting-intelligence). On 2026-05-21, Self-Healing opened a fix PR titled `fix(meet-xxx): auto-fix for Service Error Log Detected`.
 
 The trigger error from Loki:
 
@@ -233,7 +233,7 @@ Workspace Events API request failed: 409 Conflict
 
 How the AI investigated:
 
-1. **Pinned the error in Loki** -- ran `{service_name="meet-subscription-renewal"} | json | level=~"ERROR|error|Error"` via Grafana MCP, picked up the `Failed to renew Meet subscription` stack trace
+1. **Pinned the error in Loki** -- ran `{service_name="meet-xxx"} | json | level=~"ERROR|error|Error"` via Grafana MCP, picked up the `Failed to renew Meet subscription` stack trace
 2. **Traced the call path in Product Graph** -- identified `renewSubscriptions` -> `createMeetSubscription`
 3. **Cross-referenced past PRs** -- the "opposite-direction inconsistency" (name in Firestore but missing from Google = 404) had already been self-healed in another PR with `patchMeetSubscriptionTtl` -> null fallback. **The current direction (still on Google's side but missing from Firestore = 409) was the gap**
 4. **Verdict**: "the same pattern may exist elsewhere" -- a [Recurrence] decision matrix "**horizontal expansion required**" case
@@ -320,7 +320,7 @@ These aren't textbook-learnable rules -- they're "**stepped on once, then mechan
 
 Three structural things keep this sane:
 
-- **Existing rules are the template**: `packages/eslint-plugin-graph/src/rules/` already holds 26 custom rules, each as `.ts` + `.test.ts` pairs. New rules follow the same shape, so the AI never has to write the AST-walking boilerplate from scratch
+- **Existing rules are the template**: the custom-rule directory already holds 26 custom rules, each as `.ts` + `.test.ts` pairs. New rules follow the same shape, so the AI never has to write the AST-walking boilerplate from scratch
 - **Tests first**: violation / pass fixtures go into `.test.ts` first, implementation fills in TDD-style. Coverage threshold (90% statements + branches) is gated by the [Part 3](/posts/cortex-auto-review) auto-review, so a lint without tests cannot merge
 - **lint / type / CI guard sit in the same "mechanize" bucket**: the decision matrix in [`recurrence-prevention.md`](https://github.com/air-closet/cortex-review-guidelines/blob/main/en/guidelines/recurrence-prevention.md) groups lint / type constraint / CI guard together as the "lint-required" row, and leaves the choice within that bucket (write it as a lint? express it at the type level? add a separate CI guard?) to the AI based on how much AST work is involved and whether runtime semantics matter. Traps that need AST inspection but actually hinge on runtime behavior usually end up as a type constraint (branded type / discriminated union / signature tightening) rather than a custom lint
 
