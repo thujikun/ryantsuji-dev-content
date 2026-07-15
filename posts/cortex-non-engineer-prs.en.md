@@ -16,7 +16,7 @@ syndication:
   devto:
     id: 3849367
     slug: "the-author-doesnt-have-to-be-an-engineer-how-the-harness-holds-quality-series-part-5-12e4"
-    contentHash: "d6d3abe6ffd821ed"
+    contentHash: "56c094a692b65caf"
     publishAt: "2026-06-09T08:30:00+09:00"
 cover: /images/posts/cortex-non-engineer-prs.en.cover.png
 ---

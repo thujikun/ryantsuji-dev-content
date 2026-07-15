@@ -16,7 +16,7 @@ syndication:
   devto:
     id: 3527776
     slug: "we-built-a-custom-graph-rag-to-let-ai-answer-did-that-initiative-actually-work-3oda"
-    contentHash: "2291267dd126d865"
+    contentHash: "96764616c582228e"
 cover: /images/posts/initiative-graph-rag.en.cover.png
 ---
 
