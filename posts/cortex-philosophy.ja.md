@@ -1,5 +1,5 @@
 ---
-title: "AIは信用するものではなく設計するもの ── 連載総括・最終章（Part 6）"
+title: "AIは信用するものではなく設計するもの"
 publishedAt: "2026-06-16T08:30:00+09:00"
 updatedAt: "2026-06-16T08:30:00+09:00"
 slug: "cortex-philosophy"

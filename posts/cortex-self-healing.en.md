@@ -1,5 +1,5 @@
 ---
-title: "Fixed Before Anyone Notices, Stronger After Every Fix: Self-Healing + Recurrence Prevention (Series Part 4)"
+title: "Fixed Before Anyone Notices, Stronger After Every Fix: Self-Healing + Recurrence Prevention"
 publishedAt: "2026-06-02T08:30:00+09:00"
 updatedAt: "2026-06-02T08:30:00+09:00"
 slug: "cortex-self-healing"

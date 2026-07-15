@@ -1,5 +1,5 @@
 ---
-title: "Building a Real AI Harness: Auto-Reviewed PRs, Self-Healing Ops, and Non-Engineer Contributors (Series Intro)"
+title: "Building a Real AI Harness: Auto-Reviewed PRs, Self-Healing Ops, and Non-Engineer Contributors"
 publishedAt: "2026-05-12"
 updatedAt: "2026-05-16"
 slug: "ai-harness-intro"

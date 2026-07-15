@@ -1,5 +1,5 @@
 ---
-title: "AI Isn't Something to Trust — It's Something to Design (Series Final)"
+title: "AI Isn't Something to Trust — It's Something to Design"
 publishedAt: "2026-06-16T08:30:00+09:00"
 updatedAt: "2026-06-16T08:30:00+09:00"
 slug: "cortex-philosophy"

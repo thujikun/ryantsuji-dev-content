@@ -1,5 +1,5 @@
 ---
-title: "Making the Context Across 46 Repositories Semantically Searchable for AI (Part 2)"
+title: "Making the Context Across 46 Repositories Semantically Searchable for AI"
 publishedAt: "2026-06-30T08:30:00+09:00"
 updatedAt: "2026-06-30T08:30:00+09:00"
 slug: "code-graph-46-repos-part2"

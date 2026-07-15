@@ -1,5 +1,5 @@
 ---
-title: "Building One Knowledge Graph Across 46 Repositories With Static Analysis (Part 1)"
+title: "Building One Knowledge Graph Across 46 Repositories With Static Analysis"
 publishedAt: "2026-06-23T08:30:00+09:00"
 updatedAt: "2026-06-23T08:30:00+09:00"
 slug: "code-graph-46-repos"

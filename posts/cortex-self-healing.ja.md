@@ -1,5 +1,5 @@
 ---
-title: "気づく前に直り、直すたびに強くなる ── Self-Healingと再発防止の仕組み（連載Part 4）"
+title: "気づく前に直り、直すたびに強くなる ── Self-Healingと再発防止の仕組み"
 publishedAt: "2026-06-02T08:30:00+09:00"
 updatedAt: "2026-06-02T08:30:00+09:00"
 slug: "cortex-self-healing"

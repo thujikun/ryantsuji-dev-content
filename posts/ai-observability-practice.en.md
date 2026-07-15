@@ -1,5 +1,5 @@
 ---
-title: "Observability Design for the AI Era — Reconciling PII Protection With AI Searchability, and Driving Self-Healing (Part 2)"
+title: "Observability Design for the AI Era — Reconciling PII Protection With AI Searchability, and Driving Self-Healing"
 publishedAt: "2026-07-14T08:30:00+09:00"
 updatedAt: "2026-07-14T08:30:00+09:00"
 slug: "ai-observability-practice"

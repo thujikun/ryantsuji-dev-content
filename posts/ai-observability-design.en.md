@@ -1,5 +1,5 @@
 ---
-title: "Observability Design for the AI Era — Application / Infrastructure / CI / LLM, Each in Its Own Shape (Part 1)"
+title: "Observability Design for the AI Era — Application / Infrastructure / CI / LLM, Each in Its Own Shape"
 publishedAt: "2026-07-07T08:30:00+09:00"
 updatedAt: "2026-07-07T08:30:00+09:00"
 slug: "ai-observability-design"

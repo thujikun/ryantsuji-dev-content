@@ -1,5 +1,5 @@
 ---
-title: "AIハーネスの心臓部 ── AIのAIによるAIのためのナレッジグラフ（連載Part 2）"
+title: "AIハーネスの心臓部 ── AIのAIによるAIのためのナレッジグラフ"
 publishedAt: "2026-05-19T09:00:00+09:00"
 updatedAt: "2026-05-19T09:00:00+09:00"
 slug: "cortex-product-graph"

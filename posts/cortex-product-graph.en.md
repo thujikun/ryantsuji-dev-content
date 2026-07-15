@@ -1,5 +1,5 @@
 ---
-title: "The Heart of the AI Harness: A Knowledge Graph of the AI, by the AI, for the AI (Series Part 2)"
+title: "The Heart of the AI Harness: A Knowledge Graph of the AI, by the AI, for the AI"
 publishedAt: "2026-05-19T09:00:00+09:00"
 updatedAt: "2026-05-19T09:00:00+09:00"
 slug: "cortex-product-graph"
