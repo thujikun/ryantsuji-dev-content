@@ -59,7 +59,7 @@ Here's the road we took.
 | Late March to June | Blacksmith (4 vCPU) | Speed and cost |
 | Late June to now | Namespace (4 vCPU/8GB) | Speed, cost, and the hang problem below |
 
-Along the way we also evaluated **self-hosting on AWS spot instances, and passed on it because every job would pay the instance startup overhead**. CI is a world where boot latency compounds, so always-pooled runners win.
+Along the way we also evaluated **self-hosting on AWS spot instances, and decided against it because every job would pay the instance startup overhead**. CI is a world where boot latency compounds, so always-pooled runners win.
 
 Each migration is literally a one-line change to `runs-on`:
 
@@ -105,7 +105,7 @@ Namespace's plans cap **concurrent capacity, counted in vCPUs**. The Developer p
 
 Because AI agents develop in parallel, our CI concurrency is high, and peaks blow well past 8 machines. From day one of the migration, runs piled up in the queue and CI clogged. **We rolled back to Blacksmith after two days**, upgraded to the Business plan (160 vCPUs, or 40 machines), re-migrated, and it has been stable since.
 
-The lesson is plain: **measure your repository's peak concurrency before you switch**. Pull run history from the GitHub API and the peak number of simultaneously running jobs falls out mechanically. Pick a plan on price and speed alone and you'll take the same detour we did.
+The lesson is simple: **measure your repository's peak concurrency before you switch**. Pull run history from the GitHub API and the peak number of simultaneously running jobs falls out mechanically. Pick a plan on price and speed alone and you'll take the same detour we did.
 
 ### Measured: the median shrank, and the tail shrank more
 
