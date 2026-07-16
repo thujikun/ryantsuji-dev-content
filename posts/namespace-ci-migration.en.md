@@ -15,7 +15,7 @@ syndication:
   devto:
     id: 4158688
     slug: "github-actions-getting-expensive-we-cut-ci-costs-to-a-quarter-with-a-one-line-change-16ac-temp-slug-1285806"
-    contentHash: "124b770f5cbd9a66"
+    contentHash: "4cb4c921ccdce01b"
     publishAt: "2026-07-28T08:30:00+09:00"
 cover: /images/posts/namespace-ci-migration.en.cover.png
 ---
