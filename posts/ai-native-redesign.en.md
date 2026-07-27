@@ -13,10 +13,7 @@ tags:
 lang: "en"
 syndication:
   devto:
-    id: 4100706
-    slug: "ai-native-redesign-the-principles-dont-change-only-the-machinery-does-47d8"
-    contentHash: "48372ebfc74a60a5"
-    publishAt: "2026-07-21T08:00:00+09:00"
+    publishAt: "2026-07-28T08:30:00+09:00"
 cover: /images/posts/ai-native-redesign.en.cover.png
 ---
 

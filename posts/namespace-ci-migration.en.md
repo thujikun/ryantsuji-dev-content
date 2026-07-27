@@ -1,7 +1,7 @@
 ---
 title: "GitHub Actions Getting Expensive? We Cut CI Costs to a Quarter With a One-Line Change"
-publishedAt: "2026-07-28T08:30:00+09:00"
-updatedAt: "2026-07-28T08:30:00+09:00"
+publishedAt: "2026-07-30T08:30:00+09:00"
+updatedAt: "2026-07-30T08:30:00+09:00"
 slug: "namespace-ci-migration"
 summary: "AI-driven development inflates CI cost on two axes at once: more runs, and more tasks you now want CI to do. We migrated our GitHub Actions runners twice, from GitHub-hosted to Blacksmith to Namespace, and measured everything along the way. Per-run CI cost dropped to roughly a quarter, p90 came down 37%, and silent never-finishing runs went from 32 to zero. Failure story included: we skipped estimating peak concurrency and had to roll back in two days."
 emoji: "💸"
@@ -16,7 +16,7 @@ syndication:
     id: 4158688
     slug: "github-actions-getting-expensive-we-cut-ci-costs-to-a-quarter-with-a-one-line-change-16ac-temp-slug-1285806"
     contentHash: "4cb4c921ccdce01b"
-    publishAt: "2026-07-28T08:30:00+09:00"
+    publishAt: "2026-07-30T08:30:00+09:00"
 cover: /images/posts/namespace-ci-migration.en.cover.png
 ---
 

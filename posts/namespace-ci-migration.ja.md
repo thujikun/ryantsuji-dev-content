@@ -1,7 +1,7 @@
 ---
 title: "GitHub Actionsのコストが増えているなら、Namespaceを使えばいいじゃない"
-publishedAt: "2026-07-28T08:30:00+09:00"
-updatedAt: "2026-07-28T08:30:00+09:00"
+publishedAt: "2026-07-30T08:30:00+09:00"
+updatedAt: "2026-07-30T08:30:00+09:00"
 slug: "namespace-ci-migration"
 summary: "AIで開発が速くなると、CIの実行回数もタスクも増えてコストが膨らみ続けます。GitHub hosted→Blacksmith→Namespaceとランナーを2回乗り換えた実測記録。同一ワークフローの比較でCIコストはGitHub hosted時代の約1/4、p90は37%短縮。並列数を見積もらずに移行して2日でロールバックした失敗談も込みで、乗り換え判断の材料を全部公開します。"
 emoji: "💸"
@@ -14,9 +14,9 @@ lang: "ja"
 syndication:
   zenn:
     id: "6b47018589df0f"
-    publishAt: "2026-07-28T08:30:00+09:00"
+    publishAt: "2026-07-30T08:30:00+09:00"
   devto:
-    publishAt: "2026-07-28T08:30:00+09:00"
+    publishAt: "2026-07-30T08:30:00+09:00"
 cover: /images/posts/namespace-ci-migration.ja.cover.png
 ---
 
