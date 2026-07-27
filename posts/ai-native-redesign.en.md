@@ -13,6 +13,9 @@ tags:
 lang: "en"
 syndication:
   devto:
+    id: 4240375
+    slug: "ai-native-redesign-the-principles-dont-change-only-the-machinery-does-4jio-temp-slug-8705773"
+    contentHash: "3f6746163117351d"
     publishAt: "2026-07-28T08:30:00+09:00"
 cover: /images/posts/ai-native-redesign.en.cover.png
 ---
