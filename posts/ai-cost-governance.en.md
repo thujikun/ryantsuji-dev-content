@@ -196,10 +196,39 @@ Run the expected value: 96% of PRs paying 25 seconds outweighs 4% of PRs saving 
 
 "Make the structure cleaner" always sounds right. In a cost context, **you can decide against it with arithmetic**. Go by which version feels more elegant and you'll miss reversals like this one.
 
+## Case 4: it looks free at first, then the data grows
+
+One more: **BigQuery MERGE**.
+
+When you want to insert data without creating duplicates, MERGE is the obvious choice. Match on a key, update if it's there, insert if it isn't. One statement, and it's idempotent.
+
+The catch is that **MERGE reads the target every time, no matter how many rows you're inserting**. Even for a single row, it has to scan the target side to confirm that row isn't already there.
+
+That's awkward from a cost perspective. **While the table is small, it looks like nothing.** Nothing is wrong on the day you write it. But as the data accumulates, the scan per run grows with it. Your execution frequency hasn't changed, and the cost climbs anyway.
+
+And because nobody edited any code, **this never shows up in PR review**. A gate at merge time asks "how much does this change add," so anything that grows without being changed is out of scope by construction. This is the purest version of what I described at the top: invisible on the day you build it, accumulating quietly afterward.
+
+### Where the duplicate check should live
+
+So we moved the duplicate check to **Firestore, and BigQuery only gets the insert**.
+
+Look the key up in Firestore, and only insert the rows that come back as new. BigQuery becomes append-only, and the scan for reconciliation goes away entirely.
+
+Same shape as Case 2. Not "how do we optimize the MERGE" but **does BigQuery need to be the thing doing the duplicate check at all**. BigQuery is excellent at scanning large volumes and aggregating. Asking it to confirm whether one key exists is using it against the grain. Firestore is the opposite: point lookups are its job, aggregation isn't. **Push each to the side it's good at and both end up doing something natural.**
+
+### Why you need something that notices
+
+The point here isn't "don't use MERGE." It has its place, and we haven't replaced all of ours.
+
+The point is that **cost grows in two different ways: expensive from day one, and expensive after it grows into it**. The first kind, review catches. The second kind, review never sees.
+
+Which is what the daily reporting is for. Comparing against the same weekday last week, "this app's cost keeps climbing and nobody has touched it" eventually shows up on its own. That's the reason a gate alone isn't enough.
+
 ## What the freed-up time is actually for
 
 - When implementation gets cheap, the gate that slow implementation used to provide comes off with it
 - What's left is the running cost of everything you shipped, which is invisible on the day you ship it
+- And it grows in two ways: **expensive from day one**, and **expensive once the data grows into it**. Review only ever catches the first kind
 - **So the time you gained goes into asking whether it should exist**
 - Habits erode, so make it structural: a gate at merge, daily reporting, quotas on usage-based services, guards in CI
 - And accept that some calls can't be automated: how recovery works, how far back you'd roll, whether this thing needs to exist at all
