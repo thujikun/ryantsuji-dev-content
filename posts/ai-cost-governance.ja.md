@@ -13,6 +13,7 @@ tags:
 lang: "ja"
 syndication:
   zenn:
+    id: "7760060d03216c"
     publishAt: "2026-08-06T08:30:00+09:00"
   devto:
     publishAt: "2026-08-06T08:30:00+09:00"

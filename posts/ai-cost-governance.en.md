@@ -13,6 +13,9 @@ tags:
 lang: "en"
 syndication:
   devto:
+    id: 4308732
+    slug: "when-shipping-gets-cheap-deciding-gets-expensive-guardrails-for-ai-era-cloud-costs-5g43-temp-slug-1164259"
+    contentHash: "6a26bb7907560874"
     publishAt: "2026-08-06T08:30:00+09:00"
 cover: /images/posts/ai-cost-governance.en.cover.png
 ---
