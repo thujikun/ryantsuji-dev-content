@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <defs>
+    <marker id="flow" viewBox="0 0 6 6" refX="5" refY="3" markerWidth="5" markerHeight="4" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#64748b"/>
+    </marker>
+    <marker id="stop" viewBox="0 0 6 6" refX="5" refY="3" markerWidth="5" markerHeight="4" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#38bdf8"/>
+    </marker>
+  </defs>
+
+  <rect width="1600" height="900" fill="#0f172a"/>
+
+  <text x="800" y="62" font-size="38" fill="#e2e8f0" text-anchor="middle" font-weight="bold" font-family="system-ui, -apple-system, sans-serif">Three layers that stop cost from piling up</text>
+  <text x="800" y="102" font-size="21" fill="#94a3b8" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif">Entrance, ongoing, ceiling. Each catches a different moment, so no single one is enough</text>
+
+  <g font-family="system-ui, -apple-system, sans-serif">
+
+    <!-- Timeline spine -->
+    <line x1="140" y1="196" x2="1460" y2="196" stroke="#334155" stroke-width="2"/>
+    <text x="140" y="180" font-size="16" fill="#64748b" text-anchor="start">a change is written</text>
+    <text x="800" y="180" font-size="16" fill="#64748b" text-anchor="middle">it keeps running</text>
+    <text x="1460" y="180" font-size="16" fill="#64748b" text-anchor="end">runaway</text>
+
+    <!-- ===== Layer 1: gate at merge ===== -->
+    <rect x="90" y="230" width="430" height="470" rx="14" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+    <text x="305" y="278" font-size="18" fill="#38bdf8" text-anchor="middle" font-weight="bold">LAYER 1</text>
+    <text x="305" y="318" font-size="29" fill="#e2e8f0" text-anchor="middle" font-weight="bold">Gate at the entrance</text>
+    <text x="305" y="352" font-size="17" fill="#94a3b8" text-anchor="middle">Stop it before merge</text>
+
+    <line x1="130" y1="378" x2="480" y2="378" stroke="#334155" stroke-width="1"/>
+
+    <text x="130" y="412" font-size="17" fill="#cbd5e1">Past a threshold, a human reviews it</text>
+    <text x="146" y="448" font-size="16" fill="#94a3b8">Ongoing daily cost   ¥2,000/day (~$13)</text>
+    <text x="146" y="478" font-size="16" fill="#94a3b8">One-off execution    ¥10,000 (~$65)</text>
+    <text x="146" y="508" font-size="16" fill="#94a3b8">Storage growth       ¥1,000/mo (~$6)</text>
+
+    <rect x="130" y="536" width="350" height="132" rx="10" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+    <text x="150" y="568" font-size="16" fill="#38bdf8" font-weight="600">The AI only measures quantities</text>
+    <text x="150" y="598" font-size="15" fill="#94a3b8">Scan volume, call counts, token counts</text>
+    <text x="150" y="628" font-size="16" fill="#38bdf8" font-weight="600">The money math is deterministic</text>
+    <text x="150" y="656" font-size="15" fill="#94a3b8">Unit prices from actual billing export</text>
+
+    <!-- ===== Layer 2: daily visibility ===== -->
+    <rect x="585" y="230" width="430" height="470" rx="14" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+    <text x="800" y="278" font-size="18" fill="#38bdf8" text-anchor="middle" font-weight="bold">LAYER 2</text>
+    <text x="800" y="318" font-size="29" fill="#e2e8f0" text-anchor="middle" font-weight="bold">Continuous visibility</text>
+    <text x="800" y="352" font-size="17" fill="#94a3b8" text-anchor="middle">Keep it in view every day</text>
+
+    <line x1="625" y1="378" x2="975" y2="378" stroke="#334155" stroke-width="1"/>
+
+    <text x="625" y="412" font-size="17" fill="#cbd5e1">Per-app cost to Slack, twice a day</text>
+
+    <rect x="625" y="436" width="350" height="60" rx="10" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+    <text x="645" y="462" font-size="15" fill="#38bdf8" font-weight="600">Post even when nothing crossed a threshold</text>
+    <text x="645" y="484" font-size="15" fill="#94a3b8">So silence and health stay distinguishable</text>
+
+    <rect x="625" y="508" width="350" height="60" rx="10" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+    <text x="645" y="534" font-size="16" fill="#38bdf8" font-weight="600">Compare to the same weekday last week</text>
+    <text x="645" y="556" font-size="15" fill="#94a3b8">Day-over-day would flag every Monday</text>
+
+    <rect x="625" y="580" width="350" height="60" rx="10" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+    <text x="645" y="606" font-size="16" fill="#38bdf8" font-weight="600">No data last week counts as an increase</text>
+    <text x="645" y="628" font-size="15" fill="#94a3b8">A brand-new batch is the dangerous case</text>
+
+    <!-- ===== Layer 3: quota ceiling ===== -->
+    <rect x="1080" y="230" width="430" height="470" rx="14" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+    <text x="1295" y="278" font-size="18" fill="#38bdf8" text-anchor="middle" font-weight="bold">LAYER 3</text>
+    <text x="1295" y="318" font-size="29" fill="#e2e8f0" text-anchor="middle" font-weight="bold">Quota as the ceiling</text>
+    <text x="1295" y="352" font-size="17" fill="#94a3b8" text-anchor="middle">Stop it as it happens</text>
+
+    <line x1="1120" y1="378" x2="1470" y2="378" stroke="#334155" stroke-width="1"/>
+
+    <text x="1120" y="412" font-size="17" fill="#cbd5e1">Set the cap from measured normal usage</text>
+
+    <rect x="1120" y="436" width="350" height="96" rx="10" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+    <text x="1140" y="464" font-size="15" fill="#64748b">BigQuery's default cap</text>
+    <text x="1140" y="492" font-size="19" fill="#94a3b8" font-weight="600">200 TiB/day, not a ceiling at all</text>
+    <text x="1140" y="518" font-size="19" fill="#38bdf8" font-weight="600">Ours sits at 1.5x normal usage</text>
+
+    <rect x="1120" y="544" width="350" height="124" rx="10" fill="#0f172a" stroke="#475569" stroke-width="1" stroke-dasharray="6,4"/>
+    <text x="1140" y="572" font-size="16" fill="#cbd5e1" font-weight="600">Only for things allowed to stop</text>
+    <text x="1140" y="600" font-size="15" fill="#94a3b8">Internal platform, so you rerun tomorrow</text>
+    <text x="1140" y="628" font-size="15" fill="#94a3b8">Do this on a customer-facing path</text>
+    <text x="1140" y="652" font-size="15" fill="#94a3b8">and you have built an outage</text>
+
+    <!-- Flow arrows between layers -->
+    <line x1="520" y1="465" x2="580" y2="465" stroke="#64748b" stroke-width="2" marker-end="url(#flow)"/>
+    <text x="550" y="450" font-size="14" fill="#64748b" text-anchor="middle">leaks through</text>
+
+    <line x1="1015" y1="465" x2="1075" y2="465" stroke="#64748b" stroke-width="2" marker-end="url(#flow)"/>
+    <text x="1045" y="450" font-size="14" fill="#64748b" text-anchor="middle">leaks through</text>
+
+    <!-- Bottom summary -->
+    <rect x="90" y="730" width="1420" height="112" rx="14" fill="#1e293b" stroke="#334155" stroke-width="2"/>
+    <text x="800" y="774" font-size="23" fill="#e2e8f0" text-anchor="middle" font-weight="bold">Alerts tell you afterward. A quota stops it while it happens</text>
+    <text x="800" y="812" font-size="18" fill="#94a3b8" text-anchor="middle">Cuts are one-time. These three layers stop the pile-up itself, and only once they are structural rather than a habit</text>
+
+  </g>
+</svg>

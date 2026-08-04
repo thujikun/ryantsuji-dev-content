@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <defs>
+    <marker id="flow" viewBox="0 0 6 6" refX="5" refY="3" markerWidth="5" markerHeight="4" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#64748b"/>
+    </marker>
+    <marker id="stop" viewBox="0 0 6 6" refX="5" refY="3" markerWidth="5" markerHeight="4" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#38bdf8"/>
+    </marker>
+  </defs>
+
+  <rect width="1600" height="900" fill="#0f172a"/>
+
+  <text x="800" y="62" font-size="38" fill="#e2e8f0" text-anchor="middle" font-weight="bold" font-family="Noto Sans JP, system-ui, sans-serif">コストの積み上がりを止める3層</text>
+  <text x="800" y="102" font-size="21" fill="#94a3b8" text-anchor="middle" font-family="Noto Sans JP, system-ui, sans-serif">入口・継続・天井。効くタイミングが違うので、どれか1つでは塞がらない</text>
+
+  <g font-family="Noto Sans JP, system-ui, sans-serif">
+
+    <!-- Timeline spine -->
+    <line x1="140" y1="196" x2="1460" y2="196" stroke="#334155" stroke-width="2"/>
+    <text x="140" y="180" font-size="16" fill="#64748b" text-anchor="start">変更を書く</text>
+    <text x="800" y="180" font-size="16" fill="#64748b" text-anchor="middle">動き続ける</text>
+    <text x="1460" y="180" font-size="16" fill="#64748b" text-anchor="end">暴走</text>
+
+    <!-- ===== Layer 1: gate at merge ===== -->
+    <rect x="90" y="230" width="430" height="470" rx="14" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+    <text x="305" y="278" font-size="18" fill="#38bdf8" text-anchor="middle" font-weight="bold">LAYER 1</text>
+    <text x="305" y="318" font-size="29" fill="#e2e8f0" text-anchor="middle" font-weight="bold">入口のゲート</text>
+    <text x="305" y="352" font-size="17" fill="#94a3b8" text-anchor="middle">マージ前に止める</text>
+
+    <line x1="130" y1="378" x2="480" y2="378" stroke="#334155" stroke-width="1"/>
+
+    <text x="130" y="412" font-size="17" fill="#cbd5e1">閾値を超えたら人間レビューへ</text>
+    <text x="146" y="448" font-size="16" fill="#94a3b8">・日次コスト増　2,000円/日</text>
+    <text x="146" y="478" font-size="16" fill="#94a3b8">・単発実行　　　10,000円</text>
+    <text x="146" y="508" font-size="16" fill="#94a3b8">・ストレージ　　1,000円/月</text>
+
+    <rect x="130" y="536" width="350" height="132" rx="10" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+    <text x="150" y="568" font-size="16" fill="#38bdf8" font-weight="600">AIは数量だけ測る</text>
+    <text x="150" y="598" font-size="15" fill="#94a3b8">スキャン量・実行回数・トークン数</text>
+    <text x="150" y="628" font-size="16" fill="#38bdf8" font-weight="600">金額計算は決定論的に</text>
+    <text x="150" y="656" font-size="15" fill="#94a3b8">単価はBilling Exportの実測値</text>
+
+    <!-- ===== Layer 2: daily visibility ===== -->
+    <rect x="585" y="230" width="430" height="470" rx="14" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+    <text x="800" y="278" font-size="18" fill="#38bdf8" text-anchor="middle" font-weight="bold">LAYER 2</text>
+    <text x="800" y="318" font-size="29" fill="#e2e8f0" text-anchor="middle" font-weight="bold">継続的な可視化</text>
+    <text x="800" y="352" font-size="17" fill="#94a3b8" text-anchor="middle">毎日見えるようにする</text>
+
+    <line x1="625" y1="378" x2="975" y2="378" stroke="#334155" stroke-width="1"/>
+
+    <text x="625" y="412" font-size="17" fill="#cbd5e1">app別コストを1日2回Slackへ</text>
+
+    <rect x="625" y="436" width="350" height="60" rx="10" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+    <text x="645" y="462" font-size="16" fill="#38bdf8" font-weight="600">超過ゼロの日も必ず投稿</text>
+    <text x="645" y="484" font-size="15" fill="#94a3b8">沈黙と正常を区別できるように</text>
+
+    <rect x="625" y="508" width="350" height="60" rx="10" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+    <text x="645" y="534" font-size="16" fill="#38bdf8" font-weight="600">前週同曜日比で見る</text>
+    <text x="645" y="556" font-size="15" fill="#94a3b8">前日比だと毎週月曜が誤検知</text>
+
+    <rect x="625" y="580" width="350" height="60" rx="10" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+    <text x="645" y="606" font-size="16" fill="#38bdf8" font-weight="600">前週データ無しも増加扱い</text>
+    <text x="645" y="628" font-size="15" fill="#94a3b8">新規バッチが一番危ない</text>
+
+    <!-- ===== Layer 3: quota ceiling ===== -->
+    <rect x="1080" y="230" width="430" height="470" rx="14" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+    <text x="1295" y="278" font-size="18" fill="#38bdf8" text-anchor="middle" font-weight="bold">LAYER 3</text>
+    <text x="1295" y="318" font-size="29" fill="#e2e8f0" text-anchor="middle" font-weight="bold">天井のクォータ</text>
+    <text x="1295" y="352" font-size="17" fill="#94a3b8" text-anchor="middle">その場で止める</text>
+
+    <line x1="1120" y1="378" x2="1470" y2="378" stroke="#334155" stroke-width="1"/>
+
+    <text x="1120" y="412" font-size="17" fill="#cbd5e1">通常時の実測から上限を決める</text>
+
+    <rect x="1120" y="436" width="350" height="96" rx="10" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+    <text x="1140" y="464" font-size="15" fill="#64748b">BigQueryの既定上限</text>
+    <text x="1140" y="492" font-size="19" fill="#94a3b8" font-weight="600">200 TiB/日 = 天井として無意味</text>
+    <text x="1140" y="518" font-size="19" fill="#38bdf8" font-weight="600">実際の設定は通常時の1.5倍</text>
+
+    <rect x="1120" y="544" width="350" height="124" rx="10" fill="#0f172a" stroke="#475569" stroke-width="1" stroke-dasharray="6,4"/>
+    <text x="1140" y="572" font-size="16" fill="#cbd5e1" font-weight="600">前提: 止まってよいものだけ</text>
+    <text x="1140" y="600" font-size="15" fill="#94a3b8">社内基盤だから翌日再実行で済む</text>
+    <text x="1140" y="628" font-size="15" fill="#94a3b8">顧客向け経路で同じことをすると</text>
+    <text x="1140" y="652" font-size="15" fill="#94a3b8">それは障害になる</text>
+
+    <!-- Flow arrows between layers -->
+    <line x1="520" y1="465" x2="580" y2="465" stroke="#64748b" stroke-width="2" marker-end="url(#flow)"/>
+    <text x="550" y="450" font-size="14" fill="#64748b" text-anchor="middle">すり抜け</text>
+
+    <line x1="1015" y1="465" x2="1075" y2="465" stroke="#64748b" stroke-width="2" marker-end="url(#flow)"/>
+    <text x="1045" y="450" font-size="14" fill="#64748b" text-anchor="middle">すり抜け</text>
+
+    <!-- Bottom summary -->
+    <rect x="90" y="730" width="1420" height="112" rx="14" fill="#1e293b" stroke="#334155" stroke-width="2"/>
+    <text x="800" y="774" font-size="23" fill="#e2e8f0" text-anchor="middle" font-weight="bold">アラートは事後に知らせる。クォータはその場で止める</text>
+    <text x="800" y="812" font-size="18" fill="#94a3b8" text-anchor="middle">削減は一度で終わるが、積み上がり自体を止めるのはこの3層。心がけではなく仕組みにして初めて機能する</text>
+
+  </g>
+</svg>
