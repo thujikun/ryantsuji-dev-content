@@ -16,6 +16,7 @@ cover: /images/posts/org-os-overview.ja.cover.png
 syndication:
   zenn:
     id: "a97c6df3529ca6"
+    publishAt: "2099-01-01T00:00:00+09:00"
 ---
 
 <!--
