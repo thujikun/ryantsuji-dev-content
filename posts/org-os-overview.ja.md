@@ -12,7 +12,6 @@ tags:
 lang: "ja"
 series: "org-os"
 seriesOrder: 1
-excludeFromSyndication: true
 ---
 
 <!--
