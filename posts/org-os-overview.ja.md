@@ -13,6 +13,9 @@ lang: "ja"
 series: "org-os"
 seriesOrder: 1
 cover: /images/posts/org-os-overview.ja.cover.png
+syndication:
+  zenn:
+    id: "a97c6df3529ca6"
 ---
 
 <!--
