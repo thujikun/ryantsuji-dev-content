@@ -12,6 +12,7 @@ tags:
 lang: "ja"
 series: "org-os"
 seriesOrder: 1
+cover: /images/posts/org-os-overview.ja.cover.png
 ---
 
 <!--
