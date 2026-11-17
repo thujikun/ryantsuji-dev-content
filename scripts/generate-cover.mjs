@@ -89,8 +89,19 @@ function sanitizeOgText(text) {
   return text.replace(/[─-╿]/gu, "—");
 }
 
+/**
+ * タイトルを「──」「—」の区切りで主題と副題に分ける。区切りが無ければ副題は null。
+ * satori は CJK を任意の位置で折り返すため、区切りをまたいだ改行（「組／織」のような
+ * 単語の途中での改行）を避けるには、区切りの位置で明示的に行を分けるしかない。
+ */
+function splitTitle(title) {
+  const m = sanitizeOgText(title).match(/^(.+?)\s*—+\s*(.+)$/u);
+  if (!m) return { main: sanitizeOgText(title), sub: null };
+  return { main: m[1], sub: m[2] };
+}
+
 function OgTemplate({ title }) {
-  const safeTitle = sanitizeOgText(title);
+  const { main, sub } = splitTitle(title);
   return h(
     "div",
     {
@@ -168,16 +179,35 @@ function OgTemplate({ title }) {
       },
       h(
         "div",
-        {
-          style: {
-            fontFamily: "serif",
-            fontSize: 64,
-            lineHeight: 1.25,
-            color: TEXT_PRIMARY,
-            letterSpacing: "-0.015em",
+        { style: { display: "flex", flexDirection: "column", gap: 20 } },
+        h(
+          "div",
+          {
+            style: {
+              fontFamily: "serif",
+              fontSize: 64,
+              lineHeight: 1.25,
+              color: TEXT_PRIMARY,
+              letterSpacing: "-0.015em",
+            },
           },
-        },
-        safeTitle,
+          main,
+        ),
+        sub
+          ? h(
+              "div",
+              {
+                style: {
+                  fontFamily: "serif",
+                  fontSize: 44,
+                  lineHeight: 1.3,
+                  color: TEXT_MUTED,
+                  letterSpacing: "-0.01em",
+                },
+              },
+              sub,
+            )
+          : null,
       ),
     ),
     // 下段: tagline
